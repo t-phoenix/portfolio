@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
