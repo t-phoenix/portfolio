@@ -5,10 +5,11 @@ import { FadeIn, MagneticButton } from "./animations";
 import { socialLinksData } from "../data/socialLinksData";
 
 // EmailJS Configuration - Using environment variables
-// Make sure to set these in your .env.local file
-const EMAILJS_SERVICE_ID = import.meta.env.EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = import.meta.env.EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY = import.meta.env.EMAILJS_PUBLIC_KEY;
+// Make sure to set these in your .env.local file with VITE_ prefix
+// Note: EMAILJS_USER_ID is the "Public Key" from EmailJS dashboard - it's safe to expose to browser
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_USER_ID = import.meta.env.VITE_EMAILJS_USER_ID; // This is EmailJS's "Public Key" - safe for client-side
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -48,7 +49,7 @@ const Contact = () => {
           message: formData.message,
           time: currentTime,
         },
-        EMAILJS_PUBLIC_KEY
+        EMAILJS_USER_ID
       );
 
       console.log("Email sent successfully:", result.text);
