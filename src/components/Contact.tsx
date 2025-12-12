@@ -1,34 +1,75 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { FadeIn, MagneticButton } from "./animations";
 import { socialLinksData } from "../data/socialLinksData";
+
+// EmailJS Configuration - Using environment variables
+// Make sure to set these in your .env.local file
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    budget: "",
+    subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage("");
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Get current timestamp for the email
+      const currentTime = new Date().toLocaleString("en-US", {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
 
-    console.log("Form submitted:", formData);
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          time: currentTime,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
 
-    // Reset form after success
-    setTimeout(() => {
-      setFormData({ name: "", email: "", budget: "", message: "" });
-      setIsSuccess(false);
-    }, 3000);
+      console.log("Email sent successfully:", result.text);
+      setIsSubmitting(false);
+      setIsSuccess(true);
+
+      // Reset form after success
+      setTimeout(() => {
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setIsSuccess(false);
+      }, 3000);
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      setIsSubmitting(false);
+      setErrorMessage("Failed to send message. Please try again.");
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    }
   };
 
   return (
@@ -159,7 +200,7 @@ const Contact = () => {
                 </motion.div>
               </div>
 
-              {/* Budget */}
+              {/* Subject */}
               <motion.div
                 className="space-y-2"
                 initial={{ opacity: 0, y: 20 }}
@@ -168,30 +209,24 @@ const Contact = () => {
                 transition={{ delay: 0.3 }}
               >
                 <label
-                  htmlFor="budget"
+                  htmlFor="subject"
                   className="text-xs text-gray uppercase font-medium"
                 >
-                  Budget
+                  Subject
                 </label>
-                <motion.select
-                  id="budget"
+                <motion.input
+                  id="subject"
+                  type="text"
                   required
-                  value={formData.budget}
+                  placeholder="What's this about?"
+                  value={formData.subject}
                   onChange={(e) =>
-                    setFormData({ ...formData, budget: e.target.value })
+                    setFormData({ ...formData, subject: e.target.value })
                   }
-                  className="w-full px-3 py-3 bg-white/10 rounded-lg text-secondary focus:outline-none focus:ring-2 focus:ring-orange transition-all appearance-none cursor-pointer"
+                  className="w-full px-3 py-3 bg-white/10 rounded-lg text-secondary placeholder:text-gray/60 focus:outline-none focus:ring-2 focus:ring-orange transition-all"
                   whileFocus={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
-                >
-                  <option value="" disabled>
-                    Select…
-                  </option>
-                  <option value="<$3k">&lt;$3k</option>
-                  <option value="$3k - $5k">$3k - $5k</option>
-                  <option value="$5k - $10k">$5k - $10k</option>
-                  <option value=">$10k">&gt;$10k</option>
-                </motion.select>
+                />
               </motion.div>
 
               {/* Message */}
@@ -219,6 +254,20 @@ const Contact = () => {
                   transition={{ duration: 0.2 }}
                 />
               </motion.div>
+
+              {/* Error Message */}
+              {errorMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg"
+                >
+                  <p className="text-red-400 text-sm text-center">
+                    {errorMessage}
+                  </p>
+                </motion.div>
+              )}
 
               {/* Submit Button */}
               <motion.div
