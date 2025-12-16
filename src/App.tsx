@@ -10,6 +10,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ParticleBackground from './components/ParticleBackground';
 import ScrollToTop from './components/ScrollToTop';
+import Potshot from './components/Potshot';
 import { ScrollProgress } from './components/animations';
 import { useSmoothScroll } from './hooks';
 
@@ -41,6 +42,7 @@ function App() {
       <Projects />
       <Blog />
       <Achievements />
+      <Potshot />
       <Contact />
       <Footer />
     </div>

@@ -1,0 +1,3 @@
+[submodule "potshot-contracts/lib/openzeppelin-contracts"]
+	path = potshot-contracts/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts

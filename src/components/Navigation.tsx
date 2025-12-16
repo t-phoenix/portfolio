@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Home, Folder, Briefcase, Wrench, Edit } from 'lucide-react';
+import { Home, Folder, Briefcase, Wrench, Edit, Dices } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { MagneticButton } from './animations';
 
@@ -21,6 +21,7 @@ const Navigation = () => {
     { icon: Briefcase, label: 'Experience', href: '#experience' },
     { icon: Wrench, label: 'Tools', href: '#tools' },
     { icon: Edit, label: 'Thoughts', href: '#blog' },
+    { icon: Dices, label: 'Potshot', href: '#potshot' },
   ];
 
   const container = {
