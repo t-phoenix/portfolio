@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { useDisconnect, useConnect, useAccount } from "wagmi";
+import { useDisconnect, useAccount } from "wagmi";
+import { useAppKit, useAppKitState } from "@reown/appkit/react";
 
 interface PaymentButtonsProps {
   isConnected: boolean;
@@ -32,20 +33,19 @@ export const PaymentButtons = ({
 }: PaymentButtonsProps) => {
   const { disconnect } = useDisconnect();
   const { address } = useAccount();
-  const { connect, connectors } = useConnect();
+  const { open } = useAppKit();
+  const { open: isModalOpen, loading: isModalLoading } = useAppKitState();
 
   const formatAddress = (addr: string) => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
   const handleConnect = () => {
-    // Get the first available connector (typically injected wallet like MetaMask)
-    const availableConnector = connectors[0];
-    
-    if (availableConnector) {
-      connect({ connector: availableConnector });
-    }
+    open({ view: 'Connect' });
   };
+
+  // Check if connecting (modal is open or loading)
+  const isConnecting = isModalOpen || isModalLoading;
 
   if(isGamePaused){
     return(
@@ -66,11 +66,35 @@ export const PaymentButtons = ({
     return (
       <motion.button
         onClick={handleConnect}
-        className="w-full py-4 px-6 rounded-xl font-bold text-lg bg-orange hover:bg-orange/90 hover:shadow-lg hover:shadow-orange/30 text-white border border-orange/50 transition-all"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        disabled={isConnecting}
+        className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all ${
+          isConnecting 
+            ? "bg-orange/50 text-white/70 cursor-wait border border-orange/30"
+            : "bg-orange hover:bg-orange/90 hover:shadow-lg hover:shadow-orange/30 text-white border border-orange/50"
+        }`}
+        whileHover={!isConnecting ? { scale: 1.02 } : {}}
+        whileTap={!isConnecting ? { scale: 0.98 } : {}}
       >
-        🔌 Connect Wallet to Play
+        {isConnecting ? (
+          <motion.div
+            className="flex items-center justify-center gap-2"
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <motion.div
+              className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+            Connecting...
+          </motion.div>
+        ) : (
+          <span>🔌 Connect Wallet to Play</span>
+        )}
       </motion.button>
     );
   }

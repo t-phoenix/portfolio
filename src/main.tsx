@@ -2,7 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { WagmiProvider } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { config } from './config/wagmi'
+import { createAppKit } from '@reown/appkit/react'
+import { wagmiAdapter, projectId, metadata, networks } from './config/wagmi'
 import './index.css'
 import App from './App.tsx'
 
@@ -20,9 +21,27 @@ const queryClient = new QueryClient({
   },
 })
 
+// Initialize AppKit modal (must be done outside React component)
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks,
+  projectId,
+  metadata,
+  features: {
+    analytics: false,
+    swaps: false,
+    onramp: false,
+  },
+  themeMode: 'dark',
+  themeVariables: {
+    '--w3m-accent': '#ffffff',
+    '--w3m-border-radius-master': '4px'
+  }
+})
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <WagmiProvider config={config}>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <App />
       </QueryClientProvider>
