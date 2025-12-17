@@ -151,6 +151,7 @@ const Potshot = () => {
               onSelectAmount={handleSelectAmount}
               onCustomAmountChange={handleCustomAmountChange}
               onBuyTicket={handleBuyTicket}
+              onRefreshBalances={refetchBalances}
             />
 
             {/* Disclaimer - Only shown when wallet is not connected */}

@@ -1,5 +1,5 @@
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
-import { base } from '@reown/appkit/networks'
+import { base, optimism, arbitrum, scroll, bsc } from '@reown/appkit/networks'
 import { http } from 'wagmi'
 
 // Get WalletConnect project ID from environment
@@ -21,15 +21,26 @@ export const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/179229932']
 }
 
-// Set the networks
-export const networks: [typeof base] = [base]
+// Set the networks - Base is the primary chain for ticket purchases
+// Other chains are supported for Nexus SDK cross-chain swaps
+export const networks = [base, optimism, arbitrum, scroll, bsc] as [
+  typeof base,
+  typeof optimism,
+  typeof arbitrum,
+  typeof scroll,
+  typeof bsc
+]
 
-// Create Wagmi Adapter
+// Create Wagmi Adapter with all supported chains for cross-chain swaps
 export const wagmiAdapter = new WagmiAdapter({
   networks,
   projectId,
   transports: {
     [base.id]: http(baseRpcUrl),
+    [optimism.id]: http(),
+    [arbitrum.id]: http(),
+    [scroll.id]: http(),
+    [bsc.id]: http(),
   },
 })
 

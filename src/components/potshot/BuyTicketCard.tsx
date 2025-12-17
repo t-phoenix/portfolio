@@ -27,6 +27,7 @@ interface BuyTicketCardProps {
   onSelectAmount: (amount: number) => void;
   onCustomAmountChange: (value: string, numericValue: number) => void;
   onBuyTicket: () => void;
+  onRefreshBalances?: () => void;
 }
 
 export const BuyTicketCard = ({
@@ -45,6 +46,7 @@ export const BuyTicketCard = ({
   onSelectAmount,
   onCustomAmountChange,
   onBuyTicket,
+  onRefreshBalances,
 }: BuyTicketCardProps) => {
   const [isTipModalOpen, setIsTipModalOpen] = useState(false);
 
@@ -157,6 +159,7 @@ export const BuyTicketCard = ({
           hasEnoughGas={hasEnoughGas}
           isLoadingBalances={isLoadingBalances}
           onBuyTicket={onBuyTicket}
+          onRefreshBalances={onRefreshBalances}
         />
 
         {/* Tip Developer Button */}

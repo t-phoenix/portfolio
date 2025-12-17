@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { WagmiProvider } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react'
+import { base } from '@reown/appkit/networks'
 import { wagmiAdapter, projectId, metadata, networks } from './config/wagmi'
 import './index.css'
 import App from './App.tsx'
@@ -21,10 +22,14 @@ const queryClient = new QueryClient({
   },
 })
 
+// Apply dark mode to the document
+document.documentElement.classList.add('dark')
+
 // Initialize AppKit modal (must be done outside React component)
 createAppKit({
   adapters: [wagmiAdapter],
-  networks,
+  networks: [...networks],
+  defaultNetwork: base,
   projectId,
   metadata,
   features: {
@@ -32,6 +37,9 @@ createAppKit({
     swaps: false,
     onramp: false,
   },
+  // Disable automatic network validation to allow cross-chain swaps
+  // The Nexus SDK handles chain switching internally
+  allowUnsupportedChain: true,
   themeMode: 'dark',
   themeVariables: {
     '--w3m-accent': '#ffffff',

@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useDisconnect, useAccount } from "wagmi";
 import { useAppKit, useAppKitState } from "@reown/appkit/react";
+import { BridgeFundsModal } from "./BridgeFundsModal";
 
 interface PaymentButtonsProps {
   isConnected: boolean;
@@ -15,6 +17,7 @@ interface PaymentButtonsProps {
   hasEnoughGas: boolean;
   isLoadingBalances: boolean;
   onBuyTicket: () => void;
+  onRefreshBalances?: () => void;
 }
 
 export const PaymentButtons = ({
@@ -30,11 +33,13 @@ export const PaymentButtons = ({
   hasEnoughGas,
   isLoadingBalances,
   onBuyTicket,
+  onRefreshBalances,
 }: PaymentButtonsProps) => {
   const { disconnect } = useDisconnect();
   const { address } = useAccount();
   const { open } = useAppKit();
   const { open: isModalOpen, loading: isModalLoading } = useAppKitState();
+  const [isBridgeModalOpen, setIsBridgeModalOpen] = useState(false);
 
   const formatAddress = (addr: string) => {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
@@ -222,11 +227,36 @@ export const PaymentButtons = ({
             {!hasEnoughUSDC && hasEnoughGas && "Insufficient USDC"}
             {hasEnoughUSDC && !hasEnoughGas && "Insufficient ETH for gas"}
           </p>
-          <p className="text-tertiary text-xs text-center mt-1">
-            Please add funds to your Base wallet to continue
+          <p className="text-tertiary text-xs text-center mt-1 mb-3">
+            Swap any asset to USDC on Base using Avail Nexus
           </p>
+          
+          {/* Swap Funds Button */}
+          <motion.button
+            onClick={() => setIsBridgeModalOpen(true)}
+            className="w-full py-3 px-4 rounded-lg font-semibold text-sm bg-gradient-to-r from-orange/20 to-amber-500/20 hover:from-orange/30 hover:to-amber-500/30 text-orange border border-orange/30 hover:border-orange/50 transition-all flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span>🔄</span>
+            Swap to USDC on Base
+          </motion.button>
         </div>
       )}
+
+      {/* Bridge Funds Modal */}
+      <BridgeFundsModal
+        isOpen={isBridgeModalOpen}
+        onClose={() => {
+          setIsBridgeModalOpen(false);
+          // Refresh balances when modal closes (user may have bridged assets)
+          onRefreshBalances?.();
+        }}
+        onComplete={() => {
+          // Refresh balances after successful bridge/swap
+          onRefreshBalances?.();
+        }}
+      />
     </div>
   );
 };

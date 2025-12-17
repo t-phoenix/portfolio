@@ -24,7 +24,7 @@ const ParticleBackground = () => {
           value: 'transparent',
         },
       },
-      fpsLimit: 120,
+      fpsLimit: 60,
       interactivity: {
         events: {
           onClick: {
@@ -56,7 +56,7 @@ const ParticleBackground = () => {
           color: '#0099ff',
           distance: 150,
           enable: true,
-          opacity: 0.2,
+          opacity: 0.3,
           width: 1,
         },
         move: {
@@ -76,7 +76,7 @@ const ParticleBackground = () => {
           value: 80,
         },
         opacity: {
-          value: 0.3,
+          value: 0.5,
         },
         shape: {
           type: 'circle',
