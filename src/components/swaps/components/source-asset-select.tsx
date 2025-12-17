@@ -75,11 +75,35 @@ const SourceAssetSelect: FC<SourceAssetSelectProps> = ({
 
   // Only show chains that have tokens with balance
   const chainsWithTokens = useMemo(() => {
-    if (!swapSupportedChainsAndTokens || !allTokens.length) return [];
+    if (!allTokens.length) return [];
+    
     const chainIdsWithTokens = new Set(allTokens.map((t) => t.chainId));
-    return swapSupportedChainsAndTokens.filter((c) =>
-      chainIdsWithTokens.has(c.id)
-    );
+    
+    // If swapSupportedChainsAndTokens is available, filter it to only show chains with tokens
+    if (swapSupportedChainsAndTokens && swapSupportedChainsAndTokens.length > 0) {
+      const filtered = swapSupportedChainsAndTokens.filter((c) =>
+        chainIdsWithTokens.has(c.id)
+      );
+      // If we have filtered results, return them
+      if (filtered.length > 0) {
+        return filtered;
+      }
+    }
+    
+    // Fallback: derive chains from tokens themselves using CHAIN_METADATA
+    const chainsFromTokens: Array<{ id: number; logo: string; name: string }> = [];
+    for (const chainId of chainIdsWithTokens) {
+      if (chainId && CHAIN_METADATA[chainId]) {
+        const chainMeta = CHAIN_METADATA[chainId];
+        chainsFromTokens.push({
+          id: chainId,
+          logo: chainMeta.logo || "",
+          name: chainMeta.name || "",
+        });
+      }
+    }
+    
+    return chainsFromTokens;
   }, [swapSupportedChainsAndTokens, allTokens]);
 
   // Filter tokens by selected chain and search query
