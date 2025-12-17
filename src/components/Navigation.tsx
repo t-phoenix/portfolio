@@ -17,9 +17,9 @@ const Navigation = () => {
 
   const navItems = [
     { icon: Home, label: 'Home', href: '#' },
-    { icon: Folder, label: 'Projects', href: '#projects' },
     { icon: Briefcase, label: 'Experience', href: '#experience' },
     { icon: Wrench, label: 'Tools', href: '#tools' },
+    { icon: Folder, label: 'Projects', href: '#projects' },
     { icon: Edit, label: 'Thoughts', href: '#blog' },
     { icon: Dices, label: 'Potshot', href: '#potshot' },
   ];
@@ -61,11 +61,12 @@ const Navigation = () => {
       >
         {navItems.map((navItem) => (
           <motion.div key={navItem.label} variants={item}>
+            <a href={navItem.href} aria-label={navItem.label}>
             <MagneticButton
               className="group relative p-3 rounded-xl hover:bg-white/10 transition-all duration-300"
               strength={0.2}
             >
-              <a href={navItem.href} aria-label={navItem.label}>
+              
                 <motion.div
                   className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-white/10 backdrop-blur-sm px-3 py-1 rounded-lg text-xs whitespace-nowrap pointer-events-none"
                   initial={{ y: -5 }}
@@ -74,8 +75,9 @@ const Navigation = () => {
                   {navItem.label}
                 </motion.div>
                 <navItem.icon className="w-5 h-5 text-secondary group-hover:text-orange transition-colors" />
-              </a>
+              
             </MagneticButton>
+            </a>
           </motion.div>
         ))}
       </motion.div>

@@ -13,10 +13,10 @@ const MagneticButton = ({
   className = '',
   strength = 0.3,
 }: MagneticButtonProps) => {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
 
     const { left, top, width, height } = ref.current.getBoundingClientRect();
@@ -34,7 +34,7 @@ const MagneticButton = ({
   };
 
   return (
-    <motion.button
+    <motion.div
       ref={ref}
       className={className}
       onMouseMove={handleMouseMove}
@@ -43,7 +43,7 @@ const MagneticButton = ({
       transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
     >
       {children}
-    </motion.button>
+    </motion.div>
   );
 };
 
