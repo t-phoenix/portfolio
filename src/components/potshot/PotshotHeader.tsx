@@ -13,7 +13,7 @@ export const PotshotHeader = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
-            className="text-7xl md:text-[110px] font-bold leading-none text-secondary"
+            className="text-5xl sm:text-6xl md:text-[110px] font-bold leading-none text-secondary wrap-break-words max-w-full"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

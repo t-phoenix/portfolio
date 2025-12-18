@@ -9,7 +9,7 @@ const Blog = () => {
       <div className="space-y-12">
         <FadeIn delay={0.1}>
           <motion.h2
-            className="text-7xl md:text-[90px] font-bold leading-none"
+            className="text-5xl sm:text-6xl md:text-[90px] font-bold leading-none wrap-break-words max-w-full"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -40,7 +40,7 @@ const Blog = () => {
 
                 {/* Blog Image */}
                 <motion.div
-                  className="w-full md:w-32 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-white/10"
+                  className="w-full md:w-32 h-32 rounded-lg overflow-hidden shrink-0 bg-white/10"
                   whileHover={{ scale: 1.05, rotate: 2 }}
                   transition={{ duration: 0.3 }}
                 >

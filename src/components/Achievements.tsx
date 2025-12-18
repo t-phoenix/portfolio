@@ -8,7 +8,7 @@ const Achievements = () => {
       <div className="space-y-12">
         <FadeIn delay={0.1}>
           <motion.h2
-            className="text-7xl md:text-[90px] font-bold leading-none"
+            className="text-5xl sm:text-6xl md:text-[90px] font-bold leading-none wrap-break-words max-w-full"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

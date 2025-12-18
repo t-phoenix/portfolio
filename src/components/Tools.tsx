@@ -8,7 +8,7 @@ const Tools = () => {
       <div className="space-y-12">
         <FadeIn delay={0.1}>
           <motion.h2
-            className="text-7xl md:text-[90px] font-bold leading-none"
+            className="text-5xl sm:text-6xl md:text-[90px] font-bold leading-none wrap-break-words max-w-full"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -34,7 +34,7 @@ const Tools = () => {
               >
                 <div className="flex items-start gap-4">
                   <motion.div
-                    className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-white/10"
+                    className="w-16 h-16 rounded-lg overflow-hidden shrink-0 bg-white/10"
                     whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   >

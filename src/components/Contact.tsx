@@ -81,7 +81,7 @@ const Contact = () => {
         <div className="lg:col-span-7">
           <FadeIn delay={0.1}>
             <motion.h2
-              className="text-7xl md:text-[90px] font-bold leading-none mb-8"
+              className="text-5xl sm:text-6xl md:text-[90px] font-bold leading-none mb-8 wrap-break-words max-w-full"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
