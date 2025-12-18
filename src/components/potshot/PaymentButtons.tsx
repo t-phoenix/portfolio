@@ -112,7 +112,7 @@ export const PaymentButtons = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-tertiary text-xs">Connected:</span>
-              <span className="text-secondary font-mono text-sm">{formatAddress(address)}</span>
+              <span className="text-secondary font-mono text-sm break-all">{formatAddress(address)}</span>
             </div>
             <motion.button
               onClick={() => disconnect()}

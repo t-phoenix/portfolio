@@ -77,7 +77,7 @@ export const BuyTicketCard = ({
           <label className="text-tertiary text-sm mb-3 block">
             Choose your contribution (min ${MIN_TICKET_PRICE})
           </label>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="number"
               min={MIN_TICKET_PRICE}
@@ -89,23 +89,25 @@ export const BuyTicketCard = ({
                 const numericValue = parseFloat(value);
                 onCustomAmountChange(value, numericValue);
               }}
-              className="flex-1 py-3 px-4 rounded-lg bg-white/10 border border-white/10 text-secondary placeholder-tertiary focus:outline-none focus:border-orange/50 focus:bg-white/15 transition-all"
+              className="flex-1 py-3 px-4 rounded-lg bg-white/10 border border-white/10 text-secondary placeholder-tertiary focus:outline-none focus:border-orange/50 focus:bg-white/15 transition-all w-full sm:w-auto"
             />
-            {QUICK_AMOUNTS.slice(0,3).map((amount) => (
-              <motion.button
-                key={amount}
-                onClick={() => onSelectAmount(amount)}
-                className={`py-3 px-4 rounded-lg font-bold transition-all whitespace-nowrap ${
-                  contributionAmount === amount && !customAmount
-                    ? "bg-orange text-white shadow-lg shadow-orange/30 border border-orange/50"
-                    : "bg-white/10 text-secondary hover:bg-white/15 border border-white/10"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                ${amount}
-              </motion.button>
-            ))}
+            <div className="flex gap-2 sm:gap-3 flex-wrap sm:flex-nowrap">
+              {QUICK_AMOUNTS.slice(0,3).map((amount) => (
+                <motion.button
+                  key={amount}
+                  onClick={() => onSelectAmount(amount)}
+                  className={`py-3 px-4 rounded-lg font-bold transition-all whitespace-nowrap flex-1 sm:flex-none min-w-[80px] ${
+                    contributionAmount === amount && !customAmount
+                      ? "bg-orange text-white shadow-lg shadow-orange/30 border border-orange/50"
+                      : "bg-white/10 text-secondary hover:bg-white/15 border border-white/10"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  ${amount}
+                </motion.button>
+              ))}
+            </div>
           </div>
         </div>
 

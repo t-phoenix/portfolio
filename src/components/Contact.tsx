@@ -495,7 +495,7 @@ const Contact = () => {
                       <img
                         src={social.icon}
                         alt={social.label}
-                        className="relative w-full h-full object-cover p-3 group-hover:p-2 transition-all duration-300"
+                        className="relative w-full h-full object-cover px-3 py-3 group-hover:p-2 rounded-[20px] transition-all duration-300"
                       />
                     </motion.div>
 
