@@ -178,7 +178,18 @@ export const PaymentButtons = ({
             </div>
           </div>
           {canBuyDirectly && (
-            <span className="text-accent text-xs font-semibold">✓ Ready</span>
+            <div className="flex items-center gap-4">
+              <span className="text-accent text-xs font-semibold">✓ Ready</span>
+              <motion.button
+                onClick={() => setIsBridgeModalOpen(true)}
+                className="px-2 py-1 rounded-lg bg-orange/20 hover:bg-orange/30 text-orange border border-orange/30 hover:border-orange/50 transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                title="Bridge funds"
+              >
+                <span className="text-2xl">😱</span>
+              </motion.button>
+            </div>
           )}
         </div>
       </div>
