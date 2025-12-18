@@ -70,6 +70,18 @@ const SourceAssetSelect: FC<SourceAssetSelectProps> = ({
       const key = `${t.contractAddress.toLowerCase()}-${t.chainId}`;
       unique.set(key, t);
     }
+    
+    // Debug logging in production to understand what chains are available
+    if (process.env.NODE_ENV === "production") {
+      const chainIds = new Set(tokens.map((t) => t.chainId));
+      console.log("[SourceAssetSelect] Available chains from swapBalance:", Array.from(chainIds));
+      console.log("[SourceAssetSelect] Total tokens found:", tokens.length);
+      console.log("[SourceAssetSelect] swapBalance breakdown:", swapBalance.map(a => ({
+        symbol: a.symbol,
+        chains: a.breakdown.map(b => ({ chainId: b.chain?.id, chainName: b.chain?.name, balance: b.balance }))
+      })));
+    }
+    
     return Array.from(unique.values());
   }, [swapBalance, nexusSDK]);
 
@@ -79,18 +91,9 @@ const SourceAssetSelect: FC<SourceAssetSelectProps> = ({
     
     const chainIdsWithTokens = new Set(allTokens.map((t) => t.chainId));
     
-    // If swapSupportedChainsAndTokens is available, filter it to only show chains with tokens
-    if (swapSupportedChainsAndTokens && swapSupportedChainsAndTokens.length > 0) {
-      const filtered = swapSupportedChainsAndTokens.filter((c) =>
-        chainIdsWithTokens.has(c.id)
-      );
-      // If we have filtered results, return them
-      if (filtered.length > 0) {
-        return filtered;
-      }
-    }
-    
-    // Fallback: derive chains from tokens themselves using CHAIN_METADATA
+    // Always derive chains from tokens themselves using CHAIN_METADATA as the source of truth
+    // This ensures we show all chains where the user actually has tokens, regardless of
+    // what swapSupportedChainsAndTokens returns (which might be filtered/limited)
     const chainsFromTokens: Array<{ id: number; logo: string; name: string }> = [];
     for (const chainId of chainIdsWithTokens) {
       if (chainId && CHAIN_METADATA[chainId]) {
@@ -101,6 +104,21 @@ const SourceAssetSelect: FC<SourceAssetSelectProps> = ({
           name: chainMeta.name || "",
         });
       }
+    }
+    
+    // If swapSupportedChainsAndTokens is available, use it to validate and order chains
+    // but don't filter out chains that exist in tokens
+    if (swapSupportedChainsAndTokens && swapSupportedChainsAndTokens.length > 0) {
+      const supportedChainIds = new Set(swapSupportedChainsAndTokens.map(c => c.id));
+      // Prioritize chains that are in swapSupportedChainsAndTokens, but include all chains from tokens
+      const prioritized = chainsFromTokens.sort((a, b) => {
+        const aSupported = supportedChainIds.has(a.id);
+        const bSupported = supportedChainIds.has(b.id);
+        if (aSupported && !bSupported) return -1;
+        if (!aSupported && bSupported) return 1;
+        return 0;
+      });
+      return prioritized;
     }
     
     return chainsFromTokens;

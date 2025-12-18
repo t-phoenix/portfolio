@@ -1,5 +1,5 @@
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
-import { base, optimism, arbitrum, scroll, bsc } from '@reown/appkit/networks'
+import { base, optimism, arbitrum, scroll, bsc, mainnet, polygon } from '@reown/appkit/networks'
 import { http } from 'wagmi'
 
 // Get WalletConnect project ID from environment
@@ -41,6 +41,8 @@ export const wagmiAdapter = new WagmiAdapter({
     [arbitrum.id]: http(),
     [scroll.id]: http(),
     [bsc.id]: http(),
+    [mainnet.id]: http(),
+    [polygon.id]: http(),
   },
 })
 

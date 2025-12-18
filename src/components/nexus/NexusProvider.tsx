@@ -96,13 +96,56 @@ const NexusProvider = ({
     setSupportedChainsAndTokens(list ?? null);
     const swapList = sdk.utils.getSwapSupportedChainsAndTokens();
     setSwapSupportedChainsAndTokens(swapList ?? null);
-    const [bridgeAbleBalanceResult, rates] = await Promise.allSettled([
+    const [bridgeAbleBalanceResult, swapBalanceResult, rates] = await Promise.allSettled([
       sdk.getBalancesForBridge(),
+      sdk.getBalancesForSwap(),
       sdk.utils.getCoinbaseRates(),
     ]);
 
     if (bridgeAbleBalanceResult.status === "fulfilled") {
-      setBridgableBalance(bridgeAbleBalanceResult.value);
+      const bridgeBal = bridgeAbleBalanceResult.value;
+      setBridgableBalance(bridgeBal);
+      // Debug logging to understand what chains are returned
+      if (process.env.NODE_ENV === "production") {
+        const allChainIds = new Set<number>();
+        bridgeBal?.forEach(asset => {
+          asset.breakdown?.forEach(breakdown => {
+            if (breakdown.chain?.id) {
+              allChainIds.add(breakdown.chain.id);
+            }
+          });
+        });
+        console.log("[NexusProvider] Bridge balance chains:", Array.from(allChainIds));
+        console.log("[NexusProvider] Bridge balance assets:", bridgeBal?.map(a => ({
+          symbol: a.symbol,
+          breakdownCount: a.breakdown?.length || 0
+        })));
+      }
+    } else {
+      console.error("Failed to fetch bridge balance:", bridgeAbleBalanceResult.reason);
+    }
+
+    if (swapBalanceResult.status === "fulfilled") {
+      const swapBal = swapBalanceResult.value;
+      setSwapBalance(swapBal);
+      // Debug logging to understand what chains are returned
+      if (process.env.NODE_ENV === "production") {
+        const allChainIds = new Set<number>();
+        swapBal?.forEach(asset => {
+          asset.breakdown?.forEach(breakdown => {
+            if (breakdown.chain?.id) {
+              allChainIds.add(breakdown.chain.id);
+            }
+          });
+        });
+        console.log("[NexusProvider] Swap balance chains:", Array.from(allChainIds));
+        console.log("[NexusProvider] Swap balance assets:", swapBal?.map(a => ({
+          symbol: a.symbol,
+          breakdownCount: a.breakdown?.length || 0
+        })));
+      }
+    } else {
+      console.error("Failed to fetch swap balance:", swapBalanceResult.reason);
     }
 
     if (rates?.status === "fulfilled") {
