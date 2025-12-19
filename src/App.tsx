@@ -13,14 +13,24 @@ import ScrollToTop from './components/ScrollToTop';
 import Potshot from './components/Potshot';
 import { ScrollProgress } from './components/animations';
 import { useSmoothScroll } from './hooks';
+import { useScrollDepthTracking } from './hooks/useAnalytics';
+import { trackPageView } from './lib/analytics';
 
 function App() {
   // Initialize smooth scroll
   useSmoothScroll();
+  
+  // Track scroll depth
+  useScrollDepthTracking();
 
   // Add CSS for Lenis smooth scroll
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'auto';
+  }, []);
+
+  // Track initial page view
+  useEffect(() => {
+    trackPageView(window.location.pathname, document.title);
   }, []);
 
   return (

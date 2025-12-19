@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { FadeIn, MagneticButton } from "./animations";
 import { socialLinksData } from "../data/socialLinksData";
+import { trackFormSubmit } from "../lib/analytics";
 
 // EmailJS Configuration - Using environment variables
 // Make sure to set these in your .env.local file with VITE_ prefix
@@ -55,6 +56,9 @@ const Contact = () => {
       console.log("Email sent successfully:", result.text);
       setIsSubmitting(false);
       setIsSuccess(true);
+      
+      // Track successful form submission
+      trackFormSubmit("contact_form", "success");
 
       // Reset form after success
       setTimeout(() => {
@@ -65,6 +69,9 @@ const Contact = () => {
       console.error("Email sending failed:", error);
       setIsSubmitting(false);
       setErrorMessage("Failed to send message. Please try again.");
+      
+      // Track failed form submission
+      trackFormSubmit("contact_form", "error");
       
       // Clear error message after 5 seconds
       setTimeout(() => {
