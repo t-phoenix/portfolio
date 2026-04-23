@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Achievements from './components/Achievements';
@@ -55,6 +56,9 @@ function App() {
       <Potshot />
       <Contact />
       <Footer />
+      
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
