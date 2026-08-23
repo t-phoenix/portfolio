@@ -1,13 +1,22 @@
 import { motion } from "framer-motion";
+import { Suspense, lazy } from "react";
 import { AnimatedText, CountUp, FadeIn, MagneticButton } from "./animations";
 import { socialLinksData } from "../data";
+
+const BlockchainNetwork = lazy(() => import("./3d/BlockchainNetwork"));
 
 const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen pt-40 px-4 md:px-8 max-w-7xl mx-auto"
+      className="min-h-screen pt-40 px-4 md:px-8 max-w-7xl mx-auto relative"
     >
+      {/* 3D Blockchain Network Background */}
+      <Suspense fallback={null}>
+        <div className="absolute inset-0 opacity-40 pointer-events-none">
+          <BlockchainNetwork />
+        </div>
+      </Suspense>
       <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
         {/* Profile Card - Sticky on desktop with 3D effect */}
         <FadeIn delay={0.2} direction="left">
