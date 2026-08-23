@@ -36,24 +36,44 @@ website: https://www.abhinil.in
 3. SimpliDAO - DAO tooling for on-chain governance
 4. Potshot - Provably fair lottery using Chainlink VRF on Base
 
-## APIs Available (x402 Protocol)
-These APIs are monetized via x402 protocol - AI agents can pay USDC to access:
+## Free APIs (Web3 Tools Hub)
+These tools are free to use without authentication:
+
+### /api/tools/gas-tracker
+Real-time gas prices across multiple chains (Ethereum, Base, Arbitrum, Optimism, Polygon, BSC).
+Input: ?chain=ethereum (optional)
+Output: Standard, fast, instant gas prices with USD cost estimates
+
+### /api/tools/allowance-checker
+Check token allowances/approvals for any address.
+Input: ?address=0x...&chain=ethereum
+Output: All token approvals, spender info, risk assessment
+
+### /api/tools/bridge-comparator
+Compare bridge fees and times across protocols.
+Input: ?token=USDC&amount=1000&source=ethereum&dest=base
+Output: Quotes from multiple bridges, recommendations
+
+### /api/articles/hackernoon
+Fetch engineering articles from HackerNoon.
+Output: Article titles, excerpts, dates
+
+### /api/profile/linkedin
+Fetch profile and experience data.
+Output: Professional experience, skills
+
+## Premium APIs (x402 Protocol)
+These APIs require USDC payment via x402 protocol:
 
 ### /api/premium/bridge/quote ($0.01/request)
-Cross-chain bridge route optimization and fee comparison.
+Advanced cross-chain bridge route optimization.
 Input: amount, token, sourceChain, destChain
-Output: Optimal routes from multiple protocols with fees and timing
+Output: Optimal routes with fees, timing, and execution paths
 
 ### /api/premium/defi/pool-analysis ($0.02/request)
-DeFi liquidity pool analysis and impermanent loss calculation.
+DeFi liquidity pool deep analysis.
 Input: protocol, poolAddress, token0, token1
-Output: TVL, APY breakdown, risk score, IL calculation
-
-### /api/articles/hackernoon (free)
-Fetch engineering articles from HackerNoon by author.
-
-### /api/profile/linkedin (free)
-Fetch profile and experience data.
+Output: TVL, APY breakdown, risk score, IL calculation, recommendations
 
 ## Contact
 - GitHub: https://github.com/t-phoenix
