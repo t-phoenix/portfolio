@@ -1,3 +1,4 @@
+import type { StaticImageData } from 'next/image';
 import ethereumIcon from '../assets/tools/ethereum.png';
 import solidityIcon from '../assets/tools/solidity.png';
 import foundryIcon from '../assets/tools/foundry.png';
@@ -23,7 +24,7 @@ import basechainIcon from '../assets/tools/basechain.png';
 export interface Tool {
   name: string;
   category: string;
-  icon: string;
+  icon: string | StaticImageData;
 }
 
 export const toolsData: Tool[] = [

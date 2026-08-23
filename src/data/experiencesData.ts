@@ -1,3 +1,4 @@
+import type { StaticImageData } from 'next/image';
 import cosxLogo from '../assets/experiences/cosx_logo.jpeg';
 import pactlabsLogo from '../assets/experiences/pactlabs_logo.jpeg';
 import equistartLogo from '../assets/experiences/equistart.jpeg';
@@ -9,7 +10,7 @@ export interface Experience {
   url: string;
   description: string;
   period: string;
-  logo: string;
+  logo: string | StaticImageData;
 }
 
 export const experiencesData: Experience[] = [

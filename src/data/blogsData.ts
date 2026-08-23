@@ -2,13 +2,15 @@ import blog1Img from '../assets/blogs/blog1.png';
 import blog2Img from '../assets/blogs/blog2.png';
 import blog3Img from '../assets/blogs/blog3.png';
 
+import type { StaticImageData } from 'next/image';
+
 export interface BlogArticle {
   title: string;
   description: string;
   date: string;
   readTime: string;
   url: string;
-  image: string;
+  image: string | StaticImageData;
 }
 
 export const blogsData: BlogArticle[] = [

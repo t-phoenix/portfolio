@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Suspense, lazy } from "react";
 import { AnimatedText, CountUp, FadeIn, MagneticButton } from "./animations";
 import { socialLinksData } from "../data";
+import { getImageSrc } from "../lib/image";
 
 const BlockchainNetwork = lazy(() => import("./3d/BlockchainNetwork"));
 
@@ -125,7 +126,7 @@ const Hero = () => {
                             aria-label={social.label}
                           >
                             <img
-                              src={social.icon}
+                              src={getImageSrc(social.icon)}
                               alt={social.label}
                               className="w-5 h-5 text-orange hover:text-orange/80 transition-colors"
                             />
