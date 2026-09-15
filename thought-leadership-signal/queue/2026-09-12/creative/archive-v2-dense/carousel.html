@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal — float is the product — 2026-09-12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600;700&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0b1016;
+    --panel: #141c26;
+    --line: #2a3544;
+    --paper: #ebe6db;
+    --gold: #d4a017;
+    --gold-ink: #1a1200;
+    --ice: #c9d4e3;
+    --dim: #8b96a5;
+    --ok: #3fa36a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #000;
+    font-family: "IBM Plex Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    align-items: center;
+  }
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+  }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+  .display { font-family: Syne, sans-serif; font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; }
+
+  /* ===== 01 HOOK ===== */
+  .s1 {
+    grid-template-rows: 80px 1fr 200px;
+  }
+  .s1 .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    background: var(--gold);
+    color: var(--gold-ink);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .s1 .mid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    min-height: 0;
+  }
+  .s1 .a, .s1 .b {
+    display: flex;
+    align-items: center;
+    padding: 28px 40px;
+  }
+  .s1 .a {
+    background: var(--ink);
+    border-bottom: 6px solid var(--gold);
+  }
+  .s1 .b {
+    background: var(--panel);
+  }
+  .s1 h1 {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 118px;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+  }
+  .s1 .a h1 { color: var(--paper); }
+  .s1 .b h1 { color: var(--gold); }
+  .s1 .bot {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    border-top: 4px solid var(--line);
+  }
+  .s1 .bot .tag {
+    padding: 36px 40px;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.15;
+    background: var(--paper);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+  }
+  .s1 .bot .stamp {
+    background: var(--gold);
+    color: var(--gold-ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .s1 .bot .stamp strong {
+    font-family: Syne, sans-serif;
+    font-size: 72px;
+    line-height: 0.9;
+    font-weight: 800;
+  }
+  .s1 .bot .stamp span {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ===== 02 FLOW ===== */
+  .s2 {
+    grid-template-rows: 88px 1fr;
+  }
+  .s2 .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 4px solid var(--line);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .s2 .stack {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    min-height: 0;
+  }
+  .s2 .row {
+    display: grid;
+    grid-template-columns: 120px 1fr 160px;
+    align-items: stretch;
+    border-bottom: 4px solid var(--ink);
+    min-height: 0;
+  }
+  .s2 .row:last-child { border-bottom: 0; }
+  .s2 .n {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Syne, sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    background: var(--gold);
+    color: var(--gold-ink);
+  }
+  .s2 .body {
+    padding: 28px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    background: var(--panel);
+  }
+  .s2 .body strong {
+    font-family: Syne, sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .s2 .body span {
+    font-size: 28px;
+    color: var(--ice);
+    font-weight: 600;
+  }
+  .s2 .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    font-family: Syne, sans-serif;
+    font-size: 56px;
+    color: var(--gold);
+    font-weight: 800;
+  }
+  .s2 .row.gap .body {
+    background: #1a1008;
+  }
+  .s2 .row.gap .body strong { color: var(--gold); }
+  .s2 .row.gap .n { background: #8a5a00; color: var(--paper); }
+
+  /* ===== 03 CONTRAST ===== */
+  .s3 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .s3 .col {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 40px 36px;
+    min-height: 0;
+  }
+  .s3 .left {
+    background: var(--panel);
+    border-right: 6px solid var(--gold);
+  }
+  .s3 .right {
+    background: var(--gold);
+    color: var(--gold-ink);
+  }
+  .s3 .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 22px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .s3 h2 {
+    font-family: Syne, sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+  }
+  .s3 .fill {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 24px;
+  }
+  .s3 .pill {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.2;
+    padding: 28px 24px;
+    border: 3px solid var(--line);
+    background: var(--ink);
+  }
+  .s3 .right .pill {
+    border-color: var(--gold-ink);
+    background: rgba(0,0,0,0.12);
+  }
+  .s3 .foot {
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: auto;
+    padding-top: 24px;
+  }
+
+  /* ===== 04 FIX STACK ===== */
+  .s4 {
+    grid-template-rows: 100px 1fr;
+  }
+  .s4 .top {
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Syne, sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .s4 .stack {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .s4 .band {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    border-bottom: 5px solid var(--ink);
+    min-height: 0;
+  }
+  .s4 .band:last-child { border-bottom: 0; }
+  .s4 .k {
+    display: flex;
+    align-items: center;
+    padding: 0 36px;
+    font-family: Syne, sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: var(--panel);
+  }
+  .s4 .v {
+    display: flex;
+    align-items: center;
+    padding: 0 36px;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.15;
+    background: var(--ink);
+    color: var(--ice);
+  }
+  .s4 .band:nth-child(1) .k { color: var(--gold); }
+  .s4 .band:nth-child(2) .k { color: var(--ok); background: #102018; }
+  .s4 .band:nth-child(3) .k { color: var(--paper); background: #1c2430; }
+
+  /* ===== 05 LESSON ===== */
+  .s5 {
+    grid-template-rows: 1fr auto auto;
+  }
+  .s5 .hero {
+    padding: 48px 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    background: var(--ink);
+    border-bottom: 6px solid var(--gold);
+  }
+  .s5 .hero .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 24px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .s5 .hero h1 {
+    font-family: Syne, sans-serif;
+    font-size: 96px;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.9;
+  }
+  .s5 .hero p {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--ice);
+    line-height: 1.2;
+    max-width: 980px;
+  }
+  .s5 .opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .s5 .opt {
+    padding: 40px 28px;
+    border-right: 4px solid var(--ink);
+    background: var(--panel);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .s5 .opt:last-child { border-right: 0; }
+  .s5 .opt b {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 22px;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .s5 .opt span {
+    font-family: Syne, sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .s5 .ask {
+    background: var(--gold);
+    color: var(--gold-ink);
+    padding: 40px 40px;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+</style>
+</head>
+<body>
+
+<!-- 01 -->
+<section class="slide s1">
+  <div class="top">
+    <span class="mono">Signal · 01 / 05</span>
+    <span class="mono">Macro · Settlement</span>
+  </div>
+  <div class="mid">
+    <div class="a"><h1>Settlement<br/>scaled.</h1></div>
+    <div class="b"><h1>Then the float<br/>needed a lender.</h1></div>
+  </div>
+  <div class="bot">
+    <div class="tag">Card rails absorbed crypto speed. Working capital had to catch up.</div>
+    <div class="stamp">
+      <strong>FLOAT</strong>
+      <span>is the product</span>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="slide s2">
+  <div class="top">
+    <span>The path</span>
+    <span class="mono">02 / 05</span>
+  </div>
+  <div class="stack">
+    <div class="row">
+      <div class="n">01</div>
+      <div class="body">
+        <strong>Card program</strong>
+        <span>Stablecoin linked spend on the network</span>
+      </div>
+      <div class="arrow">↓</div>
+    </div>
+    <div class="row">
+      <div class="n">02</div>
+      <div class="body">
+        <strong>VisaNet settle</strong>
+        <span>Daily obligations before cardholders pay back</span>
+      </div>
+      <div class="arrow">↓</div>
+    </div>
+    <div class="row">
+      <div class="n">03</div>
+      <div class="body">
+        <strong>Stablecoin rail</strong>
+        <span>Programmable clearance inside existing card ops</span>
+      </div>
+      <div class="arrow">↓</div>
+    </div>
+    <div class="row gap">
+      <div class="n">04</div>
+      <div class="body">
+        <strong>Float gap</strong>
+        <span>Few million. Every day. Warehouses do not fit.</span>
+      </div>
+      <div class="arrow">!</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="slide s3">
+  <div class="col left">
+    <div class="eyebrow">What did not break</div>
+    <h2>Demand<br/>held.</h2>
+    <div class="fill">
+      <div class="pill">Programs live across the network</div>
+      <div class="pill">Volume kept climbing</div>
+      <div class="pill">Rails were ready enough</div>
+    </div>
+    <div class="foot mono">NOT THE BOTTLENECK</div>
+  </div>
+  <div class="col right">
+    <div class="eyebrow">What did</div>
+    <h2>Capital<br/>timing.</h2>
+    <div class="fill">
+      <div class="pill">Fund settle before collect</div>
+      <div class="pill">Daily cycles, thin float</div>
+      <div class="pill">Warehouse credit mismatches</div>
+    </div>
+    <div class="foot mono">THE REAL CONSTRAINT</div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="slide s4">
+  <div class="top">The credit grammar</div>
+  <div class="stack">
+    <div class="band">
+      <div class="k">FILES</div>
+      <div class="v">Daily Visa settlement data sizes the facility in near real time</div>
+    </div>
+    <div class="band">
+      <div class="k">CLAIM</div>
+      <div class="v">Settlement receivables become live collateral, not a slide deck</div>
+    </div>
+    <div class="band">
+      <div class="k">SPIGOT</div>
+      <div class="v">Onchain borrow and repay tied to the same settlement stream</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="slide s5">
+  <div class="hero">
+    <div class="label">Mechanism</div>
+    <h1>When settlement<br/>is programmable,<br/>the float is too.</h1>
+    <p>Credit that can see the settlement file is how card rails absorb crypto speed.</p>
+  </div>
+  <div class="opts">
+    <div class="opt"><b>A</b><span>Demand</span></div>
+    <div class="opt"><b>B</b><span>Compliance</span></div>
+    <div class="opt"><b>C</b><span>Float timing</span></div>
+  </div>
+  <div class="ask">What breaks first at scale on your stack?</div>
+</section>
+
+</body>
+</html>

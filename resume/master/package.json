@@ -1,0 +1,10 @@
+{
+  "name": "abhinil-resume-export",
+  "private": true,
+  "scripts": {
+    "export": "node export-pdf.cjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.22.0"
+  }
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal — issuer builds the chain — 2026-09-13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@500;600;700&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #071018;
+    --panel: #101a24;
+    --line: #243140;
+    --paper: #eef2f6;
+    --blue: #4aa3ff;
+    --blue-ink: #041018;
+    --ice: #b8c9da;
+    --pad: 60px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #000;
+    font-family: "IBM Plex Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    align-items: center;
+  }
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+  }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+
+  /* 01 */
+  .s1 { grid-template-rows: 72px 1fr 188px; }
+  .s1 .top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 var(--pad); background: var(--blue); color: var(--blue-ink);
+    font-size: 22px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .s1 .mid {
+    display: grid; grid-template-rows: 1fr 1fr; min-height: 0;
+    padding: 28px var(--pad) 32px;
+  }
+  .s1 .block { display: flex; align-items: center; min-height: 0; min-width: 0; }
+  .s1 .block.b { border-top: 4px solid var(--blue); }
+  .s1 h1 {
+    font-family: "Space Grotesk", sans-serif; font-weight: 700;
+    font-size: 104px; line-height: 1.02; letter-spacing: -0.04em;
+    max-width: 940px; overflow-wrap: anywhere;
+  }
+  .s1 h1.a { color: var(--paper); }
+  .s1 h1.b { color: var(--blue); }
+  .s1 .bot {
+    display: grid; grid-template-columns: 1.3fr 0.7fr; border-top: 3px solid var(--line);
+  }
+  .s1 .tag {
+    padding: 28px var(--pad); font-size: 36px; font-weight: 700; line-height: 1.22;
+    background: var(--paper); color: var(--ink); display: flex; align-items: center;
+  }
+  .s1 .stamp {
+    background: var(--blue); color: var(--blue-ink);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 8px; padding: 20px; text-align: center;
+  }
+  .s1 .stamp strong { font-family: "Space Grotesk", sans-serif; font-size: 64px; font-weight: 700; line-height: 1; }
+  .s1 .stamp span { font-family: "IBM Plex Mono", monospace; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+
+  /* 02 */
+  .s2 { grid-template-rows: 80px 1fr; }
+  .s2 .top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 var(--pad); border-bottom: 3px solid var(--line);
+    font-size: 24px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue);
+  }
+  .s2 .stack {
+    display: grid; grid-template-rows: repeat(3, 1fr);
+    padding: 32px var(--pad) var(--pad); gap: 18px; min-height: 0;
+  }
+  .s2 .row {
+    display: grid; grid-template-columns: 210px 1fr; border: 2px solid var(--line);
+    border-radius: 6px; overflow: hidden; min-height: 0; background: var(--panel);
+  }
+  .s2 .k {
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Space Grotesk", sans-serif; font-size: 40px; font-weight: 700;
+    background: var(--blue); color: var(--blue-ink); padding: 14px;
+  }
+  .s2 .v {
+    display: flex; align-items: center; padding: 22px 32px; font-size: 38px;
+    font-weight: 700; line-height: 1.2; color: var(--ice); min-width: 0;
+  }
+
+  /* 03 */
+  .s3 { grid-template-columns: 1fr 1fr; }
+  .s3 .col {
+    display: grid; grid-template-rows: auto auto 1fr;
+    padding: 52px 48px; gap: 20px; min-height: 0;
+  }
+  .s3 .left { background: var(--panel); border-right: 4px solid var(--blue); }
+  .s3 .right { background: var(--blue); color: var(--blue-ink); }
+  .s3 .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 18px;
+    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+  }
+  .s3 h2 {
+    font-family: "Space Grotesk", sans-serif; font-size: 68px; font-weight: 700;
+    letter-spacing: -0.035em; line-height: 1.04; max-width: 100%;
+  }
+  .s3 .fill { display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+  .s3 .pill {
+    font-size: 30px; font-weight: 700; line-height: 1.22; padding: 26px 22px;
+    border: 2px solid var(--line); background: var(--ink);
+  }
+  .s3 .right .pill { border-color: rgba(4,16,24,0.25); background: rgba(0,0,0,0.1); }
+
+  /* 04 */
+  .s4 { grid-template-rows: 100px 1fr; }
+  .s4 .top {
+    display: flex; align-items: center; padding: 0 var(--pad);
+    background: var(--paper); color: var(--ink);
+    font-family: "Space Grotesk", sans-serif; font-size: 44px; font-weight: 700;
+  }
+  .s4 .body {
+    padding: 48px var(--pad); display: flex; flex-direction: column;
+    justify-content: center; gap: 20px; min-height: 0;
+  }
+  .s4 .phase {
+    display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: center;
+    padding: 36px 0; border-bottom: 2px solid var(--line);
+  }
+  .s4 .phase:last-child { border-bottom: 0; }
+  .s4 .n {
+    font-family: "Space Grotesk", sans-serif; font-size: 56px; font-weight: 700; color: var(--blue);
+  }
+  .s4 .t strong {
+    display: block; font-family: "Space Grotesk", sans-serif; font-size: 46px;
+    font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .s4 .t span { font-size: 30px; color: var(--ice); font-weight: 600; line-height: 1.3; }
+
+  /* 05 */
+  .s5 { grid-template-rows: 1fr auto auto; }
+  .s5 .hero {
+    padding: 56px var(--pad) 36px; display: flex; flex-direction: column;
+    justify-content: center; gap: 22px; border-bottom: 4px solid var(--blue); min-height: 0;
+  }
+  .s5 .label {
+    font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--blue); font-weight: 700;
+  }
+  .s5 h1 {
+    font-family: "Space Grotesk", sans-serif; font-size: 76px; font-weight: 700;
+    letter-spacing: -0.035em; line-height: 1.08; max-width: 920px;
+  }
+  .s5 .opts { display: grid; grid-template-columns: 1fr 1fr; }
+  .s5 .opt {
+    padding: 44px 40px; min-height: 240px; background: var(--panel);
+    border-right: 2px solid var(--ink); display: flex; flex-direction: column;
+    justify-content: center; gap: 18px;
+  }
+  .s5 .opt:last-child { border-right: 0; }
+  .s5 .opt b {
+    font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: 0.12em;
+    color: var(--blue); text-transform: uppercase;
+  }
+  .s5 .opt span { font-size: 40px; font-weight: 700; line-height: 1.15; }
+  .s5 .ask {
+    background: var(--blue); color: var(--blue-ink); padding: 40px var(--pad);
+    font-size: 34px; font-weight: 800; line-height: 1.25;
+  }
+</style>
+</head>
+<body>
+
+<section class="slide s1">
+  <div class="top"><span class="mono">Signal · 01 / 05</span><span class="mono">Macro · Arc</span></div>
+  <div class="mid">
+    <div class="block a"><h1 class="a">The issuer is<br/>building the</h1></div>
+    <div class="block b"><h1 class="b">chain.</h1></div>
+  </div>
+  <div class="bot">
+    <div class="tag">Mint the dollar. Then meter the machine in that same dollar.</div>
+    <div class="stamp"><strong>USDC</strong><span>as gas</span></div>
+  </div>
+</section>
+
+<section class="slide s2">
+  <div class="top"><span>Product grammar</span><span class="mono">02 / 05</span></div>
+  <div class="stack">
+    <div class="row"><div class="k">GAS</div><div class="v">Fees denominated in USDC, not a volatile L1 token</div></div>
+    <div class="row"><div class="k">SET</div><div class="v">Permissioned validators drawn from finance ops</div></div>
+    <div class="row"><div class="k">PORT</div><div class="v">EVM compatible so Solidity stacks can move</div></div>
+  </div>
+</section>
+
+<section class="slide s3">
+  <div class="col left">
+    <div class="eyebrow">What feeds say</div>
+    <h2>Another<br/>L1 launch.</h2>
+    <div class="fill">
+      <div class="pill">TPS theater</div>
+      <div class="pill">Ecosystem logos</div>
+      <div class="pill">Mainnet countdown</div>
+    </div>
+  </div>
+  <div class="col right">
+    <div class="eyebrow">What operators hear</div>
+    <h2>Who runs<br/>the blocks.</h2>
+    <div class="fill">
+      <div class="pill">Who proposes</div>
+      <div class="pill">Who pays gas</div>
+      <div class="pill">Who can be removed</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide s4">
+  <div class="top">Two phases</div>
+  <div class="body">
+    <div class="phase">
+      <div class="n">01</div>
+      <div class="t"><strong>Own issuance</strong><span>Mint and redeem the dollar</span></div>
+    </div>
+    <div class="phase">
+      <div class="n">02</div>
+      <div class="t"><strong>Own the rail</strong><span>Meter compute and settlement in that dollar</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide s5">
+  <div class="hero">
+    <div class="label">Open question</div>
+    <h1>What matters more<br/>on a dollar native L1?</h1>
+  </div>
+  <div class="opts">
+    <div class="opt"><b>A</b><span>Open validators</span></div>
+    <div class="opt"><b>B</b><span>Predictable USDC gas</span></div>
+  </div>
+  <div class="ask">Pick the constraint you would underwrite first.</div>
+</section>
+
+</body>
+</html>

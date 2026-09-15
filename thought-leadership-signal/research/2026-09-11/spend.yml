@@ -1,0 +1,34 @@
+date: "2026-09-11"
+spend_usd: 0.20
+note: Includes discarded KYA draft research + rewrite for x402 MCP key leak
+items:
+  - endpoint: https://stableenrich.dev/api/exa/search
+    usd: 0.01
+    note: early AI agents query (KYA draft)
+  - endpoint: https://stableenrich.dev/api/serper/news
+    usd: 0.04
+    note: KYA draft news
+  - endpoint: https://stableenrich.dev/api/serper/news
+    usd: 0.04
+    note: empty liability query
+  - endpoint: https://stableenrich.dev/api/exa/answer
+    usd: 0.01
+    note: KYA week synthesis
+  - endpoint: https://stableenrich.dev/api/exa/search
+    usd: 0.01
+    note: Robinhood (discarded)
+  - endpoint: https://stableenrich.dev/api/reddit/search
+    usd: 0.02
+    note: weak for KYA
+  - endpoint: https://stableenrich.dev/api/exa/answer
+    usd: 0.01
+    note: rewrite freshest non-desk news
+  - endpoint: https://stableenrich.dev/api/serper/news
+    usd: 0.04
+    note: rewrite broad news
+  - endpoint: https://stableenrich.dev/api/exa/contents
+    usd: 0.002
+    note: Knostic + New Stack
+  - endpoint: https://stableenrich.dev/api/exa/search
+    usd: 0.01
+    note: gadgethumans-mcp

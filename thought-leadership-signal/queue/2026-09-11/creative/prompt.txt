@@ -1,0 +1,3 @@
+v2 dense HTML code_receipt. Archive-v1 keeps sparse first pass.
+Fonts: Newsreader + Space Grotesk + IBM Plex Mono.
+Fill plane: 108–128px hooks, 36px code, full-bleed splits, thick bottom bands.

@@ -1,0 +1,3 @@
+diagram_systems dense — Visa settlement float / Credit Coop Spigot grammar.
+Fonts: Syne + IBM Plex Sans/Mono. Palette: ink #0b1016, gold #d4a017, paper #ebe6db.
+No numbers on slides. No MCP/agent thesis. Export via export-slides.cjs.

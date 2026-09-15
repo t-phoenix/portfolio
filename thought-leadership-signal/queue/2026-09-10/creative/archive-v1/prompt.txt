@@ -1,0 +1,9 @@
+Format: carousel_clearance (NEW — not Day 1 frame grid, not Day 2 teal rail)
+
+System:
+- Navy clearance card + bone paper dual column
+- Type: Fraunces (display) + Outfit (UI) + IBM Plex Mono (folio)
+- Accent: amber stamps / mint brand mark
+- Composition: perforated ticket cover, ALLOW|HOLD matrix, venue stack rows, thesis, invite bar
+
+No numbers on slides. Numbers live in x.md / linkedin.md.

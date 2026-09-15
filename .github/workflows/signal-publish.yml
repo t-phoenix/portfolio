@@ -1,0 +1,88 @@
+name: Signal Publish Due
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: thought-leadership-signal/ops/publish
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install
+        run: npm install --omit=dev
+
+      - name: Write .env from secrets
+        env:
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          X_PROVIDER: ${{ secrets.X_PROVIDER }}
+          X_ALLOW_URLS: ${{ secrets.X_ALLOW_URLS }}
+          TWITTERAPI_API_KEY: ${{ secrets.TWITTERAPI_API_KEY }}
+          TWITTERAPI_LOGIN_COOKIES: ${{ secrets.TWITTERAPI_LOGIN_COOKIES }}
+          TWITTERAPI_AUTH_SESSION: ${{ secrets.TWITTERAPI_AUTH_SESSION }}
+          X_PROXY_URL: ${{ secrets.X_PROXY_URL }}
+          X_SCREEN_NAME: ${{ secrets.X_SCREEN_NAME }}
+          PUBLISH_DRY_RUN: ${{ secrets.PUBLISH_DRY_RUN }}
+        run: |
+          {
+            echo "LINKEDIN_CLIENT_ID=$LINKEDIN_CLIENT_ID"
+            echo "LINKEDIN_CLIENT_SECRET=$LINKEDIN_CLIENT_SECRET"
+            echo "LINKEDIN_ACCESS_TOKEN=$LINKEDIN_ACCESS_TOKEN"
+            echo "LINKEDIN_REFRESH_TOKEN=$LINKEDIN_REFRESH_TOKEN"
+            echo "LINKEDIN_PERSON_URN=$LINKEDIN_PERSON_URN"
+            echo "X_API_KEY=$X_API_KEY"
+            echo "X_API_SECRET=$X_API_SECRET"
+            echo "X_ACCESS_TOKEN=$X_ACCESS_TOKEN"
+            echo "X_ACCESS_SECRET=$X_ACCESS_SECRET"
+            echo "X_PROVIDER=${X_PROVIDER:-auto}"
+            echo "X_ALLOW_URLS=${X_ALLOW_URLS:-false}"
+            echo "TWITTERAPI_API_KEY=$TWITTERAPI_API_KEY"
+            echo "TWITTERAPI_LOGIN_COOKIES=$TWITTERAPI_LOGIN_COOKIES"
+            echo "TWITTERAPI_AUTH_SESSION=$TWITTERAPI_AUTH_SESSION"
+            echo "X_PROXY_URL=$X_PROXY_URL"
+            echo "X_SCREEN_NAME=${X_SCREEN_NAME:-touchey_phoenix}"
+            echo "PUBLISH_DRY_RUN=${PUBLISH_DRY_RUN:-true}"
+            echo "SIGNAL_TIMEZONE=Asia/Kolkata"
+          } > .env
+
+      - name: Publish due packs
+        run: npm run publish-due
+
+      - name: Commit meta / archive moves
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "signal-publish-bot"
+          git config user.email "signal-publish-bot@users.noreply.github.com"
+          git add thought-leadership-signal/queue thought-leadership-signal/archive || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(signal): publish-due status updates"
+            git push
+          fi

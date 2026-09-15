@@ -15,7 +15,7 @@ const Experience = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            4+ YEARS OF WEB3
+            5+ YEARS OF WEB3
             <br />
             <span className="text-white/10">EXPERIENCE</span>
           </motion.h2>

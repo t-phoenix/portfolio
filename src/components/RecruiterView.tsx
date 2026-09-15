@@ -8,10 +8,10 @@ const RecruiterView = () => {
   const quickInfo = {
     targetRoles: ['Web3 Evangelist / DevRel', 'Senior Smart Contract Engineer', 'Senior Solidity Engineer'],
     keyAchievements: [
-      '$1.5B+ USD bridged on-chain in production',
-      '$26K+ in hackathon prizes won',
-      '4+ years Web3/Solidity experience',
-      'Expertise in DeFi, NFT, DAO protocols',
+      '$2B+ private credit bridged on-chain (Pact Labs)',
+      '$26K+ in hackathon prizes across 4 wins',
+      '5+ years Web3/Solidity product experience',
+      '8+ production DeFi, DAO, credit, and consumer products shipped',
     ],
     topProjects: [
       { name: 'Crypto Index Fund', tech: 'Balancer V3 + Uniswap V3 architecture' },

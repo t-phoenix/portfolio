@@ -1,0 +1,81 @@
+---
+description: Thought Leadership Signal daily packs, publish ops, and session learnings
+globs: thought-leadership-signal/**
+alwaysApply: false
+---
+
+# Thought Leadership Signal
+
+Work under `thought-leadership-signal/`. Full ops learnings: [`ops/LEARNINGS.md`](../../thought-leadership-signal/ops/LEARNINGS.md).
+
+## Product
+
+- Handles: X `@touchey_phoenix`, LinkedIn Abhinil Agarwal
+- Cadence: one angle/day; packs in `queue/YYYY-MM-DD/`; posted packs move to `archive/`
+- Outward copy: **no hyphens/dashes**, no product/follow CTAs, numbers in copy not duplicated on creatives
+- Never same creative format two days in a row ([`brand/CREATIVE_PLAYBOOK.md`](../../thought-leadership-signal/brand/CREATIVE_PLAYBOOK.md))
+
+## Daily pack recipe
+
+1. Research → `research/YYYY-MM-DD/` (AgentCash Enrich; prefer Base; log spend)
+2. Brief + `x.md` + `linkedin.md` + `meta.yml` (`status: ready`)
+3. Studio HTML carousel → PNG via puppeteer `export-slides.cjs` (local $0)
+4. `npm run suggest-times` then user locks `npm run schedule`
+5. GHA / `publish-due` ships when `status: scheduled` and times due
+
+## X publish (official API — preferred)
+
+- Env in `ops/publish/.env`: `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET`
+- `X_PROVIDER=auto` → official when those four are set
+- **Post only.** No reads/search from the publisher (cost + scope)
+- `X_ALLOW_URLS=false` — URLs in tweets cost ~$0.20 vs ~$0.015 text/media
+- ~$0.015/tweet; 6-tweet thread ≈ ~$0.09. Need pay-per-use **credits** in console.x.com
+- App must be **Read and write**. Callback/Website required to save settings:
+  - Website: `https://www.abhinil.in`
+  - Callback: `http://localhost:8765/callback`
+- After permission changes: **regenerate Access Token + Secret**
+- Consumer Key + Secret must be a **matching pair from the same regenerate**; Bearer working ≠ OAuth1 working
+- Access token user-id prefix must match `@touchey_phoenix` (e.g. `2253716034-…`)
+- Do **not** paste OAuth 2.0 Client ID/Secret into `X_API_*`
+- twitterapi.io is fallback only (proxy + login cookies; TOTP often fails)
+
+## LinkedIn
+
+- Official Share API; tokens via `npm run linkedin-auth`
+- MultiImage carousels supported; API version must stay current (not stale `202401`)
+
+## Publish safety
+
+- Default `PUBLISH_DRY_RUN=true`; live needs `PUBLISH_DRY_RUN=false`
+- `isPublished` ignores `dryRun: true` receipts so dry runs never block live
+- Never treat dry-run ids as real posts
+- Idempotent: skip platforms already in `schedule.published`
+- Both platforms posted → `status: posted` → archive (live only)
+
+## Creative / copy lessons
+
+- Hook in tweet 1; thread 3–6; keep under 280 unless account has longer posts
+- Creative ≠ caption data dump
+- Rotate formats: studio / asymmetric / clearance / diagram / receipt / meme / **code receipt**
+- **Topic breadth:** Web3 only, AI only, or intersection — do not force Web3 x AI every day. See [`topics/SELECTION.md`](../../thought-leadership-signal/topics/SELECTION.md)
+- Tasteful code on slides OK when it is the receipt (one smoking gun block)
+- **Density (hard gate):** bold hook **76–88px** with limited spacing (~52–60px inset); **no overflow / edge kiss**; avoid sparse voids *and* cramped type soup. Archive sparse in `archive-v1/`, over-dense in `archive-v2-dense/`. See CREATIVE_PLAYBOOK density doctrine.
+- Do not chain sequel theses (permission day → identity day was too close)
+- Week arc (avoid repeats — **leave this lane after 09-11**):
+  - 09-08: incentive bug / agent sold you something (MCP trust)
+  - 09-09: soft edges fail first (Vitalik / probing)
+  - 09-10: desk not vault (permission is the product) — posted; archive/2026-09-10
+  - 09-11: x402 MCP shipped the raw key (not auto sign)
+  - 09-12: Visa settlement float / Credit Coop Spigot (diagram_systems) — Web3-only macro
+  - 09-13: Circle Arc — issuer builds the chain (quote_editorial)
+  - 09-14: Harness vs model — 99.9% / 62.7% (data_frame)
+
+## Instant publish (when user asks to post now)
+
+```bash
+cd thought-leadership-signal/ops/publish
+npm run schedule -- --date YYYY-MM-DD --x <iso past/now> --linkedin <iso>
+PUBLISH_DRY_RUN=false npm run publish-due
+```
+
+Only schedule the target date. Day 3 live: X `2098489772671156656`, LI `urn:li:ugcPost:7504255519499436033`.

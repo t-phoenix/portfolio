@@ -1,0 +1,3 @@
+data_frame balanced — harness vs model 99.9 / 62.7.
+Pad 56px. Hook ~72px. Score panels 96px with air. Teal/amber split.
+No overflow. Format ≠ quote (09-13) ≠ diagram (09-12).

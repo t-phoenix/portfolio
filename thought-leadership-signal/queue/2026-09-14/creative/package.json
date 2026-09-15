@@ -1,0 +1,10 @@
+{
+  "name": "signal-creative-2026-09-14",
+  "private": true,
+  "scripts": {
+    "export": "node export-slides.cjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.22.0"
+  }
+}

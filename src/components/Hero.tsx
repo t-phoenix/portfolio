@@ -197,11 +197,11 @@ const Hero = () => {
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <p className="text-7xl font-semibold text-orange">$1.5B+</p>
+                  <p className="text-7xl font-semibold text-orange">$2B+</p>
                   <p className="text-tertiary text-sm uppercase tracking-tight">
-                    USD BRIDGED
+                    PRIVATE CREDIT
                     <br />
-                    ON-CHAIN
+                    BRIDGED
                   </p>
                   <motion.div
                     className="absolute -inset-2 bg-orange/5 rounded-lg -z-10 opacity-0 group-hover:opacity-100"

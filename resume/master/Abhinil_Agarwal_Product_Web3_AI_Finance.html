@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Abhinil Agarwal — Product · Web3 · AI · Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0e1218;
+    --muted: #5a6570;
+    --line: #d8dde3;
+    --paper: #f7f5f0;
+    --gold: #b8890f;
+    --gold-soft: #f3ead0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: A4; margin: 0; }
+  body {
+    background: #e8e4dc;
+    color: var(--ink);
+    font-family: "IBM Plex Sans", Helvetica, Arial, sans-serif;
+    font-size: 8.7pt;
+    line-height: 1.28;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 16px auto;
+    background: var(--paper);
+    padding: 10mm 12mm 8mm;
+    position: relative;
+  }
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; width: 210mm; min-height: 297mm; }
+  }
+
+  header {
+    border-bottom: 2.5px solid var(--ink);
+    padding-bottom: 7px;
+    margin-bottom: 8px;
+  }
+  .kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 7pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  h1 {
+    font-family: Syne, "IBM Plex Sans", sans-serif;
+    font-size: 22pt;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .subtitle {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+  .contact {
+    font-size: 7.4pt;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  .contact a { color: var(--ink); text-decoration: none; font-weight: 500; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin: 8px 0 8px;
+  }
+  .stat {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7px 8px 6px;
+  }
+  .stat b {
+    display: block;
+    font-family: Syne, sans-serif;
+    font-size: 12pt;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .stat span {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 6pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  h2 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 7pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    margin: 8px 0 5px;
+    font-weight: 600;
+  }
+
+  .summary { font-size: 8.4pt; color: var(--ink); }
+  .keywords {
+    font-size: 7pt;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .job { margin-bottom: 6px; }
+  .job-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+  .job-title {
+    font-weight: 700;
+    font-size: 9pt;
+  }
+  .job-org { font-weight: 600; color: var(--ink); }
+  .job-meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 6.8pt;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .job-sub {
+    font-size: 7.4pt;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  ul { padding-left: 12px; margin: 0; }
+  li { margin-bottom: 1px; }
+  li::marker { color: var(--gold); }
+
+  .two {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 12px;
+  }
+  .chip-row { margin-top: 1px; }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .chip {
+    font-size: 6.6pt;
+    background: var(--gold-soft);
+    color: var(--ink);
+    padding: 1px 5px;
+    font-weight: 500;
+  }
+
+  .award {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 6px;
+    margin-bottom: 2px;
+    align-items: baseline;
+  }
+  .award b {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 7pt;
+    color: var(--gold);
+  }
+
+  .links a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .links li { margin-bottom: 2px; }
+
+  footer.note {
+    margin-top: 6px;
+    padding-top: 4px;
+    border-top: 1px solid var(--line);
+    font-size: 6.5pt;
+    color: var(--muted);
+    font-family: "IBM Plex Mono", monospace;
+  }
+</style>
+</head>
+<body>
+<article class="page">
+  <header>
+    <div class="kicker">Product · Web3 · AI · Finance</div>
+    <h1>Abhinil Agarwal</h1>
+    <p class="subtitle">Technical Product Leader building on-chain finance and agentic systems</p>
+    <p class="contact">
+      Bangalore / Jaipur / Himachal · Open to Remote · Hybrid · Relocation<br />
+      <a href="mailto:abhijaipur2011@gmail.com">abhijaipur2011@gmail.com</a>
+      · +91-8107599599
+      · <a href="https://www.abhinil.in">abhinil.in</a>
+      · <a href="https://www.linkedin.com/in/abhinil-agarwal-975374145/">LinkedIn</a>
+      · <a href="https://github.com/t-phoenix">GitHub</a>
+      · <a href="https://x.com/touchey_phoenix">X</a>
+      · <a href="https://hackernoon.com/u/tphoenix">Hackernoon</a>
+    </p>
+  </header>
+
+  <section class="stats" aria-label="Key metrics">
+    <div class="stat"><b>$2B+</b><span>Private credit bridged</span></div>
+    <div class="stat"><b>$26K+</b><span>Hackathon prizes</span></div>
+    <div class="stat"><b>5+</b><span>Years Web3 product</span></div>
+    <div class="stat"><b>20+</b><span>Teams on starter kit</span></div>
+  </section>
+
+  <h2>Summary</h2>
+  <p class="summary">
+    Technical Product Leader and CTO with 5+ years taking Web3, DeFi, and on-chain finance products from discovery to production.
+    Owned architecture and delivery for private credit rails that scaled to <strong>$2B+</strong> in bridged private credit, plus AMM/index products, DAO tooling, and AI-agentic systems.
+    Bridges engineering, protocol partners, and GTM with roadmaps, PRDs, UX flows, and measurable outcomes.
+    Published on Hackernoon; runs a daily Web3 × AI signal practice on X and LinkedIn.
+  </p>
+  <p class="keywords">
+    Keywords: Technical Product Manager · Product roadmap · PRD · MVP · Go-to-market · Stakeholder management · DeFi · On-chain credit · Private credit · Settlement · Stablecoins · AMM · DEX · DAO · Tokenomics · Solidity · Aptos Move · EVM · AI agents · LLM · MCP · Agentic workflows · Developer experience
+  </p>
+
+  <h2>Experience</h2>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">CTO · <span class="job-org">ADPR Memetic Brand Labs</span></div>
+      <div class="job-meta">Feb 2026 – Present</div>
+    </div>
+    <div class="job-sub">Product and technical leadership · Web3 × AI · Remote</div>
+    <ul>
+      <li>Own product and technical strategy for a Web3 × AI lab spanning culture, coordination, and agentic tooling.</li>
+      <li>Roadmap AI agent workflows and experimental finance products; ship Thought Leadership Signal daily (X + LinkedIn).</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">Head of Web3 / Blockchain · <span class="job-org">CosX</span></div>
+      <div class="job-meta">Mar 2025 – Present</div>
+    </div>
+    <div class="job-sub">Product interface · Protocol partners · Remote</div>
+    <ul>
+      <li>Primary interface between AI/engineering and protocol partners; convert constraints into requirements and delivery plans.</li>
+      <li>Lead Web3 product initiatives tied to <strong>$2B+</strong> private credit infrastructure across credit, payments, and chain surfaces.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">On-chain Credit Product Builder · <span class="job-org">Pact Labs</span></div>
+      <div class="job-meta">Mar 2025 – Feb 2026</div>
+    </div>
+    <div class="job-sub">Private credit · Aptos Move · EVM · Remote</div>
+    <ul>
+      <li>Built credit infrastructure that scaled to <strong>$2B+</strong> USD in bridged private credit across Aptos and EVM.</li>
+      <li>Partnered with CTO and PMs to turn off-chain credit into auditable on-chain flows; shipped React Native credit UX.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">Web3 Product Builder · <span class="job-org">Equistart Labs</span></div>
+      <div class="job-meta">Jun 2022 – Mar 2025 · ~2y 9mo</div>
+    </div>
+    <div class="job-sub">DeFi · DAO · Structured products · Remote</div>
+    <ul>
+      <li>Owned <strong>3</strong> product lines end to end: DEX, crypto index / structured funds, and Simpli DAO (Solidity, Foundry, React Native).</li>
+      <li>Won <strong>$2,000</strong> (Balancer V3 fee hook) and <strong>$2,500</strong> (Equistart DAO suite) with complete product demos and docs.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">Developer Relations Engineer · <span class="job-org">Celo Foundation</span></div>
+      <div class="job-meta">Mar 2022 – May 2022</div>
+    </div>
+    <ul>
+      <li>React Native Web3 starter adopted by <strong>20+</strong> hackathon teams; tutorials on Medium and Hackernoon; mentored prize-winning teams.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head">
+      <div class="job-title">Full-Stack & Mobile Engineer · <span class="job-org">ETG India</span></div>
+      <div class="job-meta">Jan 2021 – Jun 2021</div>
+    </div>
+    <ul>
+      <li>Insurtech mobile app with GCP AutoML + Dialogflow; Firebase backend; Google Play release — first production mobile ship.</li>
+    </ul>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2>Selected products</h2>
+      <ul>
+        <li><strong>Private credit rails</strong> — Pact · $2B+ bridged · Aptos + EVM</li>
+        <li><strong>Crypto Index</strong> — structured on-chain funds · Balancer V3 + Uniswap V3</li>
+        <li><strong>Simpli DAO</strong> — voting, proposals, payouts · Celo · $2.5K</li>
+        <li><strong>Volatility fee hook</strong> — Balancer V3 product mechanic · $2K</li>
+        <li><strong>Potshot</strong> — live raffle on Base · Solidity + React</li>
+        <li><strong>Thought Leadership Signal</strong> — daily Web3/AI narrative system</li>
+      </ul>
+
+      <h2>Awards</h2>
+      <div class="award"><b>$20,000</b><span>1st · Harmony Hackathon (Gitcoin) · Wallet frontend · 2021</span></div>
+      <div class="award"><b>$2,500</b><span>Winner · Build With Celo · Equistart DAO Suite · 2022</span></div>
+      <div class="award"><b>$2,000</b><span>Winner · Balancer Hookathon (DoraHacks) · Fee hook · 2024</span></div>
+      <div class="award"><b>$1,700</b><span>Winner · Green NFT Hackathon (Gitcoin) · Research · 2021</span></div>
+    </div>
+
+    <div>
+      <h2>Skills</h2>
+      <p class="chip-row"><strong>Product</strong></p>
+      <div class="chips">
+        <span class="chip">Roadmaps</span><span class="chip">PRDs</span><span class="chip">MVP</span>
+        <span class="chip">Prioritization</span><span class="chip">GTM</span><span class="chip">Stakeholders</span>
+        <span class="chip">Fintech UX</span><span class="chip">Metrics</span><span class="chip">DevRel</span>
+      </div>
+      <p class="chip-row" style="margin-top:8px"><strong>Web3 finance</strong></p>
+      <div class="chips">
+        <span class="chip">DeFi</span><span class="chip">Private credit</span><span class="chip">AMM/DEX</span>
+        <span class="chip">DAO</span><span class="chip">Settlement</span><span class="chip">Stablecoins</span>
+        <span class="chip">Tokenomics</span><span class="chip">Uniswap V3</span><span class="chip">Balancer</span>
+      </div>
+      <p class="chip-row" style="margin-top:8px"><strong>AI</strong></p>
+      <div class="chips">
+        <span class="chip">LLM products</span><span class="chip">AI agents</span><span class="chip">MCP</span>
+        <span class="chip">Agentic workflows</span>
+      </div>
+      <p class="chip-row" style="margin-top:8px"><strong>Build</strong></p>
+      <div class="chips">
+        <span class="chip">Solidity</span><span class="chip">Aptos Move</span><span class="chip">Foundry</span>
+        <span class="chip">React</span><span class="chip">React Native</span><span class="chip">TypeScript</span>
+        <span class="chip">Ethereum</span><span class="chip">Base</span><span class="chip">Aptos</span><span class="chip">Celo</span>
+      </div>
+
+      <h2>Education</h2>
+      <p><strong>Integrated M.Tech, CSE</strong><br />IIIT Bangalore · 2016–2021 · 5-year program</p>
+
+      <h2>Presence</h2>
+      <ul class="links">
+        <li><a href="https://hackernoon.com/u/tphoenix">Hackernoon · Top finance writing</a></li>
+        <li><a href="https://x.com/touchey_phoenix">X · @touchey_phoenix</a></li>
+        <li><a href="https://www.linkedin.com/in/abhinil-agarwal-975374145/">LinkedIn</a></li>
+        <li><a href="https://medium.com/@tphoenix">Medium</a></li>
+        <li><a href="https://www.abhinil.in">Portfolio · abhinil.in</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="note">
+    Target roles: Technical Product Manager · Product Manager (Web3 / DeFi / Fintech) · Product Lead (AI × Crypto) · Founding Product
+  </footer>
+</article>
+</body>
+</html>

@@ -1,0 +1,8 @@
+date: "2026-09-12"
+total_usd: 0.00
+note: Cursor WebSearch + WebFetch only. AgentCash balance low (~$0.09); skipped Enrich to preserve runway.
+breakdown:
+  - item: web_search_webfetch
+    usd: 0
+  - item: creative_html_puppeteer
+    usd: 0

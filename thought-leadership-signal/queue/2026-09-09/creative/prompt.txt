@@ -1,0 +1,6 @@
+Asymmetric Soft Edges pack.
+Vertical teal rail, core/edges split, thesis band, giant ?.
+No metrics on slides. Numbers in x.md / linkedin.md.
+Brand: Syne, IBM Plex, Signal teal.
+
+Video variant for thread post `### 3`: `creative/post-03.mp4` (6s zoom/pan of `slide-03.png`, no extra text).

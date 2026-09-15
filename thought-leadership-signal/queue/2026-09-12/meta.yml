@@ -1,0 +1,93 @@
+date: '2026-09-12'
+status: posted
+pillar: macro-finance
+platform_targets:
+  - x
+  - linkedin
+creative_format: diagram_systems
+hook: Settlement scaled. Then the float needed a lender.
+receipts:
+  - >-
+    https://www.theblock.co/news/business/2026-09-08-visa-stablecoin-settlement-tops-20-billion-annualized-run-rate-up-more-than-15x-year-over-year-413749
+  - >-
+    https://www.prnewswire.com/apac/news-releases/visa-brings-onchain-lending-into-everyday-payments-302873001.html
+  - https://cointelegraph.com/news/us-bank-launches-usbdc-stablecoin-with-live-cross-border-payment
+numbers:
+  - 'visa_stablecoin_settlement_arr: >$20B'
+  - 'visa_settlement_yoy: >15x'
+  - 'stablecoin_card_programs: 160+'
+  - 'card_program_volume_yoy: ~200%'
+  - 'credit_coop_financed: >$2.5B since 2023, 0 defaults'
+  - 'onchain_borrow_repay: >3000 / >9000'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0
+spend_breakdown:
+  - research_web_native: 0
+  - creative: 0
+notes: >-
+  Web3-only macro. Leaves MCP/desk/key week arc. diagram_systems densified: bold Syne hook,
+  full-bleed flow bands, gold/ink contrast, minimal whitespace. Not clearance (09-10) or
+  code_receipt (09-11). Status ready 2026-09-13; prefer morning/evening IST today or later. |
+  Scheduled x=2026-09-15T13:25:07+05:30 linkedin=2026-09-15T13:25:07+05:30
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-09-13T09:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 95
+      rationale: Sunday builder skim; clean slot now that Sep 12 windows are past.
+    - id: evening-prime
+      label: Evening prime
+      at: '2026-09-13T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 93
+      rationale: After work India + EU overlap.
+    - id: midday
+      label: Midday scroll
+      at: '2026-09-13T12:45:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 85
+      rationale: Lunch window; LinkedIn often stronger.
+    - id: late-edge
+      label: Late edge
+      at: '2026-09-13T21:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 78
+      rationale: US East afternoon overlap for X crypto discourse.
+    - id: next-morning
+      label: Next morning
+      at: '2026-09-14T09:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 88
+      rationale: Park for Monday morning if reviewing creatives overnight.
+  chosen:
+    x: '2026-09-15T13:25:07+05:30'
+    linkedin: '2026-09-15T13:25:07+05:30'
+  published:
+    x:
+      id: '2099768976222085246'
+      url: https://x.com/touchey_phoenix/status/2099768976222085246
+      at: '2026-09-15T07:55:13.869Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7505534719288070144
+      url: null
+      at: '2026-09-15T07:55:24.157Z'
+      dryRun: false

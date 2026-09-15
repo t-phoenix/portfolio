@@ -1,0 +1,211 @@
+# Topic taxonomy for Signal research and posts
+# Pillars map to brand positioning. Queries are AgentCash ready.
+
+version: 1
+updated: 2026-09-08
+
+pillars:
+  - id: web3-ai
+    name: Web3 x AI / agentic systems
+    description: On chain agents, automation, coordination between humans and agents
+    keywords:
+      - on-chain agents
+      - AI agents crypto
+      - agentic workflows
+      - autonomous agents DeFi
+      - LLM blockchain
+    exa_queries:
+      - "on-chain AI agents crypto 2026"
+      - "agentic workflows blockchain coordination"
+      - "autonomous agents DeFi protocols"
+    news_queries:
+      - "AI agents cryptocurrency"
+      - "on-chain AI agents"
+    reddit_queries:
+      - "AI agents crypto"
+      - "onchain agents"
+    subreddits:
+      - ethereum
+      - CryptoCurrency
+      - MachineLearning
+
+  - id: defi-architecture
+    name: DeFi architecture
+    description: AMMs, hooks, structured products, liquidity, protocol risk
+    keywords:
+      - AMM design
+      - Balancer hooks
+      - Uniswap V4
+      - structured products DeFi
+      - liquidity risk
+    exa_queries:
+      - "DeFi AMM architecture hooks 2026"
+      - "Uniswap V4 hooks design patterns"
+      - "structured products on-chain funds"
+    news_queries:
+      - "DeFi protocol design"
+      - "AMM hooks Uniswap Balancer"
+    reddit_queries:
+      - "Uniswap V4 hooks"
+      - "DeFi architecture"
+    subreddits:
+      - defi
+      - ethfinance
+      - CryptoTechnology
+
+  - id: digital-coordination
+    name: Digital coordination / DAOs
+    description: DAO tooling, governance, incentives, ops at scale
+    keywords:
+      - DAO tooling
+      - on-chain governance
+      - digital coordination
+      - incentive design
+      - community ops
+    exa_queries:
+      - "DAO governance tooling 2026"
+      - "digital coordination on-chain communities"
+      - "DAO operational failure modes"
+    news_queries:
+      - "DAO governance"
+      - "on-chain coordination"
+    reddit_queries:
+      - "DAO governance"
+      - "DAO tooling"
+    subreddits:
+      - ethereum
+      - dao
+
+  - id: macro-finance
+    name: Macro + non sovereign finance
+    description: Money history, stablecoins, settlement rails, monetary design
+    keywords:
+      - stablecoins
+      - settlement rails
+      - non-sovereign money
+      - monetary history
+      - on-chain FX
+    exa_queries:
+      - "stablecoin settlement rails 2026"
+      - "non-sovereign money crypto thesis"
+      - "on-chain dollar infrastructure"
+    news_queries:
+      - "stablecoin regulation"
+      - "crypto settlement rails"
+    reddit_queries:
+      - "stablecoins"
+      - "bitcoin money thesis"
+    subreddits:
+      - Bitcoin
+      - ethereum
+      - Economics
+
+  - id: protocol-engineering
+    name: Protocol engineering
+    description: Solidity, Move, security patterns, protocol implementation lessons
+    keywords:
+      - Solidity patterns
+      - Move Aptos
+      - smart contract security
+      - protocol upgrades
+      - gas optimization
+    exa_queries:
+      - "smart contract security patterns 2026"
+      - "Move language Aptos protocol design"
+      - "Solidity DeFi security lessons"
+    news_queries:
+      - "smart contract exploit"
+      - "Move blockchain"
+    reddit_queries:
+      - "smart contract security"
+      - "Solidity tips"
+    subreddits:
+      - ethdev
+      - solidity
+      - CryptoTechnology
+
+  - id: culture-building
+    name: Crypto culture building
+    description: Memetics, community, brand as protocol, resilient culture
+    keywords:
+      - crypto memetics
+      - community building web3
+      - brand as protocol
+      - culture coordination
+    exa_queries:
+      - "crypto culture building community 2026"
+      - "memetics web3 brand"
+      - "resilient crypto communities"
+    news_queries:
+      - "crypto community culture"
+      - "web3 brand"
+    reddit_queries:
+      - "crypto culture"
+      - "web3 community"
+    subreddits:
+      - CryptoCurrency
+      - ethereum
+
+  - id: builder-reality
+    name: Builder reality
+    description: Shipping, hackathons, failure modes, ops truth (no humblebrag)
+    keywords:
+      - shipping crypto products
+      - hackathon lessons
+      - startup failure crypto
+      - builder burnout
+    exa_queries:
+      - "crypto startup failure lessons builders"
+      - "shipping DeFi products hard lessons"
+      - "hackathon to production crypto"
+    news_queries:
+      - "crypto startup shutdown"
+      - "web3 founders lessons"
+    reddit_queries:
+      - "building in crypto"
+      - "failed startup crypto"
+    subreddits:
+      - startups
+      - ethdev
+      - entrepreneur
+
+  - id: ai-markets
+    name: AI x markets
+    description: Agents trading, data loops, automated decision systems
+    keywords:
+      - AI trading agents
+      - algorithmic markets
+      - prediction markets AI
+      - market making bots
+    exa_queries:
+      - "AI trading agents crypto markets 2026"
+      - "prediction markets AI agents"
+      - "automated market making agents"
+    news_queries:
+      - "AI trading crypto"
+      - "prediction markets AI"
+    reddit_queries:
+      - "AI trading"
+      - "trading bots crypto"
+    subreddits:
+      - algotrading
+      - CryptoMarkets
+      - MachineLearning
+
+rotation_hint: |
+  Pick one pillar per day. Prefer alternating technical and human/culture angles.
+  When news is thin, use evergreen education from the same pillar.
+
+evergreen_angles:
+  - id: coordination-tax
+    pillar: digital-coordination
+    hook_seed: "Every product tax is really a coordination tax."
+  - id: culture-is-infra
+    pillar: culture-building
+    hook_seed: "Culture is part of the protocol stack whether you designed it or not."
+  - id: agents-need-rails
+    pillar: web3-ai
+    hook_seed: "Agents without settlement rails are chatbots with a wallet shaped hole."
+  - id: hooks-are-policy
+    pillar: defi-architecture
+    hook_seed: "Your fee hook is monetary policy for a tiny nation of LPs."

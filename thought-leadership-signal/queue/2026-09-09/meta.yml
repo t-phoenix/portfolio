@@ -1,0 +1,101 @@
+date: '2026-09-09'
+status: posted
+pillar: web3-ai
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_studio_asymmetric
+hook: Soft edges fail first.
+receipts:
+  - >-
+    https://cryptoslate.com/vitalik-buterin-now-confident-ai-wont-break-crypto-betting-90-of-his-net-worth/
+  - Yahoo Finance / TheStreet amplification (Serper 2026-09-09)
+numbers:
+  - 'shapiro_claim: ~50% chance BTC >50% down in 2 years'
+  - 'vitalik_implicit_bet: ~90% net worth'
+  - 'glasswing_credits: up to $100M'
+  - 'open_letter_orgs: 100+'
+  - 'boltz: suspended after AI-assisted probing (Aug 2026)'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - post-03.mp4
+  - slide-04.png
+spend_usd: 0.05
+spend_breakdown:
+  - research_exa: 0.01
+  - research_serper_news: 0.04
+  - creative: 0
+notes: >-
+  New layout: vertical rail + core/edges split + thesis band. Not Day 1 frame/grid template. Numbers
+  only in copy. Also generated `creative/post-03.mp4` as the 6s video variant of `slide-03.png`
+  (subtle zoom/pan, no extra text). | Scheduled x=2026-09-10T09:00:00+05:30
+  linkedin=2026-09-10T09:00:00+05:30 | LinkedIn multiImage posted urn:li:ugcPost:7503763763062403072
+  | publish errors: x: X create tweet failed: 403 {"detail":"Your client app is not configured with
+  the appropriate oauth1 app permissions for this
+  endpoint.","status":403,"title":"Forbidden","type":"https://api.x.com/2/problems/oauth1-permissions"}
+  | publish errors: x: X create tweet failed: 401
+  {"title":"Unauthorized","type":"about:blank","status":401,"detail":"Unauthorized"} | publish
+  errors: x: X create tweet failed: 401
+  {"title":"Unauthorized","type":"about:blank","status":401,"detail":"Unauthorized"} | publish
+  errors: x: X create tweet failed: 401
+  {"title":"Unauthorized","type":"about:blank","status":401,"detail":"Unauthorized"}
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-09-09T08:30:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 95
+      rationale: IST weekday morning when builders and operators skim feeds before deep work.
+    - id: evening-prime
+      label: Evening prime
+      at: '2026-09-09T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 93
+      rationale: After work engagement peak for India + EU overlap start.
+    - id: next-morning
+      label: Next morning
+      at: '2026-09-10T09:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 90
+      rationale: If shipping late tonight, park for tomorrow morning instead of low-signal hours.
+    - id: midday
+      label: Midday scroll
+      at: '2026-09-09T12:45:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 85
+      rationale: Lunch window; LinkedIn often stronger than X here.
+    - id: late-edge
+      label: Late edge
+      at: '2026-09-09T21:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 77
+      rationale: US East afternoon overlap; good for X crypto discourse.
+  chosen:
+    x: '2026-09-10T09:00:00+05:30'
+    linkedin: '2026-09-10T09:00:00+05:30'
+  published:
+    x:
+      id: '2098018729426866447'
+      url: https://x.com/touchey_phoenix/status/2098018729426866447
+      at: '2026-09-10T12:00:22.475Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7503763763062403072
+      url: null
+      at: '2026-09-10T10:38:15.388Z'
+      imageCount: 4
+      format: multiImage

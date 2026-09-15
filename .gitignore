@@ -12,9 +12,13 @@ dist
 dist-ssr
 *.local
 
-# Environment variables
-.env.local
+# Environment variables / secrets (never commit)
 .env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
 
 # Editor directories and files
 .vscode/*
@@ -26,3 +30,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local multi-agent / skill install artifacts (installed for capability, not source)
+.agents/
+skills-lock.json
+
+# Personal CRM / social-graph exports (names, dm hashes) — keep local
+mind/haah/
+
+# Local scratch media (not portfolio site assets)
+creatives/
+
+# Empty / local ideation stubs
+digs/

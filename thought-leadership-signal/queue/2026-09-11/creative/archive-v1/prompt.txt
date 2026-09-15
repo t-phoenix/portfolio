@@ -1,0 +1,4 @@
+Local HTML code_receipt. GitHub-dark terminal aesthetic.
+Fonts: Newsreader + Space Grotesk + IBM Plex Mono.
+Smoking gun: headers["X-402-Wallet"] = WALLET_KEY
+No paid image gen.

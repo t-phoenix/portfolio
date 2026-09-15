@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal — Soft Edges — 2026-09-09</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0b0d10;
+    --ink-2: #151a1f;
+    --paper: #f0ece4;
+    --paper-2: #ddd7cb;
+    --signal: #2f8f84;
+    --signal-2: #5ec4b6;
+    --mute: #6e6a64;
+    --mute-d: #8b939c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: "IBM Plex Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    align-items: center;
+  }
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* ===== SLIDE 01: asymmetric rail ===== */
+  .s1 {
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    grid-template-columns: 96px 1fr;
+  }
+  .s1 .rail {
+    background: var(--signal);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 64px;
+  }
+  .s1 .rail span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .s1 .main {
+    padding: 72px 80px 72px 72px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .s1 .top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mute-d);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .s1 .top .brand { color: var(--signal-2); }
+  .s1 h1 {
+    margin-top: auto;
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 118px;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+  }
+  .s1 h1 em {
+    font-style: normal;
+    color: var(--signal-2);
+  }
+  .s1 .punch {
+    margin-top: 36px;
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--paper-2);
+    max-width: 720px;
+    line-height: 1.3;
+  }
+
+  /* ===== SLIDE 02: CORE / EDGES split ===== */
+  .s2 { display: grid; grid-template-rows: 1fr 1.35fr; }
+  .s2 .core {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .s2 .edges {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 56px 72px 64px;
+    display: flex;
+    flex-direction: column;
+  }
+  .s2 .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .s2 .core .tag { color: var(--signal-2); }
+  .s2 .edges .tag { color: var(--signal); }
+  .s2 .core h2 {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+  .s2 .core p {
+    font-size: 24px;
+    color: var(--mute-d);
+    max-width: 640px;
+    line-height: 1.35;
+  }
+  .s2 .list {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 40px;
+  }
+  .s2 .item {
+    font-family: Syne, sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: -0.03em;
+    padding-bottom: 14px;
+    border-bottom: 2px solid rgba(11, 13, 16, 0.12);
+  }
+  .s2 .folio {
+    position: absolute;
+    top: 40px;
+    right: 56px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--mute-d);
+  }
+
+  /* ===== SLIDE 03: single thesis band ===== */
+  .s3 {
+    background: var(--paper);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
+  .s3 .band {
+    margin: auto 0;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 88px 80px;
+    position: relative;
+  }
+  .s3 .band::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    background: var(--signal);
+  }
+  .s3 .kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--signal-2);
+    margin-bottom: 28px;
+  }
+  .s3 h1 {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 880px;
+  }
+  .s3 .meta-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 80px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  /* ===== SLIDE 04: close with giant glyph ===== */
+  .s4 {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px 72px;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 40px;
+  }
+  .s4 .left {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .s4 .brand {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--signal-2);
+  }
+  .s4 h1 {
+    margin-top: 80px;
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 680px;
+  }
+  .s4 .ask {
+    margin-top: auto;
+    padding-top: 36px;
+    border-top: 1px solid rgba(240, 236, 228, 0.15);
+  }
+  .s4 .ask .k {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--signal-2);
+    margin-bottom: 16px;
+  }
+  .s4 .ask p {
+    font-size: 28px;
+    line-height: 1.35;
+    font-weight: 500;
+    max-width: 620px;
+  }
+  .s4 .glyph {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 280px;
+    line-height: 0.8;
+    color: var(--signal);
+    opacity: 0.35;
+    align-self: end;
+    text-align: right;
+    letter-spacing: -0.08em;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+  <!-- 01 -->
+  <section class="slide s1" id="slide-01">
+    <div class="rail"><span>Signal · 01 / 04</span></div>
+    <div class="main">
+      <div class="top">
+        <span class="brand">Abhinil · Web3 × AI</span>
+        <span>09.09.26</span>
+      </div>
+      <h1>Soft<br/>edges<br/><em>fail first.</em></h1>
+      <p class="punch">AI does not need to break the cryptography to shake the system.</p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="slide s2" id="slide-02">
+    <div class="folio">02 / 04</div>
+    <div class="core">
+      <div class="tag">Core</div>
+      <h2>Hashing.<br/>Proof of work.<br/>Consensus.</h2>
+      <p>These are hard to break. That is not where the near term fight lives.</p>
+    </div>
+    <div class="edges">
+      <div class="tag">Soft edges</div>
+      <div class="list">
+        <div class="item">Clients</div>
+        <div class="item">Pools</div>
+        <div class="item">Wallets</div>
+        <div class="item">Bridges</div>
+        <div class="item">Exchanges</div>
+        <div class="item">Ops tempo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="slide s3" id="slide-03">
+    <div class="meta-row">
+      <span>Signal · Abhinil</span>
+      <span>03 / 04</span>
+    </div>
+    <div class="band">
+      <div class="kicker">The real race</div>
+      <h1>The danger is not the end state. It is the transition while defenders catch up.</h1>
+    </div>
+    <div class="meta-row">
+      <span>Coordination · Security · Culture</span>
+      <span>Thought leadership</span>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="slide s4" id="slide-04">
+    <div class="left">
+      <div class="brand">Signal · Abhinil</div>
+      <h1>Build for the soft edges, or the transition will choose for you.</h1>
+      <div class="ask">
+        <div class="k">Your turn · 04 / 04</div>
+        <p>If AI probing hit your stack tomorrow, what fails first: code, keys, or human ops?</p>
+      </div>
+    </div>
+    <div class="glyph">?</div>
+  </section>
+
+</body>
+</html>

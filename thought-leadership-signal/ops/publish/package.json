@@ -1,0 +1,22 @@
+{
+  "name": "signal-publish",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Schedule and publish Thought Leadership Signal packs to X and LinkedIn",
+  "scripts": {
+    "suggest-times": "node src/suggest-times.mjs",
+    "schedule": "node src/schedule.mjs",
+    "publish-due": "node src/publish-due.mjs",
+    "linkedin-auth": "node src/linkedin-auth.mjs",
+    "x-login": "node src/x-login.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "js-yaml": "^4.1.0",
+    "open": "^10.1.0"
+  }
+}

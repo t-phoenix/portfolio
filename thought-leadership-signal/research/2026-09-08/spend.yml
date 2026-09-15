@@ -1,0 +1,18 @@
+date: 2026-09-08
+calls:
+  - endpoint: https://stableenrich.dev/api/exa/search
+    cost_usd: 0.01
+    network: solana
+    note: on-chain AI agents crypto 2026
+  - endpoint: https://stableenrich.dev/api/reddit/search
+    cost_usd: 0.02
+    network: solana
+    note: AI agents crypto (noisy; kept Notion trust signal)
+  - endpoint: https://stableenrich.dev/api/exa/search
+    cost_usd: 0.01
+    network: solana
+    note: DeFi AMM hooks Uniswap Balancer 2026
+  - endpoint: https://stablememes.dev/api/automeme
+    cost_usd: 0.00
+    note: failed; Base USDC empty; bridge Solana→Base errored; used carousel instead
+total_usd: 0.04

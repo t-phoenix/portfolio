@@ -1,0 +1,7 @@
+date: "2026-09-13"
+total_usd: 0
+breakdown:
+  - item: web_search_webfetch
+    usd: 0
+  - item: creative_html_puppeteer
+    usd: 0

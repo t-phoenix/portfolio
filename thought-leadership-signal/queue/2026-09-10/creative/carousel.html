@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal — Desk Not Vault v2b — 2026-09-10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Outfit:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0b1020;
+    --navy-2: #151d35;
+    --bone: #f2ebe0;
+    --ink: #0f1218;
+    --amber: #f0c14b;
+    --mint: #3d9b8f;
+    --mute: #6a655d;
+    --deny: #c24a38;
+    --ok: #1f7a4d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: Outfit, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    align-items: center;
+  }
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* ===== 01 ===== */
+  .s1 {
+    background: var(--navy);
+    color: var(--bone);
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+  }
+  .s1 .top {
+    display: flex;
+    justify-content: space-between;
+    padding: 32px 44px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border-bottom: 4px solid var(--amber);
+  }
+  .s1 h1 {
+    padding: 20px 44px 8px;
+    font-family: Fraunces, serif;
+    font-weight: 800;
+    font-size: 168px;
+    line-height: 0.86;
+    letter-spacing: -0.05em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .s1 h1 span { display: block; }
+  .s1 h1 em { font-style: normal; color: var(--amber); }
+  .s1 .band {
+    margin: 0 44px 28px;
+    background: var(--amber);
+    color: var(--ink);
+    border-radius: 16px;
+    padding: 28px 36px;
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+  .s1 .bottom {
+    padding: 28px 44px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
+    border-top: 3px solid rgba(240,193,75,0.35);
+  }
+  .s1 .bottom span:last-child {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 20px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  /* ===== 02 ===== */
+  .s2 {
+    background: var(--ink);
+    color: var(--bone);
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+  .s2 .head {
+    padding: 36px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--amber);
+  }
+  .s2 .head .brand {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .s2 .head h2 {
+    font-family: Fraunces, serif;
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .s2 .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .s2 .col {
+    padding: 24px;
+    display: grid;
+    grid-template-rows: auto repeat(3, 1fr);
+    gap: 12px;
+  }
+  .s2 .col.allow { background: #d7ebe1; color: var(--ink); }
+  .s2 .col.hold { background: #f0d4cd; color: var(--ink); border-left: 4px solid var(--ink); }
+  .s2 .stamp {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 24px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 10px 12px;
+    border: 4px solid currentColor;
+    width: fit-content;
+  }
+  .s2 .col.allow .stamp { color: var(--ok); }
+  .s2 .col.hold .stamp { color: var(--deny); }
+  .s2 .item {
+    background: rgba(15,18,24,0.1);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .s2 .item strong {
+    font-size: 54px;
+    font-weight: 800;
+    line-height: 0.98;
+    margin-bottom: 12px;
+  }
+  .s2 .item span {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #2c313c;
+  }
+
+  /* ===== 03 ===== */
+  .s3 {
+    background: var(--navy);
+    color: var(--bone);
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+  .s3 .head {
+    padding: 40px 44px 20px;
+  }
+  .s3 .top {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 14px;
+  }
+  .s3 h2 {
+    font-family: Fraunces, serif;
+    font-size: 84px;
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+  }
+  .s3 .rows {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 20px 44px 44px;
+    gap: 16px;
+  }
+  .s3 .row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 0 32px;
+    background: var(--navy-2);
+    border-left: 10px solid var(--amber);
+    border-radius: 0 18px 18px 0;
+  }
+  .s3 .who {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 30px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 600;
+  }
+  .s3 .what {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.12;
+  }
+
+  /* ===== 04 ===== */
+  .s4 {
+    background: var(--bone);
+    color: var(--ink);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 36px 40px 40px;
+    gap: 18px;
+  }
+  .s4 .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  .s4 .stack {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .s4 .chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    border-radius: 18px;
+    font-family: Fraunces, serif;
+    font-weight: 800;
+    font-size: 84px;
+    letter-spacing: -0.035em;
+  }
+  .s4 .chip:nth-child(1) { background: var(--ink); color: var(--bone); }
+  .s4 .chip:nth-child(2) { background: var(--amber); color: var(--ink); }
+  .s4 .chip:nth-child(3) { background: var(--navy-2); color: var(--bone); }
+  .s4 .chip:nth-child(4) { background: var(--mint); color: var(--bone); }
+  .s4 .chip small {
+    font-family: Outfit, sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+  }
+  .s4 .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .s4 .foot .brand {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  /* ===== 05 ===== */
+  .s5 {
+    background: var(--navy);
+    color: var(--bone);
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    padding: 36px 40px 40px;
+    gap: 20px;
+  }
+  .s5 .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .s5 h2 {
+    font-family: Fraunces, serif;
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+  .s5 .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
+    min-height: 0;
+  }
+  .s5 .opt {
+    border-radius: 18px;
+    padding: 28px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+  }
+  .s5 .opt:nth-child(1),
+  .s5 .opt:nth-child(2) {
+    background: var(--bone);
+    color: var(--ink);
+  }
+  .s5 .opt:nth-child(3),
+  .s5 .opt:nth-child(4) {
+    background: var(--amber);
+    color: var(--ink);
+  }
+  .s5 .opt .n {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 22px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .s5 .opt .t {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.02;
+  }
+</style>
+</head>
+<body>
+
+  <section class="slide s1">
+    <div class="top">
+      <span>Signal · Abhinil</span>
+      <span>Clearance 03</span>
+    </div>
+    <h1><span>Desk,</span><span>not</span><span><em>vault.</em></span></h1>
+    <div class="band">Agent finance is shipping. The product is the fence.</div>
+    <div class="bottom">
+      <span>Give the model a desk with rules.</span>
+      <span>Permission first</span>
+    </div>
+  </section>
+
+  <section class="slide s2">
+    <div class="head">
+      <div class="brand">Signal · permission grammar</div>
+      <h2>Draw the line.</h2>
+    </div>
+    <div class="cols">
+      <div class="col allow">
+        <div class="stamp">Allow</div>
+        <div class="item"><strong>Read markets</strong><span>Live state, positions, risk signals</span></div>
+        <div class="item"><strong>Prepare unsigned</strong><span>Assemble. Do not sign.</span></div>
+        <div class="item"><strong>Act in a cage</strong><span>Isolated portfolio or subaccount</span></div>
+      </div>
+      <div class="col hold">
+        <div class="stamp">Hold</div>
+        <div class="item"><strong>Vault keys</strong><span>No silent signing authority</span></div>
+        <div class="item"><strong>External exit</strong><span>No unbounded withdraw path</span></div>
+        <div class="item"><strong>Scope creep</strong><span>No quiet expansion of rights</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s3">
+    <div class="head">
+      <div class="top">This week · agent rails</div>
+      <h2>Three venues.<br />One pattern.</h2>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="who">Aave</div>
+        <div class="what">MCP for live lending state and unsigned prep</div>
+      </div>
+      <div class="row">
+        <div class="who">Binance</div>
+        <div class="what">Agent OS with MCP, subaccounts, revoke</div>
+      </div>
+      <div class="row">
+        <div class="who">Coinbase</div>
+        <div class="what">Isolated portfolios. Hard withdraw fence.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide s4">
+    <div class="eyebrow">Thesis · permission is the product</div>
+    <div class="stack">
+      <div class="chip">Read <small>cheap</small></div>
+      <div class="chip">Prepare <small>useful</small></div>
+      <div class="chip">Execute <small>capped</small></div>
+      <div class="chip">Never <small>absolute</small></div>
+    </div>
+    <div class="foot">
+      <span>Grammar beats model IQ on a bad day.</span>
+      <span class="brand">Signal · Abhinil</span>
+    </div>
+  </section>
+
+  <section class="slide s5">
+    <div class="label">Open question</div>
+    <h2>Where do you draw the line for an agent on your stack?</h2>
+    <div class="options">
+      <div class="opt"><span class="n">01</span><span class="t">Read only</span></div>
+      <div class="opt"><span class="n">02</span><span class="t">Prepare unsigned</span></div>
+      <div class="opt"><span class="n">03</span><span class="t">Execute in a hard cap</span></div>
+      <div class="opt"><span class="n">04</span><span class="t">Never touch keys</span></div>
+    </div>
+  </section>
+
+</body>
+</html>

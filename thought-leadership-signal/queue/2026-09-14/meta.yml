@@ -1,0 +1,77 @@
+date: '2026-09-14'
+status: ready
+pillar: ai-markets
+platform_targets:
+  - x
+  - linkedin
+creative_format: data_frame
+hook: 99.9% and 62.7% are the same model.
+receipts:
+  - https://thenextweb.com/news/openai-astra-arc-agi-3-harness-62-7-vs-99-9-benchmark-revisions
+numbers:
+  - 'astra_adapter: 99.9%'
+  - 'astra_standard_harness: 62.7%'
+  - 'adapter_reasoning_none: 96.7%'
+  - 'like_for_like_vs_sol: 62.7% vs 7.8%'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0
+spend_breakdown:
+  - research_web_native: 0
+  - creative: 0
+notes: >-
+  AI-only. Harness vs model. data_frame teal/amber split. Balanced pad 56px, scores large with air.
+  Not quote (09-13) or diagram (09-12). Leaves MCP/key lane.
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-09-14T08:30:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 95
+      rationale: IST weekday morning when builders and operators skim feeds before deep work.
+    - id: evening-prime
+      label: Evening prime
+      at: '2026-09-14T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 93
+      rationale: After work engagement peak for India + EU overlap start.
+    - id: next-morning
+      label: Next morning
+      at: '2026-09-15T09:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 90
+      rationale: If shipping late tonight, park for tomorrow morning instead of low-signal hours.
+    - id: midday
+      label: Midday scroll
+      at: '2026-09-14T12:45:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 85
+      rationale: Lunch window; LinkedIn often stronger than X here.
+    - id: late-edge
+      label: Late edge
+      at: '2026-09-14T21:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 77
+      rationale: US East afternoon overlap; good for X crypto discourse.
+  chosen:
+    x: null
+    linkedin: null
+  published:
+    x: null
+    linkedin: null

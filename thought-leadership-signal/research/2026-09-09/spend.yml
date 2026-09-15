@@ -1,0 +1,11 @@
+date: 2026-09-09
+calls:
+  - endpoint: https://stableenrich.dev/api/exa/search
+    cost_usd: 0.01
+    network: base
+    note: stablecoin / AI crypto scan
+  - endpoint: https://stableenrich.dev/api/serper/news
+    cost_usd: 0.04
+    network: base
+    note: Vitalik Buterin AI Bitcoin
+total_usd: 0.05

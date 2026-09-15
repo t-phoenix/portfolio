@@ -1,0 +1,10 @@
+Format: carousel_clearance v2 (dense)
+
+Archived v1 in creative/archive-v1/
+
+Changes vs v1:
+- Larger display type (cover ~178px)
+- Full-width amber thesis band on slide 1
+- ALLOW/HOLD cards fill the column (grid 1fr rows)
+- Venue rows + thesis chips + question options fill remaining canvas
+- Less margin, less vertical void

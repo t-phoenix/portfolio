@@ -1,0 +1,51 @@
+date: '2026-09-10'
+status: posted
+pillar: web3-ai
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_clearance
+hook: They gave agents a desk. Not the vault.
+receipts:
+  - https://cryptobriefing.com/aave-mcp-server-ai-agents/
+  - >-
+    https://futurecio.tech/binance-unveils-agent-os-to-connect-ai-applications-to-financial-infrastructure/
+  - https://en.cryptonomist.ch/2026/09/10/coinbase-ai-financial-account/
+  - https://crypto.news/coinbase-expands-ai-access-to-stocks-and-crypto/
+numbers:
+  - 'aave_mcp_chains: 21 (V3 coverage)'
+  - 'aave_mcp_tools: ~40'
+  - 'coinbase_agent_pairs: 900+'
+  - 'coinbase_agent_external_withdraw: blocked via agent API'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0.05
+spend_breakdown:
+  - research_serper_news: 0.04
+  - research_exa: 0.01
+  - creative: 0
+notes: >-
+  Clearance creative v2 denser (archive-v1 keeps sparse first pass). Fraunces/Outfit amber stamps.
+  Not Day 1 frame grid or Day 2 teal rail. Numbers only in copy. Thesis: permission is the product.
+  | Scheduled x=2026-09-12T00:40:00+05:30 linkedin=2026-09-12T00:40:00+05:30
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: '2026-09-12T00:40:00+05:30'
+    linkedin: '2026-09-12T00:40:00+05:30'
+  published:
+    x:
+      id: '2098489772671156656'
+      url: https://x.com/touchey_phoenix/status/2098489772671156656
+      at: '2026-09-11T19:12:08.059Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7504255519499436033
+      url: null
+      at: '2026-09-11T19:12:19.241Z'
+      dryRun: false

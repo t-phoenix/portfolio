@@ -1,0 +1,7 @@
+spend_usd: 0.05
+breakdown:
+  - serper_news: 0.04
+  - exa_search: 0.01
+  - reddit: 0
+  - creative: 0
+notes: Reddit skipped due to Tempo balance. Research paid on Base.
