@@ -2,11 +2,26 @@ import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { base, optimism, arbitrum, scroll, bsc, mainnet, polygon } from '@reown/appkit/networks'
 import { http } from 'wagmi'
 
+// Get environment variables (support both Vite and Next.js)
+const getEnvVar = (key: string): string => {
+  // Try Next.js style first (NEXT_PUBLIC_*)
+  const nextKey = `NEXT_PUBLIC_${key}`;
+  if (typeof process !== 'undefined' && process.env?.[nextKey]) {
+    return process.env[nextKey] as string;
+  }
+  // Try Vite style (VITE_*)
+  const viteKey = `VITE_${key}`;
+  if (typeof import.meta !== 'undefined' && import.meta.env?.[viteKey]) {
+    return import.meta.env[viteKey];
+  }
+  return '';
+};
+
 // Get WalletConnect project ID from environment
-export const projectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || ''
+export const projectId = getEnvVar('WALLETCONNECT_PROJECT_ID')
 
 // Get Alchemy API key from environment for dedicated RPC
-const alchemyApiKey = import.meta.env.VITE_ALCHEMY_API
+const alchemyApiKey = getEnvVar('ALCHEMY_API')
 
 // Use Alchemy RPC if API key is available, otherwise fallback to public RPC
 const baseRpcUrl = alchemyApiKey 

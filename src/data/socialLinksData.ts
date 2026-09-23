@@ -1,3 +1,4 @@
+import type { StaticImageData } from 'next/image';
 import githubIcon from '../assets/socials/github.jpeg';
 import linkedinIcon from '../assets/socials/linkedin_logo.jpeg';
 import twitterIcon from '../assets/socials/twitterX.png';
@@ -7,10 +8,10 @@ import hackernoon from '../assets/socials/hackernoon.png';
 import medium from '../assets/socials/medium.png';
 
 export interface SocialLink {
-  icon: string;
+  icon: string | StaticImageData;
   href: string;
   label: string;
-  color: string; // Gradient color for hover effect
+  color: string;
 }
 
 export const socialLinksData: SocialLink[] = [

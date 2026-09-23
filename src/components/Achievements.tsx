@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FadeIn } from './animations';
 import { achievementsData, platformLogos } from '../data';
+import { getImageSrc } from '../lib/image';
 
 const Achievements = () => {
   return (
@@ -52,7 +53,7 @@ const Achievements = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <img 
-                      src={platformLogos[achievement.platform]} 
+                      src={getImageSrc(platformLogos[achievement.platform])} 
                       alt={`${achievement.platform} logo`}
                       className="w-full h-full object-contain"
                     />

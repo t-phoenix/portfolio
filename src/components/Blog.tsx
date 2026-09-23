@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeIn } from './animations';
 import { blogsData } from '../data';
+import { getImageSrc } from '../lib/image';
 
 const Blog = () => {
   return (
@@ -44,7 +45,7 @@ const Blog = () => {
                   whileHover={{ scale: 1.05, rotate: 2 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+                  <img src={getImageSrc(article.image)} alt={article.title} className="w-full h-full object-cover" />
                 </motion.div>
 
                 <div className="flex-1 space-y-4 relative z-10">

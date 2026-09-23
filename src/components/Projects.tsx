@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeIn } from './animations';
 import { projectsData } from '../data';
+import { getImageSrc } from '../lib/image';
 
 const Projects = () => {
   return (
@@ -54,7 +55,7 @@ const Projects = () => {
                   style={{ transformStyle: 'preserve-3d' }}
                 >
                   <motion.img
-                    src={project.image}
+                    src={getImageSrc(project.image)}
                     alt={project.name}
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.1 }}

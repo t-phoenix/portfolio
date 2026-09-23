@@ -4,13 +4,25 @@ import emailjs from "@emailjs/browser";
 import { FadeIn, MagneticButton } from "./animations";
 import { socialLinksData } from "../data/socialLinksData";
 import { trackFormSubmit } from "../lib/analytics";
+import { getImageSrc } from "../lib/image";
 
 // EmailJS Configuration - Using environment variables
-// Make sure to set these in your .env.local file with VITE_ prefix
-// Note: EMAILJS_USER_ID is the "Public Key" from EmailJS dashboard - it's safe to expose to browser
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_USER_ID = import.meta.env.VITE_EMAILJS_USER_ID; // This is EmailJS's "Public Key" - safe for client-side
+// Supports both Vite (VITE_*) and Next.js (NEXT_PUBLIC_*) env vars
+const getEnvVar = (key: string): string => {
+  const nextKey = `NEXT_PUBLIC_${key}`;
+  if (typeof process !== 'undefined' && process.env?.[nextKey]) {
+    return process.env[nextKey] as string;
+  }
+  const viteKey = `VITE_${key}`;
+  if (typeof import.meta !== 'undefined' && import.meta.env?.[viteKey]) {
+    return import.meta.env[viteKey];
+  }
+  return '';
+};
+
+const EMAILJS_SERVICE_ID = getEnvVar('EMAILJS_SERVICE_ID');
+const EMAILJS_TEMPLATE_ID = getEnvVar('EMAILJS_TEMPLATE_ID');
+const EMAILJS_USER_ID = getEnvVar('EMAILJS_USER_ID');
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -390,7 +402,7 @@ const Contact = () => {
                               }}
                             />
                             <img
-                              src={social.icon}
+                              src={getImageSrc(social.icon)}
                               alt={social.label}
                               className="w-full h-full object-cover p-2"
                             />
@@ -500,7 +512,7 @@ const Contact = () => {
                         }}
                       />
                       <img
-                        src={social.icon}
+                        src={getImageSrc(social.icon)}
                         alt={social.label}
                         className="relative w-full h-full object-cover px-3 py-3 group-hover:p-2 rounded-[20px] transition-all duration-300"
                       />
