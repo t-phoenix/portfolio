@@ -232,7 +232,7 @@ const Hero = () => {
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <p className="text-7xl font-semibold">
-                    <CountUp end={4} prefix="" suffix="+" duration={2} />
+                    <CountUp end={5} prefix="" suffix="+" duration={2} />
                   </p>
                   <p className="text-tertiary text-sm uppercase tracking-tight">
                     YEARS WEB3
