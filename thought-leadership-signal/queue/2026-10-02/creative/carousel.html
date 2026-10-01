@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-02</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: #f4f1ea;
+    padding: 64px; display: grid; grid-template-rows: auto 1fr auto; gap: 12px;
+    background: radial-gradient(820px 480px at 80% 20%, rgba(142,231,255,0.14), transparent 55%), linear-gradient(180deg, #12171e, #07090d);
+  }
+  .slide::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(244,241,234,0.16); pointer-events: none; }
+  .chrome, .foot, .stage { position: relative; z-index: 2; }
+  .chrome, .foot { display: flex; justify-content: space-between; align-items: center; font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #9aa3ad; }
+  .brand { color: #8ee7ff; display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: #8ee7ff; display: inline-block; }
+  .stage { display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+  .eye { font-family: "IBM Plex Sans", sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #8ee7ff; margin-bottom: 16px; }
+  h1 { font-family: Syne, sans-serif; font-weight: 800; font-size: 78px; line-height: 0.94; letter-spacing: -0.03em; max-width: 940px; }
+  .sub { margin-top: 16px; font-family: "IBM Plex Sans", sans-serif; font-size: 28px; line-height: 1.28; color: #9aa3ad; max-width: 860px; }
+  .foot { border-top: 1px solid rgba(244,241,234,0.16); padding-top: 16px; }
+  .scene { perspective: 1200px; margin-top: 28px; height: 280px; position: relative; }
+
+  .glass { width: 240px; height: 200px; position: relative; transform: rotateX(14deg) rotateY(-28deg); transform-style: preserve-3d; }
+  .glass i { position: absolute; inset: 0; background: linear-gradient(145deg, rgba(210,248,255,0.5), rgba(40,80,100,0.15)); border: 1px solid rgba(255,255,255,0.55); box-shadow: 0 28px 40px rgba(0,0,0,0.4); }
+  .glass i::after { content: ""; position: absolute; inset: 16px; border: 1px solid rgba(255,255,255,0.25); }
+  .glass b { position: absolute; left: 100%; top: 0; width: 36px; height: 100%; background: linear-gradient(90deg, rgba(142,231,255,0.5), rgba(10,20,30,0.2)); transform: rotateY(90deg); transform-origin: left; }
+
+  .pair { display: flex; gap: 36px; align-items: center; height: 100%; }
+  .card { width: 340px; min-height: 200px; padding: 28px; border: 1px solid rgba(142,231,255,0.4); background: rgba(142,231,255,0.06); }
+  .card strong { display: block; font-family: Syne, sans-serif; font-size: 42px; margin-bottom: 10px; }
+  .card span { font-family: "IBM Plex Sans", sans-serif; font-size: 24px; color: #c5d0d8; }
+  .card.a { transform: rotate(-4deg); }
+  .card.b { transform: rotate(5deg); background: rgba(255,255,255,0.04); }
+
+  .nums { display: flex; align-items: flex-end; gap: 28px; height: 100%; }
+  .big { font-family: Syne, sans-serif; font-weight: 800; font-size: 132px; line-height: 0.8; letter-spacing: -0.04em; color: #8ee7ff; }
+  .to { font-family: Syne, sans-serif; font-size: 42px; color: #9aa3ad; padding-bottom: 28px; }
+  .track { position: absolute; left: 0; right: 80px; bottom: 18px; height: 8px; background: rgba(255,255,255,0.08); }
+  .track em { display: block; width: 72%; height: 100%; background: linear-gradient(90deg, #8ee7ff, transparent); }
+
+  .jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; height: 100%; }
+  .paper { background: #efeae2; color: #12161b; padding: 28px; transform: rotate(-3deg); box-shadow: 0 24px 40px rgba(0,0,0,0.35); }
+  .paper p { height: 10px; background: #12161b; opacity: 0.2; margin-bottom: 12px; }
+  .paper p:nth-child(2) { width: 80%; }
+  .paper p:nth-child(3) { width: 64%; }
+  .paper strong, .die strong { font-family: Syne, sans-serif; font-size: 36px; display: block; margin-bottom: 16px; }
+  .die { border: 1px solid rgba(142,231,255,0.5); padding: 28px; transform: rotate(6deg) translateY(16px); background: linear-gradient(160deg, rgba(142,231,255,0.2), transparent); }
+  .pips { display: grid; grid-template-columns: repeat(3, 18px); gap: 14px; }
+  .pips i { width: 18px; height: 18px; border-radius: 50%; background: #8ee7ff; }
+
+  .q { font-family: Syne, sans-serif; font-weight: 800; font-size: 220px; line-height: 0.8; color: rgba(142,231,255,0.9); transform: rotate(-8deg); }
+</style>
+</head>
+<body>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 05</span></header>
+  <div class="stage">
+    <p class="eye">New tool</p>
+    <h1>It cannot write a sentence.</h1>
+    <p class="sub">The model in builder loops this week does not chat.</p>
+    <div class="scene"><div class="glass"><i></i><b></b></div></div>
+  </div>
+  <footer class="foot"><span>Decision, not prose</span><span>01 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 05</span></header>
+  <div class="stage">
+    <p class="eye">The input</p>
+    <h1>You write the choices.</h1>
+    <div class="scene" style="height:420px">
+      <div class="pair">
+        <div class="card a"><strong>Facts</strong><span>What is already true.</span></div>
+        <div class="card b"><strong>Answers</strong><span>The only options it may pick.</span></div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span>A sheet, not a prompt</span><span>02 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 05</span></header>
+  <div class="stage">
+    <p class="eye">How fast</p>
+    <div class="scene" style="height:340px">
+      <div class="nums"><span class="big">70</span><span class="to">to</span><span class="big">500</span></div>
+      <div class="track"><em></em></div>
+    </div>
+    <p class="sub">Milliseconds. Then a pick, and how sure it is.</p>
+  </div>
+  <footer class="foot"><span>Output is free</span><span>03 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Two jobs</p>
+    <h1 style="font-size:64px">Different tools.</h1>
+    <div class="scene" style="height:380px">
+      <div class="jobs">
+        <div class="paper"><strong>Writer</strong><p></p><p></p><p></p></div>
+        <div class="die"><strong>Clerk</strong><div class="pips"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span>Language, or a branch</span><span>04 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Your turn</p>
+    <div class="scene" style="height:220px"><div class="q">?</div></div>
+    <h1 style="font-size:68px">Did you only need a yes or no?</h1>
+  </div>
+  <footer class="foot"><span>@touchey_phoenix</span><span>05 / 05</span></footer>
+</section>
+</body>
+</html>
