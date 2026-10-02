@@ -73,5 +73,13 @@ schedule:
     x: '2026-10-02T09:07:00+05:30'
     linkedin: '2026-10-02T09:07:00+05:30'
   published:
-    x: null
-    linkedin: null
+    x:
+      id: dry-run
+      url: null
+      at: '2026-10-02T08:23:44.979Z'
+      dryRun: true
+    linkedin:
+      id: dry-run
+      url: null
+      at: '2026-10-02T08:23:44.981Z'
+      dryRun: true
