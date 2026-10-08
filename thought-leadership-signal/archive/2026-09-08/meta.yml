@@ -1,0 +1,35 @@
+date: 2026-09-08
+status: ready
+pillar: web3-ai
+platform_targets: [x, linkedin]
+creative_format: carousel_studio
+hook: "Your AI agent just sold you something you never asked for. Now imagine it also held your keys."
+receipts:
+  - "https://reddit.com/r/ClaudeAI/comments/1w9dluw/notions_official_mcp_connector_prompt_injects_ai/"
+  - "https://coincub.com/blog/crypto-ai-agents/"
+numbers:
+  - "reddit_score: 2178 (captured 2026-09-08)"
+  - "reddit_comments: 142 (captured 2026-09-08)"
+  - "approx_upvote_per_comment: ~15"
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0.04
+spend_breakdown:
+  - research_exa_agents: 0.01
+  - research_reddit: 0.02
+  - research_exa_defi: 0.01
+  - creative: 0.00
+notes: "Hero rebuild 2026-09-22: every slide is a hero frame (no supporting cards). Old supporting pass in creative/archive-v3-support/. Numbers only in post text."
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: null
+    linkedin: null
+  published:
+    x: null
+    linkedin: null

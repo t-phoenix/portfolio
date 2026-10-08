@@ -1,0 +1,31 @@
+date: '2026-10-04'
+status: ready
+pillar: web3-ai
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: A fast yes is cheap. A yes that moves money is not.
+receipts:
+  - https://dev.to/moonthetrain/jev-trading-bots-i-checked-19-projects-for-real-results-odb
+  - https://www.jev-tutorial.org/guides/agent-decision-layer
+numbers: []
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0
+notes: >-
+  Day 3 of 3. Authority. Gate stills. Ties to credit without naming a product.
+  Vote versus wallet.
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: null
+    linkedin: null
+  published:
+    x: null
+    linkedin: null

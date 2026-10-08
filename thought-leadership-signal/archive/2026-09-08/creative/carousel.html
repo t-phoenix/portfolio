@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080" />
+<title>Signal — Rails Before Capital (hero carousel)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0e1114;
+    --ink-2: #161b20;
+    --paper: #ece9e2;
+    --paper-2: #ddd8ce;
+    --mute: #8b8680;
+    --mute-on-dark: #9aa0a6;
+    --signal: #3d9b8f;
+    --signal-bright: #5ec4b6;
+    --warn: #e8a54b;
+    --danger: #c45c4a;
+    --line: rgba(236, 233, 226, 0.14);
+    --line-light: rgba(14, 17, 20, 0.1);
+    --inset: 60px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a1a1a;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    align-items: center;
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: var(--inset);
+    gap: 28px;
+  }
+
+  .slide--dark { background: var(--ink); color: var(--paper); }
+  .slide--light { background: var(--paper); color: var(--ink); }
+
+  .slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .slide--light::before {
+    background-image:
+      linear-gradient(var(--line-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-light) 1px, transparent 1px);
+    opacity: 1;
+  }
+
+  .slide > * { position: relative; z-index: 1; }
+
+  .chrome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute-on-dark);
+  }
+  .slide--light .chrome { color: var(--mute); }
+  .chrome .brand { color: var(--signal-bright); display: flex; align-items: center; gap: 10px; }
+  .slide--light .chrome .brand { color: var(--signal); }
+  .chrome .dot {
+    width: 10px;
+    height: 10px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  .stage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+    gap: 22px;
+  }
+
+  .eyebrow {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--signal-bright);
+  }
+  .slide--light .eyebrow { color: var(--signal); }
+
+  .bar {
+    width: 56px;
+    height: 5px;
+    background: var(--signal);
+    flex-shrink: 0;
+  }
+
+  .hero {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 78px;
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    max-width: 960px;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .hero--xl { font-size: 96px; letter-spacing: -0.04em; }
+  .hero--md { font-size: 72px; }
+  .hero--tight { font-size: 68px; }
+
+  .lede {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.35;
+    max-width: 900px;
+    color: var(--mute-on-dark);
+  }
+  .slide--light .lede { color: #4a4742; }
+
+  .lede strong {
+    color: var(--paper);
+    font-weight: 700;
+  }
+  .slide--light .lede strong { color: var(--ink); }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mute-on-dark);
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+  }
+  .slide--light .foot {
+    color: var(--mute);
+    border-top-color: var(--line-light);
+  }
+
+  /* Full-bleed word stack (hero bands) */
+  .bands {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .band {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 28px 32px;
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-left-width: 6px;
+  }
+  .slide--light .band {
+    background: rgba(255, 255, 255, 0.55);
+    border-color: var(--line-light);
+  }
+
+  .band .k {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .band .t {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+  .band .d {
+    margin-top: 6px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--mute-on-dark);
+    line-height: 1.3;
+  }
+  .slide--light .band .d { color: #4a4742; }
+
+  .band--signal { border-left-color: var(--signal-bright); }
+  .band--warn { border-left-color: var(--warn); }
+  .band--paper { border-left-color: var(--paper-2); }
+  .band--danger { border-left-color: var(--danger); }
+
+  .punch {
+    margin-top: 8px;
+    padding: 28px 32px;
+    background: linear-gradient(135deg, rgba(196, 92, 74, 0.2), rgba(232, 165, 75, 0.08));
+    border: 1px solid rgba(196, 92, 74, 0.45);
+  }
+  .punch .lab {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warn);
+    margin-bottom: 10px;
+  }
+  .punch .line {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+  }
+
+  .ask {
+    margin-top: 12px;
+    padding: 28px 32px;
+    background: rgba(61, 155, 143, 0.1);
+    border: 1px solid rgba(61, 155, 143, 0.35);
+  }
+  .ask .lab {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 12px;
+  }
+  .ask p {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+</style>
+</head>
+<body>
+
+  <!-- 01 HOOK -->
+  <section class="slide slide--dark" id="slide-01">
+    <header class="chrome">
+      <span class="brand"><span class="dot"></span>Signal · Abhinil</span>
+      <span>01 / 05</span>
+    </header>
+    <div class="stage">
+      <div class="bar"></div>
+      <p class="eyebrow">Trust break</p>
+      <h1 class="hero hero--md">Your AI agent just sold you something you never asked for.</h1>
+      <p class="lede"><strong>Now imagine it also held your keys.</strong></p>
+    </div>
+    <footer class="foot">
+      <span>Web3 × AI</span>
+      <span>Incentive design</span>
+    </footer>
+  </section>
+
+  <!-- 02 DIAGNOSIS — hero statement, no cards -->
+  <section class="slide slide--light" id="slide-02">
+    <header class="chrome">
+      <span class="brand"><span class="dot"></span>Signal · Abhinil</span>
+      <span>02 / 05</span>
+    </header>
+    <div class="stage">
+      <div class="bar"></div>
+      <p class="eyebrow">Diagnosis</p>
+      <h1 class="hero hero--xl">That is an incentive bug.</h1>
+      <p class="lede">A trust break feels emotional.<br /><strong>The cause is structural.</strong></p>
+    </div>
+    <footer class="foot">
+      <span>Mechanism over mood</span>
+      <span>02 / 05</span>
+    </footer>
+  </section>
+
+  <!-- 03 BLAST RADIUS — large bands, not tiny rows -->
+  <section class="slide slide--dark" id="slide-03">
+    <header class="chrome">
+      <span class="brand"><span class="dot"></span>Signal · Abhinil</span>
+      <span>03 / 05</span>
+    </header>
+    <div class="stage" style="justify-content: flex-start; padding-top: 8px;">
+      <div class="bar"></div>
+      <p class="eyebrow">Blast radius</p>
+      <h1 class="hero hero--tight">Autonomy without rails is unpaid risk.</h1>
+      <div class="bands">
+        <div class="band band--warn">
+          <div class="k">01</div>
+          <div>
+            <div class="t">Wallets</div>
+            <div class="d">Capital can move</div>
+          </div>
+        </div>
+        <div class="band band--warn">
+          <div class="k">02</div>
+          <div>
+            <div class="t">Settlement</div>
+            <div class="d">Actions finalize on chain</div>
+          </div>
+        </div>
+        <div class="band band--danger">
+          <div class="k">03</div>
+          <div>
+            <div class="t">No clear veto</div>
+            <div class="d">No one can stop the loop</div>
+          </div>
+        </div>
+      </div>
+      <div class="punch">
+        <div class="lab">Outcome</div>
+        <div class="line">Blast radius, not a bad reply.</div>
+      </div>
+    </div>
+    <footer class="foot">
+      <span>Risk equation</span>
+      <span>03 / 05</span>
+    </footer>
+  </section>
+
+  <!-- 04 MENTAL MODEL — three hero layers -->
+  <section class="slide slide--dark" id="slide-04">
+    <header class="chrome">
+      <span class="brand"><span class="dot"></span>Signal · Abhinil</span>
+      <span>04 / 05</span>
+    </header>
+    <div class="stage" style="justify-content: flex-start; padding-top: 8px;">
+      <div class="bar"></div>
+      <p class="eyebrow">Mental model</p>
+      <h1 class="hero" style="font-size: 64px;">Three layers that decide outcomes.</h1>
+      <div class="bands">
+        <div class="band band--signal">
+          <div class="k" style="color: var(--signal-bright);">01</div>
+          <div>
+            <div class="t">Intelligence</div>
+            <div class="d">What could happen</div>
+          </div>
+        </div>
+        <div class="band band--warn">
+          <div class="k" style="color: var(--warn);">02</div>
+          <div>
+            <div class="t">Rails</div>
+            <div class="d">What is allowed to happen</div>
+          </div>
+        </div>
+        <div class="band band--paper">
+          <div class="k">03</div>
+          <div>
+            <div class="t">Culture</div>
+            <div class="d">Whether anyone respects the rails</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot">
+      <span>Operating stack</span>
+      <span>04 / 05</span>
+    </footer>
+  </section>
+
+  <!-- 05 CLOSE -->
+  <section class="slide slide--light" id="slide-05">
+    <header class="chrome">
+      <span class="brand"><span class="dot"></span>Signal · Abhinil</span>
+      <span>05 / 05</span>
+    </header>
+    <div class="stage">
+      <div class="bar"></div>
+      <p class="eyebrow">Operating rule</p>
+      <h1 class="hero hero--md">Rails before capital.</h1>
+      <p class="lede">Web3 × AI only works in that order.</p>
+      <div class="ask">
+        <div class="lab">Your turn</div>
+        <p>Where did an agent or automation last act against your interest, even in a small way?</p>
+      </div>
+    </div>
+    <footer class="foot">
+      <span>@touchey_phoenix</span>
+      <span>No CTA · just the question</span>
+    </footer>
+  </section>
+
+</body>
+</html>

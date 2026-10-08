@@ -59,7 +59,9 @@ Work under `thought-leadership-signal/`. Full ops learnings: [`ops/LEARNINGS.md`
 - Rotate formats: studio / asymmetric / clearance / diagram / receipt / meme / **code receipt**
 - **Topic breadth:** Web3 only, AI only, or intersection — do not force Web3 x AI every day. See [`topics/SELECTION.md`](../../thought-leadership-signal/topics/SELECTION.md)
 - Tasteful code on slides OK when it is the receipt (one smoking gun block)
-- **Density (hard gate):** bold hook **76–88px** with limited spacing (~52–60px inset); **no overflow / edge kiss**; avoid sparse voids *and* cramped type soup. Archive sparse in `archive-v1/`, over-dense in `archive-v2-dense/`. See CREATIVE_PLAYBOOK density doctrine.
+- **Hero every slide (hard gate):** every carousel frame is a hero creative — one dominant idea, big display type, equal craft on 01–05. No supporting-deck cards, appendix lists, or tiny captions under a void.
+- **3D stills:** shared palette and frame inside a pack, a new spatial idea on every slide (statement, number, chart, or contrast). Never the same prop five times. Studio HTML, not paid imaginary scenes. See [`brand/CREATIVE_PLAYBOOK.md`](../../thought-leadership-signal/brand/CREATIVE_PLAYBOOK.md).
+- **Density (hard gate):** safe inset **56–64px**; hero display usually **72–88px** (short punches up to ~104px if fully inside); secondary **24–34px**; **no overflow / cut / edge kiss**; avoid sparse voids *and* cramped type soup. Archive: sparse → `archive-v1/`, over-dense → `archive-v2-dense/`, supporting-style → `archive-v3-support/`.
 - Do not chain sequel theses (permission day → identity day was too close)
 - Week arc (avoid repeats — **leave this lane after 09-11**):
   - 09-08: incentive bug / agent sold you something (MCP trust)

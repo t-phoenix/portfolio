@@ -28,7 +28,8 @@ Creatives must look like work from a top branding and creative agency.
 
 **Craft standards**
 - Consistent folio, margins, and type system within a pack
-- One dominant idea per frame
+- **Every carousel slide is a hero** — same stop power as slide 01; no supporting filler frames
+- One dominant idea per frame, big type, safe inset, no cut text
 - Phone legible at arm length
 - Alternating rhythm across days; never the same layout template forever
 

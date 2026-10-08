@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-04</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: #f3f6f4;
+    padding: 64px; display: grid; grid-template-rows: auto 1fr auto;
+    background: radial-gradient(640px 420px at 78% 78%, rgba(125,255,225,0.1), transparent 60%), linear-gradient(180deg, #10211c, #07110f);
+  }
+  .slide::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(243,246,244,0.16); pointer-events: none; }
+  .chrome, .foot, .stage { position: relative; z-index: 2; }
+  .chrome, .foot { display: flex; justify-content: space-between; font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #9eaea8; }
+  .brand { color: #7dffe1; display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: #7dffe1; display: inline-block; }
+  .stage { display: flex; flex-direction: column; justify-content: center; }
+  .eye { font-family: "IBM Plex Sans", sans-serif; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; color: #7dffe1; font-weight: 600; margin-bottom: 14px; }
+  h1 { font-family: Syne, sans-serif; font-weight: 800; font-size: 74px; line-height: 0.94; letter-spacing: -0.03em; max-width: 940px; }
+  .sub { margin-top: 14px; font-family: "IBM Plex Sans", sans-serif; font-size: 28px; line-height: 1.28; color: #9eaea8; max-width: 860px; }
+  .foot { border-top: 1px solid rgba(243,246,244,0.16); padding-top: 16px; }
+
+  .price { display: flex; gap: 40px; align-items: flex-end; margin-top: 36px; }
+  .chip { width: 160px; height: 100px; border: 1px solid rgba(125,255,225,0.5); display: flex; align-items: center; justify-content: center; font-family: Syne, sans-serif; font-size: 28px; transform: rotate(-8deg); }
+  .vault { width: 280px; height: 220px; border: 2px solid #7dffe1; display: flex; align-items: center; justify-content: center; font-family: Syne, sans-serif; font-size: 42px; box-shadow: 0 24px 40px rgba(0,0,0,0.35); background: rgba(125,255,225,0.06); }
+
+  .lock { margin-top: 28px; width: 100%; padding: 36px; border: 1px solid rgba(125,255,225,0.45); display: flex; justify-content: space-between; align-items: center; }
+  .lock strong { font-family: Syne, sans-serif; font-size: 64px; }
+  .ring { width: 140px; height: 140px; border-radius: 50%; border: 10px solid #7dffe1; border-right-color: transparent; transform: rotate(30deg); }
+
+  .shut { margin-top: 40px; height: 280px; position: relative; }
+  .door { position: absolute; left: 180px; top: 10px; width: 420px; height: 240px; border: 2px solid #7dffe1; background: rgba(7,17,15,0.6); display: flex; align-items: center; justify-content: center; font-family: Syne, sans-serif; font-size: 48px; }
+  .stop { position: absolute; left: 80px; right: 80px; top: 120px; height: 8px; background: #7dffe1; }
+
+  .scale { margin-top: 36px; display: flex; align-items: flex-end; gap: 48px; height: 320px; }
+  .spark { width: 80px; height: 48px; background: #7dffe1; font-family: "IBM Plex Sans", sans-serif; font-size: 16px; letter-spacing: 0.12em; display: flex; align-items: flex-end; padding: 8px; }
+  .facility { width: 360px; height: 100%; border: 1px solid #7dffe1; background: linear-gradient(180deg, rgba(125,255,225,0.25), transparent); padding: 24px; font-family: Syne, sans-serif; font-size: 48px; }
+
+  .hand { margin-top: 20px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; align-items: stretch; }
+  .hand article { border: 1px solid rgba(125,255,225,0.35); padding: 28px; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .hand .keys { background: rgba(125,255,225,0.08); border-color: #7dffe1; }
+  .hand h2 { font-family: Syne, sans-serif; font-weight: 800; font-size: 64px; line-height: 0.95; }
+  .hand .keys h2 { font-size: 92px; }
+  .hand p { margin-top: 12px; font-family: "IBM Plex Sans", sans-serif; font-size: 24px; color: #9eaea8; }
+</style>
+</head>
+<body>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 05</span></header>
+  <div class="stage">
+    <p class="eye">The split</p>
+    <h1>A fast yes is cheap.</h1>
+    <div class="price">
+      <div class="chip">Yes</div>
+      <div class="vault">Money</div>
+    </div>
+    <p class="sub">The second yes is the one that costs.</p>
+  </div>
+  <footer class="foot"><span>Price the yes</span><span>01 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 05</span></header>
+  <div class="stage">
+    <p class="eye">What it is not</p>
+    <h1>Not a wallet.</h1>
+    <div class="lock"><strong>Closed question</strong><div class="ring"></div></div>
+    <p class="sub">A confidence number. Then stop.</p>
+  </div>
+  <footer class="foot"><span>Clerk, not treasurer</span><span>02 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 05</span></header>
+  <div class="stage">
+    <p class="eye">The useful pattern</p>
+    <h1>Let it refuse.</h1>
+    <div class="shut"><div class="stop"></div><div class="door">No</div></div>
+  </div>
+  <footer class="foot"><span>A person still says yes</span><span>03 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Credit already knew</p>
+    <h1 style="font-size:62px">A signal is not a facility.</h1>
+    <div class="scale">
+      <div class="spark">SIGNAL</div>
+      <div class="facility">The loss lives here</div>
+    </div>
+  </div>
+  <footer class="foot"><span>Someone owns the loss</span><span>04 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Your turn</p>
+    <div class="hand">
+      <article><h2>Vote</h2><p>A model may have this.</p></article>
+      <article class="keys"><h2>Keys</h2><p>Do not hand these over.</p></article>
+    </div>
+  </div>
+  <footer class="foot"><span>@touchey_phoenix</span><span>05 / 05</span></footer>
+</section>
+</body>
+</html>

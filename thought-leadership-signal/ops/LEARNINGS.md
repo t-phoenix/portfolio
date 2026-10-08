@@ -104,6 +104,8 @@ Expect `200` + `screen_name: touchey_phoenix` before live publish.
 | 2026-09-12 | Settlement scaled → float needs a lender (Visa / Credit Coop) | diagram_systems |
 | 2026-09-13 | Issuer builds the chain (Circle Arc / USDC gas) | quote_editorial |
 | 2026-09-14 | 99.9% and 62.7% are the same model (harness vs weights) | data_frame |
+| 2026-10-07 | A rule only replaces a referee when breaking it costs something (Glamsterdam ePBS, free test ETH) | carousel_3d_still, paper |
+| 2026-10-08 | Every wait before finality is a loan someone prices (Solana Alpenglow) | carousel_3d_still, ember |
 
 **Hard ban after this week’s arc:** do not ship another “agent trust / MCP / desk / key on the wire” sequel. Pick Web3-only, AI-only (non-MCP-exfil), DeFi, stablecoins, builder ops, or a new mechanism.
 
@@ -114,17 +116,18 @@ Expect `200` + `screen_name: touchey_phoenix` before live publish.
 - Open lanes: x402, web3 finance, contracts, DeFi, LLM, agents, skills, MCP, etc.
 - See [`topics/SELECTION.md`](../topics/SELECTION.md). Do not ship sequel theses of the prior day.
 
-## Creative density + readability (user direction 2026-09-11 + 2026-09-13)
+## Creative density + readability (user direction 2026-09-11 + 2026-09-13 + 2026-09-22)
 
 User reject criteria (hard gate before `ready`):
 
-1. **Bold capturing hook** — slide 1 must stop the scroll, but stay readable.
-2. **Not sparse** — no void posters with tiny type in a desert.
-3. **Not over-dense** — no wall-to-wall type, no text kissing/leaving the crop, no cramped boxes.
-4. **Safe inset ~52–60px**; hero display usually **76–88px**; body **24–30px**. Limited gaps (~14–22px).
-5. Prefer normal-width faces for long words (Space Grotesk / Newsreader) over ultra-extended display that overflows.
-6. Archive weak passes: `creative/archive-v1/` (sparse), `archive-v2-dense/` (overflow/cramp).
-7. Canonical: [`brand/CREATIVE_PLAYBOOK.md`](../brand/CREATIVE_PLAYBOOK.md) → Density doctrine.
+1. **Hero every slide** — every frame stops scroll alone; no supporting-deck cards/lists/tiny captions. Equal craft across 01–05.
+2. **Bold capturing hook** — display type owns the frame, stays readable.
+3. **Not sparse** — no void posters with tiny type in a desert.
+4. **Not over-dense** — no wall-to-wall type, no text kissing/leaving the crop, no cramped boxes.
+5. **Safe inset 56–64px**; hero usually **72–88px** (short punches ≤~104px if fully inside); secondary **24–34px**; gaps **16–28px**.
+6. Prefer normal-width faces for long words (Syne / Space Grotesk / IBM Plex) over ultra-extended display that overflows.
+7. Archive weak passes: `archive-v1/` (sparse), `archive-v2-dense/` (overflow/cramp), `archive-v3-support/` (supporting-style).
+8. Canonical: [`brand/CREATIVE_PLAYBOOK.md`](../brand/CREATIVE_PLAYBOOK.md) → Hero every slide + Density doctrine.
 
 ### Format rotation lock
 

@@ -1,0 +1,4 @@
+Hero rebuild 2026-09-22.
+Every slide = hero creative (no supporting cards).
+Safe inset 60px. Syne display 64–96px. IBM Plex secondary 28–30px.
+Previous supporting-style export: archive-v3-support/

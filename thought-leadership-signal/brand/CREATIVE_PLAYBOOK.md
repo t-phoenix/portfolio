@@ -97,38 +97,75 @@ Swap when the angle demands it. Never invent assets to force a format.
 - Soft grid, generous margins, folio `01 / 05`, brand chip `Signal · Abhinil`
 - Avoid purple neon, stock moon rockets, cream + terracotta cliché stacks
 
+## 3D stills (hard gate — 2026-10-02)
+
+Carousels are frozen motion frames, not flat decks.
+
+- Shared palette, type, folio, and frame inside a pack. A new spatial idea on every slide. Do not stamp the same prop five times.
+- Mix how the idea is shown: a statement, a bold number, a simple chart, a contrast. One idea still owns the frame.
+- Bold display type. Subtext clearly smaller. Object large enough to read as the creative, not a corner icon.
+- Frame border, 56–64px inset, no clipped glyphs.
+- Build in studio HTML (perspective, depth, light) and export PNG. Do not pay for imaginary hero scenes.
+- Paid image models (StableStudio and similar) stay off the hero. Spline or a real Three.js capture is the upgrade if a pack needs true rendered geometry.
+
+## Hero every slide (hard gate — 2026-09-22)
+
+**Every carousel frame is a hero creative.** There are no “supporting” slides, no filler cards, no tiny caption under a void.
+
+A slide fails if someone would swipe past it because only slide 01 felt like the ad.
+
+### What “hero” means
+
+1. **One dominant idea owns the frame** — statement, contrast, or model fills the optical center.
+2. **Display type is the product** — the hero line is the scroll stop, not decoration around widgets.
+3. **Equal craft across 01–05** — same type system, same inset, same intentional rhythm. Slide 04 cannot look like a checklist after a cinematic 01.
+4. **Secondary lines earn their size** — if it is on the slide, it is large enough to read at phone distance (≥22px). Prefer one powerful secondary line over two small cards.
+5. **Composition fills the square** — use hierarchy and banding, not a sticky note floating in the bottom third.
+
+### Reject (supporting-creative tells)
+
+- Small title + two tiny info cards
+- Bullet / equation rows that look like a deck appendix
+- Huge empty mid band with a caption
+- Slide that only makes sense after reading the caption
+- Text clipped, kissing the crop, or overflowing its box
+
+Archive supporting-style fails under `creative/archive-v3-support/` (or next `archive-v*`).
+
 ## Density doctrine (1080×1080)
 
 Carousel slides must feel **composed**, not a sticky note on a void — and not a wall of type jammed to the edges.
 
-### Balance (hard gate — 2026-09-13)
+### Balance (hard gate)
 
 Density without readability is a reject. Over-dense overflow is as bad as sparse voids.
 
-1. **Safe inset** — Content padding ~52–60px from the frame. Limited spacing, not deserts and not edge kiss.
-2. **Hook size sweet spot** — Hero display usually **76–88px**. Bold enough to stop scroll; not 100–140px overflow.
-3. **Breathing room on hero** — Small intentional gaps between blocks (~14–22px). Avoid huge empty mid bands *and* wall-to-wall type.
-4. **No overflow** — Every string must fit inside its box. Prefer normal-width faces for long words.
-5. **Body scale** — Supporting copy ~24–30px. Code receipts ~28–32px mono with wrap.
-6. **One idea, clear** — Fewer elements, each large enough to read at phone size.
-7. **Avoid extremes** — Reject sparse void posters *and* reject cramped overflow posters. Archive failed passes under `creative/archive-v*`.
-8. **Fixed slide height** — Root `.slide` stays `1080×1080` with `display: grid`.
+1. **Safe inset** — Content padding **56–64px** from the outer edge (inside any frame rule). Visible margin on all sides. Never edge kiss.
+2. **Hero display** — Usually **72–88px** for multi-line hooks; short punches may go **90–104px** if every glyph stays inside the safe inset.
+3. **Breathing room** — Gaps between major blocks **16–28px**. Avoid deserts *and* wall-to-wall type.
+4. **No overflow / no cut text** — Every string fully visible. Prefer normal-width faces (Syne / Space Grotesk / IBM Plex) for long words. Soft wrap allowed; hard clip is a reject.
+5. **Body / secondary** — **24–34px**. Labels / folio **14–18px**. Code receipts **26–32px** mono with wrap.
+6. **Internal padding** — Any panel/band has ≥20px inner padding.
+7. **One idea, clear** — Fewer elements, each large enough at ~1/3 phone width.
+8. **Fixed slide** — Root `.slide` is exactly `1080×1080`. Prefer CSS grid for vertical rhythm.
 
-### Density checklist before export
+### Pre-export checklist (every slide)
 
-- [ ] Hook grabs attention and is fully inside the frame with visible margin
-- [ ] No text clipped at edges or box borders
-- [ ] Hero has some air (not edge-to-edge type soup)
-- [ ] Supporting lines readable at ~1/3 phone width
-- [ ] Contrast panels / options have internal padding
-- [ ] No large empty mid band with only a tiny caption (sparse reject)
+- [ ] Would this frame stop scroll **alone** (hero test)?
+- [ ] Hook / statement fully inside the frame with visible margin
+- [ ] No text clipped, truncated, or kissing the crop
+- [ ] Big type with intentional spacing (not soup, not void)
+- [ ] Secondary lines still phone-legible
+- [ ] Folio + brand chip present and consistent
+- [ ] Same craft level as slide 01
 
-### Anti patterns (updated)
+### Anti patterns
 
 - AI imaginary hero art
 - Fake metrics
 - Tiny unreadable type **or** oversized empty margins with small type
 - **Oversized display that overflows / touches crop**
+- **Supporting-deck layouts** (cards, appendix lists, tiny captions)
 - Same quote card every day
 - Logo spam without citation role
 - Cluttered "infographic vomit"

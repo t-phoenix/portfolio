@@ -43,3 +43,10 @@ creatives/
 
 # Empty / local ideation stubs
 digs/
+
+# Private job / interview prep (compensation, call notes, JD PDFs)
+OkContract*/
+* - Technical Developer Advocate/
+
+# Per-pack puppeteer deps (locks were inconsistently tracked; npm install regenerates)
+thought-leadership-signal/**/creative/package-lock.json

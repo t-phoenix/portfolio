@@ -1,4 +1,0 @@
-Clean studio HTML carousel (Syne + IBM Plex).
-No Reddit metrics or photo receipts on slides.
-Numbers live in x.md / linkedin.md only.
-Eye catch = typography hierarchy, not forced assets.

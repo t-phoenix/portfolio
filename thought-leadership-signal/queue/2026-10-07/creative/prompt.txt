@@ -1,0 +1,7 @@
+Build notes, not an AI scene prompt.
+Format: carousel_3d_still. Studio HTML, CSS oblique cuboids, exported with puppeteer. $0.
+Palette: paper #ebe8e1, ink #0e1114, signal teal #2f8377. Syne 800 display, IBM Plex Sans text.
+Spatial idea per slide: 01 two blocks and a loose relay plate. 02 relay block outside the dashed rules.
+03 bid card then block on an enforcement plinth. 04 tall stake column beside a flat test ETH sliver.
+05 dashed referee tile against a solid rule block.
+No numbers on the art.

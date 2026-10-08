@@ -1,0 +1,80 @@
+date: '2026-10-07'
+status: ready
+pillar: protocol-engineering
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: Ethereum has run on a handshake for four years. This week it starts testing the contract.
+receipts:
+  - >-
+    https://www.cryptotimes.io/2026/09/29/ethereum-sets-glamsterdam-sepolia-activation-for-6-october/
+  - https://www.kucoin.com/news/flash/ethereum-warns-of-builder-abuse-risks-in-glamsterdam-testnet
+  - >-
+    https://coinpedia.org/research-report/ethereum-glamsterdam-vs-solana-alpenglow-october-2026-protocol-comparison
+  - https://ethresear.ch/t/epbs-distilled/25800
+numbers:
+  - 'relay_share: over 90% of blocks via MEV Boost relays'
+  - 'sepolia: 2026-10-06 13:53:36 UTC, epoch 353,024'
+  - 'devnet_gas: 200M, up from 60M, about 84,000 validators'
+  - 'warning: core dev call 2026-09-17'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0
+notes: >-
+  Day 1 of 2, Web3 only. Enforcement thesis. Paper and ink block stills, first light pack after
+  three dark ones. Numbers in the caption, not on the art. Verify Sepolia activation outcome before
+  posting.
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-10-07T08:30:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 95
+      rationale: IST weekday morning when builders and operators skim feeds before deep work.
+    - id: evening-prime
+      label: Evening prime
+      at: '2026-10-07T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 93
+      rationale: After work engagement peak for India + EU overlap start.
+    - id: next-morning
+      label: Next morning
+      at: '2026-10-08T09:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 90
+      rationale: If shipping late tonight, park for tomorrow morning instead of low-signal hours.
+    - id: midday
+      label: Midday scroll
+      at: '2026-10-07T12:45:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 85
+      rationale: Lunch window; LinkedIn often stronger than X here.
+    - id: late-edge
+      label: Late edge
+      at: '2026-10-07T21:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 77
+      rationale: US East afternoon overlap; good for X crypto discourse.
+  chosen:
+    x: null
+    linkedin: null
+  published:
+    x: null
+    linkedin: null

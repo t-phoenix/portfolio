@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-07</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    --ink: #0e1114; --teal: #2f8377; --teal-hi: #49a797; --teal-lo: #1f5d54; --mute: #5b6166;
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: var(--ink);
+    padding: 64px; display: grid; grid-template-rows: auto 1fr auto; gap: 12px;
+    background: radial-gradient(760px 520px at 82% 70%, rgba(47,131,119,0.16), transparent 62%), linear-gradient(180deg, #efece5, #e2ded5);
+  }
+  .slide::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(14,17,20,0.2); pointer-events: none; }
+  .chrome, .foot, .stage { position: relative; z-index: 2; }
+  .chrome, .foot { display: flex; justify-content: space-between; align-items: center; font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); }
+  .brand { color: var(--teal); display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: var(--teal); display: inline-block; }
+  .stage { display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+  .eye { font-family: "IBM Plex Sans", sans-serif; font-size: 17px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 18px; }
+  h1 { font-family: Syne, sans-serif; font-weight: 800; font-size: 96px; line-height: 0.94; letter-spacing: -0.035em; max-width: 940px; }
+  .sub { margin-top: 30px; font-family: "IBM Plex Sans", sans-serif; font-weight: 500; font-size: 32px; line-height: 1.26; color: var(--mute); max-width: 880px; }
+  .foot { border-top: 1px solid rgba(14,17,20,0.2); padding-top: 16px; }
+
+  .scene { margin-top: 64px; height: 340px; position: relative; display: flex; align-items: flex-end; gap: 44px; }
+
+  /* oblique cuboid */
+  .cube { position: relative; width: var(--w); height: var(--h); flex: none; --d: 50px;
+    --front: var(--ink); --top: #3a4046; --side: #23282d; --on: #efece5; }
+  .cube.teal { --front: var(--teal); --top: var(--teal-hi); --side: var(--teal-lo); --on: #f4f2ec; }
+  .cube .f { position: absolute; inset: 0; background: var(--front); color: var(--on); display: flex; align-items: center; justify-content: center; text-align: center; font-family: Syne, sans-serif; font-weight: 800; font-size: 38px; letter-spacing: -0.02em; padding: 12px; }
+  .cube .t { position: absolute; left: 0; bottom: 100%; width: 100%; height: var(--d); background: var(--top); transform-origin: bottom left; transform: skewX(-45deg); }
+  .cube .s { position: absolute; left: 100%; top: 0; width: var(--d); height: 100%; background: var(--side); transform-origin: top left; transform: skewY(-45deg); }
+  .cube::after { content: ""; position: absolute; left: 4%; right: -22%; bottom: -30px; height: 34px; background: radial-gradient(ellipse at center, rgba(14,17,20,0.3), transparent 68%); filter: blur(5px); z-index: -1; }
+
+  .ghost { flex: none; border: 3px dashed var(--teal); color: var(--teal); display: flex; align-items: center; justify-content: center; font-family: Syne, sans-serif; font-weight: 800; font-size: 38px; letter-spacing: -0.02em; background: rgba(47,131,119,0.07); }
+
+  /* 02 */
+  .rules { flex: none; width: 610px; height: 320px; border: 3px dashed rgba(14,17,20,0.45); position: relative; display: flex; align-items: flex-end; gap: 70px; padding: 0 0 34px 40px; }
+  .rules > span { position: absolute; left: 22px; top: 18px; font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 18px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); }
+
+  /* 03 */
+  .seq { flex-direction: column; align-items: stretch; gap: 0; }
+  .seq .row { display: flex; align-items: flex-end; gap: 40px; padding-left: 36px; height: 280px; }
+  .arrow { flex: none; width: 116px; margin-right: 34px; height: 8px; background: var(--ink); position: relative; margin-bottom: 70px; }
+  .arrow::after { content: ""; position: absolute; right: -34px; top: -16px; border-left: 34px solid var(--ink); border-top: 20px solid transparent; border-bottom: 20px solid transparent; }
+  .plinth { height: 60px; width: 900px; background: var(--ink); color: #efece5; display: flex; align-items: center; padding: 0 30px; font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 22px; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  /* 04 */
+  .bars { gap: 110px; padding-left: 36px; border-bottom: 4px solid var(--ink); }
+  .col { display: flex; flex-direction: column; align-items: flex-start; gap: 54px; }
+  .tag { font-family: Syne, sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -0.02em; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Ethereum, this week</p>
+    <h1>Ethereum ran on a handshake.</h1>
+    <div class="scene">
+      <div class="cube" style="--w:270px;--h:210px"><i class="t"></i><i class="s"></i><div class="f" style="font-size:32px">Proposer</div></div>
+      <div class="ghost" style="width:200px;height:120px;transform:rotate(-8deg);margin:0 0 70px 44px">Relay</div>
+      <div class="cube teal" style="--w:250px;--h:210px"><i class="t"></i><i class="s"></i><div class="f">Builder</div></div>
+    </div>
+    <p class="sub">Now it is testing the contract.</p>
+  </div>
+  <footer class="foot"><span>From trust to rule</span><span>01 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 05</span></header>
+  <div class="stage">
+    <p class="eye">The middleman</p>
+    <h1>Nobody voted for the relay.</h1>
+    <div class="scene" style="gap:60px">
+      <div class="rules"><span>Consensus rules</span>
+        <div class="cube" style="--w:200px;--h:150px;--d:40px"><i class="t"></i><i class="s"></i><div class="f" style="font-size:26px">Proposer</div></div>
+        <div class="cube" style="--w:200px;--h:150px;--d:40px"><i class="t"></i><i class="s"></i><div class="f" style="font-size:26px">Builder</div></div>
+      </div>
+      <div class="cube teal" style="--w:210px;--h:180px;margin-bottom:96px"><i class="t"></i><i class="s"></i><div class="f">Relay</div></div>
+    </div>
+    <p class="sub">It carries the blocks from outside the rules.</p>
+  </div>
+  <footer class="foot"><span>Out of protocol</span><span>02 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 05</span></header>
+  <div class="stage">
+    <p class="eye">The change</p>
+    <h1>Promise first. Block second.</h1>
+    <div class="scene seq">
+      <div class="row">
+        <div class="cube" style="--w:270px;--h:150px;--d:22px"><i class="t"></i><i class="s"></i><div class="f">Staked bid</div></div>
+        <div class="arrow"></div>
+        <div class="cube teal" style="--w:270px;--h:220px;--d:60px"><i class="t"></i><i class="s"></i><div class="f">Block</div></div>
+      </div>
+      <div class="plinth">Enforced by the chain</div>
+    </div>
+    <p class="sub">The chain holds the builder to the bid.</p>
+  </div>
+  <footer class="foot"><span>Commit, then reveal</span><span>03 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 05</span></header>
+  <div class="stage">
+    <p class="eye">The catch</p>
+    <h1 style="font-size:104px">A rule needs a price.</h1>
+    <div class="scene bars">
+      <div class="cube teal" style="--w:300px;--h:280px"><i class="t"></i><i class="s"></i><div class="f" style="font-size:44px">Real stake</div></div>
+      <div class="col">
+        <span class="tag">Test ETH</span>
+        <div class="cube" style="--w:300px;--h:20px"><i class="t"></i><i class="s"></i><div class="f"></div></div>
+      </div>
+    </div>
+    <p class="sub">Free money makes free promises.</p>
+  </div>
+  <footer class="foot"><span>What the testnet showed</span><span>04 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Your turn</p>
+    <h1 style="font-size:104px">Referee or rule?</h1>
+    <div class="scene" style="gap:70px">
+      <div class="ghost" style="width:370px;height:230px;font-size:48px;transform:rotate(-5deg);margin:0 0 26px 22px">Referee</div>
+      <div class="cube teal" style="--w:360px;--h:230px;--d:60px"><i class="t"></i><i class="s"></i><div class="f" style="font-size:64px">Rule</div></div>
+    </div>
+    <p class="sub">Which one is your system still leaning on?</p>
+  </div>
+  <footer class="foot"><span>@touchey_phoenix</span><span>05 / 05</span></footer>
+</section>
+
+</body>
+</html>

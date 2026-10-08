@@ -1,0 +1,78 @@
+date: '2026-10-08'
+status: ready
+pillar: macro-finance
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: Solana has two words for done. The next upgrade deletes the gap between them.
+receipts:
+  - >-
+    https://solanacompass.com/news/alpenglow-activates-on-solana-testnet-as-frankendancer-era-ends-agave-v44-schedule-targets-november-9-mainnet-activation
+  - >-
+    https://coinpedia.org/research-report/ethereum-glamsterdam-vs-solana-alpenglow-october-2026-protocol-comparison
+  - https://cryptoticker.io/en/solana-alpenglow-mainnet-date-missed/
+numbers:
+  - 'finality: about 12.8 s today, target 100 to 150 ms'
+  - 'vote_share: 71.5% of transactions on average'
+  - 'fault_model: two thirds honest and online, to 20% adversarial plus 20% offline'
+  - 'timeline: testnet late September, mainnet unconfirmed, September 28 passed'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0
+notes: >-
+  Day 2 of 2, Web3 only. Time thesis, not an enforcement sequel. Slate and alpenglow ember stills.
+  Numbers in the caption, not on the art. Recheck mainnet date the morning of posting.
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-10-08T08:30:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 93
+      rationale: IST weekday morning when builders and operators skim feeds before deep work.
+    - id: evening-prime
+      label: Evening prime
+      at: '2026-10-08T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 91
+      rationale: After work engagement peak for India + EU overlap start.
+    - id: next-morning
+      label: Next morning
+      at: '2026-10-09T09:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 88
+      rationale: If shipping late tonight, park for tomorrow morning instead of low-signal hours.
+    - id: midday
+      label: Midday scroll
+      at: '2026-10-08T12:45:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 83
+      rationale: Lunch window; LinkedIn often stronger than X here.
+    - id: late-edge
+      label: Late edge
+      at: '2026-10-08T21:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 75
+      rationale: US East afternoon overlap; good for X crypto discourse.
+  chosen:
+    x: null
+    linkedin: null
+  published:
+    x: null
+    linkedin: null

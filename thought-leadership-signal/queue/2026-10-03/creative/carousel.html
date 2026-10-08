@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-03</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: #f6f1e8;
+    padding: 64px; display: grid; grid-template-rows: auto 1fr auto;
+    background: radial-gradient(700px 420px at 18% 88%, rgba(226,161,90,0.16), transparent 60%), linear-gradient(165deg, #221c17, #14110e);
+  }
+  .slide::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(246,241,232,0.16); pointer-events: none; }
+  .chrome, .foot, .stage { position: relative; z-index: 2; }
+  .chrome, .foot { display: flex; justify-content: space-between; font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #b3a89c; }
+  .brand { color: #e2a15a; display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: #e2a15a; display: inline-block; }
+  .stage { display: flex; flex-direction: column; justify-content: center; }
+  .eye { font-family: "IBM Plex Sans", sans-serif; font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; color: #e2a15a; font-weight: 600; margin-bottom: 14px; }
+  h1 { font-family: Syne, sans-serif; font-weight: 800; font-size: 74px; line-height: 0.94; letter-spacing: -0.03em; max-width: 940px; }
+  .sub { margin-top: 14px; font-family: "IBM Plex Sans", sans-serif; font-size: 28px; line-height: 1.28; color: #b3a89c; max-width: 860px; }
+  .foot { border-top: 1px solid rgba(246,241,232,0.16); padding-top: 16px; }
+
+  .crash { height: 230px; position: relative; margin-top: 20px; perspective: 900px; }
+  .slab { position: absolute; top: 48px; width: 280px; height: 130px; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 22px 36px rgba(0,0,0,0.35); }
+  .slab.a { left: 80px; background: linear-gradient(120deg, #f2d2a4, #c4843d); transform: rotate(-8deg); }
+  .slab.b { right: 80px; background: #1b1815; border-color: rgba(226,161,90,0.5); transform: rotate(8deg); }
+  .streak { position: absolute; left: 340px; top: 100px; width: 180px; height: 10px; background: linear-gradient(90deg, transparent, #e2a15a, transparent); }
+
+  .ticket { margin-top: 36px; display: flex; justify-content: space-between; align-items: stretch; border: 1px solid rgba(226,161,90,0.45); }
+  .ticket div { padding: 28px 32px; }
+  .ticket .left { background: rgba(226,161,90,0.12); }
+  .ticket strong { display: block; font-family: Syne, sans-serif; font-size: 40px; }
+  .ticket span { font-family: "IBM Plex Sans", sans-serif; font-size: 22px; color: #b3a89c; }
+  .down { font-family: Syne, sans-serif; font-size: 92px; color: #e2a15a; line-height: 1; }
+
+  .chart { margin-top: 28px; display: flex; align-items: flex-end; gap: 28px; height: 300px; border-bottom: 2px solid rgba(246,241,232,0.2); padding-bottom: 8px; }
+  .col { flex: 1; background: linear-gradient(180deg, #e2a15a, #8a5a28); position: relative; }
+  .col span { position: absolute; top: -40px; left: 0; right: 0; text-align: center; font-family: Syne, sans-serif; font-size: 22px; }
+
+  .bars { display: flex; gap: 48px; align-items: flex-end; height: 340px; margin-top: 12px; }
+  .bar { width: 180px; background: #e2a15a; display: flex; align-items: flex-start; justify-content: center; padding-top: 16px; font-family: Syne, sans-serif; font-size: 28px; }
+  .bar.fee { height: 58%; background: #3a3128; border: 1px solid #e2a15a; }
+  .bar.loss { height: 100%; }
+  .pct { margin-left: auto; font-family: Syne, sans-serif; font-size: 120px; line-height: 0.85; color: #e2a15a; align-self: center; }
+  .pct small { display: block; font-family: "IBM Plex Sans", sans-serif; font-size: 20px; letter-spacing: 0.14em; color: #b3a89c; }
+
+  .stack { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .row { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-left: 6px solid rgba(226,161,90,0.35); background: rgba(255,255,255,0.03); font-family: Syne, sans-serif; }
+  .row.on { border-left-color: #e2a15a; background: rgba(226,161,90,0.12); font-size: 48px; }
+  .row.off { color: #8a7d72; font-size: 32px; }
+  .row.mid { font-size: 36px; color: #d9cbbd; }
+</style>
+</head>
+<body>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 05</span></header>
+  <div class="stage">
+    <p class="eye">The test</p>
+    <h1>Fast is not an edge.</h1>
+    <p class="sub">A simple rule still won the fair comparisons.</p>
+    <div class="crash"><div class="slab a"></div><div class="streak"></div><div class="slab b"></div></div>
+  </div>
+  <footer class="foot"><span>Speed versus result</span><span>01 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 05</span></header>
+  <div class="stage">
+    <p class="eye">What a demo proves</p>
+    <h1>An order is not a profit.</h1>
+    <div class="ticket">
+      <div class="left"><strong>Order sent</strong><span>The pipe works.</span></div>
+      <div><span class="down">0</span><span> Edge</span></div>
+    </div>
+  </div>
+  <footer class="foot"><span>Plumbing, then a result</span><span>02 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 05</span></header>
+  <div class="stage" style="position:relative">
+    <p class="eye">Open repos</p>
+    <h1 style="font-size:64px">4 tests. Rule ahead.</h1>
+    <div class="chart">
+      <div class="col" style="height:62%"><span>1</span></div>
+      <div class="col" style="height:74%"><span>2</span></div>
+      <div class="col" style="height:48%"><span>3</span></div>
+      <div class="col" style="height:70%"><span>4</span></div>
+    </div>
+    <p class="sub">Four fair tests. The boring rule won or tied every one.</p>
+  </div>
+  <footer class="foot"><span>Tied or lost, all four</span><span>03 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 05</span></header>
+  <div class="stage">
+    <p class="eye">One simulated day</p>
+    <h1 style="font-size:60px">Costs ate the clever part.</h1>
+    <div class="bars">
+      <div class="bar loss">3150</div>
+      <div class="bar fee">1650</div>
+      <div class="pct">21<small>PERCENT GREEN</small></div>
+    </div>
+  </div>
+  <footer class="foot"><span>Loss, then fees</span><span>04 / 05</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Your turn</p>
+    <h1>What did you measure?</h1>
+    <div class="stack">
+      <div class="row off"><span>Fast</span><span>Latency</span></div>
+      <div class="row mid"><span>Order</span><span>Plumbing</span></div>
+      <div class="row on"><span>Money</span><span>Edge</span></div>
+    </div>
+  </div>
+  <footer class="foot"><span>@touchey_phoenix</span><span>05 / 05</span></footer>
+</section>
+</body>
+</html>

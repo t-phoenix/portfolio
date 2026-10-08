@@ -1,0 +1,85 @@
+date: '2026-10-02'
+status: posted
+pillar: ai-markets
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: The hottest model in builder circles cannot write a sentence.
+receipts:
+  - https://www.blockchain-council.org/ai/jev-guide/
+  - >-
+    https://news.bitcoin.com/technology/this-ai-cant-chat-but-crypto-traders-are-already-putting-it-to-work/
+numbers:
+  - 'latency: about 70 to 500 ms'
+  - 'price: about $0.042 per million input tokens, output free'
+  - 'seed: $40M reported'
+  - 'loop: about 300 ms between orders in the public Monad bot'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0
+notes: >-
+  Day 1 of 3. What Jev is. Glass monolith stills. Not MCP. Not the Sep 24 BlackRock demand thesis.
+  Numbers stay in the caption. | Scheduled x=2026-10-02T09:07:00+05:30
+  linkedin=2026-10-02T09:07:00+05:30
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-10-02T08:30:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 95
+      rationale: IST weekday morning when builders and operators skim feeds before deep work.
+    - id: evening-prime
+      label: Evening prime
+      at: '2026-10-02T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 93
+      rationale: After work engagement peak for India + EU overlap start.
+    - id: next-morning
+      label: Next morning
+      at: '2026-10-03T09:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 90
+      rationale: If shipping late tonight, park for tomorrow morning instead of low-signal hours.
+    - id: midday
+      label: Midday scroll
+      at: '2026-10-02T12:45:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 85
+      rationale: Lunch window; LinkedIn often stronger than X here.
+    - id: late-edge
+      label: Late edge
+      at: '2026-10-02T21:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 77
+      rationale: US East afternoon overlap; good for X crypto discourse.
+  chosen:
+    x: '2026-10-02T09:07:00+05:30'
+    linkedin: '2026-10-02T09:07:00+05:30'
+  published:
+    x:
+      id: '2107368949621100979'
+      url: https://x.com/touchey_phoenix/status/2107368949621100979
+      at: '2026-10-06T07:14:48.347Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7513134699599290368
+      url: null
+      at: '2026-10-06T07:15:00.312Z'
+      dryRun: false

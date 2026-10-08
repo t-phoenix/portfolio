@@ -1,0 +1,38 @@
+date: '2026-10-03'
+status: ready
+pillar: ai-markets
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: They let a model trade every 300 milliseconds. A simple rule still won.
+receipts:
+  - https://dev.to/moonthetrain/jev-trading-bots-i-checked-19-projects-for-real-results-odb
+  - https://python.financial/reviews/jev-trading/
+  - https://news.bitcoin.com/technology/this-ai-cant-chat-but-crypto-traders-are-already-putting-it-to-work/
+numbers:
+  - 'repos_reviewed: 19'
+  - 'rule_comparisons: 4, rule won or tied in all 4'
+  - 'sim_trades: 731'
+  - 'sim_loss: about $3150'
+  - 'sim_fees: about $1650'
+  - 'green_after_costs: about 21%'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+spend_usd: 0
+notes: >-
+  Day 2 of 3. Evidence, not a definition repeat. Copper collision stills.
+  Numbers in the caption, not on the art.
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: null
+    linkedin: null
+  published:
+    x: null
+    linkedin: null
