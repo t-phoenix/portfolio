@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FadeIn } from './animations';
 import { toolsData } from '../data';
+import { getImageSrc } from '../lib/image';
 
 const Tools = () => {
   return (
@@ -38,7 +39,7 @@ const Tools = () => {
                     whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <img src={tool.icon} alt={tool.name} className="w-full h-full object-cover" />
+                    <img src={getImageSrc(tool.icon)} alt={tool.name} className="w-full h-full object-cover" />
                   </motion.div>
                   <div className="flex-1 min-w-0">
                     <motion.h3

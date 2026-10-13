@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeIn } from './animations';
 import { experiencesData } from '../data';
+import { getImageSrc } from '../lib/image';
 
 const Experience = () => {
   return (
@@ -47,7 +48,7 @@ const Experience = () => {
                     whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   >
-                    <img src={exp.logo} alt={exp.company} className="w-full h-full object-cover" />
+                    <img src={getImageSrc(exp.logo)} alt={exp.company} className="w-full h-full object-cover" />
                   </motion.div>
 
                   <div className="flex-1 space-y-4">

@@ -7,7 +7,8 @@ import { base } from '@reown/appkit/networks'
 import { wagmiAdapter, projectId, metadata, networks } from './config/wagmi'
 import { initGA } from './lib/analytics'
 import './index.css'
-import App from './App.tsx'
+import 'atropos/css'
+import App from './App'
 
 // Create a client for React Query with aggressive caching
 const queryClient = new QueryClient({

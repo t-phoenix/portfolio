@@ -18,10 +18,39 @@ declare global {
 }
 
 /**
+ * Get environment variable (supports both Vite and Next.js)
+ */
+const getEnvVar = (key: string): string => {
+  const nextKey = `NEXT_PUBLIC_${key}`;
+  if (typeof process !== 'undefined' && process.env?.[nextKey]) {
+    return process.env[nextKey] as string;
+  }
+  const viteKey = `VITE_${key}`;
+  if (typeof import.meta !== 'undefined' && import.meta.env?.[viteKey]) {
+    return import.meta.env[viteKey];
+  }
+  return '';
+};
+
+/**
+ * Check if we're in development mode
+ */
+const isDev = (): boolean => {
+  if (typeof process !== 'undefined' && process.env?.NODE_ENV) {
+    return process.env.NODE_ENV === 'development';
+  }
+  if (typeof import.meta !== 'undefined' && import.meta.env?.DEV !== undefined) {
+    return import.meta.env.DEV;
+  }
+  return false;
+};
+
+/**
  * Get the Google Analytics Measurement ID from environment variables
  */
 export const getGAMeasurementId = (): string | null => {
-  return import.meta.env.VITE_GA_MEASUREMENT_ID || null;
+  const id = getEnvVar('GA_MEASUREMENT_ID');
+  return id || null;
 };
 
 /**
@@ -39,7 +68,7 @@ export const initGA = (): void => {
   const measurementId = getGAMeasurementId();
   
   if (!measurementId) {
-    if (import.meta.env.DEV) {
+    if (isDev()) {
       console.warn('Google Analytics Measurement ID not found. Analytics will not be tracked.');
     }
     return;

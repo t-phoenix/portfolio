@@ -1,3 +1,4 @@
+import type { StaticImageData } from 'next/image';
 import dorahacksLogo from '../assets/achievements/dorahacks.png';
 import gitcoinLogo from '../assets/achievements/gitcoin.jpeg';
 import hackerearthLogo from '../assets/achievements/hackerearth.png';
@@ -11,7 +12,7 @@ export interface Achievement {
   date: string;
 }
 
-export const platformLogos: Record<string, string> = {
+export const platformLogos: Record<string, string | StaticImageData> = {
   'DoraHacks': dorahacksLogo,
   'Gitcoin': gitcoinLogo,
   'Hackerearth': hackerearthLogo,

@@ -156,6 +156,95 @@ html.lenis {
   display: none;
 }
 
+/* 3D Transform Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+/* Atropos Custom Styles */
+.atropos {
+  width: 100%;
+}
+
+.atropos-inner {
+  border-radius: inherit;
+}
+
+.atropos-shadow {
+  filter: blur(30px);
+  background: linear-gradient(135deg, rgba(244, 108, 56, 0.2), rgba(108, 227, 182, 0.1));
+}
+
+.atropos-highlight {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* 3D Card Glow Effect */
+@keyframes glow-3d {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(244, 108, 56, 0.2),
+      0 0 40px rgba(244, 108, 56, 0.1),
+      0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(244, 108, 56, 0.3),
+      0 0 60px rgba(244, 108, 56, 0.2),
+      0 25px 50px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.animate-glow-3d {
+  animation: glow-3d 3s ease-in-out infinite;
+}
+
+/* Depth layers for parallax */
+.depth-0 { transform: translateZ(0px); }
+.depth-1 { transform: translateZ(20px); }
+.depth-2 { transform: translateZ(40px); }
+.depth-3 { transform: translateZ(60px); }
+
+/* Glass morphism for 3D elements */
+.glass-3d {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Holographic effect */
+@keyframes holographic {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.holographic {
+  background: linear-gradient(
+    135deg,
+    rgba(244, 108, 56, 0.3),
+    rgba(108, 227, 182, 0.3),
+    rgba(197, 255, 65, 0.3),
+    rgba(244, 108, 56, 0.3)
+  );
+  background-size: 400% 400%;
+  animation: holographic 5s ease infinite;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

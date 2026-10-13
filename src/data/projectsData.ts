@@ -1,3 +1,4 @@
+import type { StaticImageData } from 'next/image';
 import rektceoImg from '../assets/projects/rektceo.png';
 import cryptoindexImg from '../assets/projects/cryptoindex.png';
 import simplidaoImg from '../assets/projects/simplidao.png';
@@ -7,7 +8,7 @@ export interface Project {
   name: string;
   url: string;
   description: string;
-  image: string;
+  image: string | StaticImageData;
   tags: string[];
   techStack: string[];
   impact: string;
