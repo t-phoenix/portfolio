@@ -15,9 +15,25 @@ import {
   readMeta,
   writeMeta,
 } from "./lib.mjs";
-import { listCreativeSlides, parseLinkedInCaption, parseXThread } from "./parse-pack.mjs";
+import { listCreativeSlides, parseLinkedInCaption, parseXThread, parseXThreadMedia } from "./parse-pack.mjs";
 import { publishLinkedInPost } from "./adapters/linkedin.mjs";
-import { publishXThread } from "./x-publish.mjs";
+import { publishXThread, resolveXProvider } from "./x-publish.mjs";
+import { publishXThreadPerTweetOfficial } from "./adapters/x-official.mjs";
+
+function creativeVideo(date, meta) {
+  const assets = Array.isArray(meta.creative_assets) ? meta.creative_assets : [];
+  const rel = assets.find((a) => typeof a === "string" && a.toLowerCase().endsWith(".mp4"));
+  if (!rel) return null;
+  const full = path.resolve(packDir(date), rel);
+  if (!fs.existsSync(full)) return null;
+  const caption = full.replace(/\.mp4$/i, ".srt");
+  const thumb = path.join(packDir(date), "creative", "cover.jpg");
+  return {
+    videoPath: full,
+    captionPath: fs.existsSync(caption) ? caption : null,
+    thumbnailPath: fs.existsSync(thumb) ? thumb : null,
+  };
+}
 
 function isDue(iso, now = new Date()) {
   if (!iso || iso === "null") return false;
@@ -51,20 +67,41 @@ async function publishPack(date, cfg) {
   const chosen = meta.schedule.chosen || {};
   const published = meta.schedule.published || { x: null, linkedin: null };
   const slides = listCreativeSlides(date);
+  const video = creativeVideo(date, meta);
   const errors = [];
 
   // X
   if (!isPublished(published.x) && isDue(chosen.x)) {
     try {
       const tweets = parseXThread(date);
-      console.log(`[${date}] Publishing X (${tweets.length} tweets, dryRun=${cfg.dryRun})`);
-      const result = await publishXThread(cfg, {
-        tweets,
-        imagePaths: slides,
-      });
+      console.log(
+        `[${date}] Publishing X (${tweets.length} tweets, video=${Boolean(video)}, dryRun=${cfg.dryRun})`
+      );
+      const mediaPerTweet = parseXThreadMedia(date);
+      let result;
+      if (mediaPerTweet) {
+        if (resolveXProvider(cfg) !== "official") throw new Error("per-tweet media needs the official X API");
+        meta.schedule.x_progress = meta.schedule.x_progress || [];
+        result = await publishXThreadPerTweetOfficial(cfg, {
+          tweets,
+          mediaPerTweet,
+          done: cfg.dryRun ? [] : meta.schedule.x_progress,
+          onProgress: (ids) => {
+            meta.schedule.x_progress = ids;
+            writeMeta(date, meta);
+          },
+        });
+      } else {
+        result = await publishXThread(cfg, {
+          tweets,
+          imagePaths: video ? [] : slides,
+          videoPath: video?.videoPath || null,
+        });
+      }
       published.x = {
         id: result.tweet_id,
         url: result.url,
+        ...(result.thread?.length ? { thread: result.thread } : {}),
         at: new Date().toISOString(),
         dryRun: Boolean(result.dryRun),
       };
@@ -82,7 +119,10 @@ async function publishPack(date, cfg) {
       console.log(`[${date}] Publishing LinkedIn (dryRun=${cfg.dryRun})`);
       const result = await publishLinkedInPost(cfg, {
         text,
-        imagePaths: slides,
+        imagePaths: video ? [] : slides,
+        videoPath: video?.videoPath || null,
+        captionPath: video?.captionPath || null,
+        thumbnailPath: video?.thumbnailPath || null,
       });
       published.linkedin = {
         id: result.id,

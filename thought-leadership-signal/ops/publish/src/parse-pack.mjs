@@ -30,6 +30,15 @@ export function parseMarkdownPost(filePath) {
       started = true;
       continue;
     }
+    // Stop before ops / seed-reply sections so they never ship in the caption
+    if (
+      started &&
+      /^##\s+/.test(line) &&
+      !/^##\s+Post/i.test(line) &&
+      !/^##\s+Creative/i.test(line)
+    ) {
+      break;
+    }
     if (/^###\s+\d+/.test(line)) {
       started = true;
       if (bodyLines.length && bodyLines[bodyLines.length - 1] !== "") {
@@ -71,6 +80,14 @@ export function parseXThread(date) {
       continue;
     }
     if (!inPost) continue;
+    // Stop before first-reply / author-ops sections (URLs stay manual or seed reply)
+    if (
+      /^##\s+/.test(line) &&
+      !/^##\s+Post/i.test(line) &&
+      !/^##\s+Creative/i.test(line)
+    ) {
+      break;
+    }
     if (/^###\s+\d+/.test(line)) {
       if (current.length) {
         parts.push(current.join("\n").trim());
@@ -82,12 +99,51 @@ export function parseXThread(date) {
   }
   if (current.length) parts.push(current.join("\n").trim());
 
-  const tweets = parts.filter(Boolean);
+  const tweets = parts.map(stripMediaLines).filter(Boolean);
   if (tweets.length) return tweets;
 
   // Fallback: whole body as one tweet
   const body = parseMarkdownPost(file);
   return body ? [body] : [];
+}
+
+const MEDIA_LINE = /^media:\s*(.+)$/i;
+
+function stripMediaLines(text) {
+  return text
+    .split(/\r?\n/)
+    .filter((l) => !MEDIA_LINE.test(l.trim()))
+    .join("\n")
+    .trim();
+}
+
+/**
+ * Per-tweet media for x.md: a line "Media: creative/a.png, creative/b.png" inside a ### N block.
+ * Paths are relative to the pack. Returns null when no tweet declares media (old packs: slides on tweet 1).
+ */
+export function parseXThreadMedia(date) {
+  const file = path.join(packDir(date), "x.md");
+  const raw = fs.readFileSync(file, "utf8");
+  const out = [];
+  let idx = -1;
+  let inPost = false;
+  let any = false;
+  for (const line of raw.split(/\r?\n/)) {
+    if (/^##\s+Post/i.test(line)) { inPost = true; continue; }
+    if (!inPost) continue;
+    if (/^##\s+/.test(line)) break;
+    if (/^###\s+\d+/.test(line)) { idx++; out[idx] = []; continue; }
+    const m = line.trim().match(MEDIA_LINE);
+    if (m && idx >= 0) {
+      for (const rel of m[1].split(",").map((x) => x.trim()).filter(Boolean)) {
+        const full = path.resolve(packDir(date), rel);
+        if (!fs.existsSync(full)) throw new Error(`x.md media missing: ${rel}`);
+        out[idx].push(full);
+        any = true;
+      }
+    }
+  }
+  return any ? out.map((x) => x || []) : null;
 }
 
 export function parseLinkedInCaption(date) {
@@ -97,9 +153,21 @@ export function parseLinkedInCaption(date) {
 export function listCreativeSlides(date) {
   const dir = path.join(packDir(date), "creative");
   if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((f) => /^slide-\d+\.png$/i.test(f))
-    .sort()
-    .map((f) => path.join(dir, f));
+  const named = (re) =>
+    fs
+      .readdirSync(dir)
+      .filter((f) => re.test(f))
+      .sort()
+      .map((f) => path.join(dir, f));
+  // Story frames are the publish set when a pack has both.
+  const story = named(/^story-\d+\.png$/i);
+  if (story.length) return story;
+  const slides = named(/^slide-\d+\.png$/i);
+  if (slides.length) return slides;
+  // Single hero billboard packs
+  const hero = path.join(dir, "hero.png");
+  if (fs.existsSync(hero)) return [hero];
+  const meme = path.join(dir, "meme.png");
+  if (fs.existsSync(meme)) return [meme];
+  return [];
 }

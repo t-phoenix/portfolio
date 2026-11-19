@@ -83,6 +83,94 @@ export function guardPostCost(text, { allowUrls = false } = {}) {
   return hasUrl;
 }
 
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function xFormPost(cfg, params) {
+  const url = `${UPLOAD}/1.1/media/upload.json`;
+  const auth = oauthHeader("POST", url, params, cfg);
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: auth,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(params),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(`X media ${params.command} failed: ${res.status} ${JSON.stringify(data)}`);
+  }
+  return data;
+}
+
+/** Chunked video upload. Images stay on the simple endpoint; video must INIT/APPEND/FINALIZE. */
+export async function uploadVideoOfficial(cfg, filePath) {
+  assertOfficialX(cfg);
+  if (cfg.dryRun) return "dry-run-media";
+
+  const file = fs.readFileSync(filePath);
+  const init = await xFormPost(cfg, {
+    command: "INIT",
+    total_bytes: String(file.length),
+    media_type: "video/mp4",
+    media_category: "tweet_video",
+  });
+  const mediaId = String(init.media_id_string || init.media_id || "");
+  if (!mediaId) throw new Error(`X video INIT: no id in ${JSON.stringify(init)}`);
+
+  const chunkSize = 4 * 1024 * 1024;
+  const appendUrl = `${UPLOAD}/1.1/media/upload.json`;
+  let segment = 0;
+  for (let offset = 0; offset < file.length; offset += chunkSize) {
+    const chunk = file.subarray(offset, Math.min(offset + chunkSize, file.length));
+    const auth = oauthHeader("POST", appendUrl, {}, cfg);
+    const form = new FormData();
+    form.append("command", "APPEND");
+    form.append("media_id", mediaId);
+    form.append("segment_index", String(segment));
+    form.append("media", new Blob([chunk]), "chunk.mp4");
+    const res = await fetch(appendUrl, {
+      method: "POST",
+      headers: { Authorization: auth },
+      body: form,
+    });
+    if (!res.ok && res.status !== 204) {
+      const t = await res.text();
+      throw new Error(`X video APPEND ${segment} failed: ${res.status} ${t.slice(0, 400)}`);
+    }
+    console.log(`X video chunk ${segment + 1} uploaded`);
+    segment += 1;
+  }
+
+  let fin = await xFormPost(cfg, { command: "FINALIZE", media_id: mediaId });
+  for (let i = 0; i < 40 && fin.processing_info; i++) {
+    const state = fin.processing_info.state;
+    if (state === "succeeded") break;
+    if (state === "failed") {
+      throw new Error(`X video processing failed: ${JSON.stringify(fin.processing_info)}`);
+    }
+    const wait = Math.max(1, Number(fin.processing_info.check_after_secs) || 3) * 1000;
+    await sleep(wait);
+    const params = { command: "STATUS", media_id: mediaId };
+    const url = `${UPLOAD}/1.1/media/upload.json`;
+    const auth = oauthHeader("GET", url, params, cfg);
+    const res = await fetch(`${url}?${new URLSearchParams(params)}`, {
+      headers: { Authorization: auth },
+    });
+    fin = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(`X video STATUS failed: ${res.status} ${JSON.stringify(fin)}`);
+    }
+    console.log(`X video processing: ${fin.processing_info?.state || "ready"}`);
+  }
+  if (fin.processing_info && fin.processing_info.state !== "succeeded") {
+    throw new Error(`X video still processing: ${JSON.stringify(fin.processing_info)}`);
+  }
+  return mediaId;
+}
+
 /** Simple image upload via v1.1 media/upload (OAuth 1.0a). */
 export async function uploadMediaOfficial(cfg, filePath) {
   assertOfficialX(cfg);
@@ -112,9 +200,21 @@ export async function uploadMediaOfficial(cfg, filePath) {
   return String(id);
 }
 
+export async function deleteTweetOfficial(cfg, tweetId) {
+  assertOfficialX(cfg);
+  const url = `${API}/2/tweets/${tweetId}`;
+  const auth = oauthHeader("DELETE", url, {}, cfg);
+  const res = await fetch(url, { method: "DELETE", headers: { Authorization: auth } });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(`X delete failed: ${res.status} ${JSON.stringify(data)}`);
+  }
+  return data;
+}
+
 export async function createTweetOfficial(
   cfg,
-  { text, replyToTweetId = null, mediaIds = [] }
+  { text, replyToTweetId = null, mediaIds = [], editPreviousPostId = null }
 ) {
   if (cfg.dryRun) {
     return {
@@ -135,6 +235,9 @@ export async function createTweetOfficial(
   }
   if (mediaIds.length) {
     payload.media = { media_ids: mediaIds.map(String) };
+  }
+  if (editPreviousPostId) {
+    payload.edit_options = { previous_post_id: String(editPreviousPostId) };
   }
 
   // OAuth 1.0a for JSON body: only oauth_* params in signature (no body params)
@@ -162,14 +265,60 @@ export async function createTweetOfficial(
   };
 }
 
-export async function publishXThreadOfficial(cfg, { tweets, imagePaths = [] }) {
+async function uploadTweetMedia(cfg, paths) {
+  const vids = paths.filter((p) => /\.mp4$/i.test(p));
+  if (vids.length) return [await uploadVideoOfficial(cfg, vids[0])]; // one video per tweet, no images with it
+  const ids = [];
+  for (const p of paths.slice(0, 4)) ids.push(await uploadMediaOfficial(cfg, p));
+  return ids;
+}
+
+/**
+ * Thread with media per tweet. Resume-safe: `done` holds tweet ids already posted
+ * (index-aligned); they are skipped, and `onProgress(ids)` fires after every new tweet
+ * so a crash mid-thread never reposts earlier tweets. Media failures throw before that tweet is posted.
+ */
+export async function publishXThreadPerTweetOfficial(cfg, { tweets, mediaPerTweet, done = [], onProgress }) {
+  if (!tweets?.length) throw new Error("No tweets to publish");
+  tweets.forEach((t) => guardPostCost(t, { allowUrls: cfg.xOfficial.allowUrls })); // fail before tweet 1, not mid-thread
+  const ids = [...done];
+  for (let i = ids.length; i < tweets.length; i++) {
+    const mediaIds = mediaPerTweet?.[i]?.length ? await uploadTweetMedia(cfg, mediaPerTweet[i]) : [];
+    const r = await createTweetOfficial(cfg, {
+      text: tweets[i],
+      replyToTweetId: i > 0 ? ids[i - 1] : null,
+      mediaIds,
+    });
+    ids.push(cfg.dryRun ? `dry-run-${i}` : r.tweet_id);
+    console.log(`X tweet ${i + 1}/${tweets.length} ok`, r.url || "(dry run)", mediaIds.length ? `media=${mediaIds.length}` : "");
+    if (onProgress && !cfg.dryRun) onProgress(ids);
+  }
+  const first = ids[0];
+  const url = (id) => `https://x.com/${cfg.x.screenName}/status/${id}`;
+  return {
+    tweet_id: cfg.dryRun ? null : first,
+    url: cfg.dryRun ? null : url(first),
+    thread: cfg.dryRun ? [] : ids.map(url),
+    dryRun: Boolean(cfg.dryRun),
+    provider: "official",
+  };
+}
+
+export async function publishXThreadOfficial(cfg, { tweets, imagePaths = [], videoPath = null }) {
   if (!tweets?.length) throw new Error("No tweets to publish");
 
+  // One video, or up to 4 images, on tweet 1. A failed video must not become a text-only post.
   let mediaIds = [];
-  if (imagePaths[0]) {
+  if (videoPath) {
+    const mid = await uploadVideoOfficial(cfg, videoPath);
+    mediaIds = [mid];
+    console.log("X video ready", mid);
+  }
+  const mediaPaths = videoPath ? [] : (imagePaths || []).slice(0, 4);
+  for (const imagePath of mediaPaths) {
     try {
-      const mid = await uploadMediaOfficial(cfg, imagePaths[0]);
-      mediaIds = [mid];
+      const mid = await uploadMediaOfficial(cfg, imagePath);
+      mediaIds.push(mid);
     } catch (err) {
       console.warn("Official X media upload skipped:", err.message);
     }

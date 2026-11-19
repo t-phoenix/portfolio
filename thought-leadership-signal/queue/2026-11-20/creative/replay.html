@@ -1,0 +1,60 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#efebe1;--ink:#111;--blue:#3a7bfa;--pink:#ff3d8b;--green:#0f3d2e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1080px;height:1350px;background:var(--paper);font-family:'Space Grotesk',sans-serif;color:var(--ink);position:relative;overflow:hidden}
+body::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.09) 1.2px,transparent 1.4px);background-size:9px 9px;pointer-events:none}
+.frame{position:absolute;inset:60px}
+.kicker{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:28px;letter-spacing:.06em;display:inline-block;background:var(--ink);color:var(--paper);padding:10px 18px;transform:rotate(-1.5deg)}
+h1{font-family:'Archivo Black',sans-serif;font-size:96px;line-height:.95;margin-top:30px;letter-spacing:-.02em}
+h1 em{font-style:normal;background:var(--pink);color:#fff;padding:0 12px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px}
+.card{border:5px solid var(--ink);background:#fff;padding:30px 30px 34px;position:relative;box-shadow:12px 12px 0 var(--ink)}
+.card.b{background:var(--blue);color:#fff}
+.tag{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:24px;letter-spacing:.05em;opacity:.85}
+.big{font-family:'Archivo Black',sans-serif;font-size:84px;line-height:1;margin-top:14px}
+.arrow{font-family:'Archivo Black';font-size:44px;margin:12px 0 6px}
+.res{font-family:'Archivo Black',sans-serif;font-size:76px;line-height:1}
+.note{font-size:28px;font-weight:700;margin-top:14px;line-height:1.2}
+.zero{color:var(--pink)}
+.tape{position:absolute;width:150px;height:44px;background:rgba(255,235,120,.75);top:-22px;left:50%;transform:translateX(-50%) rotate(-4deg)}
+.punch{margin-top:84px;font-family:'Archivo Black';font-size:66px;line-height:1.08}
+.punch span{border-bottom:10px solid var(--blue)}
+.foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end}
+.foot small{font-family:'JetBrains Mono',monospace;font-size:20px;max-width:560px;line-height:1.35}
+.logo{height:64px}
+.st{position:absolute;filter:drop-shadow(0 6px 0 rgba(0,0,0,.18))}
+</style></head><body>
+<img class="st" src="assets/ethglobal-mumbai.png" style="width:150px;right:56px;top:36px;transform:rotate(-10deg)">
+<img class="st" src="assets/jar.webp" style="width:200px;right:70px;top:1000px;transform:rotate(7deg);border:8px solid #fff;border-radius:18px">
+<div class="frame">
+  <div class="kicker">THE REPLAY · 10 YEARS OF APPLE</div>
+  <h1>Same gadgets.<br><em>Different</em> ending.</h1>
+  <div class="cols">
+    <div class="card">
+      <div class="tape"></div>
+      <div class="tag">WHAT I DID</div>
+      <div class="big">$8,250</div>
+      <div class="arrow">↓</div>
+      <div class="res zero">0 shares</div>
+      <div class="note">Spent it all. Owned none of it.</div>
+    </div>
+    <div class="card b">
+      <div class="tape"></div>
+      <div class="tag">WITH 5% SET ASIDE</div>
+      <div class="big">$412</div>
+      <div class="arrow">↓</div>
+      <div class="res">~$1,900</div>
+      <div class="note">And I'd still have every gadget.</div>
+    </div>
+  </div>
+  <div class="punch">Customer for ten years.<br><span>Owner for zero.</span></div>
+  <div class="foot">
+    <small>Replay of past Apple prices, for illustration. Past returns don't predict future ones. Not financial advice.</small>
+    <img class="logo" src="assets/ownback-logo-lockup-light.svg">
+  </div>
+</div>
+<script>document.fonts.ready.then(()=>{window.READY=true})</script>
+</body></html>

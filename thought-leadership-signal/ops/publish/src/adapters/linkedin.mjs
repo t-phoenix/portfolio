@@ -108,14 +108,154 @@ export async function uploadImages(cfg, imagePaths, accessToken) {
   return out;
 }
 
+function etagOf(res) {
+  const raw = res.headers.get("etag") || res.headers.get("ETag") || "";
+  return raw.replace(/^W\//, "").replace(/^"/, "").replace(/"$/, "");
+}
+
+/**
+ * Member video: chunked upload, optional cover and SRT, then wait until AVAILABLE.
+ * @returns {Promise<string>} video URN
+ */
+export async function uploadVideo(cfg, filePath, accessToken, { captionPath, thumbnailPath } = {}) {
+  const personUrn = cfg.linkedin.personUrn;
+  if (!personUrn) throw new Error("LINKEDIN_PERSON_URN required");
+  const size = fs.statSync(filePath).size;
+  const wantCaptions = Boolean(captionPath && fs.existsSync(captionPath));
+  const wantThumb = Boolean(thumbnailPath && fs.existsSync(thumbnailPath));
+
+  const initRes = await fetch(`${LI_API}/rest/videos?action=initializeUpload`, {
+    method: "POST",
+    headers: await authHeaders(accessToken),
+    body: JSON.stringify({
+      initializeUploadRequest: {
+        owner: personUrn,
+        fileSizeBytes: size,
+        uploadCaptions: wantCaptions,
+        uploadThumbnail: wantThumb,
+      },
+    }),
+  });
+  const initData = await initRes.json().catch(() => ({}));
+  if (!initRes.ok) {
+    throw new Error(`LinkedIn video init failed: ${initRes.status} ${JSON.stringify(initData)}`);
+  }
+  const value = initData.value || {};
+  const videoUrn = value.video;
+  const parts = value.uploadInstructions || [];
+  if (!videoUrn || !parts.length) {
+    throw new Error(`LinkedIn video init missing fields: ${JSON.stringify(initData)}`);
+  }
+
+  const file = fs.readFileSync(filePath);
+  const partIds = [];
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i];
+    const slice = file.subarray(part.firstByte, part.lastByte + 1);
+    const put = await fetch(part.uploadUrl, {
+      method: "PUT",
+      headers: { "Content-Type": "application/octet-stream" },
+      body: slice,
+    });
+    if (!put.ok) {
+      const t = await put.text();
+      throw new Error(`LinkedIn video part ${i + 1} failed: ${put.status} ${t.slice(0, 300)}`);
+    }
+    const etag = etagOf(put);
+    if (!etag) throw new Error(`LinkedIn video part ${i + 1} returned no ETag`);
+    partIds.push(etag);
+    console.log(`LinkedIn video part ${i + 1}/${parts.length} uploaded`);
+  }
+
+  if (wantThumb && value.thumbnailUploadUrl) {
+    const thumb = await fetch(value.thumbnailUploadUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/octet-stream",
+        "media-type-family": "STILLIMAGE",
+      },
+      body: fs.readFileSync(thumbnailPath),
+    });
+    if (!thumb.ok) {
+      const t = await thumb.text();
+      console.warn(`LinkedIn thumbnail skipped: ${thumb.status} ${t.slice(0, 200)}`);
+    } else {
+      console.log("LinkedIn cover uploaded");
+    }
+  }
+
+  if (wantCaptions && value.captionsUploadUrl) {
+    const form = new FormData();
+    form.append(
+      "metadata",
+      JSON.stringify({
+        format: "SRT",
+        formattedForEasyReader: true,
+        largeText: true,
+        source: "USER_PROVIDED",
+        locale: { variant: "AMERICAN", country: "US", language: "EN" },
+        transcriptType: "CLOSED_CAPTION",
+      })
+    );
+    form.append(
+      "file",
+      new Blob([fs.readFileSync(captionPath)], { type: "text/plain" }),
+      "captions.srt"
+    );
+    const cap = await fetch(value.captionsUploadUrl, { method: "POST", body: form });
+    if (!cap.ok && cap.status !== 201) {
+      const t = await cap.text();
+      console.warn(`LinkedIn captions skipped: ${cap.status} ${t.slice(0, 200)}`);
+    } else {
+      console.log("LinkedIn captions uploaded");
+    }
+  }
+
+  const fin = await fetch(`${LI_API}/rest/videos?action=finalizeUpload`, {
+    method: "POST",
+    headers: await authHeaders(accessToken),
+    body: JSON.stringify({
+      finalizeUploadRequest: {
+        video: videoUrn,
+        uploadToken: value.uploadToken || "",
+        uploadedPartIds: partIds,
+      },
+    }),
+  });
+  if (!fin.ok) {
+    const t = await fin.text();
+    throw new Error(`LinkedIn video finalize failed: ${fin.status} ${t.slice(0, 400)}`);
+  }
+
+  for (let i = 0; i < 45; i++) {
+    const g = await fetch(`${LI_API}/rest/videos/${encodeURIComponent(videoUrn)}`, {
+      headers: await authHeaders(accessToken),
+    });
+    const body = await g.json().catch(() => ({}));
+    if (!g.ok) {
+      throw new Error(`LinkedIn video status failed: ${g.status} ${JSON.stringify(body)}`);
+    }
+    console.log(`LinkedIn video processing: ${body.status}`);
+    if (body.status === "AVAILABLE") return videoUrn;
+    if (body.status === "PROCESSING_FAILED") {
+      throw new Error(
+        `LinkedIn video processing failed: ${body.processingFailureReason || JSON.stringify(body)}`
+      );
+    }
+    await sleep(4000);
+  }
+  throw new Error(`LinkedIn video still processing: ${videoUrn}`);
+}
+
 /**
  * Publish a member post.
+ * - video: native video (ignores images)
  * - 0 images: text only
  * - 1 image: single media
  * - 2+ images: MultiImage (organic carousel swipe)
  * @returns {{ id: string, url: string|null, imageCount: number }}
  */
-export async function publishLinkedInPost(cfg, { text, imagePaths = [] }) {
+export async function publishLinkedInPost(cfg, { text, imagePaths = [], videoPath = null, captionPath = null, thumbnailPath = null }) {
   if (cfg.dryRun) {
     return {
       id: "dry-run",
@@ -130,10 +270,24 @@ export async function publishLinkedInPost(cfg, { text, imagePaths = [] }) {
   if (!accessToken) throw new Error("LINKEDIN_ACCESS_TOKEN missing");
   if (!cfg.linkedin.personUrn) throw new Error("LINKEDIN_PERSON_URN missing");
 
-  const paths = (imagePaths || []).slice(0, 20);
+  const paths = videoPath ? [] : (imagePaths || []).slice(0, 20);
   let content = null;
 
-  if (paths.length >= 2) {
+  if (videoPath) {
+    let videoUrn;
+    try {
+      videoUrn = await uploadVideo(cfg, videoPath, accessToken, { captionPath, thumbnailPath });
+    } catch (err) {
+      const msg = String(err.message || "");
+      if (cfg.linkedin.refreshToken && /401|expired/i.test(msg)) {
+        const refreshed = await refreshAccessToken(cfg);
+        accessToken = refreshed.access_token;
+        videoUrn = await uploadVideo(cfg, videoPath, accessToken, { captionPath, thumbnailPath });
+      } else throw err;
+    }
+    content = { media: { id: videoUrn } };
+    console.log("LinkedIn video ready", videoUrn);
+  } else if (paths.length >= 2) {
     let images;
     try {
       images = await uploadImages(cfg, paths, accessToken);

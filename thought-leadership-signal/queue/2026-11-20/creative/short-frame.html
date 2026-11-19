@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;background:#efebe1;position:relative;overflow:hidden;font-family:'Archivo Black',sans-serif;color:#111}
+body::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(0,0,0,.08) 1.2px,transparent 1.4px);background-size:9px 9px}
+.top{position:absolute;left:64px;right:64px;top:200px;height:400px;display:flex;flex-direction:column;justify-content:flex-end}
+.k{font-family:'JetBrains Mono',monospace;font-size:30px;background:#111;color:#efebe1;padding:10px 18px;align-self:flex-start;transform:rotate(-1.5deg);margin-bottom:28px}
+h1{font-size:92px;line-height:1;letter-spacing:-.02em}
+h1 em{font-style:normal;background:#ff3d8b;color:#fff;padding:0 12px}
+.slot{position:absolute;left:0;top:656px;width:1080px;height:608px;background:#111}
+.bot{position:absolute;left:64px;right:64px;top:1340px}
+.cta{font-size:58px;line-height:1.08}
+.cta span{border-bottom:10px solid #3a7bfa}
+.url{font-family:'JetBrains Mono',monospace;font-size:34px;margin-top:34px}
+.foot{position:absolute;left:64px;right:64px;bottom:150px;display:flex;justify-content:space-between;align-items:center}
+.foot small{font-family:'JetBrains Mono',monospace;font-size:22px;max-width:620px;line-height:1.35}
+.foot img{height:70px}
+</style></head><body>
+<div class="top"><div class="k" id="k"></div><h1 id="h"></h1></div>
+<div class="slot"></div>
+<div class="bot"><div class="cta">Scratch your last order.<br><span>Comment what you'd own.</span></div><div class="url">ownback.tech · free for the first 1,000</div></div>
+<div class="foot"><small>Not financial advice. Tokenized stocks carry market risk.</small><img src="assets/ownback-logo-lockup-light.svg"></div>
+<script>
+const S={a:["10 YEARS OF APPLE","Apple took <em>$8,250</em> from me."],b:["THE REGRET","I own <em>0</em> Apple shares."],c:["SO I BUILT IT","Receipts in. <em>Shares</em> out."],d:["THE REPLAY","Same 10 years. <em>5%</em> set aside."],e:["OWNBACK","Own what <em>you</em> buy."]};
+const s=S[new URLSearchParams(location.search).get("s")||"a"];
+document.getElementById("k").textContent=s[0];document.getElementById("h").innerHTML=s[1];
+document.fonts.ready.then(()=>{window.READY=true});
+</script>
+</body></html>
