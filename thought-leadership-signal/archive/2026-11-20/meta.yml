@@ -1,0 +1,65 @@
+date: '2026-11-20'
+status: posted
+owner_request: true
+topic: Ownback launch (own what you buy)
+brand_direction: C sticker bomb zine (previous pack used A)
+creative_format: thread_per_tweet_media (intro film, stills, replay card, demo, scratch cards)
+channels:
+  - x (@touchey_phoenix)
+  - linkedin (intro film)
+  - youtube (manual upload, creative/youtube-short.mp4)
+  - email (manual send, email.md)
+virality:
+  hook: Apple has taken $8,250 from me in ten years. I own zero Apple shares.
+  controversy: Stock back rewards are a trap (Bumped died when brands stopped paying)
+  comment_magnet: Reply with your YOU'D OWN screenshot; I'll reply with your 10 year number
+  reaction_ask: Like this if you own more iPhones than Apple shares
+  tags:
+    - '@ETHGlobal'
+    - '@circle'
+    - '@0G_labs'
+  cashtag: $AAPL
+links:
+  app: https://app.ownback.tech
+  site: https://ownback.tech
+caveats:
+  - Not available to US persons (xStocks)
+  - Tweet 7 uses bare domains (no https) so the URL cost guard never stops the thread midway
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: '2026-11-19T17:11:00+05:30'
+    linkedin: '2026-11-19T17:11:00+05:30'
+  published:
+    x:
+      id: '2123388475005431851'
+      url: https://x.com/touchey_phoenix/status/2123388475005431851
+      thread:
+        - https://x.com/touchey_phoenix/status/2123388475005431851
+        - https://x.com/touchey_phoenix/status/2123388538452586558
+        - https://x.com/touchey_phoenix/status/2123388542365970911
+        - https://x.com/touchey_phoenix/status/2123388566906753326
+        - https://x.com/touchey_phoenix/status/2123388891529138358
+        - https://x.com/touchey_phoenix/status/2123388904888021280
+        - https://x.com/touchey_phoenix/status/2123388908381876302
+      at: '2026-11-19T12:12:21.416Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7529153904253566976
+      url: null
+      at: '2026-11-19T12:09:36.438Z'
+      dryRun: false
+  x_progress:
+    - '2123388475005431851'
+    - '2123388538452586558'
+    - '2123388542365970911'
+    - '2123388566906753326'
+    - '2123388891529138358'
+    - '2123388904888021280'
+    - '2123388908381876302'
+notes: >-
+  X thread plus LinkedIn video post. GitHub cron ran hours late on 2026-11-19, so this pack was
+  published from the local machine. | publish errors: x: fetch failed
+creative_assets:
+  - creative/t1-intro.mp4

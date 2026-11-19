@@ -56,6 +56,14 @@ Expect `200` + `screen_name: touchey_phoenix` before live publish.
   LinkedIn: `urn:li:ugcPost:7504848419010691072`  
   Archived to `archive/2026-09-11/`
 
+- 2026-11-19 (crisis gold storyline) → https://x.com/touchey_phoenix/status/2123323891057872954  
+  LinkedIn: `urn:li:ugcPost:7529089473893281792`  
+  Archived to `archive/2026-11-19/`
+
+### Cashtags (2026-11-19)
+
+X API rejects a post with more than one cashtag (`403 Posts are limited to a maximum of one cashtag`). Max **one `$SYMBOL` per tweet**; spread them across the thread. `$5B` style amounts are not cashtags. A URL sources tweet needs `X_ALLOW_URLS=true` for that run (~$0.20).
+
 ### Ship flow that worked (2026-09-12 session)
 
 1. Pack must be `status: ready` with slides exported
@@ -106,8 +114,17 @@ Expect `200` + `screen_name: touchey_phoenix` before live publish.
 | 2026-09-14 | 99.9% and 62.7% are the same model (harness vs weights) | data_frame |
 | 2026-10-07 | A rule only replaces a referee when breaking it costs something (Glamsterdam ePBS, free test ETH) | carousel_3d_still, paper |
 | 2026-10-08 | Every wait before finality is a loan someone prices (Solana Alpenglow) | carousel_3d_still, ember |
+| 2026-10-12 | Batch vote vs continuous audit (civic) | carousel_3d_still |
+| 2026-10-17 | Wrong floor: Base $8.5T > mainnet $7.1T stablecoin volume | hero_billboard |
 
 **Hard ban after this week’s arc:** do not ship another “agent trust / MCP / desk / key on the wire” sequel. Pick Web3-only, AI-only (non-MCP-exfil), DeFi, stablecoins, builder ops, or a new mechanism.
+
+## Virality doctrine (2026-10-17)
+
+- Structured factors: `research/virality/` (`x.yml`, `linkedin.yml`, `playbook.md`)
+- Agents updated: `social-media-manager`, `content-strategist`, `mind/double/INSTRUCTIONS.md`, cursor rule
+- Growth test: prefer **one hero** + comment magnet + ≤3 tags; X links in first reply
+- Account baseline still: carousels ~30 views; replies into other threads are the main lever ([`GROWTH_PLAN.md`](../GROWTH_PLAN.md))
 
 ## Topic breadth (user direction 2026-09-11+)
 
@@ -147,3 +164,11 @@ Never same format two days running. After `code_receipt` (09-11) prefer diagram 
 - [ ] LinkedIn token still valid (re-auth if 401)
 - [ ] Next queue date not repeating yesterday’s format or thesis
 - [ ] Schedule only after human picks slot
+
+## GitHub cron is not a scheduler (2026-11-19)
+
+- `signal-publish.yml` says every 5 min, but GitHub ran it only 4 to 9 hours apart (last runs 07:24Z, 16:35Z, 23:04Z, 04:05Z). A post due at 17:11 IST did not go out.
+- For a time-sensitive post, publish locally: `PUBLISH_DRY_RUN=false npm run publish-due`, then push right away. Otherwise the next GitHub run still sees `status: scheduled` and posts the pack again.
+- X threads with per-tweet media: put `Media: creative/a.png, creative/b.png` (or one .mp4) under `### N` in x.md. The thread saves `schedule.x_progress` after each tweet, so a retry resumes instead of reposting.
+- A large X video upload can fail with `fetch failed` mid-upload. Nothing posts, so rerun publish-due.
+- Ownback launch live: X https://x.com/touchey_phoenix/status/2123388475005431851 · LinkedIn urn:li:ugcPost:7529153904253566976
