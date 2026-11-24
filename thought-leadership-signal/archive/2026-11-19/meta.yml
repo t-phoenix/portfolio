@@ -1,0 +1,70 @@
+date: '2026-11-19'
+status: posted
+pillar: intersection
+brand_direction: A hacker mono
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_storyline
+hook: Everyone who bought gold at the record is now a long term investor.
+receipts:
+  - https://www.nationthailand.com/business/trading-investment/40073439
+  - https://www.kitco.com/opinion/2026-11-13/weeks-sell-gold-brought-november-red
+  - https://www.fool.com/investing/2026/11/13/why-bitcoin-is-falling-today/
+  - https://www.gold.org/goldhub/research/gold-demand-trends
+numbers:
+  - gold $5,595 52w high to $3,733 on 19 Nov (Twelve Data), down 33 percent
+  - BTC about $126K Oct 2025 record to $63,656 on 19 Nov (Twelve Data), down 50 percent
+  - October CPI 0.4 percent vs 0.3 expected; dollar index 19 month high
+  - spot BTC ETF outflows about $1.9B over seven trading days, 5 to 13 Nov
+  - gold 2008 $1,000 to $712 to $1,921 (2011); 2020 $1,703 to $1,451 to $2,067
+  - central banks over 1,000 tonnes a year 2022 to 2024 (World Gold Council)
+  - Buffett $5B Goldman preferred at 10 percent, Sep 2008 (historical record, no link)
+  - BTC drawdowns 63 percent (Mar 2020), 77 percent (2022), 50 percent (now)
+creative_assets:
+  - creative/slide-01.png
+  - creative/slide-02.png
+  - creative/slide-03.png
+  - creative/slide-04.png
+creative_sources:
+  - Studio HTML stills in creative/carousel.html, captured by creative/export-slides.cjs
+  - stickers chai, cube, wallst, eth-mono from brand/assets/stickers/mumbai-2026
+  - Space Grotesk and JetBrains Mono via Google Fonts (OFL)
+spend_usd: 0
+virality:
+  comment_magnet: What did you actually do in March 2020, sell, hold, or buy?
+  controversial_take: Bitcoin is not digital gold. Not yet.
+  tags_x:
+    - '@federalreserve'
+    - '@GOLDCOUNCIL'
+  tags_linkedin:
+    - '#Gold'
+    - '#Bitcoin'
+    - '#Investing'
+  format: carousel_storyline
+  experiment: storyline_carousel_each_slide_teases_next_and_each_thread_tweet_expands_one_slide
+notes: >-
+  Ready, not scheduled. Prices move daily, refresh slide 1 numbers and the post before publishing.
+  Owner should reply to the LinkedIn magnet with their own March 2020 answer as promised in the
+  post. Do not publish until asked. | Scheduled x=2026-11-19T07:52:54Z linkedin=2026-11-19T07:52:54Z
+  | publish errors: x: X create tweet failed: 403 {"detail":"Posts are limited to a maximum of one
+  cashtag ($SYMBOL). Please remove additional cashtags and try
+  again.","status":403,"title":"Authorization
+  Error","type":"https://api.x.com/2/problems/not-authorized-for-resource"}
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: '2026-11-19T07:52:54Z'
+    linkedin: '2026-11-19T07:52:54Z'
+  published:
+    x:
+      id: '2123323891057872954'
+      url: https://x.com/touchey_phoenix/status/2123323891057872954
+      at: '2026-11-19T07:54:03.099Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7529089473893281792
+      url: null
+      at: '2026-11-19T07:53:35.191Z'
+      dryRun: false

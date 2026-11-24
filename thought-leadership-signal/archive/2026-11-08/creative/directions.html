@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Brand directions · Mumbai haul</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&family=Unbounded:wght@700;900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; display: flex; gap: 28px; padding: 28px; flex-wrap: wrap; }
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; padding: 64px; }
+  .slide img { position: absolute; display: block; }
+  .chip, .foot { position: absolute; left: 64px; right: 64px; display: flex; justify-content: space-between; z-index: 9; }
+  .chip { top: 52px; } .foot { bottom: 50px; }
+  h1, .sub { position: relative; z-index: 9; }
+  .stk { filter: drop-shadow(4px 8px 8px rgba(0,0,0,.35)); }
+  .obj { filter: drop-shadow(14px 26px 28px rgba(0,0,0,.5)); }
+
+  /* shared collage geometry */
+  .b-ibw   { width: 300px; left: 70px;  top: 600px; transform: rotate(-13deg); }
+  .b-dev   { width: 250px; left: 330px; top: 560px; transform: rotate(-3deg); }
+  .b-eth   { width: 330px; left: 560px; top: 590px; transform: rotate(8deg); z-index: 3; }
+  .sp-b    { width: 230px; left: 40px;  top: 1010px; transform: rotate(-8deg); z-index: 4; }
+  .sp-w    { width: 200px; left: 830px; top: 1000px; transform: rotate(10deg); z-index: 4; }
+  .s-demo  { width: 210px; left: 800px; top: 420px; transform: rotate(12deg); z-index: 5; }
+  .s-chai  { width: 190px; left: 300px; top: 1040px; transform: rotate(-6deg); z-index: 5; }
+  .s-tiger { width: 200px; left: 560px; top: 1060px; transform: rotate(8deg); z-index: 5; }
+  .s-rings { width: 160px; left: 90px;  top: 460px; transform: rotate(-14deg); z-index: 5; }
+
+  /* A · HACKER MONO (ETHGlobal energy) */
+  .a { background: #050505; color: #f5f5f0; font-family: "JetBrains Mono", monospace; }
+  .a::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 54px 54px; }
+  .a .chip, .a .foot { font: 700 17px/1 "JetBrains Mono"; letter-spacing: .06em; color: #8a8a85; text-transform: uppercase; }
+  .a .chip b { color: #d4ff3a; }
+  .a h1 { margin-top: 70px; font: 700 112px/.9 "Space Grotesk"; letter-spacing: -.05em; }
+  .a h1 i { font-style: normal; color: #050505; background: #d4ff3a; padding: 0 14px; }
+  .a .sub { margin-top: 26px; font: 500 30px/1.35 "JetBrains Mono"; color: #b8b8b2; }
+  .a .sub b { color: #d4ff3a; }
+
+  /* B · MUMBAI FESTIVAL (Devcon India energy) */
+  .b { color: #ffe9f4; background:
+      radial-gradient(800px 600px at 80% 10%, rgba(255,79,163,.45), transparent 60%),
+      radial-gradient(700px 700px at 10% 100%, rgba(255,176,0,.25), transparent 60%),
+      linear-gradient(170deg, #3a0c4a, #1c0624); }
+  .b::before { content: ""; position: absolute; inset: 0; opacity: .14; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><g fill='none' stroke='%23ffb3d9' stroke-width='2'><circle cx='45' cy='45' r='30'/><circle cx='0' cy='0' r='30'/><circle cx='90' cy='0' r='30'/><circle cx='0' cy='90' r='30'/><circle cx='90' cy='90' r='30'/></g></svg>"); }
+  .b::after { content: ""; position: absolute; inset: 26px; border: 3px solid #ffb000; border-radius: 300px 300px 28px 28px; pointer-events: none; }
+  .b .chip, .b .foot { font: 700 18px/1 "Space Grotesk"; letter-spacing: .14em; text-transform: uppercase; color: #ffb3d9; }
+  .b .chip { top: 120px; justify-content: center; gap: 30px; }
+  .b h1 { margin-top: 110px; text-align: center; font: 900 98px/.92 Unbounded; letter-spacing: -.04em; }
+  .b h1 i { font-style: normal; color: #ffb000; }
+  .b .sub { margin-top: 24px; text-align: center; font: italic 46px/1.1 "Instrument Serif"; color: #ffd0e8; }
+
+  /* C · STICKER BOMB ZINE */
+  .c { background: #efebe1; color: #111; }
+  .c::before { content: ""; position: absolute; inset: 0; opacity: .5; background-image: radial-gradient(rgba(0,0,0,.12) 1.2px, transparent 1.4px); background-size: 12px 12px; }
+  .c .chip, .c .foot { font: 700 18px/1 "JetBrains Mono"; text-transform: uppercase; letter-spacing: .04em; }
+  .c h1 { margin-top: 64px; font: 400 128px/.86 "Archivo Black"; letter-spacing: -.04em; text-transform: uppercase; }
+  .c h1 i { font-style: normal; display: inline-block; background: #3a7bfa; color: #fff; padding: 0 16px 6px; transform: rotate(-2deg); }
+  .c .sub { margin-top: 28px; display: inline-block; font: 700 30px/1.2 "Space Grotesk"; background: #ff3d8b; color: #fff; padding: 10px 18px; transform: rotate(1.5deg); }
+  .c .tape { position: absolute; width: 170px; height: 44px; background: rgba(250,240,190,.75); z-index: 6; }
+</style>
+</head>
+<body>
+
+<section class="slide a">
+  <div class="chip"><span><b>&gt;</b> signal.abhinil / haul.log</span><span>mumbai · nov 2026</span></div>
+  <h1>I don't<br>collect <i>swag.</i></h1>
+  <p class="sub">then mumbai happened.<br><b>7</b> days · <b>4</b> events · <b>1</b> ziploc</p>
+  <img class="obj b-ibw" src="stickers/objects/badge-ibw.png"><img class="obj b-dev" src="stickers/objects/badge-devcon.png"><img class="obj b-eth" src="stickers/objects/badge-ethglobal.png">
+  <img class="obj sp-b" src="stickers/objects/spinner-blue.png"><img class="obj sp-w" src="stickers/objects/spinner-white.png">
+  <img class="stk s-demo" src="stickers/idemoed.png"><img class="stk s-chai" src="stickers/chai.png"><img class="stk s-tiger" src="stickers/tiger.png"><img class="stk s-rings" src="stickers/eth-rings.png">
+  <div class="foot"><span>IBW · ETHGlobal · Pragma · Devcon</span><span>01/05</span></div>
+</section>
+
+<section class="slide b">
+  <div class="chip"><span>IBW</span><span>✦</span><span>ETHGlobal</span><span>✦</span><span>Pragma</span><span>✦</span><span>Devcon</span></div>
+  <h1>I don't<br>collect <i>swag.</i></h1>
+  <p class="sub">then Mumbai happened.</p>
+  <img class="obj b-ibw" src="stickers/objects/badge-ibw.png"><img class="obj b-dev" src="stickers/objects/badge-devcon.png"><img class="obj b-eth" src="stickers/objects/badge-ethglobal.png">
+  <img class="obj sp-b" src="stickers/objects/spinner-blue.png"><img class="obj sp-w" src="stickers/objects/spinner-white.png">
+  <img class="stk s-demo" src="stickers/idemoed.png"><img class="stk s-chai" src="stickers/chai.png"><img class="stk s-tiger" src="stickers/peacock.png" style="width:150px"><img class="stk s-rings" src="stickers/lotus.png">
+  <div class="foot"><span>Signal · Abhinil</span><span>7 days · 1 ziploc</span></div>
+</section>
+
+<section class="slide c">
+  <div class="chip"><span>Signal ✶ Abhinil</span><span>Issue 01 · Mumbai</span></div>
+  <h1>I don't<br>collect<br><i>swag.</i></h1>
+  <p class="sub">then Mumbai happened. 7 days. 4 events.</p>
+  <i class="tape" style="left:610px;top:575px;transform:rotate(-8deg)"></i>
+  <img class="obj b-ibw" src="stickers/objects/badge-ibw.png"><img class="obj b-dev" src="stickers/objects/badge-devcon.png"><img class="obj b-eth" src="stickers/objects/badge-ethglobal.png">
+  <img class="obj sp-b" src="stickers/objects/spinner-blue.png"><img class="obj sp-w" src="stickers/objects/spinner-white.png">
+  <img class="stk s-demo" src="stickers/idemoed.png"><img class="stk s-chai" src="stickers/wallst.png" style="width:230px"><img class="stk s-tiger" src="stickers/elephant.png"><img class="stk s-rings" src="stickers/pslab.png" style="width:110px">
+  <div class="foot"><span>IBW / ETHGlobal / Pragma / Devcon</span><span>01 / 05</span></div>
+</section>
+
+<script>
+  Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => {}))]).then(() => (window.READY = true));
+</script>
+</body>
+</html>

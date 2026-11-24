@@ -1,0 +1,79 @@
+1
+00:00:00,350 --> 00:00:07,688
+Next week, I'm in Mumbai for Devcon, IBW, and ETHGlobal. Hundreds of people, in seven days.
+
+2
+00:00:07,638 --> 00:00:09,350
+And I know how it goes.
+
+3
+00:00:09,370 --> 00:00:13,804
+A week later, I've forgotten what we talked about, and what I promised them.
+
+4
+00:00:13,754 --> 00:00:15,725
+So this time, I built Glance.
+
+5
+00:00:15,745 --> 00:00:18,399
+To remember people, not just collect them.
+
+6
+00:00:18,349 --> 00:00:22,001
+I meet someone, I scan their code, or just their badge.
+
+7
+00:00:22,021 --> 00:00:25,679
+And Glance finds them on X, LinkedIn, and Telegram.
+
+8
+00:00:25,629 --> 00:00:27,679
+Then I record a quick voice note.
+
+9
+00:00:27,699 --> 00:00:29,956
+AI turns it into clean notes.
+
+10
+00:00:29,976 --> 00:00:31,882
+Or I just type them myself.
+
+11
+00:00:31,832 --> 00:00:34,731
+All their accounts come together, in one place.
+
+12
+00:00:34,751 --> 00:00:36,582
+One person, every handle.
+
+13
+00:00:36,602 --> 00:00:39,137
+And nothing links, until I say so.
+
+14
+00:00:39,087 --> 00:00:41,977
+Every promise I make becomes a follow up.
+
+15
+00:00:41,997 --> 00:00:43,218
+Ready to send.
+
+16
+00:00:43,887 --> 00:00:45,940
+And all of it stays on my phone.
+
+17
+00:00:45,960 --> 00:00:47,695
+Not on anyone's server.
+
+18
+00:00:48,187 --> 00:00:52,151
+Ever come home from a conference with a phone full of strangers?
+
+19
+00:00:52,171 --> 00:00:53,335
+Yeah. Me too.
+
+20
+00:00:53,355 --> 00:00:56,193
+So tell me, what should Glance remember next?

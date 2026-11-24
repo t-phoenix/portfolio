@@ -1,0 +1,92 @@
+date: '2026-11-08'
+status: posted
+pillar: culture
+platform_targets:
+  - x
+  - linkedin
+creative_format: hero_loop_plus_exhibits
+brand_direction: C sticker bomb zine
+hook: I don't collect swag.
+receipts:
+  - Own photos, brand/assets/Eth Global goodies (IMG_4189 to IMG_4196)
+numbers: []
+creative_assets:
+  - creative/slide-01.png
+  - creative/slide-02.png
+  - creative/slide-03.png
+  - creative/slide-04.png
+  - creative/slide-05.png
+creative_sources:
+  - Own photography, HEIC converted into creative/assets
+  - >-
+    Die cut stickers lifted with Apple Vision (brand/assets/stickers/lift.swift), pack copied to
+    creative/stickers
+  - Vitalik head, John Phillips / TechCrunch, CC BY 2.0, Wikimedia Commons, parody only
+  - Ethereum mark, Simple Icons (CC0)
+  - Studio HTML creative/carousel.html, stills and loop by creative/export.cjs (puppeteer + ffmpeg)
+  - Archivo Black, Space Grotesk, JetBrains Mono via Google Fonts (OFL)
+spend_usd: 0
+virality:
+  comment_magnet: What should a 2027 event badge actually be?
+  tags_x:
+    - '@IBWofficial'
+    - '@ETHGlobal'
+    - '@EFDevcon'
+    - '@ns'
+    - '@ethereum'
+    - '@TheRealKartik'
+    - '@ensdomains'
+  tags_linkedin:
+    - '#Devcon'
+    - '#ETHGlobal'
+    - '#IBW2026'
+  links_in_post: []
+  links_in_first_reply:
+    - https://commons.wikimedia.org/wiki/File:Vitalik_Buterin_TechCrunch_London_2015_(cropped).jpg
+  format: hero_loop_plus_exhibits
+  experiment: creative_shitpost_honest_roast
+  share_cta: >-
+    quote with a badge idea, best one gets a sticker (real giveaway, must be fulfilled); tag a
+    friend still wearing their lanyard
+notes: >-
+  Draft. Facts confirmed by owner 2026-11-08: demoed at ETHGlobal, spinners from ENS, green shirt is
+  Ethereum. Badge roast targets the category and praises ETHGlobal by name. Slide 05 is labelled
+  parody; no licensed photo of Kartik exists, so his head is the ETHGlobal logo sticker. v1
+  creatives in creative/archive-v1. Owner asked for share CTA and organic tags across the thread
+  (max 3 per tweet, 7 total), overriding the zero CTA rule for this pack. Handles checked on brand
+  sites 2026-11-08. Giveaway is real: mail one sticker to the best badge idea. | LinkedIn publish
+  uses slides 01-05 (Option A); hero-loop already on X | Scheduled x=2026-11-09T19:30:00+05:30
+  linkedin=2026-11-10T00:05:00+05:30 | publish errors: linkedin: LinkedIn image init failed:
+  {"status":401,"serviceErrorCode":65602,"code":"EXPIRED_ACCESS_TOKEN","message":"The token used in
+  the request has expired"}
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - x: '2026-11-09T19:30:00+05:30'
+      why: >-
+        Mon lived slot; India evening scroll, 14:00 London, 09:00 New York; Devcon crowd home and
+        catching up
+    - linkedin: '2026-11-10T09:00:00+05:30'
+      why: Tue morning beats Monday inbox; can quote the best X badge replies
+    - linkedin_alt: '2026-11-09T13:00:00+05:30'
+      why: if both must go Monday, lunch scroll
+  chosen:
+    x: '2026-11-09T19:30:00+05:30'
+    linkedin: '2026-11-10T00:05:00+05:30'
+  published:
+    x:
+      id: '2119860505666052326'
+      url: https://x.com/touchey_phoenix/status/2119860505666052326
+      thread:
+        - https://x.com/touchey_phoenix/status/2119860505666052326
+        - https://x.com/touchey_phoenix/status/2119860508237111299
+        - https://x.com/touchey_phoenix/status/2119860512934740457
+        - https://x.com/touchey_phoenix/status/2119860515593965705
+        - https://x.com/touchey_phoenix/status/2119860518802632783
+      at: '2026-11-09T18:31:47.772Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7525627978802778113
+      url: null
+      at: '2026-11-09T18:38:50.764Z'
+      dryRun: false

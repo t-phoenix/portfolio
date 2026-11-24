@@ -1,0 +1,145 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700;800&display=swap">
+<style>
+  /* Brand direction A: Hacker Mono. Story in 4 frames: crash, pattern, buyer, your move. */
+  :root { --bg:#050505; --ink:#f5f5f0; --dim:#8a8a84; --line:#232323; --acid:#d4ff3a; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:#222; display:grid; gap:40px; padding:40px; justify-content:center; }
+  .slide { width:1080px; height:1350px; position:relative; overflow:hidden; background:var(--bg); color:var(--ink); font-family:"Space Grotesk",sans-serif; }
+  .slide::before { content:""; position:absolute; inset:0; background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px); background-size:54px 54px; opacity:.55; }
+  .slide > * { position:absolute; }
+  .chip,.foot { left:64px; right:64px; display:flex; justify-content:space-between; font:700 20px/1 "JetBrains Mono",monospace; letter-spacing:.04em; text-transform:uppercase; z-index:5; }
+  .chip { top:56px; } .foot { bottom:52px; color:var(--dim); }
+  .chip b, .foot b { color:var(--acid); }
+  .steps { display:flex; gap:8px; } .steps i { width:46px; height:8px; background:#333; } .steps i.on { background:var(--acid); }
+  h1 { left:64px; right:64px; font-weight:700; letter-spacing:-.03em; line-height:.98; }
+  h1 i { font-style:normal; color:var(--bg); background:var(--acid); padding:0 12px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+  .mono { font-family:"JetBrains Mono",monospace; }
+  .sub { left:64px; right:64px; font:500 32px/1.35 "Space Grotesk",sans-serif; color:var(--ink); }
+  .sub b { color:var(--acid); font-weight:700; }
+  .stk { filter:drop-shadow(0 0 0 #fff) drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(0 18px 24px rgba(0,0,0,.6)); z-index:4; }
+
+  /* 1 crash */
+  .term { left:64px; right:64px; top:640px; border:2px solid var(--line); background:#0b0b0b; font-family:"JetBrains Mono",monospace; }
+  .term .bar { padding:14px 22px; border-bottom:2px solid var(--line); font:700 18px/1 "JetBrains Mono"; color:var(--dim); display:flex; justify-content:space-between; }
+  .row { display:grid; grid-template-columns:150px 1fr auto; align-items:baseline; gap:20px; padding:30px 26px; border-bottom:2px solid var(--line); }
+  .row:last-child { border-bottom:0; }
+  .row .t { font:800 34px/1 "JetBrains Mono"; }
+  .row .p { font:500 34px/1 "JetBrains Mono"; color:var(--dim); }
+  .row .p b { color:var(--ink); font-weight:800; }
+  .row .d { font:800 64px/1 "JetBrains Mono"; color:var(--acid); }
+
+  /* 2 pattern */
+  .charts { left:64px; right:64px; top:560px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .card { border:2px solid var(--line); background:#0b0b0b; padding:22px; display:grid; gap:10px; }
+  .card.now { border-color:var(--acid); }
+  .card .y { font:800 40px/1 "JetBrains Mono"; }
+  .card .k { font:700 22px/1.3 "JetBrains Mono"; color:var(--dim); }
+  .card .k b { color:var(--acid); }
+  .card svg { width:100%; height:200px; }
+  .phases { left:64px; right:64px; top:1050px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; font:700 22px/1.3 "JetBrains Mono"; }
+  .phases div { border-top:6px solid #333; padding-top:14px; color:var(--dim); }
+  .phases div.on { border-color:var(--acid); color:var(--ink); }
+  .phases small { display:block; font-weight:500; font-size:19px; margin-top:6px; color:var(--dim); }
+
+  /* 3 buyer */
+  table { left:64px; right:64px; top:560px; width:952px; border-collapse:collapse; font-family:"JetBrains Mono",monospace; }
+  th { text-align:left; font:700 18px/1 "JetBrains Mono"; letter-spacing:.06em; color:var(--dim); padding:0 16px 16px; border-bottom:2px solid var(--line); }
+  td { padding:22px 16px; border-bottom:2px solid var(--line); vertical-align:top; font:500 24px/1.3 "JetBrains Mono"; }
+  td.yr { font:800 32px/1.1 "JetBrains Mono"; width:120px; }
+  td.herd { color:var(--dim); text-decoration:line-through; text-decoration-color:#555; width:380px; }
+  td.shark { color:var(--ink); }
+  td.shark b { color:var(--acid); }
+  tr.now td { background:rgba(212,255,58,.06); }
+
+  /* 4 move */
+  .rules { left:64px; right:64px; top:520px; display:grid; gap:18px; }
+  .rule { display:grid; grid-template-columns:90px 1fr; gap:20px; align-items:baseline; border-bottom:2px solid var(--line); padding-bottom:18px; }
+  .rule .n { font:800 40px/1 "JetBrains Mono"; color:var(--acid); }
+  .rule h3 { font:700 40px/1.1 "Space Grotesk"; letter-spacing:-.02em; }
+  .rule p { font:500 24px/1.3 "JetBrains Mono"; color:var(--dim); margin-top:8px; }
+  .hot { left:64px; right:64px; top:1000px; background:var(--acid); color:var(--bg); padding:28px 30px; display:grid; gap:10px; }
+  .hot .lbl { font:800 20px/1 "JetBrains Mono"; letter-spacing:.08em; }
+  .hot .big { font:700 44px/1.05 "Space Grotesk"; letter-spacing:-.02em; }
+  .hot .nums { font:700 24px/1.2 "JetBrains Mono"; }
+</style></head><body>
+
+<!-- 1 · THE CRASH -->
+<section class="slide">
+  <div class="chip"><span>Signal <b>//</b> the crash</span><span class="steps"><i class="on"></i><i></i><i></i><i></i></span></div>
+  <h1 style="top:170px;font-size:92px">Everyone who bought gold at the record is now a <i>long term investor.</i></h1>
+  <div class="term">
+    <div class="bar"><span>$ markets --since peak</span><span>19 NOV 2026</span></div>
+    <div class="row"><span class="t">GOLD</span><span class="p">$5,595 → <b>$3,733</b></span><span class="d">↓33%</span></div>
+    <div class="row"><span class="t">BTC</span><span class="p">$126K → <b>$63.7K</b></span><span class="d">↓50%</span></div>
+  </div>
+  <p class="sub" style="top:1000px;right:340px">Your feed says run. 80 years of crashes say: <b>look at who is buying.</b></p>
+  <img class="stk" src="assets/chai.png" style="width:230px;right:70px;top:1020px;transform:rotate(9deg)">
+  <div class="foot"><span>Next <b>→</b> the pattern nobody posts</span><span>1/4</span></div>
+</section>
+
+<!-- 2 · THE PATTERN -->
+<section class="slide">
+  <div class="chip"><span>Signal <b>//</b> the pattern</span><span class="steps"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+  <h1 style="top:170px;font-size:96px">In every panic, even gold gets <i>sold first.</i></h1>
+  <div class="charts">
+    <div class="card"><span class="y">2008</span>
+      <svg viewBox="0 0 280 200"><polyline points="10,120 110,165 270,25" fill="none" stroke="#f5f5f0" stroke-width="6" stroke-linejoin="round"/><circle cx="110" cy="165" r="9" fill="#d4ff3a"/><circle cx="270" cy="25" r="9" fill="#f5f5f0"/></svg>
+      <span class="k">$1,000 → $712<br><b>↓29%</b> then <b>↑170%</b></span></div>
+    <div class="card"><span class="y">2020</span>
+      <svg viewBox="0 0 280 200"><polyline points="10,110 110,150 270,40" fill="none" stroke="#f5f5f0" stroke-width="6" stroke-linejoin="round"/><circle cx="110" cy="150" r="9" fill="#d4ff3a"/><circle cx="270" cy="40" r="9" fill="#f5f5f0"/></svg>
+      <span class="k">$1,703 → $1,451<br><b>↓15%</b> then <b>record</b></span></div>
+    <div class="card now"><span class="y">2026</span>
+      <svg viewBox="0 0 280 200"><polyline points="10,40 110,165" fill="none" stroke="#f5f5f0" stroke-width="6"/><polyline points="110,165 270,40" fill="none" stroke="#d4ff3a" stroke-width="6" stroke-dasharray="4 14" stroke-linecap="round"/><circle cx="110" cy="165" r="9" fill="#d4ff3a"/><text x="236" y="120" fill="#d4ff3a" font-family="JetBrains Mono" font-weight="800" font-size="64">?</text></svg>
+      <span class="k">$5,595 → $3,733<br><b>↓33%</b> then <b>???</b></span></div>
+  </div>
+  <div class="phases">
+    <div class="on">01 Dash for cash<small>margin calls sell everything. We are here.</small></div>
+    <div>02 The printer<small>central banks cut and print</small></div>
+    <div>03 Scarce assets run<small>gold, stocks, BTC reprice</small></div>
+  </div>
+  <img class="stk" src="assets/cube.png" style="width:170px;right:70px;top:380px;transform:rotate(-10deg)">
+  <div class="foot"><span>Next <b>→</b> who is on the other side</span><span>2/4</span></div>
+</section>
+
+<!-- 3 · THE BUYER -->
+<section class="slide">
+  <div class="chip"><span>Signal <b>//</b> the buyer</span><span class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+  <h1 style="top:170px;font-size:88px">The rich don't predict crashes. They <i>wait for you</i> to panic.</h1>
+  <table>
+    <thead><tr><th>Year</th><th>Headline reader</th><th>The buyer</th></tr></thead>
+    <tbody>
+      <tr><td class="yr">1971</td><td class="herd">Held cash. Inflation hit 14.8%.</td><td class="shark">Bought oil, land, commodities on <b>fixed rate debt</b></td></tr>
+      <tr><td class="yr">2008</td><td class="herd">Sold stocks at the 2009 bottom</td><td class="shark">Buffett lent Goldman <b>$5B at 10%</b></td></tr>
+      <tr><td class="yr">2020</td><td class="herd">Sold in March, bought memes in 2021</td><td class="shark">Bought the lows once the <b>Fed backstopped</b></td></tr>
+      <tr class="now"><td class="yr">2026</td><td class="herd">Bought gold above $5,000 on "record" news</td><td class="shark">Central banks: <b>1,000+ tonnes a year</b> since 2022</td></tr>
+    </tbody>
+  </table>
+  <img class="stk" src="assets/wallst.png" style="width:260px;right:70px;top:1010px;transform:rotate(-6deg)">
+  <div class="foot"><span>Next <b>→</b> how to be the buyer</span><span>3/4</span></div>
+</section>
+
+<!-- 4 · YOUR MOVE -->
+<section class="slide">
+  <div class="chip"><span>Signal <b>//</b> your move</span><span class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+  <h1 style="top:170px;font-size:96px">You can't out trade them. You can <i>out wait</i> them.</h1>
+  <div class="rules">
+    <div class="rule"><span class="n">01</span><div><h3>Never be a forced seller</h3><p>6 months cash. Zero leverage.</p></div></div>
+    <div class="rule"><span class="n">02</span><div><h3>Buy in slices, not bottoms</h3><p>Monthly. Automatic. Boring.</p></div></div>
+    <div class="rule"><span class="n">03</span><div><h3>Rebalance to a written number</h3><p>Decided before the news, not during it.</p></div></div>
+  </div>
+  <div class="hot">
+    <span class="lbl">HOT TAKE FROM A WEB3 BUILDER</span>
+    <span class="big">Bitcoin is not digital gold. Not yet.</span>
+    <span class="nums">2020 ↓63% · 2022 ↓77% · 2026 ↓50%. It trades like leveraged tech. Size it that way.</span>
+  </div>
+  <img class="stk" src="assets/eth-mono.png" style="width:120px;right:90px;top:930px;transform:rotate(12deg)">
+  <div class="foot"><span>What did you do in March 2020<b>?</b></span><span>Not financial advice · 4/4</span></div>
+</section>
+
+<script>
+  Promise.all([...document.images].map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; })))
+    .then(() => document.fonts.ready).then(() => { window.READY = true; });
+</script>
+</body></html>

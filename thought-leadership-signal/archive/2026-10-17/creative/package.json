@@ -1,0 +1,10 @@
+{
+  "name": "signal-2026-10-12-creative",
+  "private": true,
+  "scripts": {
+    "export": "node export-hero.cjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.22.0"
+  }
+}

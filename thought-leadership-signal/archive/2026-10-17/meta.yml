@@ -1,0 +1,63 @@
+date: '2026-10-17'
+status: posted
+pillar: macro-finance
+platform_targets:
+  - x
+  - linkedin
+creative_format: hero_billboard
+hook: >-
+  Base just cleared more stablecoin volume than Ethereum mainnet. Most people are still arguing
+  about the lobby.
+receipts:
+  - https://cryptobriefing.com/ethereum-l2s-settle-77-stablecoin-volume/
+  - https://ethereuminstitutional.org/research/ethereum-institutional-briefing-issue-01
+numbers:
+  - 'window: 15 Jul to 12 Oct 2026'
+  - 'eth_family: $16.75T of $21.55T all networks (~77%)'
+  - 'base: $8.5T'
+  - 'mainnet: $7.1T'
+  - 'optimism: $0.8T'
+  - 'other_eth_l2s: $0.35T'
+creative_assets:
+  - hero.png
+virality:
+  comment_magnet: If you ship a money product tomorrow, do you default to mainnet or Base first? One reason.
+  tags_x:
+    - '@base'
+    - '@ethereum'
+    - '@tokenterminal'
+  tags_x_reply:
+    - '@ethereuminsti'
+  tags_linkedin:
+    - Base
+    - Ethereum
+    - Coinbase
+  links_in_post:
+    - https://cryptobriefing.com/ethereum-l2s-settle-77-stablecoin-volume/
+    - https://ethereuminstitutional.org/research/ethereum-institutional-briefing-issue-01
+  links_in_first_reply:
+    - https://cryptobriefing.com/ethereum-l2s-settle-77-stablecoin-volume/
+    - https://ethereuminstitutional.org/research/ethereum-institutional-briefing-issue-01
+  experiment: single_hero_vs_carousel
+spend_usd: 0
+notes: >-
+  Growth test: one hero billboard, comment fork, tags, X sources in first reply. Not an Alpenglow or
+  civic sequel. Export hero.png before ready. | Scheduled x=2026-10-17T11:56:00Z
+  linkedin=2026-10-17T11:56:00Z
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: '2026-10-17T11:56:00Z'
+    linkedin: '2026-10-17T11:56:00Z'
+  published:
+    x:
+      id: '2111426045908021658'
+      url: https://x.com/touchey_phoenix/status/2111426045908021658
+      at: '2026-10-17T11:56:12.846Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:share:7517191773283110912
+      url: null
+      at: '2026-10-17T11:56:22.070Z'
+      dryRun: false

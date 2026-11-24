@@ -1,0 +1,65 @@
+date: '2026-10-22'
+status: posted
+pillar: macro-finance
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: Base cleared more than mainnet. Two apps did the USDC work.
+receipts:
+  - https://www.talos.com/insights/beneath-the-trillions-whats-driving-usdc-and-usdt-transfer-volume
+  - https://cryptobriefing.com/ethereum-l2s-settle-77-stablecoin-volume/
+  - https://ethereuminstitutional.org/research/ethereum-institutional-briefing-issue-01
+numbers:
+  - 'usdc_base: Aerodrome exchange 69%, Morpho lending 23%, other apps about 8%'
+  - 'all_stables_90d: Base $8.5T, mainnet $7.1T, 15 Jul to 12 Oct 2026'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+virality:
+  comment_magnet: Which one do you actually use?
+  tags_x:
+    - '@base'
+    - '@ethereum'
+  tags_x_reply:
+    - '@tokenterminal'
+    - '@ethereuminsti'
+  tags_linkedin:
+    - Base
+    - Ethereum
+    - Coinbase
+  links_in_post:
+    - >-
+      https://www.talos.com/insights/beneath-the-trillions-whats-driving-usdc-and-usdt-transfer-volume
+    - https://cryptobriefing.com/ethereum-l2s-settle-77-stablecoin-volume/
+    - https://ethereuminstitutional.org/research/ethereum-institutional-briefing-issue-01
+  links_in_first_reply:
+    - >-
+      https://www.talos.com/insights/beneath-the-trillions-whats-driving-usdc-and-usdt-transfer-volume
+    - https://cryptobriefing.com/ethereum-l2s-settle-77-stablecoin-volume/
+    - https://ethereuminstitutional.org/research/ethereum-institutional-briefing-issue-01
+  experiment: carousel_four_hero_vs_single
+spend_usd: 0.01
+notes: >-
+  New mechanism after Wrong Floor. USDC composition (Talos) kept separate from the 90 day all
+  stablecoin totals (Token Terminal). Grid layout, overlap fixed on slide 01 before ready. X
+  publisher now attaches up to 4 images. | Scheduled x=2026-10-21T19:52:37Z
+  linkedin=2026-10-21T19:52:37Z
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: '2026-10-21T19:52:37Z'
+    linkedin: '2026-10-21T19:52:37Z'
+  published:
+    x:
+      id: '2112995516829360216'
+      url: https://x.com/touchey_phoenix/status/2112995516829360216
+      at: '2026-10-21T19:52:43.913Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7518761271396265984
+      url: null
+      at: '2026-10-21T19:52:59.813Z'
+      dryRun: false

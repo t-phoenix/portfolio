@@ -1,0 +1,10 @@
+Format: carousel_3d_still, 4 frozen frames of one shot.
+01 finding (Base vs mainnet towers). 02 the lap. 03 who (three blocks). 04 leftover.
+Type stays in the top band. Solids stay in the scene. No text on top of extrusions.
+Concept: three contracts printed Base USDC volume. Leftover is the tell.
+Lessons locked in:
+- CSS grid only. No absolute bars over type.
+- Explicit line breaks on headlines.
+- 60px inset. Panels padded. Bands fill the frame.
+- USDC percents and the 90 day all stablecoin totals never share a slide unlabeled.
+- Export script fails if text clips the slide edge.

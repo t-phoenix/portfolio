@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-17 — Wrong Floor</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0b0d;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .hero {
+    --paper: #f3efe6;
+    --mute: #8b8680;
+    --base-hot: #3d7cff;
+    --gold: #e8c36a;
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    color: var(--paper);
+    background:
+      radial-gradient(700px 460px at 80% 10%, rgba(0, 82, 255, 0.26), transparent 58%),
+      radial-gradient(460px 340px at 8% 92%, rgba(232, 195, 106, 0.09), transparent 68%),
+      linear-gradient(165deg, #141820 0%, #0a0b0d 52%, #07080a 100%);
+    padding: 64px 68px 60px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    row-gap: 32px;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 26px;
+    border: 1px solid rgba(243, 239, 230, 0.14);
+    pointer-events: none;
+    z-index: 5;
+  }
+  .chrome, .foot, .stage { position: relative; z-index: 2; }
+  .chrome, .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  .brand {
+    color: var(--gold);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .sq {
+    width: 10px;
+    height: 10px;
+    background: var(--base-hot);
+    display: inline-block;
+    flex: none;
+  }
+  .stage {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    row-gap: 40px;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .copy { min-width: 0; }
+  .eye {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 82px;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    max-width: 900px;
+  }
+  .sub {
+    margin-top: 22px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 1.4;
+    color: rgba(243, 239, 230, 0.72);
+    max-width: 780px;
+  }
+  .floors {
+    display: grid;
+    grid-template-columns: 1fr 1.26fr;
+    gap: 24px;
+    align-items: stretch;
+    min-height: 0;
+    height: 100%;
+    max-height: 340px;
+  }
+  .floor {
+    border: 1px solid rgba(243, 239, 230, 0.14);
+    padding: 26px 28px 28px;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    row-gap: 18px;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .floor.lobby {
+    background: linear-gradient(180deg, rgba(52, 56, 66, 0.55), rgba(18, 20, 26, 0.96));
+  }
+  .floor.money {
+    background:
+      linear-gradient(155deg, rgba(0, 82, 255, 0.52), rgba(0, 36, 110, 0.28)),
+      linear-gradient(180deg, #0d1a3a, #071018);
+    border-color: rgba(61, 124, 255, 0.5);
+    box-shadow: 0 20px 56px rgba(0, 82, 255, 0.16);
+  }
+  .floor-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+  .badge {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 7px 11px;
+    border: 1px solid rgba(243, 239, 230, 0.22);
+    color: var(--mute);
+    white-space: nowrap;
+    flex: none;
+  }
+  .floor.money .badge {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #fff;
+  }
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 7px;
+    height: 56px;
+    padding: 0 2px;
+  }
+  .lobby .bars {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .bars span {
+    flex: 1;
+    background: linear-gradient(180deg, #b4ccff, #0052ff);
+    border-radius: 2px 2px 0 0;
+    min-width: 0;
+  }
+  .bars span:nth-child(1) { height: 34%; }
+  .bars span:nth-child(2) { height: 58%; }
+  .bars span:nth-child(3) { height: 72%; }
+  .bars span:nth-child(4) { height: 48%; }
+  .bars span:nth-child(5) { height: 88%; }
+  .bars span:nth-child(6) { height: 100%; }
+  .bars span:nth-child(7) { height: 64%; }
+  .floor-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    min-height: 0;
+  }
+  .floor .label {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  .floor.money .label { color: #b7c9ff; }
+  .floor .name {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  .floor .amt {
+    font-family: Syne, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .floor.lobby .amt {
+    color: rgba(243, 239, 230, 0.82);
+    font-size: 54px;
+  }
+  .floor.money .amt {
+    color: #fff;
+    font-size: 66px;
+  }
+  .floor .hint {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--mute);
+    margin-top: 6px;
+  }
+  .floor.money .hint { color: rgba(255, 255, 255, 0.8); }
+  .foot {
+    border-top: 1px solid rgba(243, 239, 230, 0.14);
+    padding-top: 18px;
+  }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <header class="chrome">
+      <span class="brand"><i class="sq"></i>Signal · Abhinil</span>
+      <span>Wrong floor</span>
+    </header>
+    <div class="stage">
+      <div class="copy">
+        <p class="eye">Stablecoin rails · 90 days</p>
+        <h1>They kept arguing about the lobby.</h1>
+        <p class="sub">The dollars already took the elevator.</p>
+      </div>
+      <div class="floors">
+        <div class="floor lobby">
+          <div class="floor-top">
+            <span class="label">Floor L1</span>
+            <span class="badge">What people watch</span>
+          </div>
+          <div class="bars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="floor-body">
+            <span class="name">Mainnet</span>
+            <span class="amt">$7.1T</span>
+            <span class="hint">Prestige address</span>
+          </div>
+        </div>
+        <div class="floor money">
+          <div class="floor-top">
+            <span class="label">Floor L2</span>
+            <span class="badge">Where volume cleared</span>
+          </div>
+          <div class="bars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="floor-body">
+            <span class="name">Base</span>
+            <span class="amt">$8.5T</span>
+            <span class="hint">The busy floor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot">
+      <span>Token Terminal · Jul 15 to Oct 12 2026</span>
+      <span>01 / 01</span>
+    </footer>
+  </section>
+</body>
+</html>

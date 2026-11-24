@@ -6,7 +6,7 @@ Attach `creative/slide-01.png` through `slide-05.png`.
 ## Post
 
 ### 1
-Ethereum has run on a handshake for four years. This week it starts testing the contract.
+Ethereum has run on a handshake for four years. Now it is testing the contract.
 
 ### 2
 More than 90% of Ethereum blocks reach the chain through MEV Boost relays. A relay is a company in the middle. It holds the builder's block and makes sure the validator gets paid. None of that lives in the protocol.

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-11-08 · Mumbai haul (Zine)</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  /* Direction C · Sticker Bomb Zine */
+  :root { --paper: #efebe1; --ink: #111; --blue: #3a7bfa; --pink: #ff3d8b; --tape: rgba(250,240,190,.78); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #2a2a2a; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; background: var(--paper); color: var(--ink); }
+  .slide::before { content: ""; position: absolute; inset: 0; opacity: .55; background-image: radial-gradient(rgba(0,0,0,.12) 1.2px, transparent 1.4px); background-size: 12px 12px; }
+  .slide > * { position: absolute; }
+  [data-in] { will-change: transform, opacity; }
+
+  .chip, .foot { left: 64px; right: 64px; display: flex; justify-content: space-between; font: 700 18px/1 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: .04em; z-index: 20; }
+  .chip { top: 52px; } .foot { bottom: 48px; }
+  .hd { left: 64px; top: 104px; font: 400 128px/.86 "Archivo Black", sans-serif; letter-spacing: -.04em; text-transform: uppercase; z-index: 12; }
+  .hd span { display: inline-block; }
+  .blk { background: var(--blue); color: #fff; padding: 0 16px 8px; }
+  .blk.p { background: var(--pink); }
+  .tag { font: 700 32px/1.15 "Space Grotesk", sans-serif; background: var(--pink); color: #fff; padding: 12px 20px; z-index: 13; }
+  .tag.b { background: var(--blue); }
+  .tag.k { background: var(--ink); color: var(--paper); }
+  .mono { font: 700 22px/1.3 "JetBrains Mono", monospace; text-transform: uppercase; z-index: 13; }
+
+  .print { background: #fbf9f4; padding: 14px; box-shadow: 18px 30px 40px rgba(0,0,0,.28), 3px 5px 10px rgba(0,0,0,.18); }
+  .print img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .tape { width: 170px; height: 44px; background: var(--tape); z-index: 15; }
+  .stk { filter: drop-shadow(5px 9px 8px rgba(0,0,0,.28)); z-index: 14; }
+  .obj { filter: drop-shadow(16px 28px 26px rgba(0,0,0,.38)); }
+  .txt-stk { font: 400 34px/1 "Archivo Black", sans-serif; text-transform: uppercase; padding: 14px 22px; border: 6px solid #fff; border-radius: 16px; box-shadow: 4px 8px 12px rgba(0,0,0,.25); z-index: 14; }
+  .stamp { font: 700 22px/1.1 "JetBrains Mono", monospace; text-transform: uppercase; border: 4px solid var(--pink); color: var(--pink); padding: 10px 14px; z-index: 16; }
+  .lbl { font: 400 34px/1 "Archivo Black", sans-serif; text-transform: uppercase; z-index: 13; }
+  .small { font: 700 20px/1.25 "JetBrains Mono", monospace; z-index: 13; }
+</style>
+</head>
+<body>
+
+<!-- 01 · HERO LOOP (overview). Still = final frame. -->
+<section class="slide hero" data-loop="10">
+  <div class="chip"><span>Signal ✶ Abhinil</span><span>Issue 01 · Mumbai</span></div>
+  <div class="hd"><span data-in="0.15" data-r="0">I don't</span><br><span data-in="0.55" data-r="0">collect</span><br><span class="blk" data-in="1.0" data-r="-2">swag.</span></div>
+
+  <div class="tag" style="left:64px;top:520px" data-in="2.1" data-r="1.5">then Mumbai happened.</div>
+  <div class="mono" style="left:500px;top:534px" data-in="2.35" data-r="0">7 days · 4 events</div>
+
+  <!-- scene 2: the week, as stickers -->
+  <div class="txt-stk" style="left:120px;top:690px;background:#1d1d1d;color:#fff" data-in="2.6" data-out="3.7" data-r="-6">IBW</div>
+  <div class="txt-stk" style="left:330px;top:650px;background:#fff;color:#111;border-color:#111" data-in="2.8" data-out="3.7" data-r="4">ETHGlobal</div>
+  <div class="txt-stk" style="left:680px;top:700px;background:var(--blue);color:#fff" data-in="3.0" data-out="3.7" data-r="-3">Pragma</div>
+  <div class="txt-stk" style="left:260px;top:840px;background:#5b2a86;color:#fff" data-in="3.2" data-out="3.7" data-r="5">Devcon</div>
+  <img class="stk" src="stickers/eth-mono.png" style="left:640px;top:830px;width:150px" data-in="3.3" data-out="3.7" data-r="10">
+
+  <!-- scene 3: exhibits, real photos slapped in -->
+  <div class="print" style="left:110px;top:640px;width:860px;height:500px" data-in="3.8" data-out="7.1" data-r="-3"><img src="assets/flatlay.jpg"></div>
+  <div class="print" style="left:150px;top:620px;width:800px;height:470px" data-in="4.45" data-out="7.1" data-r="2.5"><img src="assets/badges-hanging.jpg"></div>
+  <div class="print" style="left:300px;top:600px;width:470px;height:600px" data-in="5.1" data-out="7.1" data-r="-4"><img src="assets/fan-spinners.jpg" style="object-position:50% 40%"></div>
+  <div class="print" style="left:180px;top:640px;width:340px;height:420px" data-in="5.75" data-out="7.1" data-r="5"><img src="assets/tee-ns.jpg" style="object-position:50% 70%"></div>
+  <div class="print" style="left:560px;top:660px;width:340px;height:420px" data-in="6.1" data-out="7.1" data-r="-5"><img src="assets/tee-ethereum.jpg" style="object-position:50% 75%"></div>
+  <div class="mono" style="left:64px;top:1180px" data-in="3.8" data-out="4.2">Exhibit A · the table</div>
+  <div class="mono" style="left:64px;top:1180px" data-in="4.45" data-out="4.85">Exhibit B · the leashes</div>
+  <div class="mono" style="left:64px;top:1180px" data-in="5.1" data-out="5.5">Exhibit C · 3D printed</div>
+  <div class="mono" style="left:64px;top:1180px" data-in="5.75" data-out="7.1">Exhibit D · two shirts, max</div>
+
+  <!-- scene 4: final collage, the still -->
+  <img class="obj" src="stickers/objects/badge-ibw.png" style="left:70px;top:640px;width:290px" data-in="7.2" data-r="-13">
+  <img class="obj" src="stickers/objects/badge-devcon.png" style="left:335px;top:610px;width:240px" data-in="7.4" data-r="-3">
+  <img class="obj" src="stickers/objects/badge-ethglobal.png" style="left:560px;top:630px;width:320px;z-index:3" data-in="7.6" data-r="8">
+  <img class="obj" src="stickers/objects/spinner-blue.png" style="left:40px;top:1010px;width:230px;z-index:4" data-in="7.9" data-r="-8" data-spin="40">
+  <img class="obj" src="stickers/objects/spinner-white.png" style="left:820px;top:990px;width:210px;z-index:4" data-in="8.1" data-r="10" data-spin="-50">
+  <img class="stk" src="stickers/idemoed.png" style="left:800px;top:440px;width:210px" data-in="8.4" data-r="12">
+  <img class="stk" src="stickers/wallst.png" style="left:300px;top:1060px;width:230px" data-in="8.6" data-r="-14">
+  <img class="stk" src="stickers/elephant.png" style="left:560px;top:1060px;width:200px" data-in="8.8" data-r="7">
+  <div class="foot"><span>IBW / ETHGlobal / Pragma / Devcon</span><span>01 / 05</span></div>
+</section>
+
+<!-- 02 · THE TABLE -->
+<section class="slide">
+  <div class="chip"><span>Signal ✶ Abhinil</span><span>Issue 01 · Mumbai</span></div>
+  <div class="hd" style="font-size:112px">I don't collect<br><span class="blk">stickers.</span></div>
+  <div class="tag" style="left:64px;top:430px;transform:rotate(1.5deg)">Apparently I do now. 7 days did this.</div>
+  <div class="print" style="left:70px;top:560px;width:940px;height:540px;transform:rotate(-2.5deg)"><img src="assets/flatlay.jpg"></div>
+  <i class="tape" style="left:90px;top:545px;transform:rotate(-14deg)"></i>
+  <i class="tape" style="left:830px;top:1080px;transform:rotate(-10deg)"></i>
+  <img class="stk" src="stickers/chai.png" style="left:800px;top:410px;width:210px;transform:rotate(9deg)">
+  <div class="mono" style="left:64px;top:1150px;width:760px">Most of these are going straight into a drawer.<br>One or two will earn a laptop.</div>
+  <div class="foot"><span>Exhibit A · the table</span><span>02 / 05</span></div>
+</section>
+
+<!-- 03 · BADGES -->
+<section class="slide">
+  <div class="chip"><span>Signal ✶ Abhinil</span><span>Issue 01 · Mumbai</span></div>
+  <div class="hd" style="font-size:104px">Event badges<br>are <span class="blk p">dog leashes.</span></div>
+  <div class="tag b" style="left:64px;top:420px;transform:rotate(-1deg);max-width:880px">Except ETHGlobal's. That one is actually designed.</div>
+  <div class="print" style="left:80px;top:540px;width:920px;height:520px;transform:rotate(1.5deg);background:#111"><img src="assets/badges-hanging.jpg"></div>
+  <i class="tape" style="left:455px;top:522px;transform:rotate(3deg)"></i>
+  <img class="stk" src="stickers/ethglobal-mumbai.png" style="left:870px;top:880px;width:160px;transform:rotate(14deg)">
+  <div class="lbl" style="left:64px;top:1105px;font-size:38px;line-height:1.05">Web3 fixed memes, merch and fonts.<br><span style="color:var(--pink)">Nobody fixed the badge.</span></div>
+  <div class="foot"><span>Exhibit B · the leashes</span><span>03 / 05</span></div>
+</section>
+
+<!-- 04 · SPINNERS -->
+<section class="slide">
+  <div class="chip"><span>Signal ✶ Abhinil</span><span>Issue 01 · Mumbai</span></div>
+  <div class="hd" style="font-size:118px">Best swag<br>was <span class="blk">3D printed.</span></div>
+  <div class="tag" style="left:64px;top:440px;transform:rotate(-1.5deg)">Two ENS fidget spinners. Zero tokens. Will keep forever.</div>
+  <img class="obj" src="stickers/objects/fan.png" style="left:640px;top:520px;width:380px;transform:rotate(18deg)">
+  <img class="obj" src="stickers/objects/spinner-blue.png" style="left:60px;top:600px;width:520px;transform:rotate(-10deg);z-index:3">
+  <img class="obj" src="stickers/objects/spinner-white.png" style="left:330px;top:900px;width:440px;transform:rotate(12deg);z-index:4">
+  <div class="txt-stk" style="left:80px;top:1080px;background:var(--blue);color:#fff;transform:rotate(-5deg)">by ENS</div>
+  <img class="stk" src="stickers/lotus.png" style="left:820px;top:1020px;width:170px;transform:rotate(-8deg)">
+  <div class="foot"><span>Exhibit C · 3D printed</span><span>04 / 05</span></div>
+</section>
+
+<!-- 05 · TWO SHIRTS, PAPER DOLL PARODY -->
+<section class="slide">
+  <div class="chip"><span>Signal ✶ Abhinil</span><span>Issue 01 · Mumbai</span></div>
+  <div class="hd" style="font-size:108px">Only two shirts<br><span class="blk">made it home.</span></div>
+  <div class="tag k" style="left:64px;top:420px;transform:rotate(1deg);max-width:900px">I only wear logos I'd defend in a room full of skeptics.</div>
+  <div class="stamp" style="right:70px;top:990px;transform:rotate(-7deg);background:var(--paper)">Parody · paper doll<br>edition</div>
+  <!-- doll 1 -->
+  <img class="obj" src="stickers/objects/tee-eth.png" style="left:40px;top:760px;width:500px">
+  <img class="obj" src="stickers/parody-vitalik-head.png" style="left:205px;top:560px;width:170px;z-index:3;transform:rotate(-3deg)">
+  <div class="lbl" style="left:70px;top:1110px;font-size:36px">Vitalik<span style="color:var(--blue)"> × Ethereum</span></div>
+  <!-- doll 2 -->
+  <img class="obj" src="stickers/objects/tee-ns.png" style="left:585px;top:690px;width:420px">
+  <img class="stk" src="stickers/eth-rings.png" style="left:722px;top:556px;width:150px;z-index:3;transform:rotate(6deg)">
+  <div class="lbl" style="left:600px;top:1110px;font-size:36px">Kartik<span style="color:var(--pink)"> × ns.com</span></div>
+  <div class="small" style="left:600px;top:1160px;width:420px">no licensed photo of Kartik, so the logo is his face</div>
+  <div class="small" style="left:70px;top:1160px;width:460px">head: John Phillips / TechCrunch, CC BY 2.0</div>
+  <div class="foot"><span>Exhibit D · two shirts, max</span><span>05 / 05</span></div>
+</section>
+
+<script>
+  // One timeline for every animated element: data-in (s) slams it in, data-out fades it, data-r is its resting tilt,
+  // data-spin is degrees per second after landing. render(t) is pure, so export can step it frame by frame.
+  const els = [...document.querySelectorAll("[data-in]")];
+  const backOut = (p) => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+  const clamp = (x) => Math.max(0, Math.min(1, x));
+  window.render = (t) => {
+    for (const el of els) {
+      const tin = +el.dataset.in, tout = el.dataset.out ? +el.dataset.out : Infinity, r = +(el.dataset.r || 0);
+      const p = clamp((t - tin) / 0.32), q = clamp((t - tout) / 0.25), e = backOut(p);
+      const spin = el.dataset.spin ? Math.max(0, t - tin) * +el.dataset.spin : 0;
+      el.style.opacity = t < tin ? 0 : Math.min(1, p * 4) * (1 - q);
+      el.style.transform = `rotate(${r + (1 - e) * 18 + spin}deg) scale(${1 + (1 - e) * 0.7 - q * 0.08}) translateY(${q * 30}px)`;
+    }
+  };
+  window.LOOP = 10;
+  Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => {}))]).then(() => {
+    window.render(window.LOOP);
+    window.READY = true;
+    if (!navigator.webdriver) { const t0 = performance.now(); const tick = (n) => { window.render(((n - t0) / 1000) % (window.LOOP + 1.5)); requestAnimationFrame(tick); }; requestAnimationFrame(tick); }
+  });
+</script>
+</body>
+</html>

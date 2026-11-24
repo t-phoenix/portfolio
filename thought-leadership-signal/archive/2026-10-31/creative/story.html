@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal story 2026-10-31</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: #f4f1ea;
+    padding: 56px 60px; display: grid; grid-template-rows: auto auto auto minmax(0, 1fr) auto auto; gap: 12px;
+    background:
+      radial-gradient(880px 480px at 82% 12%, rgba(61,155,143,.16), transparent 56%),
+      linear-gradient(180deg, #12161c, #07090d 72%);
+  }
+  .slide::before { content: ""; position: absolute; inset: 20px; border: 1px solid rgba(244,241,234,.16); pointer-events: none; }
+  .chrome, .foot, .eye, h1, .sub, .board { position: relative; z-index: 2; }
+  .chrome, .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: #9aa3ad;
+  }
+  .brand { color: #7dcec3; display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: #3d9b8f; display: inline-block; }
+  .eye { font-family: "IBM Plex Sans", sans-serif; font-size: 16px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #7dcec3; }
+  h1 { font-family: Syne, sans-serif; font-weight: 800; font-size: 72px; line-height: .92; letter-spacing: -.035em; }
+  .sub { font-family: "IBM Plex Sans", sans-serif; font-size: 26px; line-height: 1.25; color: #c5cdc8; }
+  .foot { border-top: 1px solid rgba(244,241,234,.16); padding-top: 12px; }
+  .board { min-height: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; perspective: 1100px; }
+  b.label { display: block; margin-top: 10px; font-family: "IBM Plex Sans", sans-serif; font-size: 24px; font-weight: 600; letter-spacing: .04em; text-align: center; color: #f4f1ea; }
+  .who { display: flex; flex-direction: column; align-items: center; width: 150px; flex: 0 0 auto; }
+  .person { width: 92px; height: 128px; }
+  .head { display: block; width: 42px; height: 42px; border-radius: 50%; margin: 0 auto; }
+  .torso { display: block; width: 78px; height: 72px; margin: 8px auto 0; border-radius: 32px 32px 14px 14px; }
+  .atk .head, .atk .torso { background: linear-gradient(180deg, #f0c27a, #c4843a); box-shadow: 0 16px 24px rgba(0,0,0,.35); }
+  .team .head, .team .torso { background: linear-gradient(180deg, #f4efe4, #cfc6b6); box-shadow: 0 16px 24px rgba(0,0,0,.35); }
+  .pair { display: flex; gap: 8px; }
+  .flow { width: 120px; flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .flow span { font-family: "IBM Plex Sans", sans-serif; font-size: 22px; font-weight: 600; color: #e2a15a; letter-spacing: .04em; white-space: nowrap; }
+  .flow.teal span { color: #7dcec3; }
+  .shaft { width: 100%; height: 5px; background: #e2a15a; position: relative; }
+  .shaft::after { content: ""; position: absolute; right: -2px; top: -7px; border: 9px solid transparent; border-left: 12px solid #e2a15a; }
+  .flow.teal .shaft { background: #3d9b8f; }
+  .flow.teal .shaft::after { border-left-color: #3d9b8f; }
+  .prop {
+    transform: rotateY(-14deg) rotateX(6deg);
+    box-shadow: 18px 28px 40px rgba(0,0,0,.4);
+  }
+  .server, .vault, .wallet, .contract, .loot, .blank, .chain {
+    border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .server { width: 168px; height: 196px; background: linear-gradient(160deg, #2c3842, #141a20); border: 1px solid rgba(125,206,195,.35); gap: 8px; }
+  .server img { width: 42px; height: 42px; }
+  .slot { width: 108px; height: 12px; border-radius: 4px; background: #0e1418; box-shadow: inset 0 0 0 1px rgba(125,206,195,.35); }
+  .slot.on { background: #3d9b8f; }
+  .vault { width: 150px; height: 176px; background: linear-gradient(180deg, #1c242c, #0e1318); border: 1px solid rgba(244,241,234,.2); }
+  .key { width: 54px; height: 54px; }
+  .wallet { width: 188px; height: 214px; background: linear-gradient(165deg, #243430, #12181c); border: 1px solid rgba(125,206,195,.7); position: relative; gap: 8px; }
+  .wallet img, .chain img { width: 64px; height: 64px; }
+  .coins { display: flex; gap: 6px; }
+  .coin { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #f3d7a1, #c4843a); box-shadow: 0 4px 8px rgba(0,0,0,.35); }
+  .contract { width: 150px; height: 190px; background: #3d9b8f; border: 1px solid #d7fff4; color: #071210; gap: 10px; }
+  .bars { display: flex; flex-direction: column; gap: 8px; width: 88px; }
+  .bars i { display: block; height: 8px; background: rgba(7,18,16,.55); border-radius: 3px; }
+  .bars i:nth-child(2) { width: 70%; }
+  .bars i:nth-child(3) { width: 84%; }
+  .contract .label { color: #071210; }
+  .loot { width: 150px; height: 150px; background: #14110e; border: 1px solid rgba(226,161,90,.7); gap: 8px; }
+  .blank { width: 150px; height: 150px; background: #e7e2d6; color: #14181c; }
+  .blank .label { color: #14181c; }
+  .held { display: flex; align-items: center; gap: 18px; padding: 16px 18px; border: 1px solid rgba(244,241,234,.18); border-radius: 22px; background: rgba(255,255,255,.03); }
+  .fan { position: relative; width: 250px; height: 230px; flex: 0 0 auto; }
+  .fan i { position: absolute; left: 50%; top: 18px; width: 58px; height: 84px; margin-left: -29px; background: #e6e1d4; border-radius: 5px; transform-origin: 50% 130%; box-shadow: 0 12px 18px rgba(0,0,0,.35); }
+  .fan i:nth-child(1) { transform: rotate(-48deg); }
+  .fan i:nth-child(2) { transform: rotate(-32deg); }
+  .fan i:nth-child(3) { transform: rotate(-16deg); }
+  .fan i:nth-child(5) { transform: rotate(16deg); }
+  .fan i:nth-child(6) { transform: rotate(32deg); }
+  .fan i:nth-child(7) { transform: rotate(48deg); }
+  .fan i.live { background: #3d9b8f; z-index: 3; transform: rotate(0deg) translateY(48px); width: 64px; height: 92px; margin-left: -32px; }
+  .pay { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .pay span { font-family: "IBM Plex Sans", sans-serif; font-size: 22px; font-weight: 600; color: #c5cdc8; }
+  .tab { position: absolute; right: -18px; top: 28px; width: 36px; height: 92px; border-radius: 8px; background: #3d9b8f; box-shadow: 8px 10px 16px rgba(0,0,0,.3); }
+  .stack { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+  .row { display: flex; gap: 18px; align-items: flex-end; justify-content: center; }
+  .chain { width: 148px; height: 176px; background: rgba(255,255,255,.04); border: 1px solid rgba(244,241,234,.18); gap: 8px; position: relative; }
+  .chain.first { border-color: rgba(226,161,90,.8); }
+  .chain.job { border-color: rgba(61,155,143,.9); background: rgba(61,155,143,.1); }
+  .pill { position: absolute; top: 10px; font-family: "IBM Plex Sans", sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #e2a15a; }
+  .chain.job .pill { color: #7dcec3; }
+  .chain .label { margin-top: 0; font-size: 22px; }
+  .drop { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .drop em { font-style: normal; font-family: "IBM Plex Sans", sans-serif; font-size: 22px; font-weight: 600; color: #e2a15a; }
+  .vflow { width: 5px; height: 36px; background: #e2a15a; position: relative; }
+  .vflow::after { content: ""; position: absolute; left: -7px; bottom: -2px; border: 9px solid transparent; border-top: 12px solid #e2a15a; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 06</span></header>
+  <p class="eye">The entry</p>
+  <h1>He could ask<br>the desk.</h1>
+  <div class="board">
+    <div class="who atk"><div class="person"><i class="head"></i><i class="torso"></i></div><b class="label">Attacker</b></div>
+    <div class="flow"><span>asks</span><i class="shaft"></i></div>
+    <div>
+      <div class="server prop">
+        <img src="assets/logos/binance.svg" alt="" />
+        <i class="slot on"></i><i class="slot"></i><i class="slot on"></i>
+      </div>
+      <b class="label">Signing server</b>
+    </div>
+    <div class="held">
+      <div>
+        <div class="vault prop">
+          <svg class="key" viewBox="0 0 64 64" aria-hidden="true"><circle cx="20" cy="24" r="12" fill="none" stroke="#3d9b8f" stroke-width="6"/><path d="M30 24h26M46 24v10M54 24v7" fill="none" stroke="#3d9b8f" stroke-width="6" stroke-linecap="square"/></svg>
+        </div>
+        <b class="label">Key</b>
+      </div>
+      <div class="who team">
+        <div class="pair"><div class="person"><i class="head"></i><i class="torso"></i></div><div class="person"><i class="head"></i><i class="torso"></i></div></div>
+        <img src="assets/logos/binance.svg" alt="" width="36" height="36" style="margin-top:8px" />
+        <b class="label">Binance</b>
+      </div>
+    </div>
+  </div>
+  <p class="sub">The key stayed in the machine. He reached the server that asks it to sign.</p>
+  <footer class="foot"><span>Laptop into the desk</span><span>01 / 06</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 06</span></header>
+  <p class="eye">The pages</p>
+  <h1>Fifty asks.<br>One live page.</h1>
+  <div class="board">
+    <div>
+      <div class="server prop">
+        <img src="assets/logos/binance.svg" alt="" />
+        <i class="slot on"></i><i class="slot on"></i><i class="slot"></i>
+      </div>
+      <b class="label">Signing server</b>
+    </div>
+    <div class="fan" aria-hidden="true"><i></i><i></i><i></i><i class="live"></i><i></i><i></i><i></i></div>
+    <div>
+      <div class="wallet prop">
+        <img src="assets/logos/eth.svg" alt="" />
+        <div class="pay"><i class="coin"></i><span>Customer</span></div>
+      </div>
+      <b class="label">Hot wallet</b>
+    </div>
+  </div>
+  <p class="sub">The wallet kept paying customers, so the page number kept moving.</p>
+  <footer class="foot"><span>One of fifty matched</span><span>02 / 06</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 06</span></header>
+  <p class="eye">The job</p>
+  <h1>The wallet wore<br>his contract.</h1>
+  <div class="board">
+    <div>
+      <div class="wallet prop">
+        <img src="assets/logos/binance.svg" alt="" style="position:absolute;top:14px;left:14px;width:32px;height:32px" />
+        <img src="assets/logos/eth.svg" alt="" />
+        <div class="coins"><i class="coin"></i><i class="coin"></i><i class="coin"></i></div>
+      </div>
+      <b class="label">Binance hot wallet</b>
+    </div>
+    <div class="flow teal"><span>wears</span><i class="shaft"></i></div>
+    <div class="held">
+      <div>
+        <div class="contract prop"><div class="bars"><i></i><i></i><i></i></div></div>
+        <b class="label">Contract</b>
+      </div>
+      <div class="who atk"><div class="person"><i class="head"></i><i class="torso"></i></div><b class="label">Attacker</b></div>
+    </div>
+  </div>
+  <p class="sub">That signature moved no coins. It chose which code the wallet would run.</p>
+  <footer class="foot"><span>Ethereum only</span><span>03 / 06</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 06</span></header>
+  <p class="eye">The call</p>
+  <h1>Then he called<br>the wallet.</h1>
+  <div class="board">
+    <div class="who atk"><div class="person"><i class="head"></i><i class="torso"></i></div><b class="label">Attacker</b></div>
+    <div class="flow"><span>calls</span><i class="shaft"></i></div>
+    <div>
+      <div class="wallet prop">
+        <i class="tab"></i>
+        <img src="assets/logos/eth.svg" alt="" />
+        <img src="assets/logos/binance.svg" alt="" style="width:32px;height:32px" />
+      </div>
+      <b class="label">Wearing the contract</b>
+    </div>
+    <div class="flow"><span>coins</span><i class="shaft"></i></div>
+    <div>
+      <div class="loot prop"><div class="coins"><i class="coin"></i><i class="coin"></i><i class="coin"></i><i class="coin"></i></div></div>
+      <b class="label">Attacker</b>
+    </div>
+  </div>
+  <p class="sub">One call. The balance left. About three and a half minutes after the job changed.</p>
+  <footer class="foot"><span>The sweep</span><span>04 / 06</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 06</span></header>
+  <p class="eye">The other chains</p>
+  <h1>XRP left first.</h1>
+  <div class="board" style="flex-direction:column; justify-content:center; gap:18px;">
+    <div class="server prop" style="width:220px;height:92px;flex-direction:row;gap:14px">
+      <img src="assets/logos/binance.svg" alt="" />
+      <b class="label" style="margin:0">Signing server</b>
+    </div>
+    <div class="row">
+      <div class="chain first prop"><span class="pill">First</span><img src="assets/logos/xrp.svg" alt="" /><b class="label">XRP</b></div>
+      <div class="chain prop"><img src="assets/logos/btc.svg" alt="" /><b class="label">Bitcoin</b></div>
+      <div class="chain prop"><img src="assets/logos/sol.svg" alt="" /><b class="label">Solana</b></div>
+      <div class="chain prop"><img src="assets/logos/trx.svg" alt="" /><b class="label">Tron</b></div>
+      <div class="chain job prop"><span class="pill">Contract</span><img src="assets/logos/eth.svg" alt="" /><b class="label">Ethereum</b></div>
+    </div>
+    <div class="drop"><i class="vflow"></i><div class="loot prop" style="width:220px;height:84px;flex-direction:row;gap:12px"><div class="coins"><i class="coin"></i><i class="coin"></i><i class="coin"></i></div><b class="label" style="margin:0">Attacker</b></div></div>
+  </div>
+  <p class="sub">Same desk. Those four chains signed normal sends. Ethereum kept the contract.</p>
+  <footer class="foot"><span>One desk, five chains</span><span>05 / 06</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>06 / 06</span></header>
+  <p class="eye">After</p>
+  <h1>The sheet stayed<br>on the address.</h1>
+  <div class="board">
+    <div>
+      <div class="drop"><em>New deposits</em><i class="vflow"></i></div>
+      <div class="wallet prop"><i class="tab"></i><img src="assets/logos/eth.svg" alt="" /><img src="assets/logos/binance.svg" alt="" style="width:32px;height:32px" /></div>
+      <b class="label">Same wallet</b>
+    </div>
+    <div class="flow"><span>again</span><i class="shaft"></i></div>
+    <div>
+      <div class="loot prop"><div class="coins"><i class="coin"></i><i class="coin"></i><i class="coin"></i></div></div>
+      <b class="label">Attacker</b>
+    </div>
+    <div class="held" style="flex-direction:column; gap:12px;">
+      <div class="who team" style="width:auto"><div class="pair"><div class="person"><i class="head"></i><i class="torso"></i></div></div><b class="label">Binance peels it off</b></div>
+      <div class="row">
+        <div><div class="vault prop" style="width:120px;height:120px"><svg class="key" viewBox="0 0 64 64"><circle cx="20" cy="24" r="12" fill="none" stroke="#3d9b8f" stroke-width="6"/><path d="M30 24h26M46 24v10M54 24v7" fill="none" stroke="#3d9b8f" stroke-width="6"/></svg></div><b class="label">Same key</b></div>
+        <div><div class="blank prop" style="width:120px;height:120px"></div><b class="label">New address</b></div>
+      </div>
+    </div>
+  </div>
+  <p class="sub">Later deposits left with no new ask. Taking the sheet off did not change the key.</p>
+  <footer class="foot"><span>Clear, then retire</span><span>06 / 06</span></footer>
+</section>
+
+<script>window.READY = true;</script>
+</body>
+</html>

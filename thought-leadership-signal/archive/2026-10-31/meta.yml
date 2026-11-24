@@ -1,0 +1,99 @@
+date: '2026-10-31'
+status: posted
+pillar: web3
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: They did not steal the Binance key. They got the signing desk to give one hot wallet a new job.
+receipts:
+  - >-
+    https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history
+  - >-
+    https://blockaid.io/blog/binance-55b-hack-using-advanced-ai-models-blockaid-detects-the-biggest-theft-in-crypto-history
+  - https://www.elliptic.co/insights/binance-largest-hack-in-history/
+  - https://www.maborak.com/blog/binance-14-eip-7702-revocation
+  - https://www.maborak.com/blog/binance-incident-root-cause-evidence
+  - >-
+    https://www.bleepingcomputer.com/news/security/binance-links-63-billion-crypto-theft-to-compromised-devops-laptop/
+  - >-
+    Desk check 31 Oct 2026: eth_getCode on Binance 14 at blocks 26301895 and 26301896 via
+    https://eth.drpc.org
+numbers:
+  - >-
+    TRM transfer-time total about $6.36B across 10 chains; Binance estimate about $6.3B; Elliptic
+    $6.43B
+  - nonce window 18914775 through 18914824, one hit
+  - sweep 3 minutes 24 seconds after delegation; about 167464 ETH and 63 tokens
+  - clear at 2026-10-30T00:10:35Z, gas 36800; sweeper still 1674 bytes
+creative_assets:
+  - creative/story-01.png
+  - creative/story-02.png
+  - creative/story-03.png
+  - creative/story-04.png
+  - creative/story-05.png
+  - creative/story-06.png
+  - creative/slide-01.png
+  - creative/slide-02.png
+  - creative/slide-03.png
+  - creative/slide-04.png
+  - creative/slide-05.png
+creative_sources:
+  - Three.js 0.170 stills in creative/carousel.html, captured by creative/export-slides.cjs
+  - puppeteer-core and three reused from archive/2026-10-30/creative/node_modules
+  - Syne and IBM Plex Sans via Google Fonts (OFL)
+spend_usd: 0
+virality:
+  comment_magnet: A huge send, or a wallet that grew code? If you think they stole the key, say what is wrong.
+  tags_x:
+    - '@binance'
+    - '@ethereum'
+    - '@circle'
+  tags_linkedin:
+    - Binance
+    - Ethereum
+    - Circle
+  links_in_post:
+    - >-
+      https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history
+    - >-
+      https://blockaid.io/blog/binance-55b-hack-using-advanced-ai-models-blockaid-detects-the-biggest-theft-in-crypto-history
+    - https://www.elliptic.co/insights/binance-largest-hack-in-history/
+    - https://www.maborak.com/blog/binance-14-eip-7702-revocation
+    - https://www.maborak.com/blog/binance-incident-root-cause-evidence
+    - >-
+      https://www.bleepingcomputer.com/news/security/binance-links-63-billion-crypto-theft-to-compromised-devops-laptop/
+  links_in_first_reply:
+    - >-
+      https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history
+    - >-
+      https://blockaid.io/blog/binance-55b-hack-using-advanced-ai-models-blockaid-detects-the-biggest-theft-in-crypto-history
+    - https://www.elliptic.co/insights/binance-largest-hack-in-history/
+    - https://www.maborak.com/blog/binance-14-eip-7702-revocation
+    - https://www.maborak.com/blog/binance-incident-root-cause-evidence
+    - >-
+      https://www.bleepingcomputer.com/news/security/binance-links-63-billion-crypto-theft-to-compromised-devops-laptop/
+    - https://etherscan.io/tx/0xafbf94c92a8d749988411669fa14d4f8866d9b4420b4ebd299f28e958dac7209
+  format: carousel_3d_still
+  experiment: teaching_beats_after_a_film_day
+notes: >-
+  Story stills are the publish set. X gets the first four frames (API cap). Source links ship in the
+  X replies. Attribution to TraderTraitor stays qualified. | Scheduled x=2026-10-31T16:20:00+05:30
+  linkedin=2026-10-31T16:20:00+05:30
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: '2026-10-31T16:20:00+05:30'
+    linkedin: '2026-10-31T16:20:00+05:30'
+  published:
+    x:
+      id: '2116484421109125380'
+      url: https://x.com/touchey_phoenix/status/2116484421109125380
+      at: '2026-10-31T10:56:25.482Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7522250183498182656
+      url: null
+      at: '2026-10-31T10:56:41.659Z'
+      dryRun: false

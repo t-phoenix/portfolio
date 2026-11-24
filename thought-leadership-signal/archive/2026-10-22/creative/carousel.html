@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-22</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #08111c; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    --ink: #10233f;
+    --paper: #f6efe2;
+    --mute: #c9c2b4;
+    --gold: #f0a202;
+    --blue: #2f6bff;
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: var(--paper);
+    padding: 56px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    row-gap: 22px;
+    background:
+      radial-gradient(700px 420px at 100% 0%, rgba(240, 162, 2, 0.28), transparent 60%),
+      radial-gradient(640px 480px at 0% 100%, rgba(47, 107, 255, 0.35), transparent 62%),
+      linear-gradient(165deg, #16325a 0%, #0d1c33 55%, #08111c 100%);
+  }
+  .slide::before {
+    content: ""; position: absolute; inset: 20px;
+    border: 1px solid rgba(246, 239, 226, 0.2); pointer-events: none; z-index: 4;
+  }
+  .chrome, .stage, .foot { position: relative; z-index: 2; min-width: 0; }
+  .chrome, .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute);
+  }
+  .brand { color: var(--gold); display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: var(--gold); display: inline-block; }
+  .eye {
+    font-family: "IBM Plex Sans", sans-serif; font-size: 16px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+  }
+  h1 {
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 68px;
+    line-height: 1.02; letter-spacing: -0.035em;
+  }
+  .stage {
+    min-height: 0;
+    background: linear-gradient(180deg, #fffaf1, #f3e7d0);
+    color: var(--ink);
+    border-radius: 6px;
+    padding: 64px 70px 32px 28px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  .foot { padding-top: 4px; }
+
+  .cube {
+    position: relative; width: var(--w); height: var(--h); flex: none; --d: 42px;
+    --front: linear-gradient(165deg, #6ea2ff, #2f6bff 55%, #1a3f99);
+    --top: #d9e6ff; --side: #1c3d86; --on: #071226;
+  }
+  .cube.amber {
+    --front: linear-gradient(165deg, #ffd27a, #f0a202 50%, #d07a00);
+    --top: #ffe7b8; --side: #a35e00; --on: #2a1600;
+  }
+  .cube.slate {
+    --front: linear-gradient(165deg, #4d5b73, #2a3548);
+    --top: #8b97ab; --side: #1a2230; --on: #f6efe2;
+  }
+  .cube .f {
+    position: absolute; inset: 0; background: var(--front); color: var(--on);
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 8px;
+    padding: 22px 20px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), inset 16px 0 24px rgba(255,255,255,0.14);
+  }
+  .cube .amt { font-family: Syne, sans-serif; font-weight: 800; font-size: 56px; line-height: 0.95; letter-spacing: -0.04em; }
+  .cube .nm { font-family: "IBM Plex Sans", sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .cube .t { position: absolute; left: 0; bottom: 100%; width: 100%; height: var(--d); background: var(--top); transform-origin: bottom left; transform: skewX(-46deg); }
+  .cube .s { position: absolute; left: 100%; top: 0; width: var(--d); height: 100%; background: var(--side); transform-origin: top left; transform: skewY(-46deg); }
+  .cube::after {
+    content: ""; position: absolute; left: 6%; right: -10%; bottom: -22px; height: 28px;
+    background: radial-gradient(ellipse at center, rgba(16,35,63,0.28), transparent 70%);
+    z-index: -1;
+  }
+
+  .race, .split { width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; padding-right: 24px; }
+  .copyblock { display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; min-width: 0; flex: 1; padding-bottom: 12px; }
+  .copyblock .k {
+    font-family: "IBM Plex Sans", sans-serif; font-weight: 700; font-size: 16px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #8a5a00;
+  }
+  .copyblock h2 {
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 64px;
+    line-height: 0.98; letter-spacing: -0.035em; color: var(--ink);
+  }
+  .copyblock p {
+    font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 28px;
+    line-height: 1.3; color: #24344c; max-width: 460px;
+  }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 03</span></header>
+  <div>
+    <p class="eye">Stablecoins · 90 days</p>
+    <h1>Base cleared<br>more than mainnet.</h1>
+  </div>
+  <div class="stage">
+    <div class="race">
+      <div class="cube slate" style="--w:340px;--h:300px"><i class="t"></i><i class="s"></i>
+        <div class="f"><span class="amt">$7.1T</span><span class="nm">Mainnet</span></div>
+      </div>
+      <div class="cube" style="--w:380px;--h:380px"><i class="t"></i><i class="s"></i>
+        <div class="f"><span class="amt">$8.5T</span><span class="nm">Base</span></div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span>Every stablecoin · 15 Jul to 12 Oct</span><span>01 / 03</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 03</span></header>
+  <div>
+    <p class="eye">USDC on Base · 69%</p>
+    <h1>Aerodrome is<br>the exchange.</h1>
+  </div>
+  <div class="stage">
+    <div class="split">
+      <div class="copyblock">
+        <span class="k">What it does</span>
+        <h2>Tokens trade here.</h2>
+        <p>One token in. Another token out. Liquidity sits in the pools.</p>
+      </div>
+      <div class="cube" style="--w:280px;--h:340px"><i class="t"></i><i class="s"></i>
+        <div class="f"><span class="amt">69%</span><span class="nm">Aerodrome</span></div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span>Share of USDC volume on Base</span><span>02 / 03</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 03</span></header>
+  <div>
+    <p class="eye">USDC on Base · 23%</p>
+    <h1>Morpho is<br>the lender.</h1>
+  </div>
+  <div class="stage">
+    <div class="split">
+      <div class="copyblock">
+        <span class="k">What it does</span>
+        <h2>Assets are lent.</h2>
+        <p>Suppliers deposit. Borrowers draw them out. 8% of USDC went elsewhere.</p>
+      </div>
+      <div class="cube amber" style="--w:280px;--h:340px"><i class="t"></i><i class="s"></i>
+        <div class="f"><span class="amt">23%</span><span class="nm">Morpho</span></div>
+      </div>
+    </div>
+  </div>
+  <footer class="foot"><span>Same USDC cut · not the $8.5T</span><span>03 / 03</span></footer>
+</section>
+
+</body>
+</html>

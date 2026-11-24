@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-31</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/three/build/three.module.js",
+    "three/addons/": "/vendor/three/examples/jsm/"
+  }
+}
+</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: #f4f1ea;
+    padding: 60px; display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto auto; gap: 14px;
+    background:
+      radial-gradient(900px 520px at 78% 18%, rgba(61,155,143,0.16), transparent 58%),
+      linear-gradient(180deg, #12161c 0%, #07090d 70%);
+  }
+  .slide::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(244,241,234,0.16); pointer-events: none; }
+  .chrome, .foot, .stage, .eye, h1, .sub { position: relative; z-index: 2; }
+  .chrome, .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: #9aa3ad;
+  }
+  .brand { color: #7dcec3; display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: #3d9b8f; display: inline-block; }
+  .eye {
+    font-family: "IBM Plex Sans", sans-serif; font-size: 16px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #7dcec3;
+  }
+  h1 {
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 84px; line-height: 0.92;
+    letter-spacing: -0.035em; max-width: 940px;
+  }
+  .stage { min-height: 0; display: flex; align-items: center; }
+  canvas { width: 100%; height: 470px; display: block; }
+  .sub {
+    font-family: "IBM Plex Sans", sans-serif; font-size: 28px; line-height: 1.25;
+    color: #c5cdc8; max-width: 920px;
+  }
+  .foot { border-top: 1px solid rgba(244,241,234,0.16); padding-top: 14px; }
+</style>
+</head>
+<body>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 05</span></header>
+  <p class="eye">The door</p>
+  <h1>They never<br>took the key.</h1>
+  <div class="stage"><canvas data-scene="door"></canvas></div>
+  <p class="sub">The desk could ask for a signature. The key stayed put.</p>
+  <footer class="foot"><span>The signing desk</span><span>01 / 05</span></footer>
+</section>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 05</span></header>
+  <p class="eye">The pages</p>
+  <h1>Fifty pages.<br>One fit.</h1>
+  <div class="stage"><canvas data-scene="pages"></canvas></div>
+  <p class="sub">The wallet kept paying out, so the page number kept moving.</p>
+  <footer class="foot"><span>One live page</span><span>02 / 05</span></footer>
+</section>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 05</span></header>
+  <p class="eye">The permission</p>
+  <h1>That signature<br>sent nothing.</h1>
+  <div class="stage"><canvas data-scene="zero"></canvas></div>
+  <p class="sub">It changed which instructions the wallet would follow.</p>
+  <footer class="foot"><span>A new job</span><span>03 / 05</span></footer>
+</section>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 05</span></header>
+  <p class="eye">The split</p>
+  <h1>One wallet<br>kept the job.</h1>
+  <div class="stage"><canvas data-scene="split"></canvas></div>
+  <p class="sub">Other chains were ordinary sends. Those left first.</p>
+  <footer class="foot"><span>Two kinds of exit</span><span>04 / 05</span></footer>
+</section>
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 05</span></header>
+  <p class="eye">The cleanup</p>
+  <h1>Same lock.<br>New address.</h1>
+  <div class="stage"><canvas data-scene="lock"></canvas></div>
+  <p class="sub">Taking the sheet off does not change the key.</p>
+  <footer class="foot"><span>Clear, then retire</span><span>05 / 05</span></footer>
+</section>
+<script type="module">
+import * as THREE from "three";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+
+const PAPER = 0xe6e1d4;
+const TEAL = 0x3d9b8f;
+const AMBER = 0xd7a15a;
+const METAL = 0x2a333c;
+const INK = 0x141a20;
+
+const paper = new THREE.MeshStandardMaterial({ color: PAPER, roughness: 0.62, metalness: 0.02 });
+const teal = new THREE.MeshStandardMaterial({ color: TEAL, roughness: 0.32, metalness: 0.42, emissive: 0x0d3330, emissiveIntensity: 0.55 });
+const amber = new THREE.MeshStandardMaterial({ color: AMBER, roughness: 0.38, metalness: 0.45, emissive: 0x4a2a0c, emissiveIntensity: 0.18 });
+const metal = new THREE.MeshStandardMaterial({ color: METAL, roughness: 0.34, metalness: 0.82 });
+const glass = new THREE.MeshStandardMaterial({ color: 0xd7fff4, roughness: 0.08, metalness: 0.04, transparent: true, opacity: 0.22, depthWrite: false });
+const coinGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.045, 20);
+
+function mesh(geo, mat, x, y, z) {
+  const m = new THREE.Mesh(geo, mat);
+  m.position.set(x, y, z);
+  m.castShadow = true;
+  m.receiveShadow = true;
+  return m;
+}
+
+function coin(x, y, z, tilt = 0.4) {
+  const m = new THREE.Mesh(coinGeo, amber);
+  m.position.set(x, y, z);
+  m.rotation.z = tilt;
+  m.rotation.x = 0.4;
+  m.castShadow = true;
+  return m;
+}
+
+function sheet(w, h, mat) {
+  return mesh(new THREE.BoxGeometry(w, h, 0.03), mat, 0, 0, 0);
+}
+
+function rig(canvas) {
+  const scene = new THREE.Scene();
+  const w = canvas.clientWidth || 952;
+  const h = canvas.clientHeight || 470;
+  const camera = new THREE.PerspectiveCamera(30, w / h, 0.1, 40);
+  camera.position.set(3.15, 2.05, 5.35);
+  camera.lookAt(0, 1.2, 0);
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(w, h, false);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.18;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  scene.add(new THREE.AmbientLight(0xb7c4c8, 0.55));
+  const key = new THREE.DirectionalLight(0xfff6ea, 2.6);
+  key.position.set(5, 9, 6);
+  key.castShadow = true;
+  key.shadow.mapSize.set(1024, 1024);
+  key.shadow.camera.near = 1;
+  key.shadow.camera.far = 24;
+  key.shadow.camera.left = -8;
+  key.shadow.camera.right = 8;
+  key.shadow.camera.top = 8;
+  key.shadow.camera.bottom = -8;
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0x3d9b8f, 1.8);
+  rim.position.set(-7, 4, -3);
+  scene.add(rim);
+  const warm = new THREE.PointLight(0xe2a15a, 8, 14);
+  warm.position.set(2.4, 1.6, 3.2);
+  scene.add(warm);
+
+  const floor = mesh(new THREE.CircleGeometry(9, 64), new THREE.MeshStandardMaterial({ color: 0x10151a, roughness: 0.92, metalness: 0.08 }), 0, 0, 0);
+  floor.rotation.x = -Math.PI / 2;
+  floor.castShadow = false;
+  scene.add(floor);
+  return { scene, camera, renderer };
+}
+
+function vault(scene, x) {
+  const body = mesh(new RoundedBoxGeometry(2.15, 2.55, 1.15, 3, 0.12), metal, x, 1.28, 0);
+  scene.add(body);
+  const wheel = mesh(new THREE.TorusGeometry(0.46, 0.055, 16, 40), teal, x, 1.42, 0.6);
+  scene.add(wheel);
+  scene.add(mesh(new THREE.SphereGeometry(0.09, 16, 16), teal, x, 1.88, 0.68));
+  return body;
+}
+
+function walletGlass(scene, x, y, z, s = 1) {
+  const g = mesh(new RoundedBoxGeometry(1.7 * s, 1.7 * s, 1.7 * s, 3, 0.08), glass, x, y, z);
+  scene.add(g);
+  const cage = mesh(new THREE.BoxGeometry(1.72 * s, 1.72 * s, 1.72 * s), new THREE.MeshStandardMaterial({ color: 0x9ee8df, roughness: 0.2, metalness: 0.4, transparent: true, opacity: 0.18, wireframe: true }), x, y, z);
+  scene.add(cage);
+  return g;
+}
+
+const scenes = {
+  door(scene) {
+    vault(scene, -1.7);
+    const desk = mesh(new RoundedBoxGeometry(2.3, 0.16, 1.25, 2, 0.04), metal, 1.85, 0.7, 0.3);
+    scene.add(desk);
+    scene.add(mesh(new RoundedBoxGeometry(1.15, 0.72, 0.08, 2, 0.03), new THREE.MeshStandardMaterial({ color: 0x10211f, emissive: TEAL, emissiveIntensity: 0.85, roughness: 0.3, metalness: 0.2 }), 1.85, 1.28, 0.15));
+    scene.add(mesh(new THREE.BoxGeometry(0.12, 0.28, 0.12), metal, 1.85, 0.92, 0.2));
+    const cable = mesh(new THREE.CylinderGeometry(0.035, 0.035, 2.2, 8), teal, 0.15, 0.2, 0.5);
+    cable.rotation.z = Math.PI / 2.4;
+    scene.add(cable);
+    for (let i = 0; i < 4; i++) {
+      const p = sheet(0.5, 0.66, paper);
+      p.position.set(2.65, 1.12 + i * 0.16, 0.72);
+      p.rotation.set(0.08 * (i - 1), 0.5, -0.18);
+      scene.add(p);
+    }
+  },
+  pages(scene) {
+    for (let i = 0; i < 13; i++) {
+      const live = i === 6;
+      const p = sheet(0.62, 0.88, live ? teal : paper);
+      const a = (i - 6) * 0.2;
+      p.position.set(Math.sin(a) * 2.35, live ? 1.35 : 1.95, live ? 1.15 : -0.15);
+      p.rotation.z = live ? 0.04 : a * 0.9;
+      p.rotation.y = -0.35;
+      p.rotation.x = live ? 0.65 : 0;
+      scene.add(p);
+    }
+    scene.add(mesh(new RoundedBoxGeometry(1.35, 0.28, 1.05, 2, 0.05), metal, 0, 0.28, 0.35));
+  },
+  zero(scene) {
+    walletGlass(scene, -0.35, 1.25, 0);
+    [[-0.35, 1.15, 0.1], [-0.05, 1.35, -0.15], [-0.55, 1.4, 0.05], [-0.2, 1.05, -0.05]].forEach(([x, y, z], i) => {
+      scene.add(coin(x, y, z, i * 0.3));
+    });
+    const card = sheet(1.15, 1.45, teal);
+    card.position.set(1.85, 1.45, 0.9);
+    card.rotation.y = -0.55;
+    card.rotation.z = 0.12;
+    scene.add(card);
+  },
+  split(scene) {
+    walletGlass(scene, -2.05, 1.25, 0.15, 1);
+    const stuck = sheet(0.95, 1.2, teal);
+    stuck.position.set(-2.05, 1.28, 0.95);
+    scene.add(stuck);
+    [[-1.25, 1.75, 0.65], [-0.55, 1.15, 0.7], [0.05, 0.62, 0.55]].forEach(([x, y, z], i) => scene.add(coin(x, y, z, 0.5 + i)));
+    scene.add(mesh(new RoundedBoxGeometry(0.9, 0.4, 0.7, 2, 0.06), new THREE.MeshStandardMaterial({ color: INK, roughness: 0.45, metalness: 0.35, emissive: 0x3a2410, emissiveIntensity: 0.4 }), 0.15, 0.24, 0.5));
+    const plain = mesh(new RoundedBoxGeometry(1.15, 1.4, 0.7, 3, 0.08), metal, 1.95, 1.25, -0.45);
+    scene.add(plain);
+    const gone = sheet(0.48, 0.64, paper);
+    gone.position.set(2.55, 1.72, -0.05);
+    gone.rotation.z = -0.45;
+    gone.rotation.y = 0.6;
+    scene.add(gone);
+  },
+  lock(scene) {
+    const old = mesh(new RoundedBoxGeometry(1.7, 1.9, 1.15, 3, 0.1), metal, -1.7, 1.15, 0);
+    scene.add(old);
+    scene.add(mesh(new THREE.TorusGeometry(0.38, 0.05, 14, 32), teal, -1.7, 1.25, 0.62));
+    const a = sheet(0.85, 1.05, teal);
+    a.position.set(-0.2, 2.35, 0.85);
+    a.rotation.z = 0.55;
+    a.rotation.y = 0.35;
+    scene.add(a);
+    const b = sheet(0.7, 0.85, paper);
+    b.position.set(0.45, 1.85, 1.05);
+    b.rotation.z = -0.4;
+    b.rotation.x = 0.25;
+    scene.add(b);
+    const next = mesh(new RoundedBoxGeometry(1.7, 1.7, 1.25, 3, 0.1), new THREE.MeshStandardMaterial({ color: 0xe7e2d6, roughness: 0.48, metalness: 0.18 }), 1.75, 1.05, 0);
+    scene.add(next);
+    const pile = new THREE.CylinderGeometry(0.22, 0.22, 0.07, 24);
+    [[1.45, 2.08, 0.25], [1.85, 2.2, 0.05], [2.1, 2.06, 0.3]].forEach(([x, y, z], i) => {
+      const c = new THREE.Mesh(pile, amber);
+      c.position.set(x, y, z);
+      c.rotation.x = 0.55;
+      c.rotation.z = i * 0.4;
+      c.castShadow = true;
+      scene.add(c);
+    });
+  },
+};
+
+let tris = 0;
+for (const canvas of document.querySelectorAll("canvas[data-scene]")) {
+  const { scene, camera, renderer } = rig(canvas);
+  scenes[canvas.dataset.scene](scene);
+  renderer.render(scene, camera);
+  tris += renderer.info.render.triangles;
+}
+if (tris < 1000) throw new Error("empty render " + tris);
+window.READY = true;
+</script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-11-08 · Mumbai haul</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Sans:wght@500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink: #0e1114; --paper: #f4f1ea; --teal: #3d9b8f; --mint: #7dcec3; --saffron: #f5b83d; --muted: #9aa3ad; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #050607; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+
+  .slide {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden; color: var(--paper);
+    padding: 60px 64px 52px;
+    display: grid; grid-template-rows: 28px auto auto minmax(0, 1fr) 44px; gap: 18px;
+    background:
+      radial-gradient(900px 520px at 85% 4%, rgba(61,155,143,.20), transparent 60%),
+      radial-gradient(700px 600px at 0% 100%, rgba(245,184,61,.08), transparent 60%),
+      linear-gradient(180deg, #12161c, #07090d 72%);
+  }
+  /* paper grain so the dark never reads as flat UI */
+  .slide::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .slide::before { content: ""; position: absolute; inset: 24px; border: 1px solid rgba(244,241,234,.14); pointer-events: none; z-index: 3; }
+  .chrome, .foot, h1, .sub, .stage { position: relative; z-index: 2; }
+  .chrome, .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font: 600 16px/1 "IBM Plex Sans", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+  }
+  .brand { color: var(--mint); display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: var(--teal); display: inline-block; }
+  .foot { border-top: 1px solid rgba(244,241,234,.14); padding-top: 14px; }
+  h1 { font: 800 96px/.9 Syne, sans-serif; letter-spacing: -.045em; }
+  h1 .hl { color: var(--saffron); }
+  .sub { font: 500 32px/1.25 "IBM Plex Sans", sans-serif; color: #c9d0cb; max-width: 900px; }
+  .stage { min-height: 0; perspective: 1600px; display: flex; align-items: center; justify-content: center; }
+
+  /* a real photo, printed: white border, tape, deep shadow, gentle 3D drift */
+  .print {
+    position: relative; background: #f7f4ee; padding: 14px; border-radius: 6px;
+    box-shadow: 0 2px 0 rgba(255,255,255,.25) inset, 30px 50px 70px rgba(0,0,0,.6), 6px 10px 18px rgba(0,0,0,.45);
+    transform-style: preserve-3d; animation: drift 6s ease-in-out infinite;
+  }
+  .print .ph { position: relative; overflow: hidden; border-radius: 2px; }
+  .print .ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .print .ph::after { /* sheen sweep */
+    content: ""; position: absolute; inset: -20%; pointer-events: none;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.28) 50%, transparent 60%);
+    transform: translateX(-120%); animation: sheen 6s ease-in-out infinite;
+  }
+  .tape {
+    position: absolute; width: 150px; height: 40px; background: rgba(240,232,205,.72); z-index: 4;
+    box-shadow: 0 2px 6px rgba(0,0,0,.2); clip-path: polygon(3% 0, 97% 4%, 100% 50%, 96% 100%, 2% 96%, 0 50%);
+  }
+  @keyframes drift {
+    0%, 100% { transform: var(--base) rotateX(0deg) rotateY(0deg) translateZ(0); }
+    50% { transform: var(--base) rotateX(2.2deg) rotateY(-3deg) translateZ(14px); }
+  }
+  @keyframes sheen { 0%, 8% { transform: translateX(-120%); } 30%, 100% { transform: translateX(120%); } }
+
+  /* marker doodles */
+  svg.doodle { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 5; }
+  .doodle path { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .9s ease-out forwards; }
+  .doodle text {
+    font-family: Caveat, cursive; font-weight: 700; paint-order: stroke; stroke: var(--ink); stroke-width: 7px; stroke-linejoin: round;
+    opacity: 0; animation: pop .45s ease-out forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .note { font: 700 40px/1.05 Caveat, cursive; color: var(--saffron); }
+  .note.w { color: var(--paper); }
+
+  /* 01 hero */
+  .s1 h1 { font-size: 82px; white-space: nowrap; min-width: 0; }
+  .s1 .stage { flex-direction: column; gap: 6px; }
+  .s1 .note { align-self: flex-start; transform: rotate(-4deg); margin-left: 10px; font-size: 44px; }
+  .s1 .print { --base: rotateX(14deg) rotateZ(-2.5deg); width: 960px; }
+  .s1 .ph { aspect-ratio: 2200 / 1237; }
+  .s1 .t1 { left: -26px; top: -14px; transform: rotate(-24deg); }
+  .s1 .t2 { right: -30px; bottom: -10px; transform: rotate(-18deg); }
+
+  /* 02 badges */
+  .s2 .stage { flex-direction: column; gap: 22px; }
+  .s2 .badges { position: relative; width: 952px; }
+  .s2 .badges img { display: block; width: 100%; -webkit-mask-image: radial-gradient(120% 110% at 50% 45%, #000 62%, transparent 82%); mask-image: radial-gradient(120% 110% at 50% 45%, #000 62%, transparent 82%); }
+  .s2 .picks { display: grid; grid-template-columns: 1fr 1fr 1fr; width: 952px; gap: 18px; }
+  .pick { border: 1.5px solid rgba(244,241,234,.22); border-radius: 18px; padding: 18px 20px; display: flex; gap: 14px; align-items: center; font: 600 28px/1 "IBM Plex Sans", sans-serif; }
+  .pick b { font: 800 34px/1 Syne, sans-serif; width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; background: rgba(244,241,234,.1); }
+  .pick.mine { border-color: var(--saffron); background: rgba(245,184,61,.1); }
+  .pick.mine b { background: var(--saffron); color: var(--ink); }
+
+  /* 03 spinners */
+  .s3 .stage { justify-content: space-between; align-items: stretch; gap: 30px; }
+  .s3 .col { display: flex; flex-direction: column; justify-content: center; gap: 34px; width: 420px; flex: 0 0 auto; }
+  .s3 .big { font: 800 116px/.86 Syne, sans-serif; letter-spacing: -.05em; color: var(--saffron); }
+  .s3 h1 { font-size: 88px; }
+  .s3 .print { --base: rotateY(-14deg) rotateZ(2deg); width: 372px; align-self: center; margin-right: 40px; }
+  .s3 .ph { aspect-ratio: 2268 / 4032; }
+  .spin { position: absolute; border-radius: 50%; background-image: url(assets/fan-spinners.jpg); background-repeat: no-repeat; animation: spin 6s linear infinite; z-index: 2; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* 04 tees */
+  .s4 .stage { gap: 34px; }
+  .s4 .tee { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .s4 .print { width: 430px; }
+  .s4 .ph { aspect-ratio: 1 / 1; }
+  .s4 .ph img { object-position: 50% 82%; }
+  .s4 .a .print { --base: rotateY(10deg) rotateZ(-3deg); }
+  .s4 .b .print { --base: rotateY(-10deg) rotateZ(3deg); animation-delay: -3s; }
+  .s4 .lbl { font: 800 46px/1 Syne, sans-serif; letter-spacing: -.03em; }
+  .s4 .tape { left: 50%; top: -18px; margin-left: -75px; }
+
+  /* 05 bag */
+  .s5 .stage { justify-content: space-between; gap: 30px; }
+  .s5 .print { --base: rotateY(12deg) rotateZ(-3deg); width: 470px; }
+  .s5 .ph { aspect-ratio: 1701 / 2200; }
+  .s5 .col { width: 420px; display: flex; flex-direction: column; gap: 30px; }
+  .s5 .q { font: 800 58px/.98 Syne, sans-serif; letter-spacing: -.035em; }
+  .s5 .opts { font: 600 30px/1.5 "IBM Plex Sans", sans-serif; color: #c9d0cb; }
+  .s5 .opts b { color: var(--saffron); font-family: Syne, sans-serif; margin-right: 10px; }
+</style>
+</head>
+<body>
+
+<!-- 01 HERO -->
+<section class="slide s1">
+  <div class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 05</span></div>
+  <h1>Mumbai week.<br>Zero airdrops.<br><span class="hl">Full bag.</span></h1>
+  <p class="sub">IBW, ETHGlobal, Pragma, Devcon. One table.</p>
+  <div class="stage">
+    <p class="note">portfolio update, as of 8 Nov &#8600;</p>
+    <div class="print">
+      <i class="tape t1"></i><i class="tape t2"></i>
+      <div class="ph"><img src="assets/flatlay.jpg" alt="Stickers, badges, lanyards and a fan from Mumbai week" />
+        <svg class="doodle" viewBox="0 0 1000 562" data-d='[
+          ["ring", 712, 266, 58, 54, 1, "#f5b83d", 0.3],
+          ["text", 785, 196, "certified", "#f5b83d", 46, 1.0, -6],
+          ["ring", 897, 452, 110, 108, 2, "#f4f1ea", 0.6],
+          ["arrow", 690, 520, 800, 470, "#f4f1ea", 1.1],
+          ["text", 470, 545, "my favorite. fight me.", "#f4f1ea", 44, 1.4, -2],
+          ["arrow", 450, 445, 540, 392, "#f5b83d", 1.6],
+          ["text", 300, 462, "we are in Bandra, ser", "#f5b83d", 40, 1.9, -4]
+        ]'></svg>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Mumbai · Nov 2026</span><span>Proof of attendance, analog</span></div>
+</section>
+
+<!-- 02 BADGES -->
+<section class="slide s2">
+  <div class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 05</span></div>
+  <h1>Three badges.<br><span class="hl">One frame.</span></h1>
+  <p class="sub">If you were in Mumbai, you already have a favorite.</p>
+  <div class="stage">
+    <div class="badges">
+      <img src="assets/badges-hanging.jpg" alt="Devcon, ETHGlobal and India Blockchain Week badges hanging on lanyards" />
+      <svg class="doodle" viewBox="0 0 1000 562" data-d='[
+        ["ring", 452, 300, 150, 205, 3, "#f5b83d", 0.3],
+        ["text", 600, 120, "mine", "#f5b83d", 60, 1.1, -8],
+        ["arrow", 236, 480, 160, 330, "#f4f1ea", 1.4],
+        ["text", 120, 525, "handwritten. still true.", "#f4f1ea", 40, 1.7, -3]
+      ]'></svg>
+    </div>
+    <div class="picks">
+      <div class="pick"><b>A</b>Devcon</div>
+      <div class="pick mine"><b>B</b>ETHGlobal</div>
+      <div class="pick"><b>C</b>IBW</div>
+    </div>
+  </div>
+  <div class="foot"><span>Pick one in the replies</span><span>Talk to me about x402</span></div>
+</section>
+
+<!-- 03 SPINNERS -->
+<section class="slide s3">
+  <div class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 05</span></div>
+  <h1>Best swag of<br>the week was<br><span class="hl">3D printed.</span></h1>
+  <p class="sub">Two ENS fidget spinners. Zero tokens. No regrets.</p>
+  <div class="stage">
+    <div class="col">
+      <div class="big">&times;2</div>
+      <p class="note" style="font-size:50px">a fan for the<br>Mumbai heat.<br><br>spinners for the<br>Mumbai panels.</p>
+    </div>
+    <div class="print">
+      <div class="ph">
+        <img src="assets/fan-spinners.jpg" alt="A pink folding fan with two 3D printed ENS fidget spinners" />
+        <i class="spin" data-cx="0.2367" data-cy="0.3245" data-r="0.094"></i>
+        <i class="spin" data-cx="0.6815" data-cy="0.6305" data-r="0.097"></i>
+        <svg class="doodle" viewBox="0 0 562 1000" data-d='[
+          ["arc", 133, 325, 84, 200, 330, "#f5b83d", 0.4],
+          ["arc", 133, 325, 100, 215, 300, "#f5b83d", 0.6],
+          ["arc", 383, 630, 86, 20, 150, "#f4f1ea", 0.8],
+          ["arc", 383, 630, 102, 35, 120, "#f4f1ea", 1.0]
+        ]'></svg>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Cherished, not sold</span><span>Mumbai · Nov 2026</span></div>
+</section>
+
+<!-- 04 TEES -->
+<section class="slide s4">
+  <div class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 05</span></div>
+  <h1>Only two shirts<br><span class="hl">made it home.</span></h1>
+  <p class="sub">I don't wear logos I wouldn't defend in a room full of skeptics.</p>
+  <div class="stage">
+    <div class="tee a">
+      <div class="print"><i class="tape"></i><div class="ph"><img src="assets/tee-ns.jpg" alt="Black ns.com t-shirt" /></div></div>
+      <span class="lbl">ns.com</span>
+    </div>
+    <div class="tee b">
+      <div class="print"><i class="tape"></i><div class="ph"><img style="object-position:50% 88%" src="assets/tee-ethereum.jpg" alt="Green Ethereum shirt" /></div></div>
+      <span class="lbl">Ethereum</span>
+    </div>
+  </div>
+  <div class="foot"><span>Conviction list, not a merch haul</span><span>Mumbai · Nov 2026</span></div>
+</section>
+
+<!-- 05 BAG -->
+<section class="slide s5">
+  <div class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 05</span></div>
+  <h1>Holding bags.<br><span class="hl">Literally.</span></h1>
+  <p class="sub">The only bag from that week that went up only.</p>
+  <div class="stage">
+    <div class="col">
+      <p class="q">Which badge would you frame?</p>
+      <p class="opts"><b>A</b>Devcon<br><b>B</b>ETHGlobal<br><b>C</b>IBW</p>
+      <p class="note w">one letter in the replies.<br>bonus: the one goodie you kept.</p>
+    </div>
+    <div class="print"><i class="tape" style="left:150px;top:-18px;transform:rotate(4deg)"></i><div class="ph"><img src="assets/sticker-bag.jpg" alt="A ziploc bag full of event stickers" /></div></div>
+  </div>
+  <div class="foot"><span>Proof of attendance, analog</span><span>Mumbai · Nov 2026</span></div>
+</section>
+
+<script>
+  // Marker doodles: wobbly loops and arrows that read hand drawn, seeded so every export is identical.
+  let seed = 7;
+  const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
+
+  function ring(cx, cy, rx, ry) {
+    const turns = 1.12, steps = 64, start = rnd() * Math.PI * 2;
+    let d = "";
+    for (let i = 0; i <= steps; i++) {
+      const t = start + (i / steps) * turns * Math.PI * 2, j = 1 + (rnd() - .5) * .06 + (i / steps) * .07;
+      d += (i ? "L" : "M") + (cx + Math.cos(t) * rx * j).toFixed(1) + " " + (cy + Math.sin(t) * ry * j).toFixed(1);
+    }
+    return d;
+  }
+  function arrow(x1, y1, x2, y2) {
+    const mx = (x1 + x2) / 2 + (y2 - y1) * .25, my = (y1 + y2) / 2 - (x2 - x1) * .25;
+    const a = Math.atan2(y2 - my, x2 - mx), h = 22;
+    const hx = (s) => (x2 - Math.cos(a + s) * h).toFixed(1) + " " + (y2 - Math.sin(a + s) * h).toFixed(1);
+    return `M${x1} ${y1} Q${mx} ${my} ${x2} ${y2} M${hx(.5)} L${x2} ${y2} L${hx(-.5)}`;
+  }
+  function arc(cx, cy, r, a0, a1) {
+    const p = (a) => (cx + Math.cos(a * Math.PI / 180) * r).toFixed(1) + " " + (cy + Math.sin(a * Math.PI / 180) * r).toFixed(1);
+    return `M${p(a0)} A${r} ${r} 0 0 1 ${p(a1)}`;
+  }
+
+  document.querySelectorAll("svg.doodle").forEach((svg) => {
+    for (const item of JSON.parse(svg.dataset.d)) {
+      const [kind] = item;
+      if (kind === "text") {
+        const [, x, y, str, color, size, delay, rot] = item;
+        const t = el("text", { x, y, fill: color, "font-size": size, transform: `rotate(${rot} ${x} ${y})` });
+        t.textContent = str; t.style.animationDelay = delay + "s"; svg.appendChild(t);
+        continue;
+      }
+      let d, color, delay, w = 6;
+      if (kind === "ring") { const [, cx, cy, rx, ry, s, c, dl] = item; seed = s * 97; d = ring(cx, cy, rx, ry); color = c; delay = dl; }
+      if (kind === "arrow") { const [, x1, y1, x2, y2, c, dl] = item; d = arrow(x1, y1, x2, y2); color = c; delay = dl; }
+      if (kind === "arc") { const [, cx, cy, r, a0, a1, c, dl] = item; d = arc(cx, cy, r, a0, a1); color = c; delay = dl; w = 7; }
+      const p = el("path", { d, stroke: color, "stroke-width": w, pathLength: 1 });
+      p.style.animationDelay = delay + "s"; svg.appendChild(p);
+    }
+  });
+
+  // Spinner crops: a circle of the same photo, rotated in place.
+  function placeSpinners() {
+    document.querySelectorAll(".spin").forEach((s) => {
+      const ph = s.parentElement, W = ph.clientWidth, H = ph.clientHeight;
+      const cx = +s.dataset.cx * W, cy = +s.dataset.cy * H, r = +s.dataset.r * W;
+      Object.assign(s.style, { left: cx - r + "px", top: cy - r + "px", width: 2 * r + "px", height: 2 * r + "px",
+        backgroundSize: `${W}px ${H}px`, backgroundPosition: `${r - cx}px ${r - cy}px` });
+    });
+  }
+
+  Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => {}))]).then(() => {
+    placeSpinners();
+    window.READY = true;
+  });
+</script>
+</body>
+</html>

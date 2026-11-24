@@ -1,0 +1,57 @@
+date: '2026-10-12'
+status: posted
+pillar: builder-ops
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: A five year vote cannot govern a country that updates every hour.
+receipts:
+  - >-
+    https://www.thestar.com.my/news/world/2026/10/10/delhi-sealed-off-ahead-of-youth-protest-against-indian-election-chief
+  - >-
+    https://www.rnz.co.nz/news/world/1838000/india-detains-thousands-locks-down-delhi-to-foil-election-chief-protest
+  - https://www.edelman.com/in/trust/2026/trust-barometer
+  - >-
+    https://www.gsb.stanford.edu/faculty-research/working-papers/what-happens-when-anyone-can-be-your-representative-studying-use
+  - https://congress.crowd.law/case-vtaiwan.html
+  - >-
+    https://cyber.ee/uploads/T_4_1_X_Road_complete_solution_for_inter_organizational_information_exchange_bf61cb2da1.pdf
+numbers:
+  - 'oct10_delhi: Reuters/AFP report 2000+ detained; Jantar Mantar sealed ahead of CJP protest'
+  - 'edelman_india: government trust near top of measured markets (~80% in global tables)'
+  - 'insularity: nearly half prefer similar views / media / values (India 2026)'
+  - 'vtaiwan: about 26 digital economy related laws with public process'
+  - 'stanford_daos: 250k+ voters, 18 Ethereum DAOs, ~17% tokens delegated'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+  - assets/reuters-jantar-mantar-barricades.jpg
+  - assets/afp-ahmedabad-cjp-detention.jpg
+  - assets/afp-bengaluru-ec-march.jpg
+spend_usd: 0
+notes: >-
+  Civic case study. Light paper ledger + editorial photo receipt (Reuters Jantar Mantar, AFP
+  Ahmedabad/Bengaluru). Overflow-safe cards/pillars. Honest Edelman framing in caption (high trust +
+  insularity, not collapse). Oct 10 as process receipt, not party brief. Comment invite is ceremony
+  vs audit. | Scheduled x=2026-10-14T12:13:33+00:00 linkedin=2026-10-14T12:13:33+00:00
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: '2026-10-14T12:13:33+00:00'
+    linkedin: '2026-10-14T12:13:33+00:00'
+  published:
+    x:
+      id: '2110343261202325768'
+      url: https://x.com/touchey_phoenix/status/2110343261202325768
+      at: '2026-10-14T12:13:39.521Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7516109043682217984
+      url: null
+      at: '2026-10-14T12:13:59.731Z'
+      dryRun: false

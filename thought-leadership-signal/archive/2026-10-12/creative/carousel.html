@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-10-12 — Continuous governance</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Sans:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #d8d2c8; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    --ink: #14181f;
+    --paper: #f3efe6;
+    --mute: #5c6570;
+    --teal: #2f7f76;
+    --clay: #c45c3e;
+    --line: rgba(20,24,31,0.14);
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: var(--ink);
+    padding: 64px; display: grid; grid-template-rows: auto 1fr auto; gap: 14px;
+    background:
+      radial-gradient(720px 420px at 88% 12%, rgba(47,127,118,0.14), transparent 60%),
+      radial-gradient(640px 380px at 8% 92%, rgba(196,92,62,0.12), transparent 62%),
+      linear-gradient(165deg, #f7f3eb 0%, #ebe4d8 55%, #e2dbcf 100%);
+  }
+  .slide::before {
+    content: ""; position: absolute; inset: 22px;
+    border: 1px solid var(--line); pointer-events: none; z-index: 3;
+  }
+  .chrome, .foot, .stage { position: relative; z-index: 2; }
+  .chrome, .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute);
+  }
+  .brand { color: var(--teal); display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: var(--clay); display: inline-block; }
+  .stage { display: flex; flex-direction: column; justify-content: center; min-height: 0; overflow: hidden; }
+  .eye {
+    font-family: "IBM Plex Sans", sans-serif; font-size: 17px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+  }
+  h1 {
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 78px;
+    line-height: 0.96; letter-spacing: -0.035em; max-width: 940px;
+  }
+  .sub {
+    margin-top: 22px; font-family: "IBM Plex Sans", sans-serif; font-weight: 500;
+    font-size: 28px; line-height: 1.3; color: var(--mute); max-width: 900px;
+  }
+  .foot { border-top: 1px solid var(--line); padding-top: 16px; }
+  .scene {
+    margin-top: 36px; height: 340px; position: relative;
+    display: flex; align-items: flex-end; gap: 24px;
+    perspective: 1200px; min-height: 0;
+  }
+  .chip-row {
+    display: flex; gap: 10px; flex-wrap: wrap; max-width: 920px;
+  }
+  .chip-row.abs {
+    position: absolute; left: 0; top: 0;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.82);
+    font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink);
+    box-shadow: 8px 10px 0 rgba(20,24,31,0.06);
+  }
+  .chip img { width: 18px; height: 12px; object-fit: cover; border: 1px solid rgba(0,0,0,0.1); }
+  .chip .mark {
+    width: 18px; height: 18px; border-radius: 3px; display: grid; place-items: center;
+    font-family: Syne, sans-serif; font-size: 11px; font-weight: 800; color: #fff;
+  }
+  .chip .mark.ed { background: #111; }
+  .chip .mark.st { background: #8C1515; }
+  .chip .mark.vt { background: #1f6feb; }
+  .chip .mark.ee { background: #0072CE; }
+  .chip .mark.eth { background: #627EEA; }
+  .chip .mark.re { background: #ff8000; }
+  .chip .mark.af { background: #e31c23; }
+
+  .pillar {
+    position: relative; width: var(--w); height: var(--h); flex: none;
+    --d: 42px;
+    transform: rotateX(8deg) rotateY(-18deg);
+    transform-style: preserve-3d;
+  }
+  .pillar .f {
+    position: absolute; inset: 0; background: var(--front);
+    color: var(--on, #fff); display: flex; align-items: center; justify-content: center;
+    text-align: center; font-family: Syne, sans-serif; font-weight: 800;
+    font-size: var(--fs, 22px); letter-spacing: -0.02em; line-height: 1.08;
+    padding: 22px 20px; border: 1px solid rgba(0,0,0,0.08);
+    overflow: hidden; word-break: normal; hyphens: none;
+  }
+  .pillar .t {
+    position: absolute; left: 0; bottom: 100%; width: 100%; height: var(--d);
+    background: var(--top); transform-origin: bottom left; transform: skewX(-42deg);
+  }
+  .pillar .s {
+    position: absolute; left: 100%; top: 0; width: var(--d); height: 100%;
+    background: var(--side); transform-origin: top left; transform: skewY(-42deg);
+  }
+  .pillar::after {
+    content: ""; position: absolute; left: 6%; right: -18%; bottom: -28px; height: 30px;
+    background: radial-gradient(ellipse at center, rgba(20,24,31,0.28), transparent 70%);
+    filter: blur(4px); z-index: -1;
+  }
+  .p-ink { --front: #1c2430; --top: #3a4656; --side: #121820; --on: #f3efe6; }
+  .p-teal { --front: linear-gradient(160deg, #3aa396, #2f7f76); --top: #9fd6cf; --side: #24665f; }
+  .p-clay { --front: linear-gradient(160deg, #e07a5f, #c45c3e); --top: #f0b39f; --side: #9a3f28; }
+  .p-paper { --front: #fffdf8; --top: #f0ebe1; --side: #d7d0c4; --on: #14181f; }
+
+  .gap {
+    flex: none; width: 64px; height: 220px; border: 3px dashed rgba(196,92,62,0.55);
+    background: rgba(196,92,62,0.06); position: relative;
+  }
+  .gap span {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 18px; color: var(--clay);
+    white-space: nowrap; letter-spacing: -0.02em;
+  }
+
+  .stack-cards {
+    position: relative; width: 100%; height: 100%;
+    display: flex; flex-direction: column; gap: 26px; justify-content: center;
+  }
+  .card3d {
+    position: relative; width: 840px; height: 132px; margin-left: 8px;
+    --front: #fffdf8; --top: #efe8db; --side: #cfc6b6; --on: #14181f; --d: 26px;
+    transform: rotate(-1deg);
+  }
+  .card3d.alt {
+    margin-left: 28px; transform: rotate(1deg);
+    --front: #e8f5f3; --top: #cfe8e3; --side: #a9cfc8;
+  }
+  .card3d .f {
+    position: absolute; inset: 0; background: var(--front); border: 1px solid var(--line);
+    display: flex; align-items: center; padding: 24px 40px 24px 32px; gap: 22px;
+    box-shadow: 0 18px 40px rgba(20,24,31,0.08);
+    overflow: hidden;
+  }
+  .card3d .t {
+    position: absolute; left: 0; bottom: 100%; width: 100%; height: var(--d);
+    background: var(--top); transform-origin: bottom left; transform: skewX(-40deg);
+  }
+  .card3d .s {
+    position: absolute; left: 100%; top: 0; width: var(--d); height: 100%;
+    background: var(--side); transform-origin: top left; transform: skewY(-40deg);
+  }
+  .num {
+    flex: none;
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 38px; color: var(--teal);
+    line-height: 1; min-width: 78px;
+  }
+  .card-copy {
+    font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 26px;
+    letter-spacing: -0.01em; line-height: 1.28; color: var(--ink);
+    max-width: 600px; flex: 1; min-width: 0;
+  }
+
+  .ring {
+    width: 520px; height: 300px; border: 3px dashed rgba(47,127,118,0.55);
+    border-radius: 18px; display: flex; align-items: center; justify-content: center;
+    position: relative; background: rgba(255,255,255,0.35);
+  }
+  .ring > .lab {
+    position: absolute; left: 22px; top: 16px;
+    font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 16px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal);
+  }
+
+  /* Photo receipt slide */
+  .slide.photo {
+    padding: 0; color: #f7f3eb;
+    background: #14181f;
+    grid-template-rows: 1fr;
+  }
+  .slide.photo::before { border-color: rgba(243,239,230,0.22); z-index: 4; }
+  .photo-bg {
+    position: absolute; inset: 0; background-size: cover; background-position: center 42%;
+    filter: saturate(0.92) contrast(1.05);
+  }
+  .photo-veil {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(12,16,22,0.55) 0%, rgba(12,16,22,0.22) 38%, rgba(12,16,22,0.78) 100%),
+      linear-gradient(90deg, rgba(12,16,22,0.55) 0%, transparent 55%);
+  }
+  .photo-inner {
+    position: relative; z-index: 2; height: 100%;
+    padding: 64px; display: grid; grid-template-rows: auto 1fr auto; gap: 14px;
+  }
+  .slide.photo .chrome, .slide.photo .foot { color: rgba(243,239,230,0.72); border-color: rgba(243,239,230,0.22); }
+  .slide.photo .brand { color: #9fd6cf; }
+  .slide.photo .eye { color: #9fd6cf; }
+  .slide.photo h1 { color: #f7f3eb; font-size: 70px; max-width: 860px; }
+  .slide.photo .sub { color: rgba(243,239,230,0.82); }
+  .credit {
+    margin-top: 18px;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 500;
+    letter-spacing: 0.04em; color: rgba(243,239,230,0.7); max-width: 820px;
+  }
+
+  /* Dual strip */
+  .strip {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    height: 320px; margin-top: 28px;
+  }
+  .strip figure {
+    position: relative; overflow: hidden; border: 1px solid var(--line);
+    box-shadow: 12px 14px 0 rgba(20,24,31,0.06); background: #1c2430;
+  }
+  .strip img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: saturate(0.9) contrast(1.04);
+  }
+  .strip figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 12px 14px;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: #f7f3eb;
+    background: linear-gradient(180deg, transparent, rgba(12,16,22,0.85));
+  }
+</style>
+</head>
+<body>
+
+<!-- 01 Hook -->
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Case study · Civic systems</p>
+    <h1>A five year vote cannot govern an hourly country.</h1>
+    <div class="scene" style="align-items:flex-end">
+      <div class="pillar p-ink" style="--w:230px;--h:280px;--fs:22px"><i class="t"></i><i class="s"></i><div class="f">Election<br/>Day</div></div>
+      <div class="gap"><span>The silence</span></div>
+      <div class="pillar p-teal" style="--w:230px;--h:200px;--fs:22px"><i class="t"></i><i class="s"></i><div class="f">Hourly<br/>life</div></div>
+      <div class="pillar p-clay" style="--w:230px;--h:240px;--fs:22px"><i class="t"></i><i class="s"></i><div class="f">Next<br/>vote</div></div>
+    </div>
+    <p class="sub">Batch democracy meets a stream society.</p>
+  </div>
+  <footer class="foot"><span>Cadence is the bug</span><span>01 / 05</span></footer>
+</section>
+
+<!-- 02 Photo receipt · Reuters Jantar Mantar -->
+<section class="slide photo">
+  <div class="photo-bg" style="background-image:url('assets/reuters-jantar-mantar-barricades.jpg')"></div>
+  <div class="photo-veil"></div>
+  <div class="photo-inner">
+    <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 05</span></header>
+    <div class="stage" style="justify-content:flex-end">
+      <div class="chip-row" style="margin-bottom:18px">
+        <span class="chip"><span class="mark re">R</span>Reuters · 10 Oct 2026</span>
+        <span class="chip">Jantar Mantar · Delhi</span>
+      </div>
+      <p class="eye">India · present</p>
+      <h1>They sealed the square before the argument began.</h1>
+      <p class="sub">CJP called for CEC Gyanesh Kumar to resign. Barricades answered first.</p>
+      <p class="credit">Photo: Bhawika Chhabra / Reuters · New Delhi, 9–10 Oct 2026</p>
+    </div>
+    <footer class="foot"><span>Process as security event</span><span>02 / 05</span></footer>
+  </div>
+</section>
+
+<!-- 03 Taiwan + Estonia -->
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Working systems</p>
+    <h1 style="font-size:68px">Continuous feedback. Auditable rails.</h1>
+    <div class="chip-row" style="margin-top:20px; margin-bottom:4px">
+      <span class="chip"><img src="assets/flag-taiwan.svg" alt="" />vTaiwan · Pol.is</span>
+      <span class="chip"><img src="assets/flag-estonia.svg" alt="" />Estonia · X-Road</span>
+    </div>
+    <div class="scene" style="height:310px; margin-top:16px; align-items:stretch">
+      <div class="stack-cards">
+        <div class="card3d">
+          <i class="t"></i><i class="s"></i>
+          <div class="f">
+            <span class="num">26</span>
+            <span class="card-copy">laws shaped<br/>with public process</span>
+          </div>
+        </div>
+        <div class="card3d alt">
+          <i class="t"></i><i class="s"></i>
+          <div class="f">
+            <span class="num">Log</span>
+            <span class="card-copy">every query<br/>under clear rules</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="sub">Ceremony is optional. The trail is not.</p>
+  </div>
+  <footer class="foot"><span>Process you can inspect</span><span>03 / 05</span></footer>
+</section>
+
+<!-- 04 Stanford liquid democracy -->
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 05</span></header>
+  <div class="stage">
+    <p class="eye">Lab evidence</p>
+    <h1 style="font-size:68px">Delegation scales. Attention still does not.</h1>
+    <div class="scene" style="height:360px">
+      <div class="chip-row abs">
+        <span class="chip"><span class="mark st">S</span>Stanford GSB 2024</span>
+        <span class="chip"><span class="mark eth">Ξ</span>18 Ethereum DAOs</span>
+      </div>
+      <div class="pillar p-teal" style="--w:275px;--h:220px;--fs:28px; margin-top:78px"><i class="t"></i><i class="s"></i><div class="f">250k+<br/>voters</div></div>
+      <div class="pillar p-paper" style="--w:275px;--h:220px;--fs:28px; margin-top:78px"><i class="t"></i><i class="s"></i><div class="f">17%<br/>tokens</div></div>
+      <div class="pillar p-ink" style="--w:275px;--h:220px;--fs:26px; margin-top:78px"><i class="t"></i><i class="s"></i><div class="f">Hubs<br/>lift votes</div></div>
+    </div>
+    <p class="sub">Tools help. They do not invent civic energy.</p>
+  </div>
+  <footer class="foot"><span>Hall &amp; Miyazaki</span><span>04 / 05</span></footer>
+</section>
+
+<!-- 05 Design ask + AFP strip -->
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>05 / 05</span></header>
+  <div class="stage" style="justify-content:flex-start; padding-top:8px">
+    <p class="eye">Design ask</p>
+    <h1 style="font-size:60px">Build the audit between elections.</h1>
+    <div class="chip-row" style="margin-top:16px">
+      <span class="chip"><span class="mark af">A</span>AFP · 10 Oct 2026</span>
+      <span class="chip">Ahmedabad · Bengaluru</span>
+    </div>
+    <div class="strip">
+      <figure>
+        <img src="assets/afp-ahmedabad-cjp-detention.jpg" alt="AFP: CJP supporters detained in Ahmedabad" />
+        <figcaption>Shammi Mehra / AFP</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/afp-bengaluru-ec-march.jpg" alt="AFP: Protest near Karnataka EC office" />
+        <figcaption>Idrees Mohammed / AFP</figcaption>
+      </figure>
+    </div>
+    <p class="sub" style="margin-top:20px">Where do you still run on a ceremony?</p>
+  </div>
+  <footer class="foot"><span>Continuous governance</span><span>05 / 05</span></footer>
+</section>
+
+</body>
+</html>

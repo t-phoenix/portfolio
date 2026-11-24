@@ -1,0 +1,8 @@
+Studio stills. Ink #0e1114, paper #e9e6df, teal #3d9b8f. Syne + IBM Plex Sans.
+Five frozen motion frames. A new object each slide. No logos, no numbers, no photo.
+01 oversized key against a small lock, faint swing behind it.
+02 a room, a snapped cable, the word Cut in the gap.
+03 an empty vault, the key standing outside it.
+04 a stack of sleeping slabs, the top one lifted and lit.
+05 three blocks, key pulled forward.
+Export with system Chrome, deviceScaleFactor 2.

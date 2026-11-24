@@ -1,0 +1,11 @@
+Build notes, 2026-10-31.
+
+Format: five Three.js stills, not a film (2026-10-30 was a film) and not a paid image.
+Renderer: creative/carousel.html via creative/export-slides.cjs.
+three and puppeteer-core reused from archive/2026-10-30/creative/node_modules. No new install.
+Chrome headless, Metal angle, same flags as the 10-30 film render.
+
+Palette: ink ground, paper, signal teal for the new job, amber for value leaving, dark metal for the lock.
+Each slide is a different object relationship. Shared camera and light.
+
+Do not put dollar figures on the frames. The nonce count is the picture on slide 02. The precise window lives in the caption.

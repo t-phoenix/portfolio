@@ -1,0 +1,24 @@
+BUILD NOTES · v2 (Direction C, Sticker Bomb Zine)
+=================================================
+Source: carousel.html (5 slides, 1080x1350). Rebuild: node export.cjs   (stills only: --stills)
+Hero loop is driven by window.render(t): every element with data-in slams in, data-out leaves,
+data-r is its resting tilt, data-spin rotates it after landing. Retime the edit by changing those numbers.
+Timeline: 0 to 2s headline words slam in · 2 to 3.7s "then Mumbai happened" + event stickers ·
+3.8 to 7s real photos slap in as exhibits A to D · 7.2 to 9s die cut collage lands · 1.5s hold.
+Stills = the final frame. v1 (marker circles, teal/saffron) lives in archive-v1/.
+directions.html renders the A/B/C brand board; shoot.cjs takes stills of any static page.
+
+STICKER PACK
+============
+brand/assets/stickers/mumbai-2026 (copied to creative/stickers). Made on device with lift.swift (Apple Vision).
+Rule of thumb: 1 to 3 slap stickers per frame, never on top of a face or a headline.
+
+HUMAN TOUCH IDEAS (still the best upgrades)
+===========================================
+1. Shoot 3s of a spinner actually spinning and swap it into the hero's final collage.
+2. Wear the badge for one photo with the strap pulled tight like a leash. Pairs with slide 03.
+3. Reply to badge ideas with a quote tweet and one line; best idea gets a sticker from the drawer.
+4. Day 2: "You designed the 2027 badge" carousel built from the best replies, credited.
+5. Ask Kartik for a photo (or a blessing) and swap the logo head on slide 05. If he replies, that is its own post.
+
+PAID MOTION (AgentCash / x402): not used. Everything here is real photos plus code, $0.

@@ -1,0 +1,109 @@
+date: '2026-10-27'
+status: posted
+pillar: web3-ai
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_3d_still
+hook: I stopped reading model launches this week. I started reading who held the key.
+receipts:
+  - https://openai.com/index/securing-our-frontier-model-training-environment
+  - >-
+    https://dev.to/hiroki-ii-ai/ai-daily-digest-october-25-2026-openai-trains-offline-google-ships-a-million-tpus-agent-3dlg
+  - https://toolsift.ai/agent-news/2026-10-24/
+  - https://www.llm-digest.com/daily/2026-10-24
+  - https://agenticcareers.co/state-of-agentic-hiring
+numbers:
+  - 'idle_agent: about 100 KB, AWS Infinity benchmark, 23 Oct'
+  - 'concurrency: about 75,000 in 8 GB, same benchmark, not a production fleet'
+  - 'litellm: bad package live about two hours, 21 Oct'
+  - 'roles: 2,894 open agentic roles, 448 AI Agent Engineer'
+  - 'pay: about $237k median only where the listing discloses pay'
+creative_assets:
+  - slide-01.png
+  - slide-02.png
+  - slide-03.png
+  - slide-04.png
+  - slide-05.png
+virality:
+  comment_magnet: Which one failed you last? The model, the room, or the key. One sentence.
+  tags_x:
+    - '@OpenAI'
+    - '@googlecloud'
+    - '@awscloud'
+  tags_linkedin:
+    - OpenAI
+    - Google Cloud
+    - AWS
+  links_in_post:
+    - https://openai.com/index/securing-our-frontier-model-training-environment
+    - >-
+      https://dev.to/hiroki-ii-ai/ai-daily-digest-october-25-2026-openai-trains-offline-google-ships-a-million-tpus-agent-3dlg
+    - https://toolsift.ai/agent-news/2026-10-24/
+    - https://www.llm-digest.com/daily/2026-10-24
+    - https://agenticcareers.co/state-of-agentic-hiring
+  links_in_first_reply:
+    - https://openai.com/index/securing-our-frontier-model-training-environment
+    - >-
+      https://dev.to/hiroki-ii-ai/ai-daily-digest-october-25-2026-openai-trains-offline-google-ships-a-million-tpus-agent-3dlg
+    - https://toolsift.ai/agent-news/2026-10-24/
+    - https://www.llm-digest.com/daily/2026-10-24
+    - https://agenticcareers.co/state-of-agentic-hiring
+  format: carousel_3d_still
+  experiment: hero_carousel_agent_week
+spend_usd: 0
+spend_breakdown: []
+notes: >-
+  AI only. Five hero stills, a new spatial idea each frame. Numbers in the caption. Google Agent
+  Compute Engine is a preview. Infinity's 75,000 is a benchmark. Salary median only where pay is
+  disclosed. Not scheduled. | Scheduled x=2026-10-27T18:00:00+05:30
+  linkedin=2026-10-27T18:00:00+05:30
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-10-27T08:30:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 93
+      rationale: IST weekday morning, before deep work, when engineers skim.
+    - id: evening-prime
+      label: Evening prime
+      at: '2026-10-27T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 91
+      rationale: After work. India evening and the start of the EU afternoon.
+    - id: midday
+      label: Midday scroll
+      at: '2026-10-27T12:45:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 84
+      rationale: Lunch. LinkedIn is usually stronger than X in this window.
+    - id: late-edge
+      label: Late edge
+      at: '2026-10-27T21:00:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 76
+      rationale: US East afternoon. Better for X than for LinkedIn.
+  chosen:
+    x: '2026-10-27T18:00:00+05:30'
+    linkedin: '2026-10-27T18:00:00+05:30'
+  published:
+    x:
+      id: '2115059208148422697'
+      url: https://x.com/touchey_phoenix/status/2115059208148422697
+      at: '2026-10-27T12:33:06.387Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7520824958701260800
+      url: null
+      at: '2026-10-27T12:33:21.353Z'
+      dryRun: false

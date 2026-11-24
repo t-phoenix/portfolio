@@ -1,11 +1,11 @@
 date: '2026-10-07'
-status: ready
+status: posted
 pillar: protocol-engineering
 platform_targets:
   - x
   - linkedin
 creative_format: carousel_3d_still
-hook: Ethereum has run on a handshake for four years. This week it starts testing the contract.
+hook: Ethereum has run on a handshake for four years. Now it is testing the contract.
 receipts:
   - >-
     https://www.cryptotimes.io/2026/09/29/ethereum-sets-glamsterdam-sepolia-activation-for-6-october/
@@ -28,7 +28,7 @@ spend_usd: 0
 notes: >-
   Day 1 of 2, Web3 only. Enforcement thesis. Paper and ink block stills, first light pack after
   three dark ones. Numbers in the caption, not on the art. Verify Sepolia activation outcome before
-  posting.
+  posting. | Scheduled x=2026-10-12T16:03:00+05:30 linkedin=2026-10-12T16:03:00+05:30
 schedule:
   timezone: Asia/Kolkata
   suggestions:
@@ -73,8 +73,16 @@ schedule:
       score: 77
       rationale: US East afternoon overlap; good for X crypto discourse.
   chosen:
-    x: null
-    linkedin: null
+    x: '2026-10-12T16:03:00+05:30'
+    linkedin: '2026-10-12T16:03:00+05:30'
   published:
-    x: null
-    linkedin: null
+    x:
+      id: '2109593397816435154'
+      url: https://x.com/touchey_phoenix/status/2109593397816435154
+      at: '2026-10-12T10:33:57.910Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7515359158792249344
+      url: null
+      at: '2026-10-12T10:34:12.832Z'
+      dryRun: false

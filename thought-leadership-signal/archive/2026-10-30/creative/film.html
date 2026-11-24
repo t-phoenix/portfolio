@@ -1,0 +1,508 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Glance film</title>
+<style>
+@font-face { font-family: Bricolage; src: url(fonts/BricolageGrotesque_700Bold.ttf); font-weight: 700; }
+@font-face { font-family: Bricolage; src: url(fonts/BricolageGrotesque_500Medium.ttf); font-weight: 500; }
+@font-face { font-family: JBMono; src: url(fonts/JetBrainsMono_500Medium.ttf); font-weight: 500; }
+:root {
+  --ink: #0E1215; --paper: #EEF3F2; --text2: #AEB8BE; --text3: #8794A0;
+  --tide: #8EE3D4; --harbor: #9CC3FF; --glacier: #A9DDF2; --dusk: #B7C0FF; --sea: #A6E9C1; --butter: #F5D98B; --blush: #F7A1A1;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; background: var(--ink); }
+#stage { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--ink); }
+canvas { position: absolute; inset: 0; width: 1080px !important; height: 1350px !important; }
+.layer { position: absolute; inset: 0; pointer-events: none; }
+.t { position: absolute; will-change: transform, opacity, filter; opacity: 0; color: var(--paper); }
+.display { text-shadow: 0 4px 30px rgba(14,18,21,0.6); font-family: Bricolage; font-weight: 700; letter-spacing: -0.035em; line-height: 0.92; }
+.text { text-shadow: 0 2px 18px rgba(14,18,21,0.95), 0 0 4px rgba(14,18,21,0.9); font-family: -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif; letter-spacing: -0.01em; }
+.mono { font-family: JBMono; letter-spacing: -0.02em; }
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.w > span { display: inline-block; will-change: transform; }
+.tide { color: var(--tide); }
+.dim { color: var(--text2); }
+.chip { font-family: -apple-system, 'SF Pro Text', sans-serif; display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 22px; border-radius: 999px; font-size: 24px; background: #161B1F; border: 1.5px solid #2C353B; color: var(--paper); }
+.dot { width: 12px; height: 12px; border-radius: 6px; background: var(--tide); }
+.num { font-family: JBMono; font-size: 26px; color: var(--ink); background: var(--tide); border-radius: 10px; padding: 6px 12px; display: inline-block; }
+.vignette { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 45%, rgba(14,18,21,0) 55%, rgba(5,8,10,0.72) 100%); }
+.grain { position: absolute; inset: -50%; opacity: 0.06; mix-blend-mode: overlay; }
+.frame { position: absolute; inset: 28px; border: 1.5px solid rgba(238,243,242,0.08); border-radius: 30px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="vignette"></div>
+  <canvas id="grain" class="grain" width="540" height="675"></canvas>
+  <div class="layer" id="ui">
+    <div class="frame"></div>
+
+    <!-- chrome: folio + signature -->
+    <div class="t mono" id="folio" style="top:64px; right:72px; font-size:22px; color:var(--text3)">00 / 05</div>
+    <div class="t text" id="sig" style="bottom:62px; left:72px; font-size:21px; color:var(--text3); display:flex; gap:14px; align-items:center">
+      <span class="dot"></span><span>glance</span><span style="opacity:.5">·</span><span>Mumbai week, Nov 2026</span>
+    </div>
+
+    <!-- S1 crowd -->
+    <div class="t display" data-in="0.15" data-out="4.3" style="left:72px; top:150px; font-size:176px">150<br>people.</div>
+    <div class="t display tide" data-in="1.1" data-out="4.3" style="left:72px; top:520px; font-size:176px">7 days.</div>
+    <div class="t text dim" data-in="2.6" data-out="4.3" style="left:76px; top:740px; font-size:34px; line-height:1.3">IBW · Devcon · ETHGlobal<br>and every rooftop after.</div>
+
+    <!-- S2 forgetting -->
+    <div class="t display dim" data-in="4.8" data-out="9.6" style="left:72px; top:150px; font-size:86px">A week later.</div>
+    <div class="t display" data-in="5.6" data-out="9.6" style="left:72px; top:270px; font-size:128px; width:960px">Who was</div>
+    <div class="t mono tide" id="who" data-in="5.9" data-out="9.6" style="left:68px; top:400px; font-size:104px">@degenwizard?</div>
+    <div class="t text dim" data-in="7.0" data-out="9.6" style="left:76px; top:1040px; font-size:34px; line-height:1.35; width:900px">Handles, not names. Loud rooms.<br>The promise you made at 1am.</div>
+
+    <!-- S3 reveal -->
+    <div class="t display" id="wordmark" data-in="10.7" data-out="13.3" style="left:0; right:0; top:930px; text-align:center; font-size:150px; letter-spacing:-0.05em">glance<span class="tide">.</span></div>
+    <div class="t text dim" data-in="11.4" data-out="13.3" style="left:0; right:0; top:1100px; text-align:center; font-size:36px">Glance today, know them tomorrow.</div>
+
+    <!-- features -->
+    <div class="t" data-in="13.6" data-out="19.6" style="left:72px; top:140px"><span class="num">01</span></div>
+    <div class="t display" data-in="13.7" data-out="19.6" style="left:72px; top:200px; font-size:112px">Scan anything.</div>
+    <div class="t text dim" data-in="14.3" data-out="19.6" style="left:76px; top:322px; font-size:32px; line-height:1.35; width:900px">X, LinkedIn, Telegram, WhatsApp, ENS.<br>Or just the badge on their lanyard.</div>
+
+    <div class="t" data-in="19.8" data-out="25.6" style="left:72px; top:140px"><span class="num">02</span></div>
+    <div class="t display" data-in="19.9" data-out="25.6" style="left:72px; top:200px; font-size:112px">Talk, don't type.</div>
+    <div class="t text dim" data-in="20.5" data-out="25.6" style="left:76px; top:322px; font-size:32px; line-height:1.35; width:900px">A voice note becomes who they are,<br>what you discussed, and what you owe.</div>
+
+    <div class="t" data-in="25.8" data-out="31.6" style="left:72px; top:140px"><span class="num">03</span></div>
+    <div class="t display" data-in="25.9" data-out="31.6" style="left:72px; top:200px; font-size:104px">One person.<br><span class="tide">Every handle.</span></div>
+    <div class="t text dim" data-in="26.6" data-out="31.6" style="left:76px; top:420px; font-size:32px; line-height:1.35; width:900px">Nothing links until you tap Confirm.</div>
+
+    <div class="t" data-in="31.8" data-out="36.6" style="left:72px; top:140px"><span class="num">04</span></div>
+    <div class="t display" data-in="31.9" data-out="36.6" style="left:72px; top:200px; font-size:112px">Every promise,<br><span class="tide">kept.</span></div>
+    <div class="t text dim" data-in="32.6" data-out="36.6" style="left:76px; top:430px; font-size:32px; line-height:1.35; width:900px">Follow ups drafted in the right app.</div>
+
+    <div class="t" data-in="36.8" data-out="40.7" style="left:72px; top:140px"><span class="num">05</span></div>
+    <div class="t display" data-in="36.9" data-out="40.7" style="left:72px; top:200px; font-size:112px">Yours alone.</div>
+    <div class="t text dim" data-in="37.5" data-out="40.7" style="left:76px; top:322px; font-size:32px; line-height:1.35; width:900px">No server. Face ID. Paid lookups<br>settle per call with x402 on Base.</div>
+
+    <!-- feature chips -->
+    <div class="t" data-in="21.6" data-out="25.4" style="left:72px; top:640px; display:flex; flex-direction:column; align-items:flex-start; gap:16px; width:460px">
+      <span class="chip"><span class="dot" style="background:var(--harbor)"></span>Who: founder, ZK infra</span>
+      <span class="chip"><span class="dot" style="background:var(--dusk)"></span>Topics: provers, hiring</span>
+      <span class="chip"><span class="dot" style="background:var(--butter)"></span>You owe: intro to Ravi</span>
+    </div>
+    <div class="t" data-in="38.3" data-out="40.6" style="left:72px; top:700px; display:flex; flex-direction:column; align-items:flex-start; gap:16px; width:460px">
+      <span class="chip"><span class="dot" style="background:var(--sea)"></span>On device</span>
+      <span class="chip"><span class="dot" style="background:var(--glacier)"></span>Face ID</span>
+      <span class="chip"><span class="dot" style="background:var(--harbor)"></span>USDC on Base</span>
+    </div>
+
+    <!-- finale -->
+    <div class="t text dim" data-in="41.3" data-out="99" style="left:72px; top:132px; font-size:30px">Built for</div>
+    <div class="t display" data-in="41.5" data-out="99" style="left:72px; top:176px; font-size:108px">India Blockchain<br>Week, <span class="tide">Mumbai.</span></div>
+    <div class="t mono dim" data-in="42.2" data-out="99" style="left:76px; top:410px; font-size:26px">NOV 1 → 7 · IBW · DEVCON · ETHGLOBAL</div>
+    <div class="t display" data-in="44.2" data-out="99" style="left:72px; top:1090px; font-size:66px; width:940px">What should it<br>remember next?</div>
+    <div class="t text tide" data-in="45.2" data-out="99" style="left:76px; top:1236px; font-size:28px">Tell me in the comments.</div>
+  </div>
+</div>
+
+<script type="importmap">{ "imports": { "three": "./node_modules/three/build/three.module.js", "three/addons/": "./node_modules/three/examples/jsm/" } }</script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const W = 1080, H = 1350, DURATION = 48;
+const C = { ink: 0x0E1215, paper: '#EEF3F2', tide: '#8EE3D4', harbor: '#9CC3FF', glacier: '#A9DDF2', dusk: '#B7C0FF', sea: '#A6E9C1', butter: '#F5D98B', blush: '#F7A1A1', inkHex: '#0E1215' };
+const PASTELS = [C.tide, C.harbor, C.glacier, C.dusk, C.sea, C.butter];
+
+// ---------- math ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const eOut = (x) => 1 - Math.pow(1 - x, 3);
+const eIn = (x) => x * x * x;
+const eIO = (x) => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const eExpo = (x) => x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+const eBack = (x) => { const c1 = 1.4, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// ---------- renderer ----------
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.RENDER_DPR || 1.5);
+renderer.setSize(W, H);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+document.getElementById('stage').prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(C.ink);
+scene.fog = new THREE.FogExp2(C.ink, 0.055);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.55;
+
+const camera = new THREE.PerspectiveCamera(32, W / H, 0.1, 200);
+scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(3, 4, 6); scene.add(key);
+const rim = new THREE.DirectionalLight(new THREE.Color(C.tide), 3.0); rim.position.set(-5, 2, -4); scene.add(rim);
+const rim2 = new THREE.PointLight(new THREE.Color(C.dusk), 18, 20); rim2.position.set(4, -3, 2); scene.add(rim2);
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), 0.35, 0.5, 0.9);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+// ---------- helpers ----------
+function roundRectShape(w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+function canvasTex(w, h, draw) {
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g = cv.getContext('2d'); draw(g, w, h);
+  const tx = new THREE.CanvasTexture(cv); tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = 8;
+  return tx;
+}
+function rr(g, x, y, w, h, r) { g.beginPath(); g.roundRect(x, y, w, h, r); }
+const loadImg = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+
+// ---------- badges + handle chips (the crowd) ----------
+const HANDLES = ['@degenwizard', '@0xpriya', '@zkchad', 'gm.eth', '@ravi_builds', '@anon_mumbai', '@chai_and_zk', '@meera.lens', '@rollup_rohan', '@solsurfer', '@kavya_eth', 'dev_sharma.eth', '@basedarjun', '@mempool_maya', '@rekt_raj', '@farcaster/neel', '@ishaan.base', '@tanvi_zk', '@chainlinkd', '@noncefan'];
+const ROLESL = ['FOUNDER', 'DEV', 'VC', 'RESEARCH', 'HACKER', 'SPEAKER', 'GROWTH', 'DEVREL'];
+const EVENTS = ['IBW', 'DEVCON', 'ETHGLOBAL', 'SIDE EVENT'];
+
+function badgeTexture(i) {
+  const fill = PASTELS[i % PASTELS.length];
+  return canvasTex(360, 520, (g, w, h) => {
+    g.fillStyle = fill; rr(g, 0, 0, w, h, 34); g.fill();
+    g.fillStyle = C.inkHex; rr(g, w / 2 - 50, 26, 100, 22, 11); g.fill(); // lanyard slot
+    g.globalAlpha = 0.55; g.font = '600 26px JBMono'; g.fillText(EVENTS[i % 4], 30, 108);
+    g.globalAlpha = 1; g.font = '700 46px Bricolage';
+    const h1 = HANDLES[i % HANDLES.length];
+    g.fillText(h1.length > 12 ? h1.slice(0, 12) : h1, 30, 300);
+    g.globalAlpha = 0.6; g.font = '500 28px JBMono'; g.fillText(ROLESL[i % ROLESL.length], 30, 350);
+    g.globalAlpha = 0.18; g.fillRect(30, 420, w - 60, 3);
+    g.globalAlpha = 0.7; g.font = '500 24px JBMono'; g.fillText('MUMBAI · NOV 2026', 30, 470);
+  });
+}
+function chipTexture(text, fill, ink = C.inkHex) {
+  return canvasTex(640, 140, (g, w, h) => {
+    g.fillStyle = fill; rr(g, 0, 0, w, h, 70); g.fill();
+    g.fillStyle = ink; g.font = '500 56px JBMono'; g.textBaseline = 'middle'; g.fillText(text, 46, h / 2 + 3);
+  });
+}
+
+const crowd = new THREE.Group(); scene.add(crowd);
+const badgeShape = new THREE.ExtrudeGeometry(roundRectShape(0.72, 1.04, 0.07), { depth: 0.02, bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.008, bevelSegments: 2, curveSegments: 6 });
+fixUV(badgeShape, 0.72, 1.04);
+const chipGeo = new THREE.ExtrudeGeometry(roundRectShape(1.28, 0.28, 0.14), { depth: 0.02, bevelEnabled: true, bevelThickness: 0.006, bevelSize: 0.006, bevelSegments: 2, curveSegments: 10 });
+fixUV(chipGeo, 1.28, 0.28);
+function fixUV(geo, w, h) { // map front face UVs to the rect
+  const p = geo.attributes.position, uv = geo.attributes.uv;
+  for (let i = 0; i < p.count; i++) uv.setXY(i, p.getX(i) / w + 0.5, p.getY(i) / h + 0.5);
+  uv.needsUpdate = true;
+}
+const items = [];
+const badgeMats = Array.from({ length: 18 }, (_, i) => new THREE.MeshPhysicalMaterial({ map: badgeTexture(i), roughness: 0.45, clearcoat: 0.6, clearcoatRoughness: 0.3 }));
+const chipMats = HANDLES.map((hnd, i) => new THREE.MeshPhysicalMaterial({ map: chipTexture(hnd, i % 3 === 0 ? C.paper : '#1F262B', i % 3 === 0 ? C.inkHex : C.paper), roughness: 0.4, clearcoat: 0.5 }));
+for (let i = 0; i < 170; i++) {
+  const isBadge = rnd() < 0.55;
+  const m = new THREE.Mesh(isBadge ? badgeShape : chipGeo, isBadge ? badgeMats[i % badgeMats.length] : chipMats[i % chipMats.length]);
+  const ang = rnd() * Math.PI * 2, rad = 1.4 + rnd() * 3.6;
+  const home = new THREE.Vector3(Math.cos(ang) * rad * 1.0, Math.sin(ang) * rad * 1.25, -rnd() * 60);
+  const spin = new THREE.Vector3((rnd() - .5) * 1.2, (rnd() - .5) * 1.6, (rnd() - .5) * 0.8);
+  const rot0 = new THREE.Vector3((rnd() - .5) * 0.9, (rnd() - .5) * 1.4, (rnd() - .5) * 0.6);
+  items.push({ m, home, spin, rot0, phase: rnd() * 10 });
+  crowd.add(m);
+}
+// the hero chip: @degenwizard
+const heroChipMat = new THREE.MeshPhysicalMaterial({ map: chipTexture('@degenwizard', C.tide), roughness: 0.35, clearcoat: 1, emissive: new THREE.Color(C.tide), emissiveIntensity: 0.0 });
+const heroChip = new THREE.Mesh(chipGeo, heroChipMat); scene.add(heroChip);
+const scrambleCanvas = heroChipMat.map.image;
+
+// dust
+const dustGeo = new THREE.BufferGeometry(); const dn = 1400; const dp = new Float32Array(dn * 3);
+for (let i = 0; i < dn; i++) { dp[i * 3] = (rnd() - .5) * 18; dp[i * 3 + 1] = (rnd() - .5) * 22; dp[i * 3 + 2] = -rnd() * 70 + 6; }
+dustGeo.setAttribute('position', new THREE.BufferAttribute(dp, 3));
+const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: new THREE.Color(C.glacier), size: 0.025, transparent: true, opacity: 0.55, depthWrite: false }));
+scene.add(dust);
+
+// ---------- Glance mark (ghost bubble) ----------
+const mark = new THREE.Group(); scene.add(mark);
+{
+  const s = new THREE.Shape(); const r = 0.5;
+  // from left point, go up over the top and round to bottom (clockwise in screen = counter in math)
+  s.moveTo(-0.5, -0.12);
+  s.absarc(0, 0, r, Math.PI + 0.24, -Math.PI / 2, true);
+  s.lineTo(-0.44, -0.5); s.quadraticCurveTo(-0.5, -0.5, -0.5, -0.44); s.lineTo(-0.5, -0.12);
+  const geo = new THREE.ExtrudeGeometry(s, { depth: 0.22, bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.05, bevelSegments: 10, curveSegments: 64 });
+  geo.translate(0, 0, -0.11);
+  const body = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({ color: new THREE.Color(C.tide), roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.12, sheen: 0.4, emissive: new THREE.Color(C.tide), emissiveIntensity: 0.02 }));
+  mark.add(body);
+  const eyeGeo = new THREE.CapsuleGeometry(0.045, 0.06, 8, 16);
+  const eyeMat = new THREE.MeshStandardMaterial({ color: C.ink, roughness: 0.3 });
+  const eyes = new THREE.Group();
+  for (const x of [-0.1, 0.1]) { const e = new THREE.Mesh(eyeGeo, eyeMat); e.position.set(x, 0.1, 0.18); e.scale.z = 0.5; eyes.add(e); }
+  mark.add(eyes); mark.userData.eyes = eyes;
+}
+
+// ---------- iPhone ----------
+const PW = 0.715, PH = 1.496;
+function makePhone() {
+  const g = new THREE.Group();
+  const bodyGeo = new THREE.ExtrudeGeometry(roundRectShape(PW, PH, 0.11), { depth: 0.06, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 6, curveSegments: 24 });
+  bodyGeo.translate(0, 0, -0.03);
+  const titanium = new THREE.MeshPhysicalMaterial({ color: 0x3a3f44, metalness: 0.9, roughness: 0.32, clearcoat: 0.4 });
+  g.add(new THREE.Mesh(bodyGeo, titanium));
+  // black glass
+  const glassGeo = new THREE.ShapeGeometry(roundRectShape(PW - 0.004, PH - 0.004, 0.105), 24);
+  const glass = new THREE.Mesh(glassGeo, new THREE.MeshPhysicalMaterial({ color: 0x050607, roughness: 0.1, clearcoat: 1 }));
+  glass.position.z = 0.0435; g.add(glass);
+  // screen
+  const sw = PW - 0.05, sh = PH - 0.05;
+  const scrGeo = new THREE.ShapeGeometry(roundRectShape(sw, sh, 0.085), 24); fixUV(scrGeo, sw, sh);
+  const scrMat = new THREE.MeshBasicMaterial({ color: 0xd8dcdc, toneMapped: false });
+  const screen = new THREE.Mesh(scrGeo, scrMat); screen.position.z = 0.0445; g.add(screen);
+  // reflection sheen
+  const sheenTex = canvasTex(256, 512, (c, w, h) => { const gr = c.createLinearGradient(0, 0, w, h); gr.addColorStop(0, 'rgba(255,255,255,0)'); gr.addColorStop(0.45, 'rgba(255,255,255,0.0)'); gr.addColorStop(0.5, 'rgba(255,255,255,0.10)'); gr.addColorStop(0.62, 'rgba(255,255,255,0)'); c.fillStyle = gr; c.fillRect(0, 0, w, h); });
+  const sheen = new THREE.Mesh(scrGeo, new THREE.MeshBasicMaterial({ map: sheenTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  sheen.position.z = 0.0452; g.add(sheen);
+  // island
+  const isl = new THREE.Mesh(new THREE.ShapeGeometry(roundRectShape(0.18, 0.052, 0.026), 12), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+  isl.position.set(0, PH / 2 - 0.06, 0.0455); g.add(isl);
+  // side buttons
+  const btnMat = titanium;
+  for (const [y, h, side] of [[0.36, 0.13, -1], [0.18, 0.13, -1], [0.52, 0.06, -1], [0.26, 0.2, 1]]) {
+    const b = new THREE.Mesh(new THREE.BoxGeometry(0.012, h, 0.03), btnMat); b.position.set(side * (PW / 2 + 0.012), y, 0); g.add(b);
+  }
+  g.userData = { screen: scrMat, sheen: sheen.material, sheenTex };
+  return g;
+}
+
+// ---------- screens ----------
+const SCREENS = {};
+async function screenTex(name, src) {
+  const img = await loadImg(src);
+  SCREENS[name] = canvasTex(1080, Math.round(1080 * img.height / img.width), (g, w, h) => { g.drawImage(img, 0, 0, w, h); });
+}
+const SCREEN_LIST = { scan0: 'screens/scan0.png', scan: 'screens/scan.png', voice: 'screens/voice.png', review: 'screens/review.png', person: 'screens/person.png', identity: 'screens/identity.png', follow: 'screens/followups.png', today: 'screens/today.png', people: 'screens/people.png' };
+await Promise.all(Object.entries(SCREEN_LIST).map(([k, v]) => screenTex(k, v).catch(() => console.warn('missing', v))));
+await document.fonts.ready;
+
+const phone = makePhone(); scene.add(phone);
+const phones = [makePhone(), makePhone()]; phones.forEach((p) => scene.add(p));
+const setScreen = (p, name) => { const tx = SCREENS[name]; if (tx && p.userData.screen.map !== tx) { p.userData.screen.map = tx; p.userData.screen.needsUpdate = true; } };
+
+// identity satellites
+const SATS = [['X  @degenwizard', C.paper], ['in  Arjun Mehta', C.harbor], ['tg  @arjun_zk', C.glacier], ['ens  arjunm.eth', C.dusk]];
+const satConfirmed = SATS.map(([t]) => new THREE.MeshPhysicalMaterial({ map: chipTexture('✓ ' + t.replace(/^\S+\s+/, ''), C.sea), roughness: 0.35, clearcoat: 1 }));
+const satPending = SATS.map(([t, col]) => new THREE.MeshPhysicalMaterial({ map: chipTexture(t, '#1F262B', C.paper), roughness: 0.4, clearcoat: 0.6 }));
+const sats = SATS.map((_, i) => { const m = new THREE.Mesh(chipGeo, satPending[i]); m.scale.setScalar(0.62); scene.add(m); return m; });
+
+// voice waveform
+const wave = new THREE.Group(); scene.add(wave);
+const barGeo = new THREE.CapsuleGeometry(0.007, 1, 4, 8);
+const barMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(C.tide), emissive: new THREE.Color(C.tide), emissiveIntensity: 0.35, roughness: 0.4 });
+const bars = Array.from({ length: 22 }, (_, i) => { const b = new THREE.Mesh(barGeo, barMat); b.position.x = (i - 10.5) * 0.032; wave.add(b); return b; });
+
+// privacy ring
+const ring = new THREE.Mesh(new THREE.TorusGeometry(1.15, 0.008, 16, 200), new THREE.MeshBasicMaterial({ color: new THREE.Color(C.tide), transparent: true }));
+const ring2 = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.004, 16, 200), new THREE.MeshBasicMaterial({ color: new THREE.Color(C.dusk), transparent: true }));
+scene.add(ring, ring2);
+
+// ---------- text overlay driver ----------
+const texts = [...document.querySelectorAll('.t[data-in]')];
+for (const el of texts) { // split display lines into masked words for staggered rise
+  if (!el.classList.contains('display')) continue;
+  const walk = (node) => {
+    for (const ch of [...node.childNodes]) {
+      if (ch.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        ch.textContent.split(/(\s+)/).forEach((p) => {
+          if (!p) return; if (/^\s+$/.test(p)) { frag.append(document.createTextNode(p)); return; }
+          const w = document.createElement('span'); w.className = 'w'; const i = document.createElement('span'); i.textContent = p; w.append(i); frag.append(w);
+        });
+        ch.replaceWith(frag);
+      } else if (ch.nodeType === 1 && ch.tagName !== 'BR') walk(ch);
+    }
+  };
+  walk(el);
+}
+function driveText(t) {
+  for (const el of texts) {
+    const a = +el.dataset.in, b = +el.dataset.out;
+    const kin = eExpo(prog(t, a, a + 0.9)), kout = eIn(prog(t, b - 0.35, b));
+    const vis = kin * (1 - kout);
+    el.style.opacity = vis.toFixed(3);
+    el.style.filter = `blur(${((1 - kin) * 10 + kout * 14).toFixed(2)}px)`;
+    el.style.transform = `translateY(${((1 - kin) * 26 - kout * 18).toFixed(1)}px)`;
+    const words = el.querySelectorAll('.w > span');
+    words.forEach((s, i) => { const k = eExpo(prog(t, a + i * 0.07, a + i * 0.07 + 0.8)); s.style.transform = `translateY(${((1 - k) * 105).toFixed(1)}%)`; });
+  }
+  // scramble the handle while memory fades
+  const who = document.getElementById('who');
+  const target = '@degenwizard?'; const glyphs = '@#01x_?/<>$';
+  const sk = prog(t, 7.2, 9.0);
+  let out = ''; seed2 = Math.floor(t * 18);
+  for (let i = 0; i < target.length; i++) out += (r2() < sk * 0.85 && target[i] !== '@') ? glyphs[Math.floor(r2() * glyphs.length)] : target[i];
+  who.textContent = out;
+  // chrome
+  const folio = document.getElementById('folio');
+  const fi = t < 13.9 ? 0 : t < 20 ? 1 : t < 26 ? 2 : t < 32 ? 3 : t < 37 ? 4 : t < 41 ? 5 : -1;
+  folio.textContent = `0${Math.max(fi, 0)} / 05`;
+  folio.style.opacity = (fi > 0 ? 1 : 0) * eOut(prog(t, 13.9, 14.5)) * (1 - prog(t, 40.6, 41)) + '';
+  document.getElementById('sig').style.opacity = (eOut(prog(t, 1, 2)) * (1 - eOut(prog(t, 40.5, 41)))).toFixed(3);
+}
+let seed2 = 1; const r2 = () => { seed2 = (seed2 * 48271 + 11) % 2147483647; return (seed2 % 1000) / 1000; };
+
+// film grain (deterministic per frame)
+const gcv = document.getElementById('grain'), gg = gcv.getContext('2d'); const gimg = gg.createImageData(540, 675);
+function grain(t) { let s = Math.floor(t * 30) * 9973 + 1; for (let i = 0; i < gimg.data.length; i += 4) { s = (s * 1103515245 + 12345) & 0x7fffffff; const v = s & 255; gimg.data[i] = gimg.data[i + 1] = gimg.data[i + 2] = v; gimg.data[i + 3] = 255; } gg.putImageData(gimg, 0, 0); }
+
+// ---------- timeline ----------
+const tmpV = new THREE.Vector3();
+function phonePose(p, t) {
+  // returns {x,y,z,ry,rx,rz,scale,screen}
+  const beats = [
+    { at: 13.4, x: 0.05, y: -0.33, z: 0.0, ry: -0.32, rx: 0.08, s: 'scan' },
+    { at: 19.6, x: 0.3, y: -0.40, z: 0.0, ry: -0.30, rx: 0.06, s: 'voice' },
+    { at: 25.6, x: 0.0, y: -0.40, z: -0.2, ry: -0.18, rx: 0.04, s: 'person' },
+    { at: 31.6, x: 0.08, y: -0.38, z: 0.0, ry: 0.26, rx: 0.08, s: 'follow' },
+    { at: 36.6, x: 0.32, y: -0.36, z: -0.3, ry: -0.2, rx: -0.6, s: 'people' },
+  ];
+  let i = 0; for (let k = 0; k < beats.length; k++) if (t >= beats[k].at) i = k;
+  const b = beats[i], n = beats[i + 1];
+  const enter = eOut(prog(t, 13.4, 15.0));
+  let x = b.x, y = b.y, z = b.z, ry = b.ry, rx = b.rx, screen = b.s, spin = 0;
+  if (n) { // transition into next beat over 0.9s with a full turn, swap at edge-on
+    const k = eIO(prog(t, n.at - 0.45, n.at + 0.45));
+    x = lerp(b.x, n.x, k); y = lerp(b.y, n.y, k); z = lerp(b.z, n.z, k); rx = lerp(b.rx, n.rx, k);
+    ry = lerp(b.ry, n.ry, k); spin = k * Math.PI * 2 * (i % 2 ? -1 : 1);
+    if (k >= 0.25 && k < 0.75) screen = (k < 0.5 ? b.s : n.s); if (k >= 0.5) screen = n.s;
+  }
+  // in-scene app transitions, with a small tap bounce
+  const subs = [['scan', 16.4, 'scan0', 'scan'], ['voice', 23.0, 'voice', 'review'], ['person', 28.4, 'person', 'identity']];
+  let tap = 0;
+  for (const [base, at, before, after] of subs) if (screen === base) { screen = t < at ? before : after; tap = Math.exp(-Math.pow((t - at) * 7, 2)); }
+  // idle float
+  const fl = Math.sin(t * 1.3) * 0.02;
+  p.position.set(x + (1 - enter) * 1.4, y + fl - (1 - enter) * 1.2, z + (1 - enter) * -2);
+  p.rotation.set(rx + (1 - enter) * 0.4, ry + spin + (1 - enter) * -1.6 + Math.sin(t * 0.7) * 0.04, (1 - enter) * 0.3);
+  const out = prog(t, 40.4, 41.2);
+  p.scale.setScalar(lerp(1.0, 0.0001, eIn(out)) * 0.88 * (1 - tap * 0.03));
+  p.visible = t > 13.3 && t < 41.2;
+  setScreen(p, screen);
+}
+
+function renderAt(t) {
+  // camera: fly through the crowd, settle for the product
+  const fly = eOut(prog(t, 0, 4.5));
+  const camZ = lerp(18, 4.2, fly);
+  camera.position.set(Math.sin(t * 0.35) * 0.15, Math.cos(t * 0.3) * 0.1, t < 9.5 ? camZ + (t > 4.5 ? -prog(t, 4.5, 9.5) * 0.4 : 0) : 3.8);
+  camera.lookAt(0, 0, camera.position.z - 6);
+  if (t >= 9.5) { camera.position.set(Math.sin(t * 0.3) * 0.06, 0.0, 3.8); camera.lookAt(0, 0, 0); }
+
+  // crowd
+  const gather = eIO(prog(t, 8.9, 10.0));
+  const crowdVis = t < 10.0;
+  crowd.visible = crowdVis;
+  const slow = t < 4.5 ? 1 : lerp(1, 0.25, eOut(prog(t, 4.5, 6)));
+  items.forEach((it, i) => {
+    const drift = (t * 1.2 * slow + it.phase);
+    const pz = ((it.home.z + drift * 2.0) % 60 + 60) % 60 - 60 + 14; // loop depth
+    const target = t < 9.5 ? tmpV.set(it.home.x, it.home.y, pz) : tmpV.set(it.home.x, it.home.y, pz);
+    it.m.position.set(lerp(target.x, 0, gather), lerp(target.y, 0, gather), lerp(target.z, -1, gather));
+    it.m.rotation.set(it.rot0.x + Math.sin(t * it.spin.x + it.phase) * 0.4, it.rot0.y + t * it.spin.y * 0.3 * slow, it.rot0.z);
+    it.m.scale.setScalar(1 - gather * 0.95);
+    // fade by blurring: in S2 distant ones drop
+    const fade = t > 6.5 && t < 9.5 ? prog(t, 6.5, 9.0) : 0;
+    it.m.material.opacity = 1;
+    it.m.visible = !(fade > 0 && (i % 3) < fade * 3);
+  });
+
+  // hero chip
+  const heroIn = eBack(prog(t, 4.6, 5.6));
+  heroChip.visible = t > 4.6 && t < 10.4;
+  heroChip.position.set(lerp(2.5, 0.0, heroIn), lerp(-1.6, -0.42, heroIn), camera.position.z - 4.2);
+  heroChip.rotation.set(-0.1 + Math.sin(t) * 0.05, lerp(-1.2, -0.12, heroIn), 0.04);
+  const hs = 0.8 * (1 - eIn(prog(t, 9.4, 10.4)));
+  heroChip.scale.set(hs, hs, hs);
+  heroChipMat.emissiveIntensity = 0.15 + 0.1 * Math.sin(t * 4);
+  { // scramble the 3D chip in sync
+    const g = scrambleCanvas.getContext('2d'), sk = prog(t, 7.2, 9.0);
+    g.clearRect(0, 0, 640, 140); g.fillStyle = C.tide; rr(g, 0, 0, 640, 140, 70); g.fill();
+    seed2 = Math.floor(t * 18) + 99; let s = ''; const tgt = '@degenwizard';
+    for (const ch of tgt) s += (r2() < sk && ch !== '@') ? '#01x_?'[Math.floor(r2() * 6)] : ch;
+    g.fillStyle = C.inkHex; g.font = '500 56px JBMono'; g.textBaseline = 'middle'; g.fillText(s, 46, 73);
+    heroChipMat.map.needsUpdate = true;
+  }
+
+  // dust
+  dust.position.z = t < 10 ? fly * 10 : 10;
+  dust.material.opacity = 0.5;
+
+  // mark
+  const mk = eBack(prog(t, 10.0, 11.3)), mOut = eIn(prog(t, 13.0, 13.8));
+  mark.visible = t > 9.9 && t < 13.8;
+  mark.position.set(0, lerp(0.05, 0.22, mk) + Math.sin(t * 1.4) * 0.02, lerp(-0.5, 0, mk));
+  mark.scale.setScalar(Math.max(0.0001, mk * 0.62 * (1 - mOut)));
+  mark.rotation.set(0.05 + Math.sin(t * 0.9) * 0.05, lerp(-2.4, 0.18, eOut(prog(t, 10.0, 11.6))) + Math.sin(t * 0.8) * 0.12 + mOut * 1.5, 0);
+  const look = eIO(prog(t, 11.6, 12.1)) - eIO(prog(t, 12.8, 13.2));
+  const eyes = mark.userData.eyes; eyes.position.set(lerp(0.04, 0, look), lerp(-0.05, 0.02, look), 0);
+  const blink = t > 12.35 && t < 12.55 ? 0.4 : 1; eyes.children.forEach((e) => (e.scale.y = blink));
+
+  // phone
+  phonePose(phone, t);
+
+  // voice waveform (scene 02)
+  const wv = eOut(prog(t, 20.4, 21.2)) * (1 - eIn(prog(t, 25.2, 25.7)));
+  wave.visible = wv > 0.001; wave.position.set(-0.46, -0.5, 0.2); wave.rotation.y = 0.0;
+  bars.forEach((b, i) => { const amp = 0.02 + 0.2 * Math.abs(Math.sin(t * 7 + i * 0.55) * Math.sin(t * 2.3 + i * 0.21)); b.scale.y = amp * wv + 0.001; });
+
+  // identity satellites (scene 03)
+  sats.forEach((m, i) => {
+    const on = eBack(prog(t, 26.6 + i * 0.25, 27.4 + i * 0.25)) * (1 - eIn(prog(t, 31.0, 31.6)));
+    m.visible = on > 0.001 && t < 31.7;
+    const a = (i / sats.length) * Math.PI * 2 + t * 0.35;
+    const rad = 0.5;
+    m.position.set(Math.cos(a) * rad * on, -0.40 + Math.sin(a) * 0.72 * on, Math.sin(a) * 0.5 + 0.2);
+    m.rotation.set(0, -Math.cos(a) * 0.35, 0);
+    m.scale.setScalar(0.42 * on + 0.0001);
+    m.material = t > 28.6 + i * 0.5 ? satConfirmed[i] : satPending[i];
+  });
+
+  // privacy rings (scene 05)
+  const rv = eOut(prog(t, 37.0, 38.0)) * (1 - eIn(prog(t, 40.2, 40.8)));
+  [ring, ring2].forEach((r, i) => { r.visible = rv > 0.001; r.position.set(0.32, -0.36, -0.3); r.rotation.set(-0.95 + Math.PI / 2 * 0, t * (i ? -0.4 : 0.5), 0); r.rotation.x = Math.PI / 2 - 0.75; r.scale.setScalar(lerp(0.5, 0.78, rv)); r.material.opacity = rv; });
+
+  // finale: three phones fan out
+  const fin = eOut(prog(t, 41.0, 42.4));
+  const fanT = [['today', -0.6, 0.32, -0.3], ['scan', 0, 0, 0.15], ['person', 0.6, -0.32, -0.3]];
+  [phones[0], phone, phones[1]].forEach((p, i) => {
+    if (t < 41.0) { if (p !== phone) p.visible = false; return; }
+    const [s, x, rz, z] = fanT[i];
+    p.visible = true; setScreen(p, s);
+    p.position.set(x * fin, lerp(-2.6, -0.08, fin) + Math.sin(t * 1.2 + i) * 0.015, z - 0.4);
+    p.rotation.set(-0.12, -x * 0.35 * fin + Math.sin(t * 0.6) * 0.03, rz * fin * 0.35);
+    p.scale.setScalar(0.6);
+  });
+
+  bloom.strength = 0.32;
+  composer.render();
+  driveText(t);
+  grain(t);
+}
+
+window.DURATION = DURATION;
+window.renderAt = renderAt;
+renderAt(+(new URLSearchParams(location.search).get('t') || 0));
+window.READY = true;
+if (new URLSearchParams(location.search).has('play')) { const t0 = performance.now(); const loop = () => { renderAt(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); }; loop(); }
+</script>
+</body>
+</html>

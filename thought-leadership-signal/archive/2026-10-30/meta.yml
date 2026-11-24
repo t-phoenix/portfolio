@@ -1,0 +1,80 @@
+date: '2026-10-30'
+status: posted
+pillar: builder-story
+platform_targets:
+  - x
+  - linkedin
+creative_format: motion_3d_film
+hook: Open your contacts and scroll to the last ten people you saved at a conference.
+receipts:
+  - 'Glance repo: ~/Desktop/Glance (PRD v1.0, decisions log Oct 22 to 24, 2026)'
+  - 'Mumbai week schedule: Glance/week-mumbai-2026/README.md (IBW, Devcon, ETHGlobal, pulled Oct 21)'
+  - https://indiablockchainweek.com/
+  - https://devcon.org/en/
+  - https://ethglobal.com/events/mumbai
+numbers:
+  - 'people_met: 50 to 150 in a week (PRD problem statement)'
+  - 'cost: about $0.08 per person via x402, USDC on Base (decision D8)'
+  - 'dates: IBW Nov 1 to 2, Devcon Nov 3 to 6, ETHGlobal Mumbai to Nov 7'
+creative_assets:
+  - creative/glance-film-vo.mp4
+  - creative/glance-film-vo.srt
+  - creative/glance-film-vo-alt.mp4
+  - creative/glance-film-vo-alt.srt
+  - creative/glance-film.mp4
+  - creative/cover.jpg
+creative_sources:
+  - >-
+    Real Glance app screens: iOS Simulator Release build of the Glance repo, sample people seeded
+    locally (Arjun Mehta, @degenwizard are fictional)
+  - 'Real scanner frame: iPhone screen recording, Oct 29 (/tmp/glance-frames)'
+  - >-
+    Brand kit: Glance Tidepool tokens (src/ui/theme.ts), Bricolage Grotesque + JetBrains Mono (OFL),
+    app icon mark
+  - >-
+    Film source: creative/film.html (Three.js), creative/render.cjs (puppeteer frame capture to
+    ffmpeg)
+  - 'Voiceover: Kokoro v1.0 local TTS (Apache 2.0), script in creative/audio/script.txt'
+  - 'Score: original, synthesized by creative/audio/music.py; mixed by creative/audio/mix.sh'
+spend_usd: 0
+notes: >-
+  Product story pack, explicitly requested by Abhinil, so the usual no product CTA rule is waived
+  for the comment ask. Narrated cut is primary; on screen type still carries the story when muted,
+  and LinkedIn gets the SRT. Post before IBW opens on Nov 1. On LinkedIn seed the first comment with
+  your own answer; on X post Reply 1 right away. Answer the first 10 comments within the hour. The
+  post promises the most common comment wish goes into the next build; keep that promise in a follow
+  up post during Mumbai week. | Scheduled x=2026-10-29T18:00:00+05:30
+  linkedin=2026-10-29T18:00:00+05:30
+schedule:
+  timezone: Asia/Kolkata
+  suggestions:
+    - id: evening-prime
+      label: Evening prime, two days before IBW
+      at: '2026-10-30T19:15:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 94
+      rationale: India + EU overlap, travel planning mood before Mumbai week.
+    - id: morning-prime
+      label: Morning prime
+      at: '2026-10-31T08:30:00+05:30'
+      platforms:
+        - x
+        - linkedin
+      score: 90
+      rationale: Saturday morning before arrivals; still ahead of day one.
+  chosen:
+    x: '2026-10-29T18:00:00+05:30'
+    linkedin: '2026-10-29T18:00:00+05:30'
+  published:
+    x:
+      id: '2115806039119720580'
+      url: https://x.com/touchey_phoenix/status/2115806039119720580
+      at: '2026-10-29T14:00:50Z'
+      dryRun: false
+    linkedin:
+      id: urn:li:ugcPost:7521570113465180161
+      url: null
+      at: '2026-10-29T13:54:20.209Z'
+      dryRun: false

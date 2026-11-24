@@ -1,0 +1,8 @@
+Pack: 2026-10-12 continuous governance
+Format: carousel_studio + photo_essay receipt
+Build: studio HTML/CSS → Puppeteer PNG export
+Overflow fixes: wider cards with wrapping copy; pillar padding; no nowrap on long strings
+Photos:
+  - Reuters/Bhawika Chhabra Jantar Mantar barricades (slide 02 hero)
+  - AFP Ahmedabad + Bengaluru CJP / EC protest frames (slide 05 strip)
+No AI hero art. Credits on-slide + ATTRIBUTION.md
