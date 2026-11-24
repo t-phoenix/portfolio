@@ -21,3 +21,11 @@ Each time a new session starts or upon request for a Morning Briefing:
 - Do not use hyphens or dashes in any outward communication.
 - Be authoritative yet open to technical exchange.
 - Focus on resilient tech systems over standalone products.
+
+## Thought Leadership Signal (X + LinkedIn)
+When drafting or reviewing Signal packs under `thought-leadership-signal/`:
+1. Load `thought-leadership-signal/research/virality/playbook.md` and platform yml files.
+2. Require a comment magnet (experience fork). Ban empty "Thoughts?" / "Agree?".
+3. Prefer one hero creative while the accounts are growing; carousels only when earned.
+4. Tag ≤3 receipt entities. Put source URLs on LinkedIn after the insight; on X put URLs in the first reply.
+5. Follow `brand/VOICE.md` and `brand/ENGAGEMENT.md`. Zero product or follow CTAs.

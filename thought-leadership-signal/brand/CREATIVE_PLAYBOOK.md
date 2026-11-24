@@ -32,17 +32,26 @@ Eye catching assets (photo, meme, chart) are optional. Use them when they add st
 
 ## Format catalog
 
+### hero_billboard
+- **Use for:** default growth posts (single scroll stop on X and LinkedIn)
+- **Build:** one 1080×1080 (or 1080×1350) HTML/CSS frame → PNG
+- **Bar:** would sit next to a Bloomberg Edit / Stripe launch still
+- **Rule:** one idea, giant type, optional one honest contrast; no carousel filler
+- **Save:** `hero.png` + `hero.html` + `export-hero.cjs`
+
 ### carousel_studio
-- **Use for:** multi beat teaching + receipts
+- **Use for:** multi beat teaching + receipts (when the angle needs beats)
 - **Build:** HTML/CSS design system → PNG export
 - **Assets:** real photo strips, source chips (logos), charts from research numbers
 - **Save:** `slide-01.png` … + `carousel.html` + `assets/`
+- **Growth note:** historically weak reach on this account; prefer `hero_billboard` until traction
 
 ### meme_real
-- **Use for:** irony, builder pain, culture
+- **Use for:** irony, builder pain, culture, shareability
 - **AgentCash:** StableMemes / Imgflip templates (~$0.01–0.02)
 - **Why allowed:** templates are real meme corpus, not invented scenes
 - **Save:** `meme.png` + template id in `prompt.txt`
+- **Agency bar still applies:** crop, type, and contrast must look intentional
 
 ### receipt_collage
 - **Use for:** newsjack with proof
@@ -182,3 +191,17 @@ queue/YYYY-MM-DD/creative/
   prompt.txt           # build notes (not AI scene prompts)
   carousel.md
 ```
+
+## Brand rotation (2026-11-08, replaces the single studio palette)
+
+Owner call: a new look every pack. Rotate three directions, never the same one two packs in a row. Log the one used in `meta.yml` as `brand_direction`.
+
+| Id | Name | Feel | Type | Palette |
+|----|------|------|------|---------|
+| A | Hacker Mono | ETHGlobal energy, terminal, grid | Space Grotesk + JetBrains Mono | #050505, #f5f5f0, acid #d4ff3a |
+| B | Mumbai Festival | Devcon India energy, jaali pattern, arch frame | Unbounded + Instrument Serif italic | plum #3a0c4a, pink #ff4fa3, marigold #ffb000 |
+| C | Sticker Bomb Zine | shitpost poster, halftone paper, tape | Archivo Black + Space Grotesk + JetBrains Mono | paper #efebe1, ink #111, blue #3a7bfa, pink #ff3d8b |
+
+Reference board: `queue/2026-11-08/creative/brand-directions.png` (source `directions.html`).
+Every direction uses real brand logos and die cut stickers from `brand/assets/stickers/` (1 to 3 slap stickers per frame).
+No marker circles or arrows over photos unless the joke needs exactly one.

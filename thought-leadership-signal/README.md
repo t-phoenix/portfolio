@@ -14,6 +14,8 @@ Personal brand thought leadership system for X and LinkedIn.
 | Path | Purpose |
 |------|---------|
 | [`brand/`](brand/) | Guidelines, voice, engagement doctrine, creative playbook, real asset library |
+| [`research/virality/`](research/virality/) | X + LinkedIn distribution factors and pack checklist |
+| [`GROWTH_PLAN.md`](GROWTH_PLAN.md) | Account baseline, reply lever, format experiments |
 | [`topics/TOPICS.yml`](topics/TOPICS.yml) | Pillars, keywords, AgentCash query packs |
 | [`topics/SELECTION.md`](topics/SELECTION.md) | How to pick: Web3 / AI / intersection; no sequel theses |
 | [`research/`](research/) | News, social, trends with sourced facts |

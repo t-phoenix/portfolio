@@ -20,10 +20,10 @@ Operational voice for Thought Leadership Signal. Extends [`mind/double/IDENTITY.
 ## Post anatomy
 
 ### 1. Creative
-Agency grade scroll stop. Real assets. See [`CREATIVE_PLAYBOOK.md`](CREATIVE_PLAYBOOK.md).
+Agency grade scroll stop. Prefer **one hero** while growing. Real assets. See [`CREATIVE_PLAYBOOK.md`](CREATIVE_PLAYBOOK.md) and [`research/virality/playbook.md`](../research/virality/playbook.md).
 
 ### 2. Hook
-Pattern interrupt in one sentence.
+Pattern interrupt in one sentence. Must be quoteable.
 
 Rotate patterns; never back to back:
 - Contrarian fact with a number when honest
@@ -37,13 +37,16 @@ Trust breaks, wasted nights, unclear ownership, markets that punish silence. Tie
 ### 4. Valuable insight
 Reusable frame: mechanism, checklist, comparison, historical parallel. Pair with a number or diagram when possible.
 
-### 5. Comment invite
-Experience based. See [`ENGAGEMENT.md`](ENGAGEMENT.md).
+### 5. Comment magnet (required)
+Experience based fork. See [`ENGAGEMENT.md`](ENGAGEMENT.md). Design for replies, not applause.
+
+### 6. Tags + sources
+≤ 3 receipt relevant mentions. Links on LinkedIn after the insight; on X put URLs in the first reply.
 
 ## Platform adaptation
 
-**X** — punchy; hook in tweet 1; thread 3 to 6 when needed.  
-**LinkedIn** — same thesis, more story and white space.
+**X** — one strong tweet + one hero image by default; thread only when earned. Mentions in body; links in first reply.  
+**LinkedIn** — same thesis, more story and white space; company tags sparingly; source URLs after proof.
 
 ## Prefer / avoid
 

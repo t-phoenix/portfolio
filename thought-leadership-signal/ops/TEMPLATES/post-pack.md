@@ -29,10 +29,23 @@ Copy into `queue/YYYY-MM-DD/`.
 
 ## Insight
 
-## Comment invite
+## Comment magnet (required)
+<!-- fork or lived ask; ban Thoughts? / Agree? -->
+
+## Tags
+- X:
+- LinkedIn:
+
+## Links
+- In LinkedIn body:
+- In X first reply:
+
+## Author ops
+- Seed reply text:
+- First hour: reply to every comment
 
 ## Creative format
-<!-- from CREATIVE_PLAYBOOK -->
+<!-- prefer hero_billboard | meme_real | data_frame | receipt_collage; carousel only if earned -->
 
 ## Real assets to use
 - photography:
@@ -45,7 +58,8 @@ Copy into `queue/YYYY-MM-DD/`.
 
 ## x.md / linkedin.md
 
-Follow VOICE. Name the receipt in copy when you lean on it. No hyphens or dashes.
+Follow VOICE + [`research/virality/playbook.md`](../../research/virality/playbook.md).  
+Name the receipt. No hyphens or dashes. Include `## First reply (X)` with source links.
 
 ---
 
@@ -56,11 +70,18 @@ date: YYYY-MM-DD
 status: draft   # draft | ready | scheduled | posted | failed | killed
 pillar: web3-ai
 platform_targets: [x, linkedin]
-creative_format: carousel_studio
+creative_format: hero_billboard
 hook: ""
 receipts: []
 numbers: []
 creative_assets: []
+virality:
+  comment_magnet: ""
+  tags_x: []
+  tags_linkedin: []
+  links_in_post: []
+  links_in_first_reply: []
+  experiment: single_hero_vs_carousel
 spend_usd: 0.00
 spend_breakdown: []
 notes: ""

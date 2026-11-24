@@ -11,17 +11,20 @@ Work under `thought-leadership-signal/`. Full ops learnings: [`ops/LEARNINGS.md`
 ## Product
 
 - Handles: X `@touchey_phoenix`, LinkedIn Abhinil Agarwal
-- Cadence: one angle/day; packs in `queue/YYYY-MM-DD/`; posted packs move to `archive/`
-- Outward copy: **no hyphens/dashes**, no product/follow CTAs, numbers in copy not duplicated on creatives
+- Cadence: one angle/day (growth plan prefers 4/week); packs in `queue/YYYY-MM-DD/`; posted packs move to `archive/`
+- Outward copy: **no hyphens/dashes**, no product/follow CTAs, numbers in copy not duplicated on creatives (except data/hero contrast art)
 - Never same creative format two days in a row ([`brand/CREATIVE_PLAYBOOK.md`](../../thought-leadership-signal/brand/CREATIVE_PLAYBOOK.md))
+- **Virality (required):** [`research/virality/playbook.md`](../../thought-leadership-signal/research/virality/playbook.md) — comment magnet, ≤3 tags, LI links in body / X links in first reply, prefer single `hero_billboard` while growing
+- **Engagement:** [`brand/ENGAGEMENT.md`](../../thought-leadership-signal/brand/ENGAGEMENT.md)
 
 ## Daily pack recipe
 
-1. Research → `research/YYYY-MM-DD/` (AgentCash Enrich; prefer Base; log spend)
-2. Brief + `x.md` + `linkedin.md` + `meta.yml` (`status: ready`)
-3. Studio HTML carousel → PNG via puppeteer `export-slides.cjs` (local $0)
+1. Research → `research/YYYY-MM-DD/` (AgentCash Enrich; prefer Base; log spend) + skim virality playbook
+2. Brief + `x.md` + `linkedin.md` + `meta.yml` with `virality:` block (`status: ready`)
+3. Prefer one hero HTML → PNG via `export-hero.cjs` (local $0); carousel only if earned
 4. `npm run suggest-times` then user locks `npm run schedule`
 5. GHA / `publish-due` ships when `status: scheduled` and times due
+6. Author: post seed reply on X with sources; reply to early comments same hour
 
 ## X publish (official API — preferred)
 
@@ -54,9 +57,11 @@ Work under `thought-leadership-signal/`. Full ops learnings: [`ops/LEARNINGS.md`
 
 ## Creative / copy lessons
 
-- Hook in tweet 1; thread 3–6; keep under 280 unless account has longer posts
+- Hook in tweet 1; **default = 1 tweet + 1 hero image** while under traction; thread only when earned
 - Creative ≠ caption data dump
-- Rotate formats: studio / asymmetric / clearance / diagram / receipt / meme / **code receipt**
+- Rotate formats: **hero_billboard** / meme / receipt / data_frame / diagram / studio carousel / **code receipt**
+- Comment magnet required; ban "Thoughts?" / "Agree?"
+- Tags ≤3 receipt entities; X URLs in first reply (pay-per-use + dwell)
 - **Topic breadth:** Web3 only, AI only, or intersection — do not force Web3 x AI every day. See [`topics/SELECTION.md`](../../thought-leadership-signal/topics/SELECTION.md)
 - Tasteful code on slides OK when it is the receipt (one smoking gun block)
 - **Hero every slide (hard gate):** every carousel frame is a hero creative — one dominant idea, big display type, equal craft on 01–05. No supporting-deck cards, appendix lists, or tiny captions under a void.

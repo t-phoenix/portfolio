@@ -16,16 +16,19 @@ Session learnings (X OAuth, costs, dry-run traps, thesis arc): [`LEARNINGS.md`](
 2. **Pick**  
    One pillar from [`topics/TOPICS.yml`](../topics/TOPICS.yml) + one real signal. Follow [`topics/SELECTION.md`](../topics/SELECTION.md): Web3 only, AI only, or intersection — no forced mashup, no sequel of yesterday.
 
-3. **Engagement gate**  
-   Confirm the pack will create long term value per [`brand/ENGAGEMENT.md`](../brand/ENGAGEMENT.md). Kill farming angles.
+3. **Engagement + virality gate**  
+   Confirm long term value per [`brand/ENGAGEMENT.md`](../brand/ENGAGEMENT.md) **and** the checklist in [`research/virality/playbook.md`](../research/virality/playbook.md).  
+   Kill farming. Require a comment magnet, ≤3 tags, and a link plan (LI body / X first reply).
 
 4. **Brief**  
-   `queue/YYYY-MM-DD/brief.md` must list receipts, numbers (if any), emotional bridge, insight.
+   `queue/YYYY-MM-DD/brief.md` must list receipts, numbers (if any), emotional bridge, insight, comment magnet, tags, author seed reply.
 
 5. **Copy**  
-   `x.md` + `linkedin.md` per [`brand/VOICE.md`](../brand/VOICE.md). No hyphens or dashes.
+   `x.md` + `linkedin.md` per [`brand/VOICE.md`](../brand/VOICE.md). No hyphens or dashes.  
+   Prefer single tweet + hero on X while growing.
 
 6. **Creative**  
+   Prefer one `hero_billboard` / `meme_real` / `data_frame` unless the angle needs a carousel.  
    Agency craft + real assets only ([`CREATIVE_PLAYBOOK.md`](../brand/CREATIVE_PLAYBOOK.md), [`ASSETS.md`](../brand/ASSETS.md)).  
    Never same format two days in a row. Respect [`BUDGET.md`](BUDGET.md).
 
@@ -58,11 +61,13 @@ Session learnings (X OAuth, costs, dry-run traps, thesis arc): [`LEARNINGS.md`](
 
 ## Post formula
 
-1. Agency creative (real assets)
-2. Crazy HOOK
+1. Agency creative (prefer one hero)
+2. Crazy HOOK (quoteable)
 3. Story / emotional bridge tied to receipt
 4. Insight (+ honest number or diagram)
-5. Experience based comment invite
+5. Comment magnet (fork / lived ask)
+6. Tags + source plan
+7. Author seed reply + first hour reply ops
 
 ## Weekly rhythm
 

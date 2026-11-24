@@ -3,6 +3,8 @@
 Written 2026-10-02. Baseline data pulled the same day from twitterapi.io.
 LinkedIn profile and post stats could not be read (see Gaps).
 
+**Virality doctrine (2026-10-17):** structured factors live in [`research/virality/`](research/virality/). Agents and pack templates now require comment magnets, tag/link plans, and prefer single hero creatives while testing reach.
+
 ## 1. Where things stand
 
 | Measure | Value |
