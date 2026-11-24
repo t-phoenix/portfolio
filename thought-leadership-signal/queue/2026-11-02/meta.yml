@@ -1,0 +1,66 @@
+date: '2026-11-02'
+status: ready
+pillar: web3
+platform_targets:
+  - x
+  - linkedin
+creative_format: carousel_infographic
+hook: Fairmont closed. The useful number is not the crowd.
+receipts:
+  - https://x.com/IBWofficial
+  - https://indiablockchainweek.com/ibw_2026/agendas
+  - https://devcon.org/en/
+  - https://cfp.devcon.org/devcon8/talk/RPAPTP/
+  - https://tickets.devcon.org/
+  - https://x.com/EFDevcon
+numbers:
+  - $645M across 26 deals, first 10 months of 2026, finance over 90 percent, deal count down 43 percent
+  - developer share 16 percent in 2025 to 11 percent in 2026, still number 2
+  - 119 million active, 9 in 10 did not panic trade
+  - Devcon opens 3 Nov 9:30 IST, tickets $499 / $149 / $25 including tax
+creative_assets:
+  - creative/slide-01.png
+  - creative/slide-02.png
+  - creative/slide-03.png
+  - creative/slide-04.png
+creative_sources:
+  - Studio HTML stills in creative/carousel.html, captured by creative/export-slides.cjs
+  - puppeteer-core reused from archive/2026-10-30/creative/node_modules
+  - Syne and IBM Plex Sans via Google Fonts (OFL)
+spend_usd: 0
+virality:
+  comment_magnet: Which room was the real one, the banks this afternoon or the builders tomorrow?
+  tags_x:
+    - '@IBWofficial'
+    - '@HashedEM'
+    - '@EFDevcon'
+  tags_linkedin:
+    - '#IBW2026'
+    - '#Devcon'
+    - '#Ethereum'
+  links_in_post:
+    - https://x.com/IBWofficial
+    - https://indiablockchainweek.com/ibw_2026/agendas
+    - https://devcon.org/en/
+    - https://cfp.devcon.org/devcon8/schedule/
+    - https://tickets.devcon.org/
+  links_in_first_reply:
+    - https://x.com/IBWofficial
+    - https://indiablockchainweek.com/ibw_2026/agendas
+    - https://devcon.org/en/
+    - https://cfp.devcon.org/devcon8/schedule/
+    - https://tickets.devcon.org/
+  format: carousel_infographic
+  experiment: week_at_a_glance_after_a_mechanism_story
+notes: >-
+  Ready, not scheduled. Numbers are the 1 Nov IBW thread plus the live ticket page.
+  No 2026 door count. Do not publish until asked.
+schedule:
+  timezone: Asia/Kolkata
+  suggestions: []
+  chosen:
+    x: null
+    linkedin: null
+  published:
+    x: null
+    linkedin: null

@@ -1,0 +1,8 @@
+date: '2026-10-22'
+total_usd: 0.01
+items:
+  - endpoint: https://stableenrich.dev/api/exa/search
+    usd: 0.01
+    network: base
+    tx: '0x0ac51be1564d1728b1797b1a5c2e21ce5beaaed659470bee2af1d1969eae5207'
+notes: Exa confirmation of Talos USDC composition. Monid not called (no API key).

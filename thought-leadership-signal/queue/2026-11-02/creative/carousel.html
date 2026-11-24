@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Signal 2026-11-02</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; flex-direction: column; gap: 28px; padding: 28px; align-items: center; }
+  .slide {
+    width: 1080px; height: 1080px; position: relative; overflow: hidden; color: #f4f1ea;
+    padding: 56px 64px 48px;
+    display: grid; grid-template-rows: 28px auto auto auto minmax(0, 1fr) 44px; gap: 14px;
+    background:
+      radial-gradient(820px 420px at 88% 8%, rgba(61,155,143,.18), transparent 58%),
+      linear-gradient(180deg, #12161c, #07090d 70%);
+  }
+  .slide::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(244,241,234,.16); pointer-events: none; }
+  .chrome, .foot, .eye, h1, .sub, .stage { position: relative; z-index: 2; }
+  .chrome, .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: "IBM Plex Sans", sans-serif; font-size: 16px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: #9aa3ad;
+  }
+  .brand { color: #7dcec3; display: flex; gap: 10px; align-items: center; }
+  .sq { width: 10px; height: 10px; background: #3d9b8f; display: inline-block; }
+  .eye { font-family: "IBM Plex Sans", sans-serif; font-size: 18px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #7dcec3; }
+  h1 { font-family: Syne, sans-serif; font-weight: 800; font-size: 84px; line-height: .92; letter-spacing: -.04em; max-width: 920px; }
+  .sub { font-family: "IBM Plex Sans", sans-serif; font-size: 30px; line-height: 1.25; color: #c5cdc8; max-width: 860px; }
+  .foot { border-top: 1px solid rgba(244,241,234,.16); padding-top: 12px; }
+  .stage { min-height: 0; display: flex; align-items: flex-end; justify-content: center; perspective: 1400px; padding-bottom: 8px; }
+  .slide.mid .stage { align-items: center; padding-bottom: 0; }
+  .rooms { display: flex; gap: 36px; align-items: stretch; width: 100%; }
+  .room {
+    flex: 1; min-height: 400px; border-radius: 28px; padding: 32px 28px 28px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 22px 32px 48px rgba(0,0,0,.42);
+  }
+  .room.done {
+    background: linear-gradient(165deg, #f4efe4, #d9d2c3);
+    color: #14181c;
+    transform: rotateY(14deg) rotateX(4deg);
+  }
+  .room.next {
+    background: linear-gradient(165deg, #4eaea1, #2f7d73);
+    color: #071210;
+    transform: rotateY(-12deg) rotateX(4deg);
+  }
+  .when { font-family: "IBM Plex Sans", sans-serif; font-size: 18px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; opacity: .72; }
+  .room h2 { font-family: Syne, sans-serif; font-weight: 800; font-size: 54px; line-height: .95; letter-spacing: -.03em; margin-top: 18px; }
+  .room p { font-family: "IBM Plex Sans", sans-serif; font-size: 26px; font-weight: 500; line-height: 1.3; margin-top: 16px; }
+  .stamp { font-family: Syne, sans-serif; font-weight: 800; font-size: 42px; letter-spacing: -.03em; }
+  .num {
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 168px; line-height: .86;
+    letter-spacing: -.05em; color: #e2a15a;
+  }
+  .slabwrap { display: flex; align-items: center; gap: 40px; width: 100%; }
+  .pile { position: relative; width: 360px; height: 210px; flex: 0 0 auto; }
+  .slab {
+    position: absolute; left: 36px; top: 78px; width: 300px; height: 118px; border-radius: 20px;
+    background: linear-gradient(150deg, #f6e0b8, #c4843a 46%, #8d5c2c);
+    box-shadow: 12px 16px 0 #3a2714, 20px 28px 24px rgba(0,0,0,.4);
+    transform: rotateX(18deg) rotateY(-14deg);
+  }
+  .slab.mid { left: 20px; top: 40px; width: 270px; height: 104px; opacity: .82; }
+  .slab.back { left: 4px; top: 4px; width: 240px; height: 90px; opacity: .5; }
+  .deal {
+    font-family: "IBM Plex Sans", sans-serif; font-size: 30px; font-weight: 600; color: #f4f1ea; line-height: 1.2;
+  }
+  .deal b { display: block; font-family: Syne, sans-serif; font-size: 72px; font-weight: 800; letter-spacing: -.04em; line-height: .9; }
+  .bars { display: flex; align-items: flex-end; gap: 72px; height: auto; }
+  .col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 16px; width: 240px; }
+  .bar {
+    width: 200px; border-radius: 22px 22px 12px 12px;
+    display: flex; align-items: flex-start; justify-content: center; padding-top: 22px;
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 64px; letter-spacing: -.04em;
+    box-shadow: 16px 22px 32px rgba(0,0,0,.4);
+    transform: rotateY(-10deg);
+  }
+  .bar.was { height: 280px; background: linear-gradient(180deg, #f4efe4, #cfc6b6); color: #14181c; }
+  .bar.now { height: 192px; background: linear-gradient(180deg, #f0c27a, #c4843a); color: #1a1208; transform: rotateY(10deg); }
+  .col span { font-family: "IBM Plex Sans", sans-serif; font-size: 26px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #c5cdc8; }
+  .prices { display: flex; gap: 22px; width: 100%; align-items: stretch; }
+  .ticket {
+    flex: 1; border-radius: 24px; padding: 26px 22px 22px; min-height: 240px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 16px 24px 36px rgba(0,0,0,.4);
+  }
+  .ticket.a { background: #1c242c; border: 1px solid rgba(244,241,234,.2); transform: rotateY(12deg) rotateX(6deg); }
+  .ticket.b { background: linear-gradient(165deg, #f4efe4, #d9d2c3); color: #14181c; transform: rotateX(6deg); }
+  .ticket.c { background: linear-gradient(165deg, #4eaea1, #2f7d73); color: #071210; transform: rotateY(-12deg) rotateX(6deg); }
+  .ticket em { font-style: normal; font-family: "IBM Plex Sans", sans-serif; font-size: 18px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+  .ticket strong { font-family: Syne, sans-serif; font-weight: 800; font-size: 68px; letter-spacing: -.04em; line-height: .9; display: block; margin-top: 18px; }
+  .ticket span { font-family: "IBM Plex Sans", sans-serif; font-size: 24px; font-weight: 600; line-height: 1.25; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>01 / 04</span></header>
+  <p class="eye">Mumbai, this week</p>
+  <h1>Two rooms.</h1>
+  <p class="sub">Fairmont closed. The builder room opens tomorrow.</p>
+  <div class="stage">
+    <div class="rooms">
+      <article class="room done">
+        <div>
+          <p class="when">1 and 2 Nov</p>
+          <h2>Fairmont</h2>
+          <p>The report. The banks.</p>
+        </div>
+        <b class="stamp">Closed</b>
+      </article>
+      <article class="room next">
+        <div>
+          <p class="when">From tomorrow</p>
+          <h2>Jio World Centre</h2>
+          <p>The builders.</p>
+        </div>
+        <b class="stamp">9:30</b>
+      </article>
+    </div>
+  </div>
+  <footer class="foot"><span>One night between them</span><span>Devcon 8</span></footer>
+</section>
+
+<section class="slide mid">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>02 / 04</span></header>
+  <p class="eye">On stage, 1 Nov</p>
+  <h1 class="num">$645M</h1>
+  <p class="sub">Fewer deals. Bigger checks. First ten months.</p>
+  <div class="stage">
+    <div class="slabwrap">
+      <div class="pile">
+        <div class="slab back"></div>
+        <div class="slab mid"></div>
+        <div class="slab"></div>
+      </div>
+      <p class="deal"><b>26</b> deals. Finance took almost all of it.</p>
+    </div>
+  </div>
+  <footer class="foot"><span>Hashed Emergent</span><span>India Blockchain Week</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>03 / 04</span></header>
+  <p class="eye">Share of crypto developers</p>
+  <h1>The share slipped.</h1>
+  <p class="sub">Still the second largest hub.</p>
+  <div class="stage">
+    <div class="bars">
+      <div class="col"><div class="bar was">16%</div><span>2025</span></div>
+      <div class="col"><div class="bar now">11%</div><span>2026</span></div>
+    </div>
+  </div>
+  <footer class="foot"><span>One in nine is still here</span><span>Rise In survey</span></footer>
+</section>
+
+<section class="slide">
+  <header class="chrome"><span class="brand"><i class="sq"></i>Signal · Abhinil</span><span>04 / 04</span></header>
+  <p class="eye">Tomorrow</p>
+  <h1>9:30.</h1>
+  <p class="sub">Devcon opens. Jio World Centre. Four days.</p>
+  <div class="stage">
+    <div class="prices">
+      <article class="ticket a"><div><em>General</em><strong>$499</strong></div><span>Anyone</span></article>
+      <article class="ticket b"><div><em>Live in India</em><strong>$149</strong></div><span>Prove residency</span></article>
+      <article class="ticket c"><div><em>Student</em><strong>$25</strong></div><span>Indian students</span></article>
+    </div>
+  </div>
+  <footer class="foot"><span>Tax included</span><span>Entry from 8:30</span></footer>
+</section>
+
+<script>window.READY = true;</script>
+</body>
+</html>

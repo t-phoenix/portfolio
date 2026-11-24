@@ -1,0 +1,86 @@
+# X (Twitter) virality factors for Signal
+# Sourced from xai-org/x-algorithm (open source) + account baseline
+version: 1
+updated: 2026-10-17
+platform: x
+handle: "@touchey_phoenix"
+
+# Ranker predicts action probabilities per viewer, then weights them.
+# Weights scale predicted probability, not raw counts.
+signals:
+  positive_high:
+    - id: reply
+      why: "Heavy weight vs like; mutual follows boost reply weight further"
+      signal_action: "Design for a reply someone can write in 15 seconds with a real opinion"
+    - id: share_via_copy_link
+      why: "Among the highest weighted positive actions in published weight tables"
+      signal_action: "Make one line so sharp people paste it into group chats"
+    - id: quote
+      why: "Out of network discovery + discourse"
+      signal_action: "Leave a crisp quoteable sentence in tweet 1"
+    - id: dwell
+      why: "Stopping the scroll scores even without taps"
+      signal_action: "One strong image + short hook; avoid 6 tweet walls on cold accounts"
+    - id: follow_author
+      why: "Direct growth term in the utility"
+      signal_action: "Profile clarity beats CTA; bio and pin do the follow job"
+  positive_medium:
+    - id: favorite
+      why: "Baseline unit; weak alone"
+    - id: retweet
+      why: "Lower weight than reply or copy link in published tables"
+    - id: profile_click
+      why: "Discovery into follow"
+  negative:
+    - id: not_interested
+    - id: mute
+    - id: block
+    - id: report
+      why: "Pull score down hard; avoid rage bait that triggers reports"
+
+distribution_rules:
+  - id: originals_over_replies
+    rule: "Own originals can reach For You out of network. Replies/reposts are heavily discounted or excluded from OON."
+    implication: "Replies grow relationships and borrow reach inside a thread. They do not replace posting originals."
+  - id: early_engagement_window
+    rule: "First 30 to 90 minutes of replies matter for cold start and in network push."
+    implication: "Author must reply to first comments fast. Seed a first reply with sources."
+  - id: external_urls
+    rule: "Outbound links reduce dwell and cost more on pay per use API (~$0.20 vs ~$0.015)."
+    implication: "Default X_ALLOW_URLS=false. Put URLs in the first reply, not tweet 1."
+  - id: author_diversity
+    rule: "Multiple posts from same author are attenuated in a session."
+    implication: "Prefer 1 strong original over spray. Cadence 3 to 4 originals/week + daily replies."
+
+format_weights_for_small_accounts:
+  preferred:
+    - single_image_or_hero
+    - short_text_under_280
+    - one_quoteable_line
+  deprioritized_until_traction:
+    - long_carousel_threads
+    - 5_plus_tweet_explainer_threads
+
+comment_magnets:
+  patterns:
+    - id: binary_fork
+      example: "Mainnet default or Base default. One reason."
+      ban: "Agree? / Thoughts? / Like if"
+    - id: pick_your_layer
+      example: "Which layer failed for you first: cost, custody, or liquidity?"
+    - id: lived_receipt_ask
+      example: "Where did your product still pretend L1 was the money path?"
+  rules:
+    - "Question must be answerable from experience in one sentence"
+    - "Invite disagreement, not applause"
+    - "Never ask for follows, DMs, or clicks"
+
+tagging:
+  max_mentions_in_main_post: 3
+  prefer: "Accounts that are the receipt subject (@base, @ethereum, @tokenterminal)"
+  avoid: "Tagging friends for reach, engagement pods, unrelated influencers"
+
+self_growth_loop:
+  - "Reply 5 to 8x/day into watchlist threads with a lived fact"
+  - "Reply to every comment on your post same day"
+  - "Pin and bio carry the one link; posts stay CTA free"

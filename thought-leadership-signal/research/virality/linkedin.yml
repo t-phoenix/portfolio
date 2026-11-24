@@ -1,0 +1,71 @@
+# LinkedIn virality / distribution factors for Signal
+# LinkedIn engineering posts + 2026 practitioner synthesis
+# Note: LinkedIn states the product is not designed for "virality"
+version: 1
+updated: 2026-10-17
+platform: linkedin
+profile: "Abhinil Agarwal"
+
+signals:
+  active:
+    - id: comments
+      why: "Strong active signal; thoughtful comments extend distribution"
+      signal_action: "End with an experience fork people want to defend"
+    - id: reshares
+      why: "Network hop beyond first circle"
+      signal_action: "One reusable frame + named receipt worth forwarding to a coworker"
+    - id: saves
+      why: "Practitioner analyses treat saves as high intent vs likes"
+      signal_action: "Checklist, comparison, or model people want later"
+    - id: reactions
+      why: "Weaker than comments/saves but still positive"
+  passive:
+    - id: dwell_time
+      why: "LinkedIn engineering uses dwell and P(skip); long dwell is positive"
+      signal_action: "White space, short paragraphs, one hero image that stops the thumb"
+    - id: return_visit
+      why: "Returning to a post is a quality signal"
+      signal_action: "Pack enough substance that people reopen"
+
+ranking_notes:
+  - "Relevance to viewer profile and past engagement beats pure recency"
+  - "Useful older posts can keep circulating for days"
+  - "Generic engagement bait is downranked; specific professional perspective is preferred"
+  - "Outbound links in the first line hurt; place links after the insight or in comments"
+
+format_weights:
+  preferred:
+    - single_hero_image
+    - native_document_or_carousel_when_teaching
+    - short_native_video_sparingly
+  for_this_account_now:
+    - "Single hero image + story caption (test vs prior carousels)"
+    - "Carousels only when each frame is a true hero"
+
+comment_magnets:
+  patterns:
+    - id: professional_fork
+      example: "If you ship payments tomorrow, is L1 still the default money path?"
+    - id: role_specific
+      example: "Treasury, product, or protocol: who owns the L2 decision at your shop?"
+    - id: disagree_invite
+      example: "Where is this read wrong for institutions?"
+  rules:
+    - "No 'comment YES' / emoji chains"
+    - "Ask for a case from their stack, city, or desk"
+    - "Author must reply to early comments within the hour"
+
+tagging:
+  max_company_or_people_tags: 3
+  prefer: "Entities named in the receipt (Base, Ethereum, Coinbase, Token Terminal)"
+  avoid: "Spam tagging; LinkedIn suppresses low quality tag spam"
+  how: "Tag in the body only where the sentence requires the entity"
+
+hashtags:
+  max: 3
+  style: "Specific (#stablecoins #ethereum #Base) not generic (#motivation)"
+
+links:
+  - "Primary source URLs belong in the post or first comment"
+  - "Lead with insight; link after proof"
+  - "Name the publisher in plain text so the click is intentional"

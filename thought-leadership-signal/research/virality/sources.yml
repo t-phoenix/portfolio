@@ -1,0 +1,42 @@
+version: 1
+updated: 2026-10-17
+refresh_every_days: 60
+
+x:
+  - title: "X For You feed algorithm (open source)"
+    url: "https://github.com/xai-org/x-algorithm"
+    used_for: "Predicted actions, OON discount, originality, filtering"
+  - title: "X algorithm README snapshot"
+    url: "https://github.com/xai-org/x-algorithm/blob/refs/heads/main/README.md"
+    used_for: "Weight semantics (probability, not raw counts)"
+  - title: "Community deep dive on published weights"
+    url: "https://github.com/ceoguy/x-algorithm-skill/blob/main/docs/algorithm-deep-dive.md"
+    used_for: "Reply / share / OON heuristics (treat as secondary)"
+  - title: "Signal account baseline"
+    path: "thought-leadership-signal/GROWTH_PLAN.md"
+    used_for: "Local proof that replies outperform carousels on this account"
+
+linkedin:
+  - title: "Leveraging dwell time (LinkedIn Engineering)"
+    url: "https://www.linkedin.com/blog/engineering/feed/leveraging-dwell-time-to-improve-member-experiences-on-the-linkedin-feed"
+    used_for: "Dwell / skip as ranking features"
+  - title: "Next generation LinkedIn Feed (LinkedIn Engineering)"
+    url: "https://www.linkedin.com/blog/engineering/feed/engineering-the-next-generation-of-linkedins-feed"
+    used_for: "Personalization, engagement history"
+  - title: "Homepage multi-task learning (LinkedIn Engineering)"
+    url: "https://www.linkedin.com/blog/engineering/feed/homepage-feed-multi-task-learning-using-tensorflow"
+    used_for: "Active vs passive objectives"
+  - title: "Hootsuite LinkedIn algorithm 2026 overview"
+    url: "https://blog.hootsuite.com/linkedin-algorithm/"
+    used_for: "Practitioner synthesis (saves, comments, relevance)"
+  - title: "Forbes interview on LinkedIn content quality direction"
+    url: "https://www.forbes.com/sites/jodiecook/2026/03/22/linkedin-just-changed-how-content-goes-viral-heres-the-new-playbook/"
+    used_for: "Unique professional perspective over bait"
+
+receipt_post_2026_10_17:
+  - title: "CryptoBriefing on Ethereum Institutional / Token Terminal stablecoin volume"
+    url: "https://cryptobriefing.com/ethereum-l2s-settle-77-stablecoin-volume/"
+    date: "2026-10-15"
+  - title: "Ethereum Institutional Briefing Issue 01"
+    url: "https://ethereuminstitutional.org/research/ethereum-institutional-briefing-issue-01"
+    date: "2026-10-15"
