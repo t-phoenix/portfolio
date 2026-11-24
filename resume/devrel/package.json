@@ -1,0 +1,10 @@
+{
+  "name": "resume-devrel",
+  "private": true,
+  "scripts": {
+    "pdf": "node export-pdf.cjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.22.0"
+  }
+}

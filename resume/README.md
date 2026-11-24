@@ -6,6 +6,12 @@
 |------|---------|
 | `archive/` | Prior resume/CV PDFs (unchanged originals) |
 | `master/` | Current master resume for Product × Web3 × AI × Finance |
+| `ethereum-institutional-fde/` | Forward Deployed Engineer @ Ethereum Institutional (ATS-plain) |
+| `0g-product-engineer/` | Product Engineer @ 0G |
+| `ethglobal-mumbai/` | Hacker CV for ETHGlobal Mumbai (5–7 Nov 2026) |
+| `ai-agent-engineer-tokyo/` | AI Agent Engineer, Tokyo hybrid (LLM / agents / PoC) |
+| `devrel/` | ATS-plain DevRel CVs (one folder per live role) |
+| `blockvora-defi-engineer/` | Senior Solidity / DeFi lending (Blockvora outreach, Nov 2026) |
 
 ## Master files
 
