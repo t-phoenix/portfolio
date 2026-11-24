@@ -37,7 +37,14 @@ Pack local copies live under `queue/YYYY-MM-DD/creative/assets/` so packs stay p
 - Fake dashboards with made up KPIs
 - Logos of brands unrelated to the post (confusion + legal risk)
 - Uncredited photography
-- Deepfakes or misleading edits of real people
+- Edits of real people that a viewer could mistake for a real photo or a real event
+
+## Parody of public figures (allowed, 2026-11-08)
+
+Owner decision: clearly labelled parody of public figures (founders, protocol leads) is allowed.
+- Must read as a joke at a glance: cutout collage, paper doll, sticker style, visible scissor edges, "parody" label.
+- Base photos are real and credited in ATTRIBUTION.md.
+- No photoreal swaps, no fake quotes, nothing that implies an endorsement. Claude will not produce photoreal edits of real people.
 
 ## How to use marks
 
