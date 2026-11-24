@@ -50,3 +50,15 @@ OkContract*/
 
 # Per-pack puppeteer deps (locks were inconsistently tracked; npm install regenerates)
 thought-leadership-signal/**/creative/package-lock.json
+
+# Local only: business pricing sheets, private application notes, raw phone photos
+adpr/
+resume/**/APPLICATION.md
+resume/**/package-lock.json
+thought-leadership-signal/brand/assets/Eth Global goodies/
+
+# Heavy film renders (20-25 MB each), rebuilt by the pack's render script
+thought-leadership-signal/archive/2026-10-30/creative/*.mp4
+
+# Claude Code per-machine settings
+.claude/settings.local.json
