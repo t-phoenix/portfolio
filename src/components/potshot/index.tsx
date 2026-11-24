@@ -119,7 +119,7 @@ const Potshot = () => {
   };
 
   return (
-    <section id="potshot" className="py-32 px-4 md:px-8 max-w-7xl mx-auto">
+    <section id="potshot" className="pt-8 pb-20 md:pb-28 px-4 md:px-8 max-w-7xl mx-auto">
       <div className="space-y-12">
         <PotshotHeader />
 

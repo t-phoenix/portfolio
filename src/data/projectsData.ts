@@ -1,7 +1,8 @@
-import rektceoImg from '../assets/projects/rektceo.png';
-import cryptoindexImg from '../assets/projects/cryptoindex.png';
-import simplidaoImg from '../assets/projects/simplidao.png';
-import availMemeImg from '../assets/projects/avail-meme.png';
+import rektceoImg from '../assets/projects/rektceo.webp';
+import cryptoindexImg from '../assets/projects/cryptoindex.webp';
+import simplidaoImg from '../assets/projects/simplidao.webp';
+import availMemeImg from '../assets/projects/avail-meme.webp';
+import ownbackImg from '../assets/projects/ownback.jpg';
 
 export interface Project {
   name: string;
@@ -11,9 +12,28 @@ export interface Project {
   tags: string[];
   techStack: string[];
   impact: string;
+  // where it was built (hackathon, sprint) and whether it is live
+  origin?: string;
+  year?: string;
+  live?: boolean;
+  // brand colour for the logo tile glow
+  accent?: string;
 }
 
 export const projectsData: Project[] = [
+  {
+    name: 'Ownback',
+    url: 'https://www.ownback.tech',
+    description: 'A small share of every purchase goes into the companies behind it as tokenized shares in your own wallet. You approve every buy; sign in with Google, hold only USDC.',
+    image: ownbackImg,
+    tags: ['Consumer', 'Tokenized stocks', 'USDC'],
+    techStack: ['Arc', '0G', 'Arkiv', 'USDC'],
+    impact: 'Live with real money on mainnet · free for the first 1,000',
+    origin: 'Built in 36 hours at ETHGlobal Mumbai',
+    year: '2026',
+    live: true,
+    accent: '#4CC38A',
+  },
   {
     name: 'Rekt CEO',
     url: 'https://www.rektceo.club/',
@@ -22,6 +42,7 @@ export const projectsData: Project[] = [
     tags: ['Memecoin', 'Community', 'NFT'],
     techStack: ['React', 'Solidity', 'IPFS', 'Dapp'],
     impact: '1000+ NFTs minted | Active community',
+    accent: '#f2c230',
   },
   {
     name: 'Crypto Index',
@@ -31,6 +52,7 @@ export const projectsData: Project[] = [
     tags: ['DeFi', 'Smart Contract', 'Full stack'],
     techStack: ['Foundry', 'Balancer V3', 'Uniswap V3', 'React'],
     impact: 'Balancer V3 + Uniswap V3 architecture',
+    accent: '#b5e36f',
   },
   {
     name: 'Simpli DAO',
@@ -40,6 +62,9 @@ export const projectsData: Project[] = [
     tags: ['DAO', 'Governance', 'Full Stack'],
     techStack: ['Solidity', 'React', 'WalletConnect', 'Celo'],
     impact: 'Won $2.5K at Build With Celo Hackathon',
+    origin: 'Build With Celo hackathon',
+    year: '2022',
+    accent: '#9df29b',
   },
   {
     name: 'Avail Meme',
@@ -49,6 +74,7 @@ export const projectsData: Project[] = [
     tags: ['Web3', 'Memecoin', 'Community'],
     techStack: ['React', 'TypeScript', 'Web3.js', 'Avail'],
     impact: 'Community-driven engagement platform',
+    accent: '#6aa3ff',
   },
 ];
 

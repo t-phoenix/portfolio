@@ -4,6 +4,15 @@ import emailjs from "@emailjs/browser";
 import { FadeIn, MagneticButton } from "./animations";
 import { socialLinksData } from "../data/socialLinksData";
 import { trackFormSubmit } from "../lib/analytics";
+import { BrandIcon } from "./aa1/BrandIcons";
+
+// GitHub, LinkedIn and X render as brand-coloured icons; the rest keep their logo images
+const BRAND_TILE: Record<string, string> = {
+  GitHub: "bg-[#181717] text-white",
+  LinkedIn: "bg-[#0A66C2] text-white",
+  Twitter: "bg-black text-white",
+};
+const shown = (label: string) => (label === "Twitter" ? "X" : label);
 
 // EmailJS Configuration - Using environment variables
 // Make sure to set these in your .env.local file with VITE_ prefix
@@ -81,22 +90,20 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 px-4 md:px-8 max-w-7xl mx-auto">
+    <section id="contact" className="pt-6 pb-20 md:pt-10 md:pb-24 px-4 md:px-8 max-w-7xl mx-auto">
       {/* Desktop: Two Column Layout | Mobile: Stacked */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         {/* Left Column: Form Section */}
         <div className="lg:col-span-7">
           <FadeIn delay={0.1}>
             <motion.h2
-              className="text-5xl sm:text-6xl md:text-[90px] font-bold leading-none mb-8 wrap-break-words max-w-full"
+              className="font-display font-normal text-5xl md:text-7xl leading-[0.95] mb-8 wrap-break-words max-w-full"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              LET'S WORK
-              <br />
-              <span className="text-white/10">TOGETHER</span>
+              Open a <em className="text-orange">channel.</em>
             </motion.h2>
 
             {/* Geographic Flexibility */}
@@ -338,7 +345,7 @@ const Contact = () => {
               >
                 {/* Header */}
                 <motion.h3
-                  className="text-3xl font-bold mb-2 bg-black text-white  from-orange via-accent to-orange bg-clip-text text-transparent"
+                  className="font-display font-normal text-4xl mb-2 text-starlight"
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                   }}
@@ -389,17 +396,23 @@ const Contact = () => {
                                 background: `linear-gradient(135deg, ${social.color}, transparent)`,
                               }}
                             />
-                            <img
-                              src={social.icon}
-                              alt={social.label}
-                              className="w-full h-full object-cover p-2"
-                            />
+                            {BRAND_TILE[social.label] ? (
+                              <span className={`relative grid h-full w-full place-items-center ${BRAND_TILE[social.label]}`}>
+                                <BrandIcon name={social.label} className="h-6 w-6" />
+                              </span>
+                            ) : (
+                              <img
+                                src={social.icon}
+                                alt={social.label}
+                                className="w-full h-full object-cover p-2"
+                              />
+                            )}
                           </motion.div>
 
                           {/* Label and Arrow */}
                           <div className="flex items-center justify-between flex-1">
                             <span className="text-secondary font-medium group-hover:text-orange transition-colors">
-                              {social.label}
+                              {shown(social.label)}
                             </span>
                             <motion.span
                               className="text-tertiary group-hover:text-orange transition-colors"
@@ -442,7 +455,7 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <motion.h3
-                className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-orange via-accent to-orange bg-clip-text text-transparent"
+                className="font-display font-normal text-4xl mb-6 text-center text-starlight"
                 animate={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -499,16 +512,22 @@ const Contact = () => {
                           background: `linear-gradient(135deg, ${social.color}, transparent)`,
                         }}
                       />
-                      <img
-                        src={social.icon}
-                        alt={social.label}
-                        className="relative w-full h-full object-cover px-3 py-3 group-hover:p-2 rounded-[20px] transition-all duration-300"
-                      />
+                      {BRAND_TILE[social.label] ? (
+                        <span className={`relative grid h-full w-full place-items-center rounded-[20px] ${BRAND_TILE[social.label]}`}>
+                          <BrandIcon name={social.label} className="h-6 w-6" />
+                        </span>
+                      ) : (
+                        <img
+                          src={social.icon}
+                          alt={social.label}
+                          className="relative w-full h-full object-cover px-3 py-3 group-hover:p-2 rounded-[20px] transition-all duration-300"
+                        />
+                      )}
                     </motion.div>
 
                     {/* Label */}
                     <motion.span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-tertiary opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">
-                      {social.label}
+                      {shown(social.label)}
                     </motion.span>
                   </motion.a>
                 ))}

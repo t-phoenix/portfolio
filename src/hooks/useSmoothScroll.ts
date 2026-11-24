@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Global Lenis instance for access from other components
 let lenisInstance: Lenis | null = null;
@@ -22,6 +23,8 @@ export const useSmoothScroll = () => {
 
     // Store globally for access from other components
     lenisInstance = lenis;
+    // keep GSAP pinning in step with Lenis's smoothed scroll
+    lenis.on('scroll', ScrollTrigger.update);
 
     // Handle anchor link clicks for smooth scrolling
     const handleAnchorClick = (e: MouseEvent) => {

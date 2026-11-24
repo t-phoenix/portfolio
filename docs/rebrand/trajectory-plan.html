@@ -1,0 +1,604 @@
+<title>Trajectory Rebrand</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long mission document. Each site section is a row: wireframe on the left, its build notes on the right, so design and implementation read in parallel. Single dark look by choice (it previews a dark site). */
+:root{
+  --ink:#0b0d12;          /* space ink: page ground */
+  --panel:#121620;        /* instrument panel */
+  --panel-2:#181d29;
+  --line:#2a3242;
+  --fg:#e9ecf2;           /* starlight */
+  --muted:#8b94a7;
+  --thrust:#f46c38;       /* existing brand orange, kept as thruster */
+  --aurora:#5ee6b8;       /* aurora green */
+  --aurora-2:#8a7dff;     /* aurora fringe, used only in light washes */
+  --regolith:#c9c3b8;     /* moon dust */
+  --signal:#c5ff41;       /* existing lime, Potshot only */
+  --font-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-body:"Inter Tight", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:600}
+p{margin:0}
+a{color:var(--aurora)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--aurora);outline-offset:2px}
+em.s{font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--thrust)}
+.mono{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+section.block{padding-block:56px;border-top:1px solid var(--line);display:grid;gap:28px}
+.lede{max-width:66ch;color:var(--muted);font-size:16px}
+
+/* ---------- Cover ---------- */
+.cover{position:relative;padding-block:72px 56px;overflow:hidden;display:grid;gap:22px}
+.cover::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:120%;
+  background:radial-gradient(40% 50% at 30% 40%, color-mix(in oklab,var(--aurora) 26%,transparent), transparent 70%),
+             radial-gradient(30% 40% at 70% 30%, color-mix(in oklab,var(--aurora-2) 18%,transparent), transparent 70%);
+  filter:blur(30px);z-index:-1;animation:breathe 14s ease-in-out infinite alternate}
+@keyframes breathe{to{transform:translateX(4%) scaleY(1.08);opacity:.75}}
+.cover h1{font-family:var(--font-display);font-weight:400;font-size:clamp(44px,8vw,96px);line-height:.95;letter-spacing:-.01em}
+.cover h1 i{color:var(--thrust)}
+.cover .meta{display:flex;flex-wrap:wrap;gap:8px 20px}
+.horizon{height:70px;margin-top:8px;border-radius:50% 50% 0 0/100% 100% 0 0;background:linear-gradient(180deg,color-mix(in oklab,var(--regolith) 22%,var(--ink)),var(--ink));border-top:1px solid color-mix(in oklab,var(--regolith) 50%,transparent)}
+
+/* ---------- Generic two-column + cards ---------- */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{font-size:16px}
+.pill{display:inline-block;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.use{color:var(--ink);background:var(--aurora);border-color:var(--aurora)}
+.pill.borrow{color:var(--thrust);border-color:color-mix(in oklab,var(--thrust) 60%,transparent)}
+.pill.skip{opacity:.7}
+
+/* ---------- Theme table ---------- */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--panel)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td .mono{color:var(--muted)}
+
+/* ---------- Storyline track ---------- */
+.track{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0;position:relative}
+.track li{position:relative;padding:34px 12px 0 0;display:grid;gap:4px;min-width:0}
+.track li::before{content:"";position:absolute;top:12px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--line),color-mix(in oklab,var(--aurora) 60%,var(--line)))}
+.track li::after{content:"";position:absolute;top:6px;left:0;width:14px;height:14px;border-radius:3px;transform:rotate(45deg);background:var(--ink);border:2px solid var(--aurora)}
+.track li:last-child::after{background:var(--thrust);border-color:var(--thrust)}
+.track .n{font-family:var(--font-mono);font-size:11px;color:var(--aurora)}
+.track b{font-family:var(--font-display);font-weight:400;font-size:22px;line-height:1.05}
+.track span{font-size:12.5px;color:var(--muted)}
+
+/* ---------- Tokens ---------- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.sw{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.sw i{display:block;height:54px}
+.sw div{padding:10px 12px;display:grid;gap:2px}
+.sw b{font-size:13px}
+.type-specimen{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.type-specimen .card p.big{font-size:34px;line-height:1}
+
+/* ---------- Section rows: wireframe | plan ---------- */
+.row{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.row{grid-template-columns:1fr}}
+.row-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 16px}
+.row-head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.2vw,44px);line-height:1}
+.row-head .src{display:flex;gap:6px;flex-wrap:wrap}
+.plan{display:grid;gap:14px;font-size:14px;min-width:0}
+.plan h4{margin:0 0 4px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.plan ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.plan code{font-family:var(--font-mono);font-size:12px;background:var(--panel-2);border:1px solid var(--line);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.keep{border-left:2px solid var(--aurora);padding-left:12px}
+.change{border-left:2px solid var(--thrust);padding-left:12px}
+.test{border-left:2px solid var(--muted);padding-left:12px}
+
+/* ---------- Wireframe primitives ---------- */
+.wf{background:var(--ink);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0;box-shadow:0 20px 40px -20px #000}
+.wf-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--line)}
+.wf-bar i{width:8px;height:8px;border-radius:2px;background:var(--line)}
+.wf-bar span{margin-left:8px;font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+.wf-body{position:relative;padding:18px;display:grid;gap:14px;overflow:hidden;font-size:12px}
+.ph{border:1px dashed color-mix(in oklab,var(--muted) 55%,transparent);border-radius:8px;display:grid;place-items:center;text-align:center;padding:8px;color:var(--muted);font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;min-width:0}
+.ln{height:6px;border-radius:3px;background:color-mix(in oklab,var(--muted) 35%,transparent)}
+.hd{font-family:var(--font-display);line-height:.95;font-weight:400}
+.hd i{color:var(--thrust)}
+.tag{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--aurora)}
+.btn{display:inline-block;padding:6px 10px;border-radius:6px;font-weight:600;font-size:11px}
+.btn.p{background:var(--thrust);color:var(--ink)}
+.btn.g{border:1px solid var(--line);color:var(--fg)}
+.note{position:absolute;font-family:var(--font-mono);font-size:9.5px;color:var(--ink);background:var(--aurora);padding:2px 6px;border-radius:3px;white-space:nowrap}
+.flex{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.wf-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.wf-nav .links{display:flex;gap:10px;flex-wrap:wrap;font-family:var(--font-mono);font-size:9.5px;color:var(--muted)}
+.patch{font-family:var(--font-mono);font-size:10px;padding:3px 6px;border:1px solid var(--thrust);color:var(--thrust);border-radius:4px;transform:rotate(-4deg);display:inline-block}
+
+/* hero wireframe */
+.aurora-wash{position:absolute;inset:-30% -10% 40% -10%;background:radial-gradient(45% 60% at 35% 50%,color-mix(in oklab,var(--aurora) 30%,transparent),transparent 70%),radial-gradient(35% 50% at 75% 40%,color-mix(in oklab,var(--aurora-2) 22%,transparent),transparent 70%);filter:blur(18px);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.6fr);gap:16px;align-items:end}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-top:1px solid var(--line);padding-top:10px}
+.stats b{font-family:var(--font-display);font-weight:400;font-size:clamp(20px,3vw,30px);display:block;line-height:1}
+.stats span{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.1em;color:var(--muted)}
+.moon-edge{height:46px;margin:0 -18px -18px;border-radius:50% 50% 0 0/100% 100% 0 0;background:linear-gradient(180deg,color-mix(in oklab,var(--regolith) 28%,var(--ink)),var(--ink));border-top:1px solid color-mix(in oklab,var(--regolith) 55%,transparent)}
+
+/* trajectory wireframe */
+.traj{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:16px}
+.traj svg{width:100%;height:auto;display:block}
+.wp{fill:var(--panel);stroke:var(--aurora);stroke-width:2}
+.wp-label{font-family:var(--font-mono);font-size:10px;fill:var(--fg)}
+.wp-sub{font-family:var(--font-mono);font-size:8.5px;fill:var(--muted)}
+
+/* payload */
+.stickers{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px}
+.stk{aspect-ratio:1;border-radius:12px;background:var(--panel);border:2px solid var(--fg);box-shadow:0 2px 0 #000;display:grid;place-items:center;font-family:var(--font-mono);font-size:8.5px;color:var(--muted)}
+.stk:nth-child(3n){transform:rotate(-6deg)}.stk:nth-child(4n){transform:rotate(5deg)}
+.manifest{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.manifest div{border-top:1px solid var(--line);padding-top:6px;font-family:var(--font-mono);font-size:9.5px;color:var(--muted)}
+.manifest b{color:var(--fg);font-weight:500;display:block}
+
+/* projects fan */
+.bigtype{position:absolute;inset:20px 0 auto;text-align:center;font-family:var(--font-body);font-weight:700;font-size:clamp(34px,7vw,70px);letter-spacing:-.04em;line-height:.9;color:color-mix(in oklab,var(--fg) 9%,transparent);pointer-events:none}
+.frame169{position:relative;aspect-ratio:16/9;max-width:62%;margin:28px auto 0;border-radius:18px;border:1px solid var(--line);background:linear-gradient(160deg,var(--panel-2),var(--ink));display:grid;place-items:center}
+.fan{display:flex;justify-content:center;margin-top:-18px;position:relative}
+.fan .c{width:24%;max-width:130px;aspect-ratio:3/4;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px;display:grid;align-content:end;gap:3px;margin:0 -8px;box-shadow:0 10px 20px -10px #000}
+.fan .c b{font-size:10.5px}
+.fan .c:nth-child(1){transform:rotate(-10deg) translateY(10px)}
+.fan .c:nth-child(2){transform:rotate(-3deg)}
+.fan .c:nth-child(3){transform:rotate(3deg)}
+.fan .c:nth-child(4){transform:rotate(10deg) translateY(10px)}
+
+/* log */
+.log{display:grid;gap:0}
+.log div{display:grid;grid-template-columns:76px minmax(0,1fr) 54px;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.log .ts{font-family:var(--font-mono);font-size:9.5px;color:var(--aurora)}
+.log b{font-weight:500;font-size:12px}
+.log .ph{height:34px}
+
+/* proof stack */
+.amber{position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,color-mix(in oklab,var(--thrust) 18%,transparent) 48%,transparent 62%);pointer-events:none}
+.stack{position:relative;height:170px}
+.stack .c{position:absolute;left:0;right:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.stack .c:nth-child(1){top:0;opacity:.55;transform:scale(.9)}
+.stack .c:nth-child(2){top:30px;opacity:.7;transform:scale(.94)}
+.stack .c:nth-child(3){top:62px;opacity:.85;transform:scale(.97)}
+.stack .c:nth-child(4){top:96px}
+.stack b{font-size:12px}
+
+/* potshot */
+.pot-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media (max-width:560px){.pot-grid,.hero-grid,.traj{grid-template-columns:1fr}}
+.pip{display:grid;place-items:center;gap:8px;padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.odds{width:100%;display:grid;gap:4px}
+.odds .bar{height:8px;border-radius:4px;background:var(--panel-2);border:1px solid var(--line);overflow:hidden}
+.odds .bar i{display:block;height:100%;width:40%;background:linear-gradient(90deg,var(--signal),var(--thrust))}
+.odds .scale{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:8.5px;color:var(--muted)}
+.pressure{display:flex;align-items:end;gap:3px;height:38px}
+.pressure i{flex:1;background:color-mix(in oklab,var(--aurora) 55%,transparent);border-radius:2px}
+.amts{display:flex;gap:6px;flex-wrap:wrap}
+.amts span{font-family:var(--font-mono);font-size:10px;border:1px solid var(--line);border-radius:5px;padding:4px 8px}
+.amts span.on{border-color:var(--signal);color:var(--signal)}
+.mini-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.mini-stats div{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-family:var(--font-mono);font-size:8.5px;color:var(--muted)}
+.mini-stats b{display:block;color:var(--fg);font-size:12px;font-family:var(--font-body)}
+
+/* glacier contact */
+.glacier{text-align:center;padding:26px 0 8px;display:grid;gap:10px;justify-items:center}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.form .ph{height:30px;place-items:center start;padding-left:10px}
+.form .wide{grid-column:1/-1}
+.earth{width:56%;max-width:260px;aspect-ratio:2/1;border-radius:999px 999px 0 0;margin:0 auto -1px;background:radial-gradient(60% 90% at 40% 30%,color-mix(in oklab,var(--aurora) 45%,#1b3a5a),#0f1e33);border:1px solid color-mix(in oklab,var(--aurora) 40%,transparent);border-bottom:0}
+
+/* phones */
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;justify-items:center}
+.phone{width:100%;max-width:240px;aspect-ratio:9/19;border:1px solid var(--line);border-radius:28px;padding:10px;background:var(--panel);display:grid}
+.phone .scr{border-radius:20px;background:var(--ink);overflow:hidden;position:relative;padding:14px 12px;display:grid;gap:10px;align-content:start;font-size:11px}
+.phone figcaption{text-align:center;margin-top:8px}
+
+/* plan phases */
+.phases{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:ph -1}
+.phases li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;counter-increment:ph}
+.phases li::before{content:"P" counter(ph,decimal);font-family:var(--font-mono);font-size:13px;color:var(--aurora);border:1px solid var(--aurora);border-radius:6px;height:34px;display:grid;place-items:center}
+.phases h3{font-size:16px;margin-bottom:6px}
+.phases ul{margin:6px 0 0;padding-left:18px;display:grid;gap:3px;font-size:14px}
+.gate{margin-top:8px;font-family:var(--font-mono);font-size:11.5px;color:var(--signal)}
+.gate::before{content:"GATE  "}
+
+@media (prefers-reduced-motion:reduce){.cover::before{animation:none}}
+</style>
+
+<div class="wrap">
+
+<!-- ============ COVER ============ -->
+<header class="cover">
+  <p class="eyebrow">abhinil.in · rebrand proposal · Nov 2026</p>
+  <h1>Mission AA-1:<br>from a 2002 PC to <i>$2B onchain</i></h1>
+  <p class="lede">A rebrand of abhinil.in built on four of Scrolltide's eight free themes. The whole site becomes one scroll: a launch from Earth to the Moon, with each existing section as a stage of the flight. All content in <code>src/data</code>, every section anchor and the Potshot game logic stay as they are. Only the presentation changes.</p>
+  <div class="meta">
+    <span class="pill use">Spine: SELENE</span>
+    <span class="pill use">Hero: Aurora</span>
+    <span class="pill borrow">Type + proof: Fluxora</span>
+    <span class="pill borrow">Potshot: Otis + Monsoon</span>
+    <span class="pill borrow">Projects: Visor</span>
+    <span class="pill borrow">Contact: Glacier</span>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+</header>
+
+<!-- ============ SCROLLTIDE THEMES ============ -->
+<section class="block" id="themes">
+  <div class="row-head"><p class="eyebrow">Source</p><h2 style="font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.2vw,44px)">The 8 free Scrolltide themes</h2></div>
+  <p class="lede">Scrolltide (scrolltide.co) sells scroll-driven templates as prompts you paste into Claude, Cursor or v0. 8 of its 156 templates are free, with personal and client use allowed. These prompts give direction only. We rebuild each effect with the stack the site already has (React 19, Framer Motion, GSAP, Lenis, tsParticles), so no Scrolltide code ships. Fonts and colours below are inferred from the template pages, which publish no specs.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Theme</th><th>Kind</th><th>Signature move</th><th>Verdict</th><th>Where it lands on abhinil.in</th></tr></thead>
+      <tbody>
+        <tr><td><b>SELENE</b><br><span class="mono">/templates/selene</span></td><td>Landing</td><td>Lunar expedition. Six parallax layers, Earth rises over the horizon, a trajectory line inks itself to 384,400 km on scroll.</td><td><span class="pill use">Spine</span></td><td>Story frame for the whole site. Experience becomes the trajectory; the footer becomes Earthrise.</td></tr>
+        <tr><td><b>Aurora</b><br><span class="mono">/templates/aurora</span></td><td>Hero</td><td>Dark frame, an aurora that breathes slowly, a headline that settles like a title card. Nothing bounces.</td><td><span class="pill use">Use</span></td><td>Hero ground. Replaces the particle field above the fold.</td></tr>
+        <tr><td><b>Fluxora</b><br><span class="mono">/templates/fluxora</span></td><td>Landing</td><td>Amber light raking across a frame. Headline breaks to italic serif on the one word doing the work. Proof stacked underneath.</td><td><span class="pill borrow">Borrow</span></td><td>Site-wide headline rule (one italic serif word per heading) and the Achievements proof stack.</td></tr>
+        <tr><td><b>Otis</b><br><span class="mono">/templates/otis</span></td><td>Hero</td><td>Cartoon face you grab and stretch like taffy. It wobbles back and flushes red as a patience bar runs out.</td><td><span class="pill borrow">Borrow</span></td><td>Potshot mascot "Pip". The bar is your win chance, 1% to 10%.</td></tr>
+        <tr><td><b>Monsoon</b><br><span class="mono">/templates/monsoon</span></td><td>Hero</td><td>Motion that builds like weather rolling in. Urgency held against a calm, centred message.</td><td><span class="pill borrow">Borrow</span></td><td>Current-pot pressure meter in Potshot. It rises as the pot grows.</td></tr>
+        <tr><td><b>Visor</b><br><span class="mono">/templates/visor</span></td><td>Hero</td><td>Light theme. Rounded 16:9 frame, giant type behind the subject, three cards fanned at opposing angles.</td><td><span class="pill borrow">Borrow</span></td><td>Projects: one 16:9 showcase with four fanned project cards. Recoloured for the dark site.</td></tr>
+        <tr><td><b>Glacier</b><br><span class="mono">/templates/glacier</span></td><td>Hero</td><td>Exhibition poster. Centred, slow and deliberate, one statement fills the viewport. No nav, no grid.</td><td><span class="pill borrow">Borrow</span></td><td>Contact opener: "Let's launch yours."</td></tr>
+        <tr><td><b>NAÏADE</b><br><span class="mono">/templates/naiade</span></td><td>Landing</td><td>Luxury jewellery. One camera move scrubbed by scroll as a frame sequence, with product cards at fixed beats.</td><td><span class="pill skip">Skip</span></td><td>Needs a filmed frame sequence and adds megabytes. Wrong register for an engineer's site.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cols">
+    <div class="card"><span class="pill use" style="justify-self:start">Recommended</span><h3>A · Trajectory</h3><p class="muted">SELENE spine with Aurora, Fluxora, Otis, Monsoon, Visor and Glacier at the moments they fit. Strongest story, and it reuses the dark ground and orange you already own.</p></div>
+    <div class="card"><span class="pill" style="justify-self:start">Fallback</span><h3>B · Night studio</h3><p class="muted">Aurora hero plus Fluxora type only, with no trajectory or mascot. About half the work, but the site loses its through-line.</p></div>
+    <div class="card"><span class="pill" style="justify-self:start">Considered</span><h3>C · Weather front</h3><p class="muted">Monsoon everywhere, tied to the private-credit risk story. Too heavy for a personal site and it fights the Potshot fun.</p></div>
+  </div>
+</section>
+
+<!-- ============ STORYLINE ============ -->
+<section class="block" id="story">
+  <div class="row-head"><p class="eyebrow">Storyline</p><h2 style="font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.2vw,44px)">One flight, eight stages</h2></div>
+  <p class="lede">Your own origin story (blog: a 5-year-old gets a PC in 2002) is the launch pad, and $2B+ in bridged private credit is the Moon. Sections keep their order and anchors; each gets a stage name and a headline with one italic word.</p>
+  <ol class="track">
+    <li><span class="n">00 · #home</span><b>Liftoff</b><span>Hero. "I build the rails <em class="s">money</em> moves on."</span></li>
+    <li><span class="n">01 · #experience</span><b>Trajectory</b><span>Five stages, one <em class="s">orbit</em>.</span></li>
+    <li><span class="n">02 · #tools</span><b>Payload</b><span>What's <em class="s">on board</em>.</span></li>
+    <li><span class="n">03 · #projects</span><b>Builds</b><span>Things I've put in <em class="s">orbit</em>.</span></li>
+    <li><span class="n">04 · #blog</span><b>Mission log</b><span>Notes from the <em class="s">cockpit</em>.</span></li>
+    <li><span class="n">05 · #achievements</span><b>Proof</b><span>Receipts, <em class="s">stacked</em>.</span></li>
+    <li><span class="n">06 · #potshot</span><b>Potshot</b><span>Take a <em class="s">shot</em> at the pot.</span></li>
+    <li><span class="n">07 · #contact</span><b>Earthrise</b><span>Let's launch <em class="s">yours</em>.</span></li>
+  </ol>
+</section>
+
+<!-- ============ TOKENS ============ -->
+<section class="block" id="tokens">
+  <div class="row-head"><p class="eyebrow">Design tokens</p><h2 style="font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.2vw,44px)">Palette and type</h2></div>
+  <p class="lede">Orange and lime stay, so the brand reads as an evolution rather than a different person. The tokens go into the existing <code>@theme</code> block in <code>src/index.css</code>, and the old names (<code>primary</code>, <code>orange</code>, <code>accent</code>) stay as aliases so any section not yet reskinned still renders.</p>
+  <div class="swatches">
+    <div class="sw"><i style="background:var(--ink);border-bottom:1px solid var(--line)"></i><div><b>Space ink</b><span class="mono muted">#0B0D12 · was #151312</span></div></div>
+    <div class="sw"><i style="background:var(--regolith)"></i><div><b>Regolith</b><span class="mono muted">#C9C3B8 · moon, cards</span></div></div>
+    <div class="sw"><i style="background:var(--fg)"></i><div><b>Starlight</b><span class="mono muted">#E9ECF2 · text</span></div></div>
+    <div class="sw"><i style="background:var(--thrust)"></i><div><b>Thruster</b><span class="mono muted">#F46C38 · kept, CTAs</span></div></div>
+    <div class="sw"><i style="background:var(--aurora)"></i><div><b>Aurora</b><span class="mono muted">#5EE6B8 · hero light, links</span></div></div>
+    <div class="sw"><i style="background:var(--signal)"></i><div><b>Signal</b><span class="mono muted">#C5FF41 · kept, Potshot only</span></div></div>
+  </div>
+  <div class="type-specimen">
+    <div class="card"><span class="eyebrow">Display · Instrument Serif</span><p class="big hd">Five stages, one <i>orbit</i>.</p><p class="muted">Headlines only, and the one italic word per heading.</p></div>
+    <div class="card"><span class="eyebrow">Body · Inter Tight</span><p style="font-size:18px;font-weight:600">Web3 engineer. Private credit, DEXs, DAO tooling.</p><p class="muted">Replaces Poppins. Inter is already loaded.</p></div>
+    <div class="card"><span class="eyebrow">Telemetry · JetBrains Mono</span><p class="mono" style="font-size:14px;color:var(--aurora)">T+2021 · ALT $2B+ · ODDS 4%</p><p class="muted">Stats, dates, chapter labels and contract addresses.</p></div>
+  </div>
+</section>
+
+<!-- ============ SECTION ROWS ============ -->
+<section class="block" id="sections">
+  <div class="row-head"><p class="eyebrow">Wireframes with build notes</p><h2 style="font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.2vw,44px)">Section by section</h2></div>
+  <p class="lede">Left: how each section looks once rebuilt. Right: the plan for it. A green rule marks what is kept, orange what changes and grey how it is tested.</p>
+</section>
+
+<!-- 00 HERO -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">00 · #home</span><h2>Liftoff</h2><div class="src"><span class="pill use">Aurora</span><span class="pill borrow">Fluxora type</span><span class="pill borrow">SELENE horizon</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Hero wireframe: mission patch nav, aurora background, portrait frame, serif headline and three telemetry stats above a lunar horizon">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in</span></div>
+      <div class="wf-body">
+        <div class="aurora-wash"></div>
+        <div class="wf-nav" style="position:relative"><span class="patch">AA-1</span><span class="links"><span>Trajectory</span><span>Payload</span><span>Builds</span><span>Log</span><span>Proof</span><span>Potshot</span></span><span class="btn p">Contact</span></div>
+        <div class="hero-grid">
+          <div class="ph" style="aspect-ratio:3/4">portrait<br>/public/abhinil.jpg<br>rounded frame</div>
+          <div style="display:grid;gap:10px;min-width:0">
+            <span class="tag">Web3 engineer · since 2021</span>
+            <p class="hd" style="font-size:clamp(26px,4.6vw,48px)">I build the rails<br><i>money</i> moves on.</p>
+            <div class="ln" style="width:80%"></div><div class="ln" style="width:60%"></div>
+            <div class="flex"><span class="btn p">View trajectory ↓</span><span class="btn g">Take a potshot</span></div>
+            <div class="stats"><div><b>$2B+</b><span>PRIVATE CREDIT BRIDGED</span></div><div><b>$26K+</b><span>HACKATHON PRIZES</span></div><div><b>4+</b><span>YEARS WEB3</span></div></div>
+          </div>
+        </div>
+        <div class="moon-edge"></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept</h4><ul><li>Name, both taglines, all 3 stats and <code>CountUp</code></li><li>Social links from <code>socialLinksData</code>, with the same Hackernoon, Medium and Email filter</li><li><code>MagneticButton</code>, <code>AnimatedText</code>, <code>FadeIn</code></li></ul></div>
+      <div class="change"><h4>Changes</h4><ul><li><code>Hero.tsx</code>: drop the white profile card and the two hand-drawn SVG arcs. Lay out portrait and headline in two columns</li><li>New <code>AuroraBackdrop.tsx</code>: 2 blurred CSS gradients on a 14s alternate keyframe. No video and no WebGL</li><li>Portrait moves from framerusercontent.com to <code>/public</code>, so the Framer CDN is no longer a dependency</li><li>Lunar horizon: one SVG at the hero's base, which is the first parallax layer of the SELENE spine</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>LCP stays at or under the current baseline on mobile Lighthouse</li><li>Under reduced motion the aurora holds still</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 TRAJECTORY -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">01 · #experience</span><h2>Trajectory</h2><div class="src"><span class="pill use">SELENE</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Experience wireframe: sticky chapter title on the left, a curved path on the right that draws itself from ETG India in 2021 up to CosX and Pact Labs">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in/#experience</span></div>
+      <div class="wf-body">
+        <div class="traj">
+          <div style="display:grid;gap:8px;align-content:start">
+            <span class="tag">01 · Trajectory · sticky</span>
+            <p class="hd" style="font-size:clamp(22px,3.4vw,34px)">Five stages, one <i>orbit</i>.</p>
+            <p class="mono" style="color:var(--aurora);font-size:11px">2021 ▸ NOW</p>
+            <div class="ln" style="width:90%"></div><div class="ln" style="width:70%"></div>
+          </div>
+          <svg viewBox="0 0 320 260" aria-hidden="true">
+            <path d="M20 250 C 90 240, 120 190, 150 150 S 230 60, 300 20" fill="none" stroke="var(--line)" stroke-width="2"/>
+            <path d="M20 250 C 90 240, 120 190, 150 150 S 200 90, 236 64" fill="none" stroke="var(--aurora)" stroke-width="2.5" stroke-dasharray="none"/>
+            <rect class="wp" x="14" y="244" width="12" height="12" rx="2" transform="rotate(45 20 250)"/>
+            <text class="wp-label" x="34" y="248">ETG India</text><text class="wp-sub" x="34" y="259">Jan–Jun 2021</text>
+            <rect class="wp" x="84" y="206" width="12" height="12" rx="2" transform="rotate(45 90 212)"/>
+            <text class="wp-label" x="104" y="214">Celo Foundation</text><text class="wp-sub" x="104" y="225">Mar–May 2022</text>
+            <rect class="wp" x="144" y="144" width="12" height="12" rx="2" transform="rotate(45 150 150)"/>
+            <text class="wp-label" x="164" y="152">Equistart Labs</text><text class="wp-sub" x="164" y="163">Jun 2022–Mar 2025</text>
+            <rect class="wp" x="230" y="58" width="12" height="12" rx="2" transform="rotate(45 236 64)" style="fill:var(--aurora)"/>
+            <text class="wp-label" x="128" y="72">Pact Labs + CosX</text><text class="wp-sub" x="128" y="83">Mar 2025–present</text>
+            <rect x="286" y="6" width="28" height="28" rx="6" fill="color-mix(in oklab,var(--regolith) 40%,var(--ink))" stroke="var(--regolith)"/>
+            <text class="wp-sub" x="250" y="48">$2B+ bridged</text>
+          </svg>
+        </div>
+        <div class="ph" style="height:46px">active stage card: logo · company · period · description (from experiencesData)</div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept</h4><ul><li>All 5 entries in <code>experiencesData.ts</code>, unedited: company, url, description, period and logo</li><li>The <code>#experience</code> anchor and the nav link</li></ul></div>
+      <div class="change"><h4>Changes</h4><ul><li><code>Experience.tsx</code>: a 300vh section with a sticky inner frame. GSAP ScrollTrigger (already installed) scrubs <code>strokeDashoffset</code> on the path</li><li>Waypoints are computed from the data order, so adding a job adds a point with no layout work</li><li>Pact Labs and CosX share one waypoint because both run Mar 2025 to now</li><li>Mobile: a vertical path with stage cards stacked beside it, no pinning</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>All 5 company names are in the DOM at rest, not only after scroll</li><li>Pinning works with Lenis on iOS Safari; check on a real phone</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 PAYLOAD -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">02 · #tools</span><h2>Payload</h2><div class="src"><span class="pill">New asset set</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Tools wireframe: payload manifest header with counts per group and a grid of die-cut sticker logos">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in/#tools</span></div>
+      <div class="wf-body">
+        <div class="flex" style="justify-content:space-between"><p class="hd" style="font-size:clamp(22px,3.4vw,34px)">What's <i>on board</i>.</p><span class="mono" style="color:var(--aurora)">PAYLOAD · 22 ITEMS</span></div>
+        <div class="manifest"><div><b>Chains · 6</b>Ethereum, Base, Polygon…</div><div><b>Languages · 3</b>Solidity, TS, JS</div><div><b>Protocols · 2</b>Uniswap, Balancer</div><div><b>Tooling · 11</b>Foundry, Hardhat…</div></div>
+        <div class="stickers"><span class="stk">ETH</span><span class="stk">SOL</span><span class="stk">BASE</span><span class="stk">POLY</span><span class="stk">APT</span><span class="stk">BNB</span><span class="stk">TS</span><span class="stk">JS</span><span class="stk">UNI</span><span class="stk">BAL</span><span class="stk">FDRY</span><span class="stk">HH</span><span class="stk">OZ</span><span class="stk">ALCH</span></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept</h4><ul><li><code>toolsData.ts</code>: 22 tools, their categories and the logo files in <code>src/assets/tools</code></li></ul></div>
+      <div class="change"><h4>Changes</h4><ul><li><code>Tools.tsx</code>: group the 15 raw categories into 4 manifest groups in the component with a small map. The data file stays as it is</li><li>Die-cut stickers: the existing logos with a white outline from stacked <code>drop-shadow</code>s and a slight rotation. No new image files</li><li>Hover lifts the sticker and shows its category in mono</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>The group counts add up to 22 (unit assert)</li><li>Every logo has alt text</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 BUILDS -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">03 · #projects</span><h2>Builds</h2><div class="src"><span class="pill borrow">Visor</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Projects wireframe: huge faded words BUILT ONCHAIN behind a rounded 16:9 frame, with four project cards fanned below it">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in/#projects</span></div>
+      <div class="wf-body" style="padding-bottom:28px">
+        <div class="bigtype">BUILT<br>ONCHAIN</div>
+        <div class="frame169"><span class="ph" style="border:0">active project<br>image or loop · 16:9</span></div>
+        <div class="fan"><div class="c"><span class="tag">Brand</span><b>Rekt CEO</b></div><div class="c"><span class="tag">DeFi</span><b>Crypto Index</b></div><div class="c"><span class="tag">DAO</span><b>Simpli DAO</b></div><div class="c"><span class="tag">Meme</span><b>Avail Meme</b></div></div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept</h4><ul><li>All 4 projects in <code>projectsData.ts</code>, with their links and descriptions</li></ul></div>
+      <div class="change"><h4>Changes</h4><ul><li><code>Projects.tsx</code>: a fanned row of 4 cards. Clicking or focusing a card swaps the 16:9 frame above it and shows the description</li><li>Giant "BUILT ONCHAIN" set at 9% opacity behind, parallaxed slower than the frame</li><li>Mobile: a horizontal snap carousel, no fan</li><li><b>New assets:</b> one 16:9 screenshot per project, captured from the live builds</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>Cards are buttons with keyboard focus; arrow keys change the active card</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LOG -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">04 · #blog</span><h2>Mission log</h2><div class="src"><span class="pill borrow">Fluxora type</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Blog wireframe: a log list with mono date stamps, post titles and small thumbnails">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in/#blog</span></div>
+      <div class="wf-body">
+        <p class="hd" style="font-size:clamp(22px,3.4vw,34px)">Notes from the <i>cockpit</i>.</p>
+        <div class="log">
+          <div><span class="ts">LOG 2024-02-14</span><b>Understanding Difference Between Currency And Money</b><span class="ph">img</span></div>
+          <div><span class="ts">LOG 2022-11-19</span><b>The Metaverse Story: From GTA Vice City to the Sandbox</b><span class="ph">img</span></div>
+          <div><span class="ts">LOG 2022-02-13</span><b>Cryptocurrency Is Still the Investment Opportunity of the Decade</b><span class="ph">img</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept</h4><ul><li><code>blogsData.ts</code>: titles, descriptions, dates, links and <code>blog1–3.png</code></li></ul></div>
+      <div class="change"><h4>Changes</h4><ul><li><code>Blog.tsx</code>: rows instead of cards, newest first, dates shown as <code>LOG yyyy-mm-dd</code></li><li>Hovering a row reveals the description and slides the thumbnail in</li><li>The Vice City post is the story's origin, so the hero links to it ("since 2002")</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>The date formatter handles all 3 current date strings (unit assert)</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PROOF -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">05 · #achievements</span><h2>Proof</h2><div class="src"><span class="pill borrow">Fluxora</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Achievements wireframe: headline with italic word, amber light sweep, four hackathon cards stacked and offset">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in/#achievements</span></div>
+      <div class="wf-body">
+        <div class="amber"></div>
+        <div class="flex" style="justify-content:space-between;position:relative"><p class="hd" style="font-size:clamp(22px,3.4vw,34px)">Receipts, <i>stacked</i>.</p><span class="mono" style="color:var(--thrust)">$26K+ WON</span></div>
+        <div class="stack">
+          <div class="c"><b>Green NFT Hackathon</b><span class="mono muted">Mar–May 2021</span></div>
+          <div class="c"><b>Harmony Hackathon</b><span class="mono muted">Aug–Sept 2021</span></div>
+          <div class="c"><b>Build With Celo</b><span class="mono muted">Sept–Nov 2022</span></div>
+          <div class="c"><b>Balancer Hookathon</b><span class="mono muted">Sept–Oct 2024 · DoraHacks</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept</h4><ul><li><code>achievementsData.ts</code>: 4 wins and the platform logos (DoraHacks, HackerEarth, Gitcoin)</li></ul></div>
+      <div class="change"><h4>Changes</h4><ul><li><code>Achievements.tsx</code>: the cards stack, and each one slides out to full size as it scrolls into view (Framer <code>useScroll</code>)</li><li>Amber light sweep: one CSS gradient moved by scroll progress</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>At rest, with no scroll, all 4 cards stay readable (no <code>opacity:0</code> start state)</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 POTSHOT -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">06 · #potshot</span><h2>Potshot</h2><div class="src"><span class="pill borrow">Otis</span><span class="pill borrow">Monsoon</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Potshot wireframe: draggable moon mascot with an odds bar from 1 to 10 percent, a current pot card with a rising pressure meter, amount chips, a launch ticket button, stats and the contract link">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in/#potshot</span></div>
+      <div class="wf-body">
+        <div class="flex" style="justify-content:space-between"><p class="hd" style="font-size:clamp(22px,3.4vw,34px)">Take a <i>shot</i> at the pot.</p><span class="btn g">Connect wallet</span></div>
+        <div class="pot-grid">
+          <div style="display:grid;gap:10px;min-width:0">
+            <div class="pip">
+              <svg viewBox="0 0 120 90" width="120" aria-hidden="true"><ellipse cx="60" cy="48" rx="44" ry="36" fill="var(--regolith)"/><circle cx="40" cy="34" r="5" fill="color-mix(in oklab,var(--regolith) 70%,#000)"/><circle cx="82" cy="60" r="7" fill="color-mix(in oklab,var(--regolith) 75%,#000)"/><circle cx="48" cy="46" r="4" fill="var(--ink)"/><circle cx="72" cy="46" r="4" fill="var(--ink)"/><path d="M50 60 q10 8 20 0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M104 48 l12 -6" stroke="var(--aurora)" stroke-width="2" stroke-dasharray="3 3"/></svg>
+              <span class="mono muted" style="font-size:9px">PIP · drag to stretch</span>
+              <div class="odds"><div class="bar"><i></i></div><div class="scale"><span>1%</span><span>YOUR ODDS 4%</span><span>10%</span></div></div>
+            </div>
+            <div class="amts"><span class="on">$1</span><span>$5</span><span>$10</span><span>custom</span></div>
+            <span class="btn p" style="text-align:center">Launch ticket · $1 USDC on Base</span>
+          </div>
+          <div style="display:grid;gap:10px;min-width:0">
+            <div class="card" style="padding:10px"><span class="tag">Current pot</span><b style="font-family:var(--font-display);font-weight:400;font-size:30px;line-height:1">$— USDC</b><div class="pressure"><i style="height:20%"></i><i style="height:30%"></i><i style="height:28%"></i><i style="height:45%"></i><i style="height:52%"></i><i style="height:60%"></i><i style="height:74%"></i><i style="height:88%"></i></div></div>
+            <div class="mini-stats"><div><b>$—</b>paid out</div><div><b>$—</b>to dev</div><div><b>—</b>plays</div></div>
+            <div class="ph" style="height:52px">How it works · 4 steps (GAME_STEPS)</div>
+            <span class="mono muted" style="font-size:9px;overflow-wrap:anywhere">Contract 0x… ↗ basescan · disclaimer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept, not touched</h4><ul><li>Everything in <code>potshot/hooks/*</code>, <code>helper/abi.ts</code>, <code>helper/constants.ts</code> and <code>config/wagmi.ts</code></li><li>All logic in <code>potshot/index.tsx</code>: state, the balance math, the chain switch to Base and the refetch-on-close effects</li><li><code>TicketFlowModal</code>, <code>BridgeFundsModal</code>, <code>TipDeveloperModal</code> and <code>PaymentButtons</code>: behaviour unchanged, restyled through tokens only</li><li>The disclaimer copy and the BaseScan contract link</li></ul></div>
+      <div class="change"><h4>Changes (presentation only)</h4><ul><li>New <code>potshot/PipMascot.tsx</code>: an SVG moon with 4 expressions (idle, stretched, sweating at 8% or more, flushed on a win). It reads the existing <code>userChance</code> prop. Drag uses Framer <code>drag</code> with a spring back</li><li><code>WinChanceCard</code> becomes the Pip card plus the odds bar (the Otis patience bar)</li><li><code>CurrentPotCard</code> gains a Monsoon pressure meter scaled to <code>currentPot</code></li><li>"Buy ticket" becomes "Launch ticket". The handler is still <code>handleBuyTicket</code></li><li>Replace the browser <code>alert()</code> calls with an inline status line. This is the one logic-adjacent edit, and the conditions stay the same</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>The diff for <code>hooks/</code>, <code>helper/</code> and <code>config/</code> is empty (a CI check)</li><li>On preview: connect a wallet, switch chain, and check pot, payout and plays against BaseScan reads</li><li>Ticket flow to the signature prompt in a test wallet. You place one real $1 ticket yourself before merge</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 CONTACT + FOOTER -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">07 · #contact + footer</span><h2>Earthrise</h2><div class="src"><span class="pill borrow">Glacier</span><span class="pill use">SELENE</span></div></div>
+  <div class="row">
+    <div class="wf" role="img" aria-label="Contact wireframe: a centred one-line statement filling the screen, a four-field form, social links, then Earth rising over the lunar horizon in the footer">
+      <div class="wf-bar"><i></i><i></i><i></i><span>abhinil.in/#contact</span></div>
+      <div class="wf-body">
+        <div class="glacier">
+          <span class="tag">07 · Earthrise</span>
+          <p class="hd" style="font-size:clamp(30px,5.6vw,58px)">Let's launch <i>yours</i>.</p>
+          <span class="muted">One message. I reply within 48 hours.</span>
+        </div>
+        <div class="form"><span class="ph">Your name</span><span class="ph">your@email.com</span><span class="ph wide">What's this about?</span><span class="ph wide" style="height:54px;place-items:start;padding-top:8px">Message</span><span class="btn p" style="grid-column:1/-1;text-align:center">Send transmission</span></div>
+        <div class="flex" style="justify-content:center"><span class="pill">X</span><span class="pill">LinkedIn</span><span class="pill">GitHub</span><span class="pill">Medium</span><span class="pill">Hackernoon</span></div>
+        <div style="margin:6px -18px -18px">
+          <div class="earth"></div>
+          <div class="moon-edge" style="margin:0;height:40px;display:grid;place-items:center"><span class="mono muted" style="font-size:9px">© 2026 Abhinil Agarwal · Return to orbit ↑</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="keep"><h4>Kept</h4><ul><li>The EmailJS send path in <code>Contact.tsx</code>, its env vars and the form's 4 fields, validation and success and error states</li><li>All social links from <code>socialLinksData</code></li><li><code>ScrollToTop</code> behaviour</li></ul></div>
+      <div class="change"><h4>Changes</h4><ul><li>A Glacier opener: one statement, centred, with a slow 1.2s settle. Then the form</li><li>Button label "Send" becomes "Send transmission". The success state reads "Signal received."</li><li><code>Footer.tsx</code>: Earth rising over the same horizon as the hero, which closes the story. Scroll drives the Earth's <code>translateY</code></li><li><code>RecruiterView.tsx</code> is not mounted anywhere today. Either link it from the nav as a "Recruiter quick view" or delete it; this is your call</li></ul></div>
+      <div class="test"><h4>Test</h4><ul><li>Send one real message from the preview and confirm it arrives</li><li>Error state: block the EmailJS request in DevTools</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL SHELL -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">Global shell</span><h2>Nav, background, progress</h2></div>
+  <div class="cols">
+    <div class="card"><h3>Navigation.tsx</h3><p class="muted">The same 6 anchors in the same order, renamed to the stage names (Trajectory, Payload, Builds, Log, Proof, Potshot). An "AA-1" mission patch replaces the Home icon. The icons from lucide-react stay as a mobile fallback.</p></div>
+    <div class="card"><h3>ParticleBackground.tsx</h3><p class="muted">Keep tsParticles and change only its options: a sparse, slow-twinkling starfield with no links or pointer repulse. It hides behind the hero's aurora and shows again from Trajectory on.</p></div>
+    <div class="card"><h3>ScrollProgress</h3><p class="muted">The top bar becomes an altitude readout ("ALT 38%") in mono at the right edge. It keeps the same <code>useScrollProgress</code> hook.</p></div>
+    <div class="card"><h3>Meta + OG</h3><p class="muted">New 1200×630 OG image (Moon horizon with "AA-1" patch), favicon from the patch, and updated <code>index.html</code> title and description. <code>sitemap.xml</code> needs no change.</p></div>
+  </div>
+</section>
+
+<!-- MOBILE -->
+<section class="block">
+  <div class="row-head"><span class="eyebrow">Mobile, 375px</span><h2 style="font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.2vw,44px)">Three key screens</h2></div>
+  <div class="phones">
+    <figure style="margin:0;width:100%;max-width:240px">
+      <div class="phone"><div class="scr"><div class="aurora-wash"></div><div class="flex" style="justify-content:space-between;position:relative"><span class="patch">AA-1</span><span class="mono muted">☰</span></div><div class="ph" style="aspect-ratio:4/3;position:relative">portrait</div><p class="hd" style="font-size:30px;position:relative">I build the rails <i>money</i> moves on.</p><div class="stats" style="position:relative"><div><b style="font-size:20px">$2B+</b><span>BRIDGED</span></div><div><b style="font-size:20px">$26K+</b><span>PRIZES</span></div><div><b style="font-size:20px">4+</b><span>YEARS</span></div></div><span class="btn p" style="text-align:center">View trajectory ↓</span></div></div>
+      <figcaption class="eyebrow">Liftoff</figcaption>
+    </figure>
+    <figure style="margin:0;width:100%;max-width:240px">
+      <div class="phone"><div class="scr"><span class="tag">01 · Trajectory</span><p class="hd" style="font-size:26px">Five stages, one <i>orbit</i>.</p>
+        <div style="display:grid;gap:10px;border-left:2px solid var(--aurora);padding-left:12px">
+          <div><b>CosX</b><br><span class="mono muted">Mar 2025 – now</span></div>
+          <div><b>Pact Labs</b><br><span class="mono muted">Mar 2025 – now</span></div>
+          <div><b>Equistart Labs</b><br><span class="mono muted">2022 – 2025</span></div>
+          <div><b>Celo Foundation</b><br><span class="mono muted">2022</span></div>
+          <div><b>ETG India</b><br><span class="mono muted">2021</span></div>
+        </div></div></div>
+      <figcaption class="eyebrow">Trajectory, vertical</figcaption>
+    </figure>
+    <figure style="margin:0;width:100%;max-width:240px">
+      <div class="phone"><div class="scr"><p class="hd" style="font-size:26px">Take a <i>shot</i>.</p><div class="pip"><svg viewBox="0 0 120 90" width="90" aria-hidden="true"><ellipse cx="60" cy="48" rx="44" ry="36" fill="var(--regolith)"/><circle cx="48" cy="46" r="4" fill="var(--ink)"/><circle cx="72" cy="46" r="4" fill="var(--ink)"/><path d="M50 60 q10 8 20 0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/></svg><div class="odds"><div class="bar"><i></i></div><div class="scale"><span>1%</span><span>4%</span><span>10%</span></div></div></div><div class="card" style="padding:8px"><span class="tag">Current pot</span><b style="font-family:var(--font-display);font-weight:400;font-size:24px">$— USDC</b></div><div class="amts"><span class="on">$1</span><span>$5</span><span>$10</span></div><span class="btn p" style="text-align:center">Launch ticket</span></div></div>
+      <figcaption class="eyebrow">Potshot</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ IMPLEMENTATION PLAN ============ -->
+<section class="block" id="plan">
+  <div class="row-head"><p class="eyebrow">Implementation plan</p><h2 style="font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.2vw,44px)">From branch to production</h2></div>
+  <p class="lede">The work happens on one branch, <code>rebrand/trajectory</code>, with one commit per phase and one commit per section in P3, so any single section can be reverted. Production does not change until the Vercel preview passes every gate and you sign off.</p>
+  <ol class="phases">
+    <li><div><h3>Safety net, before touching any styles</h3>
+      <ul><li>Branch from <code>main</code>. Run <code>pnpm build</code> and <code>pnpm lint</code> and record the current result as the baseline</li>
+      <li>Add <code>@playwright/test</code> as a dev dependency (the repo has no tests yet). Capture baseline screenshots of production at 375 and 1440 wide</li>
+      <li>Content-parity test: import every file in <code>src/data</code> and assert each company, project, tool, blog title and achievement name renders on the page. This is the guard that the data survives</li>
+      <li>Record Potshot read values (pot, paid out, plays) from BaseScan for later comparison</li></ul>
+      <p class="gate">parity test passes on the current site</p></div></li>
+    <li><div><h3>Tokens and fonts</h3>
+      <ul><li>Add the new colour tokens and 3 font families to <code>@theme</code> in <code>src/index.css</code>. Alias old names (<code>--color-primary</code> → space ink, and so on) so nothing breaks</li>
+      <li><code>tailwind.config.js</code> duplicates the theme but Tailwind v4 reads <code>@theme</code>. Confirm it is unused, then delete it</li></ul>
+      <p class="gate">build passes, site looks the same apart from colour and fonts</p></div></li>
+    <li><div><h3>Global shell and new assets</h3>
+      <ul><li>Starfield options, altitude progress, nav renames, AA-1 patch, AuroraBackdrop, horizon SVG and Earthrise SVG</li>
+      <li>Self-host the portrait. Make the OG image and favicon</li></ul>
+      <p class="gate">reduced-motion pass: nothing animates when the setting is on</p></div></li>
+    <li><div><h3>Sections, one commit each</h3>
+      <ul><li>In this order: Hero → Contact/Footer (the story's two ends first) → Experience → Projects → Tools → Blog → Achievements</li>
+      <li>Each commit touches only its own component file plus any new child component. Data files stay untouched</li></ul>
+      <p class="gate">parity test green after every commit</p></div></li>
+    <li><div><h3>Potshot skin</h3>
+      <ul><li>PipMascot, odds bar, pressure meter, label changes and the inline status line in place of <code>alert()</code></li>
+      <li>CI step: <code>git diff --exit-code main -- src/components/potshot/hooks src/components/potshot/helper src/config</code></li></ul>
+      <p class="gate">hooks, helper and config diff is empty; preview reads match BaseScan</p></div></li>
+    <li><div><h3>Full test pass on the Vercel preview</h3>
+      <ul><li>Automated: build, lint, parity test, unit asserts, and Playwright visual review at 375, 768 and 1440 (reviewed by eye, since the layout changes on purpose)</li>
+      <li>Performance: mobile Lighthouse with LCP and CLS no worse than the P0 baseline, and JS bundle growth under 15%</li>
+      <li>Accessibility: axe with no serious issues, keyboard through nav, project fan, Potshot and form</li>
+      <li>Devices: iOS Safari and Android Chrome on real phones (sticky pinning plus Lenis is the usual failure)</li>
+      <li>Functional: all 7 nav anchors, EmailJS delivery, wallet connect, chain switch, ticket flow to signature, and your one $1 ticket</li></ul>
+      <p class="gate">you approve the preview URL</p></div></li>
+    <li><div><h3>Ship and watch</h3>
+      <ul><li>Merge to <code>main</code>. Vercel deploys. Smoke-test production with the same checklist, minus the ticket</li>
+      <li>Rollback: Vercel instant rollback to the previous deployment, then <code>git revert</code> the merge</li>
+      <li>Watch Vercel Analytics for a week: scroll depth (already tracked) and Potshot section views against the prior week</li></ul></div></li>
+  </ol>
+  <div class="cols">
+    <div class="card"><h3>New assets to make</h3><ul style="margin:0;padding-left:18px;display:grid;gap:3px" class="muted"><li>AA-1 mission patch (SVG), favicon, OG image</li><li>Lunar horizon and Earthrise SVG layers</li><li>Pip mascot, 4 expressions (SVG)</li><li>4 project screenshots at 16:9</li><li>Self-hosted portrait</li></ul></div>
+    <div class="card"><h3>Not adding</h3><ul style="margin:0;padding-left:18px;display:grid;gap:3px" class="muted"><li>No Three.js or WebGL: CSS and SVG cover every effect</li><li>No video backgrounds</li><li>No new animation library: GSAP, Framer and Lenis are already installed</li><li>No changes to the Potshot contract</li></ul></div>
+    <div class="card"><h3>Open decisions for you</h3><ul style="margin:0;padding-left:18px;display:grid;gap:3px" class="muted"><li>Keep or delete the unmounted <code>RecruiterView</code></li><li>Mascot name (Pip is a placeholder)</li><li>Headline line: "I build the rails money moves on" or your own</li><li>Read Scrolltide's terms page before launch; only the homepage licence line was checked</li></ul></div>
+  </div>
+</section>
+
+</div>

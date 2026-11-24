@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600;1,700;1,900&family=Inter:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap');
 
 @plugin 'tailwindcss-animate';
 
@@ -9,7 +9,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-primary: #151312;
+  --color-primary: #07090e;
+  --color-ink: #07090e;
+  --color-starlight: #eef0f4;
+  --color-dim: #8e97a8;
+  --color-aurora: #5ee6b8;
+  --color-violet: #8a7dff;
   --color-secondary: #fff;
   --color-tertiary: #998f8f;
   --color-accent: #c5ff41;
@@ -18,11 +23,19 @@
 
   --font-poppins: 'Poppins', sans-serif;
   --font-inter: 'Inter', sans-serif;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter Tight', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
 }
 
 @layer base {
   body {
-    @apply bg-primary text-secondary font-poppins;
+    @apply bg-ink text-starlight font-body;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -237,4 +250,23 @@ html.lenis {
     @apply border-border outline-ring/50;
   }
   /* Body styles are defined in the first @layer base block - keeping portfolio colors */
+}
+
+/* AA-1: custom cursor replaces the native one on fine pointers */
+html.aa1-cursor, html.aa1-cursor * { cursor: none !important; }
+::selection { background: #f46c38; color: #07090e; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
+
+/* very wide screens: scale rem-based type and spacing so body copy doesn't shrink to a speck */
+@media (min-width: 1900px) { html { font-size: 112.5%; } }
+@media (min-width: 2400px) { html { font-size: 125%; } }
+
+/* Side quests: Ownback film */
+@keyframes quest-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes quest-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes quest-float { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+@media (prefers-reduced-motion: reduce) {
+  [class*="animate-[quest-"] { animation: none !important; }
 }
